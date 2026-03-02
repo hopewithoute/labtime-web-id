@@ -1,16 +1,35 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import tailwindcss from '@tailwindcss/vite'
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
 
+  css: ['~/assets/css/tailwind.css'],
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
+
   nitro: {
-    preset: "cloudflare-pages",
+    preset: 'cloudflare-pages',
 
     cloudflare: {
       deployConfig: true,
-      nodeCompat: true
-    }
+      nodeCompat: true,
+    },
   },
 
-  modules: ["nitro-cloudflare-dev"]
+  modules: ['@nuxt/eslint', 'shadcn-nuxt', 'nitro-cloudflare-dev'],
+
+  shadcn: {
+    prefix: '',
+    componentDir: './app/components/ui',
+  },
+
+  eslint: {
+    config: {
+      standalone: false,
+    },
+  },
 })
