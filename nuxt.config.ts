@@ -11,6 +11,11 @@ export default defineNuxtConfig({
     cloudflare: {
       deployConfig: true,
       nodeCompat: true,
+      wrangler: {
+        routes: [
+          { pattern: 'labtime.web.id', custom_domain: true },
+        ],
+      },
     },
   },
 
