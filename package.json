@@ -44,5 +44,10 @@
     "typescript-eslint": "^8.56.1",
     "vue-eslint-parser": "^10.4.0",
     "wrangler": "^4.69.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "serialize-javascript": ">=7.0.3"
+    }
   }
 }
