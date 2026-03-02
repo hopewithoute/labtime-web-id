@@ -27,8 +27,6 @@ export default defineNuxtConfig({
   },
 
   eslint: {
-    config: {
-      standalone: false,
-    },
+    config: {},
   },
 })
