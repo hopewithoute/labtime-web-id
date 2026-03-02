@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/tailwind.css'],
 
   nitro: {
-    preset: 'cloudflare',
+    preset: 'cloudflare_module',
 
     cloudflare: {
       deployConfig: true,
