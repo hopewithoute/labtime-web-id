@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="min-h-screen flex flex-col">
     <Transition
       leave-active-class="transition-opacity duration-700 ease-in-out"
       leave-from-class="opacity-100"
@@ -15,7 +15,7 @@
       </div>
     </Transition>
 
-    <div class="min-h-screen border-x 2xl:border-x-2 border-foreground max-w-5xl mx-auto flex flex-col">
+    <div class="flex-1 border-x 2xl:border-x-2 border-foreground max-w-5xl mx-auto flex flex-col w-full">
       <header class="border-b border-foreground p-4 md:p-6 flex justify-between items-center bg-background z-10 sticky top-0">
         <NuxtLink to="/" class="flex flex-col hover:opacity-80 transition-opacity">
           <div class="font-black text-xl md:text-2xl uppercase tracking-tighter leading-none">
