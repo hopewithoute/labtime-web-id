@@ -69,6 +69,7 @@
           </div>
         </div>
         <div class="flex items-center gap-4">
+          <ThemeToggle ref="themeToggleRef" />
           <span class="opacity-70 hidden sm:inline">© {{ new Date().getFullYear() }}</span>
           <MetricTag variant="status" value="STABLE" />
         </div>
@@ -79,8 +80,17 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { onKeyStroke } from '@vueuse/core'
 
 const appConfig = useAppConfig()
+const themeToggleRef = ref<{ toggleTheme: () => void } | null>(null)
+
+onKeyStroke(['k', 'K'], (e) => {
+  if (e.ctrlKey || e.metaKey) {
+    e.preventDefault()
+    themeToggleRef.value?.toggleTheme()
+  }
+})
 const showBootSequence = ref(false)
 const bootLines = ref<string[]>([])
 const allLines = [
