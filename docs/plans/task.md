@@ -28,3 +28,10 @@
 | 4 | Hero Section Typing Effect | pending |
 | 5 | Status Bar Footer | pending |
 | 6 | Feed Interactions (Hover States) | pending |
+
+## GitHub Link Integration
+
+| # | Task | Status |
+|---|---|---|
+| 1 | Configuration (app.config.ts) | done |
+| 2 | Header Component (layouts/default.vue) | done |

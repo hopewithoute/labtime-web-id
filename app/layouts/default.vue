@@ -30,6 +30,11 @@
             <NuxtLink to="/projects" active-class="before:content-['>_']" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2 relative">Projects</NuxtLink>
             <NuxtLink to="/articles" active-class="before:content-['>_']" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2 relative">Articles</NuxtLink>
             <NuxtLink to="/resume" active-class="before:content-['>_']" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2 relative">Resume</NuxtLink>
+            <a :href="(appConfig.github as string)" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2 relative flex items-center gap-1.5 group">
+              <span class="opacity-50 group-hover:opacity-100">[</span>
+              <span>GITHUB</span>
+              <span class="opacity-50 group-hover:opacity-100">]</span>
+            </a>
           </div>
           <MetricTag label="v" value="4.3.0" class="hidden lg:flex" />
         </nav>
@@ -75,6 +80,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
+const appConfig = useAppConfig()
 const showBootSequence = ref(false)
 const bootLines = ref<string[]>([])
 const allLines = [
