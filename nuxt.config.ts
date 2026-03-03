@@ -19,7 +19,13 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ['@nuxt/eslint', 'shadcn-nuxt', 'nitro-cloudflare-dev', '@nuxtjs/tailwindcss'],
+  modules: ['@nuxt/eslint', 'shadcn-nuxt', 'nitro-cloudflare-dev', '@nuxtjs/tailwindcss', '@nuxt/content'],
+
+  content: {
+    highlight: {
+      theme: 'github-dark',
+    },
+  },
 
   shadcn: {
     prefix: '',
