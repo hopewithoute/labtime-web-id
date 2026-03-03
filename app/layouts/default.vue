@@ -5,7 +5,7 @@
         System.Log
       </NuxtLink>
       <nav class="flex gap-6 text-sm font-medium uppercase">
-        <NuxtLink to="/case-studies" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2">Case Studies</NuxtLink>
+        <NuxtLink to="/projects" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2">Projects</NuxtLink>
         <NuxtLink to="/articles" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2">Articles</NuxtLink>
       </nav>
     </header>

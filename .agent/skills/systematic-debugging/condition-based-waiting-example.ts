@@ -2,8 +2,18 @@
 // From: Lace test infrastructure improvements (2025-10-03)
 // Context: Fixed 15 flaky tests by replacing arbitrary timeouts
 
-import type { ThreadManager } from '~/threads/thread-manager';
-import type { LaceEvent, LaceEventType } from '~/threads/types';
+export type LaceEventType = 'AGENT_MESSAGE' | 'TOOL_CALL' | 'TOOL_RESULT' | string;
+
+export interface LaceEvent {
+  type: LaceEventType;
+  data: unknown;
+  [key: string]: unknown;
+}
+
+export interface ThreadManager {
+  // eslint-disable-next-line no-unused-vars
+  getEvents(threadId: string): LaceEvent[];
+}
 
 /**
  * Wait for a specific event type to appear in thread
