@@ -4,6 +4,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --animate-blink: blink 1s step-end infinite;
+  --animate-typewriter: typing 2s steps(40, end);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -109,5 +111,21 @@
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold tracking-tighter;
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@layer base {
+  .prose :where(:not(pre) > code) {
+    @apply bg-foreground/10 text-foreground px-1 py-0.5 rounded-none border border-foreground/20;
   }
 }
