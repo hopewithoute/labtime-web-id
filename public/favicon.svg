@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    path { fill: #171717; }
+    @media (prefers-color-scheme: dark) {
+      path { fill: #fafafa; }
+    }
+  </style>
+  <!-- The Prompt ">" in LabTime Red -->
+  <polyline points="6,6 16,16 6,26" fill="none" stroke="#db1436" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter"/>
+  <!-- The Cursor "_" dynamic fill -->
+  <path d="M 18,24 h 10 v 4 h -10 z" />
+</svg>
