@@ -12,6 +12,7 @@
       <nav class="flex gap-6 text-sm font-medium uppercase">
         <NuxtLink to="/projects" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2">Projects</NuxtLink>
         <NuxtLink to="/articles" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2">Articles</NuxtLink>
+        <NuxtLink to="/resume" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2">Resume</NuxtLink>
       </nav>
     </header>
 
