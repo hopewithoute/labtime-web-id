@@ -16,3 +16,14 @@
 | 1 | Update the Desktop & Mobile Header Logo | done |
 | 2 | Update the Hero Section on the Home Page | done |
 | 3 | Update Site Metadata (Title/Head) | done |
+
+## Terminal Aesthetics Implementation
+
+| # | Task | Status |
+|---|---|---|
+| 1 | CSS Foundations & Animations | pending |
+| 2 | Boot Sequence Overlay | pending |
+| 3 | Header, Logo, and Navigation Updates | pending |
+| 4 | Hero Section Typing Effect | pending |
+| 5 | Status Bar Footer | pending |
+| 6 | Feed Interactions (Hover States) | pending |
