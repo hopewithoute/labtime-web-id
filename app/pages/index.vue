@@ -1,11 +1,21 @@
 <template>
   <div class="space-y-16">
     <!-- Hero Section -->
-    <section class="py-12 border-b-4 border-foreground">
-      <h1 class="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none mb-6">
+    <section class="py-12 border-b-4 border-foreground overflow-hidden">
+      <h1 
+        v-motion
+        :initial="{ y: 100, opacity: 0 }"
+        :enter="{ y: 0, opacity: 1, transition: { duration: 600, ease: 'easeOut' } }"
+        class="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none mb-6"
+      >
         LabTime<span class="text-accent">.init()</span>
       </h1>
-      <p class="text-2xl md:text-3xl max-w-3xl font-medium leading-tight">
+      <p 
+        v-motion
+        :initial="{ y: 20, opacity: 0 }"
+        :enter="{ y: 0, opacity: 1, transition: { delay: 400, duration: 600, ease: 'easeOut' } }"
+        class="text-2xl md:text-3xl max-w-3xl font-medium leading-tight"
+      >
         A technical journal documenting architectural decisions, performance optimizations, and the pursuit of elegant systems.
       </p>
     </section>
@@ -27,11 +37,16 @@
             <NuxtLink
               v-for="article in list"
               :key="article._path"
+              v-motion
               :to="article._path"
-              class="block p-5 border border-foreground hover:bg-accent hover:text-white transition-none group"
+              :hovered="{ x: 8, transition: { duration: 200 } }"
+              class="block p-5 border border-foreground hover:bg-accent hover:text-white transition-none group cursor-crosshair"
             >
               <div class="flex justify-between items-start mb-2">
-                <span class="font-mono text-xs uppercase opacity-70 group-hover:opacity-100">{{ article.tags?.[0] || 'Note' }}</span>
+                <span class="font-mono text-xs uppercase opacity-70 group-hover:opacity-100 flex items-center gap-2">
+                  <span class="text-accent group-hover:text-white">[<span class="inline-block w-2 text-center">{{ article._path ? 'x' : ' ' }}</span>]</span>
+                  {{ article.tags?.[0] || 'Note' }}
+                </span>
                 <time class="font-mono text-xs opacity-70 group-hover:opacity-100">{{ article.date }}</time>
               </div>
               <h3 class="text-xl font-bold uppercase tracking-tight">{{ article.title }}</h3>
@@ -51,11 +66,16 @@
           <NuxtLink
             v-for="project in projects"
             :key="project._path"
+            v-motion
             :to="project._path"
-            class="block border-l-4 border-foreground pl-6 py-2 hover:border-accent group transition-none"
+            :hovered="{ x: 8, transition: { duration: 200 } }"
+            class="block border-l-4 border-foreground pl-6 py-2 hover:border-accent group transition-none cursor-crosshair"
           >
-            <span v-if="project.role" class="font-mono text-xs uppercase text-muted-foreground group-hover:text-accent">{{ project.role }}</span>
-            <h3 class="text-2xl font-black uppercase tracking-tighter leading-none mt-1 group-hover:text-accent">{{ project.title }}</h3>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-accent font-bold font-mono text-xs">[<span class="inline-block w-2 text-center">{{ project._path ? 'x' : ' ' }}</span>]</span>
+              <span v-if="project.role" class="font-mono text-xs uppercase text-muted-foreground group-hover:text-accent">{{ project.role }}</span>
+            </div>
+            <h3 class="text-2xl font-black uppercase tracking-tighter leading-none group-hover:text-accent">{{ project.title }}</h3>
             <p class="mt-2 text-sm line-clamp-2">{{ project.description }}</p>
             <div class="mt-2 flex gap-1.5 flex-wrap">
               <Badge

@@ -36,9 +36,34 @@
         <slot />
       </main>
 
-      <footer class="border-t border-foreground p-4 md:p-6 text-sm flex justify-between uppercase">
-        <span>© {{ new Date().getFullYear() }}</span>
-        <span class="text-muted-foreground">End of Transmission</span>
+      <footer class="border-t border-foreground p-3 md:p-4 text-[10px] md:text-xs font-mono flex justify-between items-center uppercase bg-foreground text-background">
+        <div class="flex items-center gap-4">
+          <div class="flex items-center gap-2">
+            <div 
+              v-motion
+              :initial="{ opacity: 0.4, scale: 0.8 }"
+              :enter="{ 
+                opacity: 1, 
+                scale: 1, 
+                transition: { 
+                  repeat: Infinity, 
+                  duration: 1500, 
+                  repeatType: 'reverse' 
+                } 
+              }"
+              class="w-2 h-2 bg-red-500 rounded-full"
+            ></div>
+            <span class="font-bold">System Operational</span>
+          </div>
+          <div class="hidden md:flex gap-4 opacity-70">
+            <span>[✓] Connected</span>
+            <span>PING: 12ms</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="opacity-70 hidden sm:inline">© {{ new Date().getFullYear() }}</span>
+          <span class="bg-background text-foreground px-2 py-0.5 font-bold">STABLE</span>
+        </div>
       </footer>
     </div>
   </div>

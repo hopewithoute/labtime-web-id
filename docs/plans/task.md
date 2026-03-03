@@ -21,9 +21,10 @@
 
 | # | Task | Status |
 |---|---|---|
-| 1 | CSS Foundations & Animations | pending |
-| 2 | Boot Sequence Overlay | pending |
-| 3 | Header, Logo, and Navigation Updates | pending |
+| 1 | CSS Foundations & Animations | done |
+| 2 | Boot Sequence Overlay | done |
+| 3 | Header, Logo, and Navigation Updates | done |
+| 3.1 | Debug: Double Border & Shrinking Layout | done |
 | 4 | Hero Section Typing Effect | pending |
 | 5 | Status Bar Footer | pending |
 | 6 | Feed Interactions (Hover States) | pending |
