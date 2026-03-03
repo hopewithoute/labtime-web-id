@@ -27,7 +27,7 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ['@nuxt/eslint', 'shadcn-nuxt', 'nitro-cloudflare-dev', '@nuxtjs/tailwindcss', '@nuxt/content', '@vueuse/motion/nuxt'],
+  modules: ['@nuxt/eslint', 'shadcn-nuxt', '@nuxtjs/color-mode', 'nitro-cloudflare-dev', '@nuxtjs/tailwindcss', '@nuxt/content', '@vueuse/motion/nuxt'],
 
   content: {
     highlight: {
@@ -42,5 +42,9 @@ export default defineNuxtConfig({
 
   eslint: {
     config: {},
+  },
+
+  colorMode: {
+    classSuffix: '',
   },
 })
