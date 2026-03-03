@@ -3,7 +3,7 @@
     <!-- Hero Section -->
     <section class="py-12 border-b-4 border-foreground">
       <h1 class="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none mb-6">
-        System<span class="text-accent">.</span>Log
+        LabTime<span class="text-accent">.init()</span>
       </h1>
       <p class="text-2xl md:text-3xl max-w-3xl font-medium leading-tight">
         A technical journal documenting architectural decisions, performance optimizations, and the pursuit of elegant systems.
@@ -87,7 +87,7 @@
 
 <script setup lang="ts">
 useHead({
-  title: 'Home | System.Log',
+  title: 'Home | LabTime',
   meta: [
     { name: 'description', content: 'A technical blog and portfolio focusing on software architecture and performance.' }
   ]
