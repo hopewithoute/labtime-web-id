@@ -18,17 +18,20 @@
     <div class="flex-1 border-x 2xl:border-x-2 border-foreground max-w-5xl mx-auto flex flex-col w-full">
       <header class="border-b border-foreground p-4 md:p-6 flex justify-between items-center bg-background z-10 sticky top-0">
         <NuxtLink to="/" class="flex flex-col hover:opacity-80 transition-opacity">
-          <div class="font-black text-xl md:text-2xl uppercase tracking-tighter leading-none">
-            LabTime<span class="text-accent">.init()</span><span class="animate-blink">▮</span>
+          <div class="font-black text-xl md:text-2xl uppercase tracking-tighter leading-none flex items-baseline gap-1">
+            LabTime<span class="text-accent">.init()</span><span class="animate-flicker">▮</span>
           </div>
           <div class="font-mono text-[10px] md:text-xs text-muted-foreground lowercase hidden sm:block mt-0.5 ml-[2px] overflow-hidden whitespace-nowrap border-r-2 border-transparent animate-typewriter w-fit max-w-fit">
             // by Anggi Wibiyanto
           </div>
         </NuxtLink>
-        <nav class="flex gap-6 text-sm font-medium uppercase">
-          <NuxtLink to="/projects" active-class="before:content-['>_']" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2 relative">Projects</NuxtLink>
-          <NuxtLink to="/articles" active-class="before:content-['>_']" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2 relative">Articles</NuxtLink>
-          <NuxtLink to="/resume" active-class="before:content-['>_']" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2 relative">Resume</NuxtLink>
+        <nav class="flex gap-6 items-center">
+          <div class="flex gap-6 text-sm font-medium uppercase">
+            <NuxtLink to="/projects" active-class="before:content-['>_']" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2 relative">Projects</NuxtLink>
+            <NuxtLink to="/articles" active-class="before:content-['>_']" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2 relative">Articles</NuxtLink>
+            <NuxtLink to="/resume" active-class="before:content-['>_']" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2 relative">Resume</NuxtLink>
+          </div>
+          <MetricTag label="v" value="4.3.0" class="hidden lg:flex" />
         </nav>
       </header>
 
@@ -62,7 +65,7 @@
         </div>
         <div class="flex items-center gap-4">
           <span class="opacity-70 hidden sm:inline">© {{ new Date().getFullYear() }}</span>
-          <span class="bg-background text-foreground px-2 py-0.5 font-bold">STABLE</span>
+          <MetricTag variant="status" value="STABLE" />
         </div>
       </footer>
     </div>

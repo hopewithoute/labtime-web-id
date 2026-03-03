@@ -1,24 +1,31 @@
 <template>
   <div class="space-y-16">
     <!-- Hero Section -->
-    <section class="py-12 border-b-4 border-foreground overflow-hidden">
-      <h1 
-        v-motion
-        :initial="{ y: 100, opacity: 0 }"
-        :enter="{ y: 0, opacity: 1, transition: { duration: 600, ease: 'easeOut' } }"
-        class="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none mb-6"
-      >
-        LabTime<span class="text-accent">.init()</span>
-      </h1>
-      <p 
-        v-motion
-        :initial="{ y: 20, opacity: 0 }"
-        :enter="{ y: 0, opacity: 1, transition: { delay: 400, duration: 600, ease: 'easeOut' } }"
-        class="text-2xl md:text-3xl max-w-3xl font-medium leading-tight"
-      >
-        A technical journal documenting architectural decisions, performance optimizations, and the pursuit of elegant systems.
-      </p>
-    </section>
+    <CornerFrame>
+      <section class="p-8 md:p-12 border-b-4 border-foreground overflow-hidden">
+        <h1 
+          v-motion
+          :initial="{ y: 100, opacity: 0 }"
+          :enter="{ y: 0, opacity: 1, transition: { duration: 600, ease: 'easeOut' } }"
+          class="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none mb-6"
+        >
+          LabTime<span class="text-accent">.init()</span>
+        </h1>
+        <p 
+          v-motion
+          :initial="{ y: 20, opacity: 0 }"
+          :enter="{ y: 0, opacity: 1, transition: { delay: 400, duration: 600, ease: 'easeOut' } }"
+          class="text-2xl md:text-3xl max-w-3xl font-medium leading-tight"
+        >
+          A technical journal documenting architectural decisions, performance optimizations, and the pursuit of elegant systems.
+        </p>
+        
+        <div class="mt-8 flex gap-4 items-center">
+          <MetricTag label="OS" value="Nuxt_v4" />
+          <MetricTag label="Status" value="Ready" variant="status" />
+        </div>
+      </section>
+    </CornerFrame>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
       <!-- Latest Articles -->
