@@ -19,16 +19,16 @@
       <header class="border-b border-foreground p-4 md:p-6 flex justify-between items-center bg-background z-10 sticky top-0">
         <NuxtLink to="/" class="flex flex-col hover:opacity-80 transition-opacity">
           <div class="font-black text-xl md:text-2xl uppercase tracking-tighter leading-none">
-            LabTime<span class="text-accent">.init()</span>
+            LabTime<span class="text-accent">.init()</span><span class="animate-blink">▮</span>
           </div>
-          <div class="font-mono text-[10px] md:text-xs text-muted-foreground lowercase hidden sm:block mt-0.5 ml-[2px]">
+          <div class="font-mono text-[10px] md:text-xs text-muted-foreground lowercase hidden sm:block mt-0.5 ml-[2px] overflow-hidden whitespace-nowrap border-r-2 border-transparent animate-typewriter w-fit max-w-fit">
             // by Anggi Wibiyanto
           </div>
         </NuxtLink>
         <nav class="flex gap-6 text-sm font-medium uppercase">
-          <NuxtLink to="/projects" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2">Projects</NuxtLink>
-          <NuxtLink to="/articles" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2">Articles</NuxtLink>
-          <NuxtLink to="/resume" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2">Resume</NuxtLink>
+          <NuxtLink to="/projects" active-class="before:content-['>_']" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2 relative">Projects</NuxtLink>
+          <NuxtLink to="/articles" active-class="before:content-['>_']" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2 relative">Articles</NuxtLink>
+          <NuxtLink to="/resume" active-class="before:content-['>_']" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2 relative">Resume</NuxtLink>
         </nav>
       </header>
 
@@ -59,10 +59,10 @@ onMounted(() => {
   if (!sessionStorage.getItem('booted')) {
     showBootSequence.value = true
     
-    setTimeout(() => { bootLines.value.push(allLines[0]) }, 300)
-    setTimeout(() => { bootLines.value.push(allLines[1]) }, 800)
+    setTimeout(() => { bootLines.value.push(allLines[0] as string) }, 300)
+    setTimeout(() => { bootLines.value.push(allLines[1] as string) }, 800)
     setTimeout(() => { 
-      bootLines.value.push(allLines[2])
+      bootLines.value.push(allLines[2] as string)
       
       setTimeout(() => {
         showBootSequence.value = false

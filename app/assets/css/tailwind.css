@@ -104,7 +104,8 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    border-color: var(--color-border, var(--border));
+    @apply outline-ring/50;
   }
   body {
     @apply bg-background text-foreground tracking-tight selection:bg-accent selection:text-white font-sans;
