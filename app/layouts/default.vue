@@ -43,7 +43,7 @@
         <slot />
       </main>
 
-      <footer class="border-t border-foreground p-3 md:p-4 text-[10px] md:text-xs font-mono flex justify-between items-center uppercase bg-foreground text-background">
+      <footer class="border-t border-foreground p-3 md:p-4 text-[10px] md:text-xs font-mono flex justify-between items-center uppercase bg-background text-foreground">
         <div class="flex items-center gap-4">
           <div class="flex items-center gap-2">
             <div 
