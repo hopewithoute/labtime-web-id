@@ -21,7 +21,7 @@
             <span v-if="project.role" class="font-mono text-sm uppercase text-muted-foreground">{{ project.role }}</span>
             <div class="flex gap-2 flex-wrap">
               <Badge
-                v-for="tech in project.tech_stack"
+                v-for="tech in flattenTechStack(project.tech_stack)"
                 :key="tech"
                 variant="outline"
                 class="font-mono uppercase px-3 py-1 rounded-none border-foreground"
@@ -45,6 +45,39 @@
           <div v-if="project.outcome" class="border-l-4 border-accent pl-6">
             <h2 class="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-2">Outcome</h2>
             <p class="text-lg">{{ project.outcome }}</p>
+          </div>
+        </section>
+
+        <!-- Tech Stack Detail -->
+        <section v-if="project.tech_stack && typeof project.tech_stack === 'object' && !Array.isArray(project.tech_stack)" class="mb-16 max-w-3xl">
+          <h2 class="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-6 border-b border-foreground pb-2">
+            Tech Stack
+          </h2>
+          <div class="space-y-6">
+            <div v-for="(items, category) in project.tech_stack" :key="category">
+              <h3 class="font-mono text-xs uppercase tracking-wider text-accent mb-3">{{ category }}</h3>
+              <div class="space-y-3">
+                <div v-for="tech in items" :key="tech.name" class="border-l-2 border-foreground/20 pl-4">
+                  <span class="font-bold">{{ tech.name }}</span>
+                  <span class="text-muted-foreground"> — {{ tech.reason }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Screenshots Gallery -->
+        <section v-if="project.screenshots?.length" class="mb-16 max-w-4xl">
+          <h2 class="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-6 border-b border-foreground pb-2">
+            Screenshots
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <figure v-for="(screenshot, index) in project.screenshots" :key="index" class="border border-foreground">
+              <img :src="screenshot.src" :alt="screenshot.alt" class="w-full" loading="lazy" />
+              <figcaption v-if="screenshot.alt" class="px-3 py-2 text-xs font-mono uppercase text-muted-foreground border-t border-foreground">
+                {{ screenshot.alt }}
+              </figcaption>
+            </figure>
           </div>
         </section>
 
@@ -118,7 +151,7 @@ const { data: articles } = await useAsyncData(`project-${slug}-articles`, () =>
 )
 
 useHead({
-  title: () => project.value ? `${project.value.title} | System.Log` : 'Project | System.Log',
+  title: () => project.value ? `${project.value.title} | LabTime` : 'Project | LabTime',
   meta: [
     { name: 'description', content: () => project.value?.description || '' }
   ]
