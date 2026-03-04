@@ -10,7 +10,7 @@
         v-for="project in projects"
         :key="project._path"
         :to="project._path"
-        class="block p-6 md:p-8 border-b border-foreground last:border-b-0 hover:bg-black hover:text-white group transition-none"
+        class="block p-6 md:p-8 border-b border-foreground last:border-b-0 group transition-none"
       >
         <div class="flex flex-col md:flex-row md:justify-between md:items-baseline gap-2 md:gap-4 mb-3">
           <h2 class="text-2xl md:text-3xl font-black uppercase tracking-tighter group-hover:text-accent">{{ project.title }}</h2>
