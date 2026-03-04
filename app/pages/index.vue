@@ -136,31 +136,25 @@
           <NuxtLink to="/articles" class="text-sm font-bold uppercase hover:text-accent underline underline-offset-4">View All</NuxtLink>
         </div>
 
-        <ContentList
-          v-slot="{ list }"
-          path="/articles"
-          :query="{ limit: 4, sort: [{ date: -1 }] }"
-        >
-          <div class="space-y-0 border border-foreground bg-card">
-            <NuxtLink
-              v-for="(article, index) in list"
-              :key="article._path"
-              :to="article._path"
-              class="flex flex-col sm:flex-row sm:items-center justify-between p-4 hover:bg-accent hover:text-white transition-none group border-b last:border-b-0 border-foreground/20"
-            >
-              <div class="flex items-center gap-4 mb-2 sm:mb-0">
-                <span class="font-mono text-xs text-muted-foreground group-hover:text-white/70 w-8">
-                  {{ String(index + 1).padStart(2, '0') }}.
-                </span>
-                <h3 class="text-lg font-bold uppercase tracking-tight">{{ article.title }}</h3>
-              </div>
-              <div class="flex items-center gap-4 text-xs font-mono opacity-60 group-hover:opacity-100 sm:w-1/3 sm:justify-end">
-                <span class="truncate max-w-30 hidden sm:inline-block">[{{ article.tags?.[0] || 'Note' }}]</span>
-                <time class="whitespace-nowrap">{{ article.date }}</time>
-              </div>
-            </NuxtLink>
-          </div>
-        </ContentList>
+        <div class="space-y-0 border border-foreground bg-card">
+          <NuxtLink
+            v-for="(article, index) in recentArticles"
+            :key="article._path"
+            :to="article._path"
+            class="flex flex-col sm:flex-row sm:items-center justify-between p-4 hover:bg-accent hover:text-white transition-none group border-b last:border-b-0 border-foreground/20"
+          >
+            <div class="flex items-center gap-4 mb-2 sm:mb-0">
+              <span class="font-mono text-xs text-muted-foreground group-hover:text-white/70 w-8">
+                {{ String(index + 1).padStart(2, '0') }}.
+              </span>
+              <h3 class="text-lg font-bold uppercase tracking-tight">{{ article.title }}</h3>
+            </div>
+            <div class="flex items-center gap-4 text-xs font-mono opacity-60 group-hover:opacity-100 sm:w-1/3 sm:justify-end">
+              <span class="truncate max-w-30 hidden sm:inline-block">[{{ article.category || article.tags?.[0] || 'Note' }}]</span>
+              <time class="whitespace-nowrap">{{ article.date }}</time>
+            </div>
+          </NuxtLink>
+        </div>
       </section>
     </main>
   </div>
@@ -181,6 +175,20 @@ const { data: projects } = await useAsyncData('home-projects', () =>
     .where({ _dir: 'projects' })
     .sort({ date: -1 })
     .limit(3)
+    .find()
+)
+
+const { data: recentArticles } = await useAsyncData('home-recent-articles', () =>
+  queryContent()
+    .where({
+      _extension: 'md',
+      $or: [
+        { _dir: 'articles' },
+        { _path: { $contains: '/projects/' }, _dir: { $ne: 'projects' } }
+      ]
+    })
+    .sort({ date: -1 })
+    .limit(4)
     .find()
 )
 </script>
