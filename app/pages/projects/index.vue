@@ -19,7 +19,7 @@
         <p class="max-w-3xl mb-4 text-lg">{{ project.description }}</p>
         <div class="flex gap-2 flex-wrap">
           <Badge
-            v-for="tech in flattenTechStack(project.tech_stack)"
+            v-for="tech in flattenTechStack(project.meta?.tech_stack)"
             :key="tech"
             variant="outline"
             class="font-mono uppercase rounded-none border-current text-current text-xs"

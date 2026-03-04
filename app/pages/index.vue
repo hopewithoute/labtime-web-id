@@ -106,15 +106,15 @@
               <div class="flex items-center justify-between pt-6 border-t border-foreground/20">
                 <div class="flex gap-2 flex-wrap max-w-[70%]">
                   <Badge
-                    v-for="tech in flattenTechStack(project.tech_stack)?.slice(0, 4)"
+                    v-for="tech in flattenTechStack(project.meta?.tech_stack)?.slice(0, 4)"
                     :key="tech"
                     variant="outline"
                     class="font-mono uppercase text-[10px] md:text-xs rounded-none border-foreground/30 px-2 py-0.5"
                   >
                     {{ tech }}
                   </Badge>
-                  <span v-if="flattenTechStack(project.tech_stack)?.length > 4" class="font-mono text-xs opacity-50 px-2 flex items-center">
-                    +{{ flattenTechStack(project.tech_stack).length - 4 }}
+                  <span v-if="flattenTechStack(project.meta?.tech_stack)?.length > 4" class="font-mono text-xs opacity-50 px-2 flex items-center">
+                    +{{ flattenTechStack(project.meta?.tech_stack).length - 4 }}
                   </span>
                 </div>
                 <div class="font-mono text-xs font-bold uppercase group-hover:text-accent flex items-center gap-2">

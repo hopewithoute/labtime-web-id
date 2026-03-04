@@ -33,6 +33,10 @@ export default defineNuxtConfig({
         ],
       },
     },
+
+    experimental: {
+      database: true
+    }
   },
 
   modules: ['@nuxt/eslint', 'shadcn-nuxt', '@nuxtjs/color-mode', 'nitro-cloudflare-dev', '@nuxtjs/tailwindcss', '@nuxt/content', '@vueuse/motion/nuxt'],
