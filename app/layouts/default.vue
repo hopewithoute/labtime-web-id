@@ -6,20 +6,20 @@
       leave-to-class="opacity-0"
     >
       <div v-if="showBootSequence" class="fixed inset-0 z-100 bg-background text-foreground font-mono uppercase p-6 md:p-12 flex flex-col justify-end">
-        <div class="max-w-5xl mx-auto w-full mb-12 lg:px-12">
+        <div class="max-w-7xl mx-auto w-full mb-12 lg:px-12">
           <div class="space-y-2 text-sm md:text-base">
             <div v-for="(line, index) in bootLines" :key="index">{{ line }}</div>
-            <div class="animate-blink mt-1">▮</div>
+            <div class="animate-blink mt-1">_</div>
           </div>
         </div>
       </div>
     </Transition>
 
-    <div class="flex-1 border-x 2xl:border-x-2 border-foreground max-w-5xl mx-auto flex flex-col w-full">
+    <div class="flex-1 border-x 2xl:border-x-2 border-foreground max-w-7xl mx-auto flex flex-col w-full">
       <header class="border-b border-foreground p-4 md:p-6 flex justify-between items-center bg-background z-10 sticky top-0">
-        <NuxtLink to="/" class="flex flex-col hover:opacity-80 transition-opacity">
+        <NuxtLink to="/" class="flex flex-col hover:opacity-80 transition-opacity w-fit">
           <div class="font-black text-xl md:text-2xl uppercase tracking-tighter leading-none flex items-baseline gap-1">
-            LabTime<span class="text-accent">.init()</span><span class="animate-flicker">▮</span>
+            LabTime<span class="text-accent">.init()</span><span class="animate-blink">_</span>
           </div>
           <div class="font-mono text-[10px] md:text-xs text-muted-foreground lowercase hidden sm:block mt-0.5 ml-[2px] overflow-hidden whitespace-nowrap border-r-2 border-transparent animate-typewriter w-fit max-w-fit">
             // by Anggi Wibiyanto
@@ -27,16 +27,15 @@
         </NuxtLink>
         <nav class="flex gap-6 items-center">
           <div class="flex gap-6 text-sm font-medium uppercase">
-            <NuxtLink to="/projects" active-class="before:content-['>_']" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2 relative">Projects</NuxtLink>
-            <NuxtLink to="/articles" active-class="before:content-['>_']" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2 relative">Articles</NuxtLink>
-            <NuxtLink to="/resume" active-class="before:content-['>_']" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2 relative">Resume</NuxtLink>
-            <a :href="(appConfig.github as string)" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2 relative flex items-center gap-1.5 group">
+            <NuxtLink to="/projects" :class="[$route.path.startsWith('/projects') ? 'active before:content-[\'>_\'] text-accent' : '']" class="link-fill-accent hover:text-accent relative">Projects</NuxtLink>
+            <NuxtLink to="/articles" :class="[$route.path.startsWith('/articles') ? 'active before:content-[\'>_\'] text-accent' : '']" class="link-fill-accent hover:text-accent relative">Articles</NuxtLink>
+            <NuxtLink to="/resume" :class="[$route.path.startsWith('/resume') ? 'active before:content-[\'>_\'] text-accent' : '']" class="link-fill-accent hover:text-accent relative">Resume</NuxtLink>
+            <a :href="appConfig.github ? String(appConfig.github) : '#'" target="_blank" rel="noopener noreferrer" class="link-fill-accent hover:text-accent relative flex items-center gap-1.5 group">
               <span class="opacity-50 group-hover:opacity-100">[</span>
               <span>GITHUB</span>
               <span class="opacity-50 group-hover:opacity-100">]</span>
             </a>
           </div>
-          <MetricTag label="v" value="4.3.0" class="hidden lg:flex" />
         </nav>
       </header>
 
@@ -59,7 +58,7 @@
                   repeatType: 'reverse' 
                 } 
               }"
-              class="w-2 h-2 bg-red-500 rounded-full"
+              class="w-2 h-2 bg-accent rounded-full"
             ></div>
             <span class="font-bold">System Operational</span>
           </div>
