@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 useHead({
-  title: 'Projects | System.Log',
+  title: 'Projects | LabTime',
   meta: [
     { name: 'description', content: 'Deep dives into systems I\'ve built — the problems, the decisions, and the implementations.' }
   ]
