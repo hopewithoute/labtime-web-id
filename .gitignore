@@ -30,3 +30,11 @@ logs
 
 # Test coverage
 coverage/
+
+# Playwright & Tests
+playwright-report/
+test-results/
+test-content.js
+
+# Debugging
+app/pages/debug-*.vue
