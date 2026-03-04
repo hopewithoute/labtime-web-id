@@ -6,7 +6,7 @@
     }
   </style>
   <!-- The Prompt ">" in LabTime Red -->
-  <polyline points="6,6 16,16 6,26" fill="none" stroke="#db1436" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter"/>
+  <polyline points="6,6 16,16 6,26" fill="none" stroke="#db7706" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter"/>
   <!-- The Cursor "_" dynamic fill -->
   <path d="M 18,24 h 10 v 4 h -10 z" />
 </svg>
