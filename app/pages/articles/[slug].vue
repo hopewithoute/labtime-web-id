@@ -2,7 +2,7 @@
   <main>
     <ContentDoc>
       <template #default="{ doc }">
-        <article class="max-w-3xl mx-auto">
+        <article>
         <header class="mb-10 border-b-4 border-foreground pb-8">
           <Badge
             v-if="doc.tags && doc.tags.length > 0"
@@ -40,8 +40,10 @@
         </header>
         
         <div
-          class="prose-link-fill max-w-3xl prose prose-neutral prose-lg dark:prose-invert
+          class="max-w-3xl prose prose-neutral prose-lg dark:prose-invert
                       prose-headings:font-bold prose-headings:uppercase prose-headings:tracking-tighter
+                      prose-a:text-accent prose-a:border-b prose-a:border-accent prose-a:no-underline
+                      hover:prose-a:bg-accent hover:prose-a:text-white
                       prose-pre:border prose-pre:border-foreground prose-pre:rounded-none
                       prose-img:border prose-img:border-foreground prose-img:rounded-none"
         >
