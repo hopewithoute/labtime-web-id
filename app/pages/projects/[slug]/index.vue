@@ -102,7 +102,7 @@
               v-for="article in articles"
               :key="article._path"
               :to="article._path"
-              class="block p-5 border-b border-foreground last:border-b-0 hover:bg-black hover:text-white group transition-none"
+              class="block p-5 border-b border-foreground last:border-b-0 group transition-none"
             >
               <div class="flex justify-between items-start mb-2">
                 <Badge

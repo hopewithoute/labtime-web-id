@@ -58,7 +58,7 @@
           <NuxtLink
             v-if="prevArticle"
             :to="prevArticle._path"
-            class="block p-4 border border-foreground hover:bg-black hover:text-white group transition-none"
+            class="block p-4 border border-foreground group transition-none"
           >
             <span class="font-mono text-xs uppercase text-muted-foreground group-hover:text-current">&larr; Previous</span>
             <p class="font-bold uppercase tracking-tight mt-1 group-hover:text-accent">{{ prevArticle.title }}</p>
@@ -67,7 +67,7 @@
           <NuxtLink
             v-if="nextArticle"
             :to="nextArticle._path"
-            class="block p-4 border border-foreground hover:bg-black hover:text-white group transition-none text-right"
+            class="block p-4 border border-foreground group transition-none text-right"
           >
             <span class="font-mono text-xs uppercase text-muted-foreground group-hover:text-current">Next &rarr;</span>
             <p class="font-bold uppercase tracking-tight mt-1 group-hover:text-accent">{{ nextArticle.title }}</p>

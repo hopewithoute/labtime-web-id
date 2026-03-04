@@ -38,7 +38,7 @@
             <div class="pt-4 flex flex-col gap-3">
               <NuxtLink 
                 to="/resume" 
-                class="w-full inline-flex justify-between items-center bg-foreground text-background font-bold uppercase text-sm px-4 py-3 hover:bg-accent hover:text-white transition-colors group"
+                class="w-full inline-flex justify-between items-center bg-foreground text-background font-bold uppercase text-sm px-4 py-3 transition-colors group"
               >
                 <span>Execute /resume</span>
                 <span class="font-mono opacity-70 group-hover:opacity-100 transition-opacity">-></span>
@@ -141,10 +141,10 @@
             v-for="(article, index) in recentArticles"
             :key="article._path"
             :to="article._path"
-            class="flex flex-col sm:flex-row sm:items-center justify-between p-4 hover:bg-accent hover:text-white transition-none group border-b last:border-b-0 border-foreground/20"
+            class="flex flex-col sm:flex-row sm:items-center justify-between p-4 transition-none group border-b last:border-b-0 border-foreground/20"
           >
             <div class="flex items-center gap-4 mb-2 sm:mb-0">
-              <span class="font-mono text-xs text-muted-foreground group-hover:text-white/70 w-8">
+              <span class="font-mono text-xs text-muted-foreground group-hover:text-accent w-8">
                 {{ String(index + 1).padStart(2, '0') }}.
               </span>
               <h3 class="text-lg font-bold uppercase tracking-tight">{{ article.title }}</h3>
