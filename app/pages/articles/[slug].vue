@@ -3,19 +3,48 @@
     <ContentDoc>
       <template #default="{ doc }">
         <article class="max-w-3xl mx-auto">
-        <header class="mb-10 text-center">
-          <Badge variant="secondary" class="font-mono uppercase mb-6 rounded-none">{{ doc.tags?.[0] || 'Article' }}</Badge>
-          <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4">{{ doc.title }}</h1>
-          <time class="text-muted-foreground font-mono text-sm block border-y border-foreground py-2 my-6">
-            {{ doc.date }}
-          </time>
+        <header class="mb-10 border-b-4 border-foreground pb-8">
+          <Badge
+            v-if="doc.tags && doc.tags.length > 0"
+            variant="secondary"
+            class="font-mono uppercase mb-4 rounded-none text-xs"
+          >
+            {{ doc.tags[0] }}
+          </Badge>
+          <Badge
+            v-else
+            variant="secondary"
+            class="font-mono uppercase mb-4 rounded-none text-xs"
+          >
+            Article
+          </Badge>
+          <h1 class="text-4xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-4">
+            {{ doc.title }}
+          </h1>
+          <p v-if="doc.description" class="text-xl max-w-3xl text-muted-foreground">
+            {{ doc.description }}
+          </p>
+          <div class="mt-6 flex items-center gap-4">
+            <time class="font-mono text-sm text-muted-foreground">{{ doc.date }}</time>
+            <div class="flex gap-2 flex-wrap">
+              <Badge
+                v-for="tag in (doc.tags || []).slice(1)"
+                :key="tag"
+                variant="outline"
+                class="font-mono uppercase px-2 py-0.5 rounded-none border-foreground text-xs"
+              >
+                {{ tag }}
+              </Badge>
+            </div>
+          </div>
         </header>
         
         <div
-class="prose prose-neutral prose-lg dark:prose-invert 
-                    prose-headings:font-bold prose-headings:tracking-tighter
-                    prose-a:text-accent prose-a:underline hover:prose-a:text-foreground
-                    prose-pre:border-l-4 prose-pre:border-accent prose-pre:rounded-none">
+          class="prose-link-fill max-w-3xl prose prose-neutral prose-lg dark:prose-invert
+                      prose-headings:font-bold prose-headings:uppercase prose-headings:tracking-tighter
+                      prose-pre:border prose-pre:border-foreground prose-pre:rounded-none
+                      prose-img:border prose-img:border-foreground prose-img:rounded-none"
+        >
           <ContentRenderer
             :value="doc"
           />
