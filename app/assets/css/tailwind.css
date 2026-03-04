@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --animate-blink: blink 1s step-end infinite;
+  --animate-blink: blink 1.5s step-end infinite;
   --animate-typewriter: typing 2s steps(40, end);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -74,31 +74,31 @@
 }
 
 .dark {
-  --background: hsl(0, 0%, 4%);
-  --foreground: hsl(60, 10%, 98%);
-  --card: hsl(0, 0%, 4%);
-  --card-foreground: hsl(60, 10%, 98%);
-  --popover: hsl(0, 0%, 4%);
-  --popover-foreground: hsl(60, 10%, 98%);
+  --background: hsl(40, 6%, 6%);
+  --foreground: hsl(60, 10%, 96%);
+  --card: hsl(40, 6%, 6%);
+  --card-foreground: hsl(60, 10%, 96%);
+  --popover: hsl(40, 6%, 6%);
+  --popover-foreground: hsl(60, 10%, 96%);
   --primary: hsl(60, 10%, 98%);
-  --primary-foreground: hsl(0, 0%, 4%);
-  --secondary: hsl(0, 0%, 15%);
-  --secondary-foreground: hsl(60, 10%, 98%);
-  --muted: hsl(0, 0%, 15%);
-  --muted-foreground: hsl(0, 0%, 60%);
+  --primary-foreground: hsl(40, 6%, 6%);
+  --secondary: hsl(40, 6%, 12%);
+  --secondary-foreground: hsl(60, 10%, 96%);
+  --muted: hsl(40, 6%, 12%);
+  --muted-foreground: hsl(40, 4%, 60%);
   --accent: hsl(348, 83%, 47%);
   --accent-foreground: hsl(60, 10%, 98%);
   --destructive: hsl(0, 62.8%, 30.6%);
-  --border: hsl(60, 10%, 98%);
-  --input: hsl(60, 10%, 98%);
+  --border: hsl(40, 6%, 18%);
+  --input: hsl(40, 6%, 18%);
   --ring: hsl(348, 83%, 47%);
-  --sidebar: hsl(0, 0%, 4%);
-  --sidebar-foreground: hsl(60, 10%, 98%);
-  --sidebar-primary: hsl(60, 10%, 98%);
-  --sidebar-primary-foreground: hsl(0, 0%, 4%);
-  --sidebar-accent: hsl(0, 0%, 15%);
-  --sidebar-accent-foreground: hsl(60, 10%, 98%);
-  --sidebar-border: hsl(60, 10%, 98%);
+  --sidebar: hsl(40, 6%, 6%);
+  --sidebar-foreground: hsl(60, 10%, 96%);
+  --sidebar-primary: hsl(60, 10%, 96%);
+  --sidebar-primary-foreground: hsl(40, 6%, 6%);
+  --sidebar-accent: hsl(40, 6%, 12%);
+  --sidebar-accent-foreground: hsl(60, 10%, 96%);
+  --sidebar-border: hsl(40, 6%, 18%);
   --sidebar-ring: hsl(348, 83%, 47%);
 }
 
@@ -121,13 +121,63 @@
 }
 
 @keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
+  from { clip-path: inset(-10% 100% -10% 0); }
+  to { clip-path: inset(-10% 0 -10% 0); }
 }
 
 @layer base {
   .prose :where(:not(pre) > code) {
     @apply bg-foreground/10 text-foreground px-1 py-0.5 rounded-none border border-foreground/20;
+  }
+}
+
+@layer components {
+  /* Prose specific wrapper */
+  .prose-link-fill a {
+    @apply relative no-underline border-none transition-colors duration-200 text-accent;
+    text-decoration: none !important;
+  }
+  
+  .prose-link-fill a::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-[2px] bg-accent;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .prose-link-fill a:hover::after {
+    transform: scaleX(1);
+  }
+  
+  /* Ensure headings don't have underlines if they are anchor links */
+  .prose-link-fill h1 a, 
+  .prose-link-fill h2 a, 
+  .prose-link-fill h3 a, 
+  .prose-link-fill h4 a {
+    @apply text-foreground no-underline border-none;
+    text-decoration: none !important;
+  }
+}
+
+@layer utilities {
+  /* Base utility for animated underline fill */
+  .link-fill-accent {
+    @apply relative no-underline border-none transition-colors duration-200;
+    text-decoration: none !important;
+  }
+
+  .link-fill-accent::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-[2px] bg-accent;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .link-fill-accent:hover::after,
+  .link-fill-accent.active::after {
+    transform: scaleX(1);
   }
 }
 
