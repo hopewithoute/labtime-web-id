@@ -178,7 +178,7 @@ useHead({
 
 const { data: projects } = await useAsyncData('home-projects', () =>
   queryContent('/projects')
-    .where({ _file: 'index' })
+    .where({ _dir: 'projects' })
     .sort({ date: -1 })
     .limit(3)
     .find()

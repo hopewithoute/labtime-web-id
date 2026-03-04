@@ -101,14 +101,14 @@ const { data: article } = await useAsyncData(`project-article-${slug}-${articleS
 // Fetch parent project for breadcrumb
 const { data: parentProject } = await useAsyncData(`project-parent-${slug}`, () =>
   queryContent(`/projects/${slug}`)
-    .where({ _file: 'index' })
+    .where({ _path: `/projects/${slug}` })
     .findOne()
 )
 
 // Fetch sibling articles for prev/next navigation
 const { data: siblings } = await useAsyncData(`project-siblings-${slug}`, () =>
   queryContent(`/projects/${slug}`)
-    .where({ _file: { $ne: 'index' } })
+    .where({ _path: { $ne: `/projects/${slug}` } })
     .sort({ date: 1 })
     .find()
 )
@@ -126,7 +126,7 @@ const nextArticle = computed(() =>
 )
 
 useHead({
-  title: () => article.value ? `${article.value.title} | System.Log` : 'Article | System.Log',
+  title: () => article.value ? `${article.value.title} | LabTime` : 'Article | LabTime',
   meta: [
     { name: 'description', content: () => article.value?.description || '' }
   ]

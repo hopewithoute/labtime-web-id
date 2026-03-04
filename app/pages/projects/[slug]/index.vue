@@ -139,13 +139,13 @@ const slug = route.params.slug as string
 
 const { data: project } = await useAsyncData(`project-${slug}`, () =>
   queryContent(`/projects/${slug}`)
-    .where({ _file: 'index' })
+    .where({ _path: `/projects/${slug}` })
     .findOne()
 )
 
 const { data: articles } = await useAsyncData(`project-${slug}-articles`, () =>
   queryContent(`/projects/${slug}`)
-    .where({ _file: { $ne: 'index' } })
+    .where({ _path: { $ne: `/projects/${slug}` } })
     .sort({ date: -1 })
     .find()
 )
