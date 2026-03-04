@@ -8,8 +8,8 @@
     <div v-if="projects?.length" class="grid grid-cols-1 gap-0 border-y border-foreground">
       <NuxtLink
         v-for="project in projects"
-        :key="project._path"
-        :to="project._path"
+        :key="project.path"
+        :to="project.path"
         class="block p-6 md:p-8 border-b border-foreground last:border-b-0 group transition-none"
       >
         <div class="flex flex-col md:flex-row md:justify-between md:items-baseline gap-2 md:gap-4 mb-3">
@@ -41,9 +41,9 @@ useHead({
 })
 
 const { data: projects } = await useAsyncData('projects', () =>
-  queryContent('/projects')
-    .where({ _extension: 'md', _dir: 'projects' })
-    .sort({ date: -1 })
-    .find()
+  queryCollection('projects')
+    .order('date', 'DESC')
+    .all()
 )
 </script>
+

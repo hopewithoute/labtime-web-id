@@ -74,9 +74,9 @@
         <div v-if="projects?.length" class="space-y-8">
           <NuxtLink
             v-for="project in projects"
-            :key="project._path"
+            :key="project.path"
             v-motion
-            :to="project._path"
+            :to="project.path"
             :initial="{ opacity: 0, y: 20 }"
             :enter="{ opacity: 1, y: 0, transition: { duration: 400, ease: 'easeOut' } }"
             class="block group cursor-crosshair"
@@ -91,7 +91,7 @@
               <div class="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-6">
                 <div>
                   <div class="flex items-center gap-3 mb-3">
-                    <span class="text-accent font-bold font-mono text-sm">[<span class="inline-block w-2 text-center">{{ project._path ? 'x' : ' ' }}</span>]</span>
+                    <span class="text-accent font-bold font-mono text-sm">[<span class="inline-block w-2 text-center">{{ project.path ? 'x' : ' ' }}</span>]</span>
                     <span v-if="project.role" class="font-mono text-xs uppercase text-muted-foreground font-bold tracking-wider">{{ project.role }}</span>
                   </div>
                   <h3 class="text-3xl md:text-4xl font-black uppercase tracking-tighter leading-none group-hover:text-accent transition-colors">{{ project.title }}</h3>
@@ -140,8 +140,8 @@
         <div class="space-y-0 border border-foreground bg-card">
           <NuxtLink
             v-for="(article, index) in recentArticles"
-            :key="article._path"
-            :to="article._path"
+            :key="article.path"
+            :to="article.path"
             class="flex flex-col sm:flex-row sm:items-center justify-between p-4 transition-none group border-b last:border-b-0 border-foreground/20"
           >
             <div class="flex items-center gap-4 mb-2 sm:mb-0">
@@ -172,24 +172,17 @@ useHead({
 })
 
 const { data: projects } = await useAsyncData('home-projects', () =>
-  queryContent('/projects')
-    .where({ _dir: 'projects' })
-    .sort({ date: -1 })
+  queryCollection('projects')
+    .order('date', 'DESC')
     .limit(3)
-    .find()
+    .all()
 )
 
 const { data: recentArticles } = await useAsyncData('home-recent-articles', () =>
-  queryContent()
-    .where({
-      _extension: 'md',
-      $or: [
-        { _dir: 'articles' },
-        { _path: { $contains: '/projects/' }, _dir: { $ne: 'projects' } }
-      ]
-    })
-    .sort({ date: -1 })
+  queryCollection('content')
+    .order('date', 'DESC')
     .limit(4)
-    .find()
+    .all()
 )
 </script>
+

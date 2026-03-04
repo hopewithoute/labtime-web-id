@@ -99,8 +99,8 @@
           <div class="grid grid-cols-1 gap-0 border-y border-foreground">
             <NuxtLink
               v-for="article in articles"
-              :key="article._path"
-              :to="article._path"
+              :key="article.path"
+              :to="article.path"
               class="block p-5 border-b border-foreground last:border-b-0 group transition-none"
             >
               <div class="flex justify-between items-start mb-2">
@@ -137,16 +137,17 @@ const route = useRoute()
 const slug = route.params.slug as string
 
 const { data: project } = await useAsyncData(`project-${slug}`, () =>
-  queryContent(`/projects/${slug}`)
-    .where({ _path: `/projects/${slug}` })
-    .findOne()
+  queryCollection('projectArticles')
+    .path(`/projects/${slug}`)
+    .first()
 )
 
 const { data: articles } = await useAsyncData(`project-${slug}-articles`, () =>
-  queryContent(`/projects/${slug}`)
-    .where({ _path: { $ne: `/projects/${slug}` } })
-    .sort({ date: -1 })
-    .find()
+  queryCollection('projectArticles')
+    .where('path', 'LIKE', `/projects/${slug}/%`)
+    .where('path', '<>', `/projects/${slug}`)
+    .order('date', 'DESC')
+    .all()
 )
 
 useHead({
@@ -156,3 +157,4 @@ useHead({
   ]
 })
 </script>
+

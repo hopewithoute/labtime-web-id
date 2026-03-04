@@ -56,7 +56,7 @@
         <nav v-if="prevArticle || nextArticle" class="mt-16 border-t-4 border-foreground pt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
           <NuxtLink
             v-if="prevArticle"
-            :to="prevArticle._path"
+            :to="prevArticle.path"
             class="block p-4 border border-foreground group transition-none"
           >
             <span class="font-mono text-xs uppercase text-muted-foreground group-hover:text-current">&larr; Previous</span>
@@ -65,7 +65,7 @@
           <div v-else />
           <NuxtLink
             v-if="nextArticle"
-            :to="nextArticle._path"
+            :to="nextArticle.path"
             class="block p-4 border border-foreground group transition-none text-right"
           >
             <span class="font-mono text-xs uppercase text-muted-foreground group-hover:text-current">Next &rarr;</span>
@@ -93,27 +93,29 @@ const articleSlug = route.params.article as string
 
 // Fetch the article
 const { data: article } = await useAsyncData(`project-article-${slug}-${articleSlug}`, () =>
-  queryContent(`/projects/${slug}/${articleSlug}`)
-    .findOne()
+  queryCollection('projectArticles')
+    .path(`/projects/${slug}/${articleSlug}`)
+    .first()
 )
 
 // Fetch parent project for breadcrumb
 const { data: parentProject } = await useAsyncData(`project-parent-${slug}`, () =>
-  queryContent(`/projects/${slug}`)
-    .where({ _path: `/projects/${slug}` })
-    .findOne()
+  queryCollection('projectArticles')
+    .path(`/projects/${slug}`)
+    .first()
 )
 
 // Fetch sibling articles for prev/next navigation
 const { data: siblings } = await useAsyncData(`project-siblings-${slug}`, () =>
-  queryContent(`/projects/${slug}`)
-    .where({ _path: { $ne: `/projects/${slug}` } })
-    .sort({ date: 1 })
-    .find()
+  queryCollection('projectArticles')
+    .where('path', 'LIKE', `/projects/${slug}/%`)
+    .where('path', '<>', `/projects/${slug}`)
+    .order('date', 'ASC')
+    .all()
 )
 
 const currentIndex = computed(() =>
-  siblings.value?.findIndex(s => s._path === article.value?._path) ?? -1
+  siblings.value?.findIndex(s => s.path === article.value?.path) ?? -1
 )
 const prevArticle = computed(() =>
   currentIndex.value > 0 ? siblings.value?.[currentIndex.value - 1] : null
@@ -131,3 +133,4 @@ useHead({
   ]
 })
 </script>
+

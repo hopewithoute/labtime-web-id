@@ -37,11 +37,8 @@ export default defineNuxtConfig({
 
   modules: ['@nuxt/eslint', 'shadcn-nuxt', '@nuxtjs/color-mode', 'nitro-cloudflare-dev', '@nuxtjs/tailwindcss', '@nuxt/content', '@vueuse/motion/nuxt'],
 
-  content: {
-    highlight: {
-      theme: 'github-dark',
-    },
-  },
+
+
 
   shadcn: {
     prefix: '',

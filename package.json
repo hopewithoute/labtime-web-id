@@ -23,7 +23,7 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@nuxt/content": "^2.13.4",
+    "@nuxt/content": "^3.12.0",
     "@vueuse/motion": "^3.0.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -62,9 +62,11 @@
   },
   "pnpm": {
     "overrides": {
-      "serialize-javascript": ">=7.0.3",
-      "@nuxtjs/mdc": ">=0.17.2"
-    }
+      "serialize-javascript": ">=7.0.3"
+    },
+    "onlyBuiltDependencies": [
+      "better-sqlite3"
+    ]
   },
   "lint-staged": {
     "*.{vue,ts,tsx,js,mjs}": [

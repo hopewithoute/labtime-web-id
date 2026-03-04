@@ -10,8 +10,8 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
       <NuxtLink 
         v-for="article in articles" 
-        :key="article._path" 
-        :to="article._path"
+        :key="article.path" 
+        :to="article.path"
         class="flex flex-col p-6 border border-foreground hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all bg-card text-card-foreground group"
       >
         <div class="flex justify-between items-start mb-4">
@@ -34,17 +34,11 @@
 
 <script setup lang="ts">
 const { data: articles } = await useAsyncData('all-articles', () =>
-  queryContent()
-    .where({
-      _extension: 'md',
-      $or: [
-        { _dir: 'articles' },
-        { _path: { $contains: '/projects/' }, _dir: { $ne: 'projects' } }
-      ]
-    })
-    .sort({ date: -1 })
-    .find()
+  queryCollection('content')
+    .order('date', 'DESC')
+    .all()
 )
+
 
 useHead({
   title: 'Articles | LabTime',
