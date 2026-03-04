@@ -35,6 +35,7 @@
 <script setup lang="ts">
 const { data: articles } = await useAsyncData('all-articles', () =>
   queryCollection('content')
+    .where('stem', 'NOT LIKE', 'projects/%/index')
     .order('date', 'DESC')
     .all()
 )

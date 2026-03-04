@@ -180,6 +180,7 @@ const { data: projects } = await useAsyncData('home-projects', () =>
 
 const { data: recentArticles } = await useAsyncData('home-recent-articles', () =>
   queryCollection('content')
+    .where('stem', 'NOT LIKE', 'projects/%/index')
     .order('date', 'DESC')
     .limit(4)
     .all()
