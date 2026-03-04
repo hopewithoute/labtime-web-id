@@ -2,7 +2,7 @@
   <div class="space-y-12">
     <div>
       <h1 class="text-4xl md:text-6xl font-extrabold uppercase tracking-tighter mb-4">Projects</h1>
-      <p class="text-xl max-w-2xl">Deep dives into systems I've built — the problems, the decisions, and the implementations that shaped them.</p>
+      <p class="text-xl max-w-4xl">Deep dives into systems I've built — the problems, the decisions, and the implementations that shaped them.</p>
     </div>
 
     <div v-if="projects?.length" class="grid grid-cols-1 gap-0 border-y border-foreground">
@@ -19,7 +19,7 @@
         <p class="max-w-3xl mb-4 text-lg">{{ project.description }}</p>
         <div class="flex gap-2 flex-wrap">
           <Badge
-            v-for="tech in project.tech_stack"
+            v-for="tech in flattenTechStack(project.tech_stack)"
             :key="tech"
             variant="outline"
             class="font-mono uppercase rounded-none border-current text-current text-xs"
