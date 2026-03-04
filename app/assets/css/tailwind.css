@@ -57,12 +57,12 @@
   --secondary-foreground: hsl(0, 0%, 0%);
   --muted: hsl(0, 0%, 96%);
   --muted-foreground: hsl(0, 0%, 45%);
-  --accent: hsl(348, 83%, 47%);
+  --accent: hsl(32, 95%, 44%);
   --accent-foreground: hsl(60, 10%, 98%);
   --destructive: hsl(0, 84.2%, 60.2%);
   --border: hsl(0, 0%, 0%);
   --input: hsl(0, 0%, 0%);
-  --ring: hsl(348, 83%, 47%);
+  --ring: hsl(32, 95%, 44%);
   --sidebar: hsl(60, 10%, 98%);
   --sidebar-foreground: hsl(0, 0%, 0%);
   --sidebar-primary: hsl(0, 0%, 0%);
@@ -70,7 +70,7 @@
   --sidebar-accent: hsl(0, 0%, 96%);
   --sidebar-accent-foreground: hsl(0, 0%, 0%);
   --sidebar-border: hsl(0, 0%, 0%);
-  --sidebar-ring: hsl(348, 83%, 47%);
+  --sidebar-ring: hsl(32, 95%, 44%);
 }
 
 .dark {
@@ -86,12 +86,12 @@
   --secondary-foreground: hsl(60, 10%, 96%);
   --muted: hsl(40, 6%, 12%);
   --muted-foreground: hsl(40, 4%, 60%);
-  --accent: hsl(348, 83%, 47%);
+  --accent: hsl(32, 95%, 44%);
   --accent-foreground: hsl(60, 10%, 98%);
   --destructive: hsl(0, 62.8%, 30.6%);
   --border: hsl(40, 6%, 18%);
   --input: hsl(40, 6%, 18%);
-  --ring: hsl(348, 83%, 47%);
+  --ring: hsl(32, 95%, 44%);
   --sidebar: hsl(40, 6%, 6%);
   --sidebar-foreground: hsl(60, 10%, 96%);
   --sidebar-primary: hsl(60, 10%, 96%);
@@ -99,7 +99,7 @@
   --sidebar-accent: hsl(40, 6%, 12%);
   --sidebar-accent-foreground: hsl(60, 10%, 96%);
   --sidebar-border: hsl(40, 6%, 18%);
-  --sidebar-ring: hsl(348, 83%, 47%);
+  --sidebar-ring: hsl(32, 95%, 44%);
 }
 
 @layer base {
