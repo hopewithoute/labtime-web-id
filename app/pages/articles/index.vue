@@ -1,10 +1,8 @@
 <template>
   <div class="space-y-12">
-    <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-foreground pb-4 mb-8">
-      <div>
-        <h1 class="text-4xl font-extrabold uppercase tracking-tighter mb-2">Articles</h1>
-        <p class="text-lg max-w-xl text-muted-foreground">Short-form notes, tutorials, and development logs.</p>
-      </div>
+    <div>
+      <h1 class="text-4xl md:text-6xl font-extrabold uppercase tracking-tighter mb-4">Articles</h1>
+      <p class="text-xl max-w-4xl">Short-form notes, tutorials, and development logs.</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
