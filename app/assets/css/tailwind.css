@@ -175,9 +175,13 @@
     transition: transform 0.3s ease;
   }
 
-  .link-fill-accent:hover::after,
+  .link-fill-accent:hover::after {
+    transform: scaleX(1);
+  }
+
   .link-fill-accent.active::after {
     transform: scaleX(1);
+    animation: blink 1.5s step-end infinite;
   }
 }
 

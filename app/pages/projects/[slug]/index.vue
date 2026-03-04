@@ -84,10 +84,9 @@
         <!-- Project body content -->
         <div
           v-if="project.body?.children?.length"
-          class="max-w-3xl mb-16 prose prose-neutral prose-lg dark:prose-invert
+          class="max-w-3xl mb-16 prose prose-neutral prose-lg dark:prose-invert prose-link-fill
                       prose-headings:font-bold prose-headings:uppercase prose-headings:tracking-tighter
-                      prose-a:text-accent prose-a:border-b prose-a:border-accent prose-a:no-underline
-                      hover:prose-a:bg-accent hover:prose-a:text-white
+                      prose-a:no-underline
                       prose-pre:border prose-pre:border-foreground prose-pre:rounded-none
                       prose-img:border prose-img:border-foreground prose-img:rounded-none"
         >

@@ -21,17 +21,18 @@
           <div class="space-y-6">
             <div>
               <div class="font-mono text-xs uppercase text-muted-foreground mb-2">[CURRENT_ROLE]</div>
-              <div class="font-bold">Software Engineer</div>
-              <div class="text-sm opacity-80">Specializing in Frontend Architecture</div>
+              <div class="font-bold">Senior System Builder</div>
+              <div class="text-sm opacity-80">AI-Augmented Engineer</div>
             </div>
 
             <div>
               <div class="font-mono text-xs uppercase text-muted-foreground mb-2">[CORE_STACK]</div>
               <div class="flex flex-wrap gap-1.5">
-                <Badge variant="outline" class="font-mono uppercase text-[10px] rounded-none border-current px-1.5 py-0">TypeScript</Badge>
+                <Badge variant="outline" class="font-mono uppercase text-[10px] rounded-none border-current px-1.5 py-0">Elixir/Ash</Badge>
                 <Badge variant="outline" class="font-mono uppercase text-[10px] rounded-none border-current px-1.5 py-0">Vue/Nuxt</Badge>
-                <Badge variant="outline" class="font-mono uppercase text-[10px] rounded-none border-current px-1.5 py-0">Tailwind</Badge>
-                <Badge variant="outline" class="font-mono uppercase text-[10px] rounded-none border-current px-1.5 py-0">Architecture</Badge>
+                <Badge variant="outline" class="font-mono uppercase text-[10px] rounded-none border-current px-1.5 py-0">React</Badge>
+                <Badge variant="outline" class="font-mono uppercase text-[10px] rounded-none border-current px-1.5 py-0">Laravel</Badge>
+                <Badge variant="outline" class="font-mono uppercase text-[10px] rounded-none border-current px-1.5 py-0">AI-Augmented</Badge>
               </div>
             </div>
 
