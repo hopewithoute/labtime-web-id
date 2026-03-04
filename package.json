@@ -62,7 +62,8 @@
   },
   "pnpm": {
     "overrides": {
-      "serialize-javascript": ">=7.0.3"
+      "serialize-javascript": ">=7.0.3",
+      "@nuxtjs/mdc": ">=0.17.2"
     }
   },
   "lint-staged": {
