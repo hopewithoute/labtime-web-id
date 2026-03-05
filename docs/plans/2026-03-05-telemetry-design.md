@@ -1,12 +1,20 @@
----
-title: "Unified Learning Telemetry Tracker"
-description: "High-performance xAPI telemetry sync across all content types with backend Ash mapping and calculation."
-date: 2026-03-05
-category: "Content Architecture"
----
+# Design: LMS Sertifikasi Unified Learning Telemetry Sub-Article
+
+## Problem Statement
+The user needs a focused, engineer-to-engineer write-up for their portfolio project (LMS Sertifikasi) covering the "Content Architecture", specifically the Unified Learning Telemetry system. The goal is to highlight the combination of xAPI standardization and real-time synchronization via Phoenix Channels, demonstrating how high-frequency UI state was decoupled from backend network load.
+
+## Selected Approach
+We will create a dedicated "Deep Dive" markdown file (`content/projects/lms-sertifikasi/unified-learning-telemetry.md`) that acts as a related writing/sub-article for the main LMS Sertifikasi project page. 
+
+The article will follow a **Problem -> Architecture -> Result** structure.
+It will include a custom-styled technical infographic (already generated via Nano Banana / AI Image Gen and placed in `public/projects/lms-sertifikasi/telemetry-infographic.png`).
+
+## Content Draft
+
+### Unified Learning Telemetry 
 
 **The Problem**  
-Tracking learning progress across wildly different mediums (Interactive Videos, Interactive Quizzes, PDFs) usually results in fragmented, messy data tables. Furthermore, relying on the frontend to calculate "completion" is inherently unreliable due to network drops or browser closures.
+Tracking learning progress across wildly different mediums (Interactive Videos, SCORM Quizzes, PDFs) usually results in fragmented, messy data tables. Furthermore, tracking this progress in real-time across multiple devices—without self-inflicting a DDoS attack on the backend—requires careful state management and network prioritization.
 
 **The Architecture**  
 ![Unified Learning Telemetry Architecture](/projects/lms-sertifikasi/telemetry-infographic.png)
@@ -22,3 +30,11 @@ We solved this by building a **Unified Telemetry Mapping** layer that resides in
 A "Zero-Trust" progress engine. By centralizing the calculation logic in backend notifiers rather than relying on frontend calls, we ensured that completion remains 100% accurate even if a user closes their browser mid-session or uses an offline-capable xAPI player.
 
 *(Note: Real-time multi-device synchronization via WebSockets is covered in a separate architectural deep-dive.)*
+
+**The Result**  
+A unified, high-performance telemetry pipeline. Instructors get standardized, deeply granular analytics across all content types, while learners get a flawless, real-time "continue where you left off" experience across all their devices—all achieved with zero database bottlenecking.
+
+## Validation Plan
+1. Ensure the markdown file is created at `content/projects/lms-sertifikasi/unified-learning-telemetry.md`.
+2. Ensure the frontmatter matches the expected schema for the labtime-web-id portfolio.
+3. Ensure the image path resolves correctly in the Nuxt Content rendering.

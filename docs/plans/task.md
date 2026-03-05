@@ -1,6 +1,4 @@
-| Task | Status | Result |
+# Task Tracker
+| Task | Status | Output |
 | :--- | :--- | :--- |
-| Task 1: Setup Dependencies and Configuration | completed | DONE |
-| Task 2: Create ThemeToggle Component | completed | DONE |
-| Task 3: Integrate Toggle and Keyboard Shortcut | completed | DONE |
-| Final Verification | completed | Build Passed |
+| Task 1 | `done` | Successfully wrote and committed the Telemetry article and infographic |

@@ -1,12 +1,32 @@
+# Telemetry Sub-Article Implementation Plan
+
+> **For Antigravity:** REQUIRED WORKFLOW: Use `.agent/workflows/execute-plan.md` to execute this plan in single-flow mode.
+
+**Goal:** Create a new markdown sub-article `unified-learning-telemetry.md` in the `content/projects/lms-sertifikasi` directory detailing the architecture of the xAPI telemetry system using React Vanilla Stores, WebSockets, and Elixir.
+
+**Architecture:** We will translate the approved design document (`docs/plans/2026-03-05-telemetry-design.md`) into a Nuxt Content markdown file, complete with frontmatter and the embedded 'Nano Banana' infographic.
+
+**Tech Stack:** Nuxt Content (Markdown), Vue (Frontend)
+
+---
+
+### Task 1: Create the Sub-Article Content File
+
+**Files:**
+- Create: `content/projects/lms-sertifikasi/unified-learning-telemetry.md`
+
+**Step 1: Write the implementation**
+
+```markdown
 ---
 title: "Unified Learning Telemetry Tracker"
-description: "High-performance xAPI telemetry sync across all content types with backend Ash mapping and calculation."
+description: "High-performance xAPI telemetry syncing across devices with O(1) React UI updates and Phoenix Channels."
 date: 2026-03-05
 category: "Content Architecture"
 ---
 
 **The Problem**  
-Tracking learning progress across wildly different mediums (Interactive Videos, Interactive Quizzes, PDFs) usually results in fragmented, messy data tables. Furthermore, relying on the frontend to calculate "completion" is inherently unreliable due to network drops or browser closures.
+Tracking learning progress across wildly different mediums (Interactive Videos, SCORM Quizzes, PDFs) usually results in fragmented, messy data tables. Furthermore, tracking this progress in real-time across multiple devices—without self-inflicting a DDoS attack on the backend—requires careful state management and network prioritization.
 
 **The Architecture**  
 ![Unified Learning Telemetry Architecture](/projects/lms-sertifikasi/telemetry-infographic.png)
@@ -22,3 +42,14 @@ We solved this by building a **Unified Telemetry Mapping** layer that resides in
 A "Zero-Trust" progress engine. By centralizing the calculation logic in backend notifiers rather than relying on frontend calls, we ensured that completion remains 100% accurate even if a user closes their browser mid-session or uses an offline-capable xAPI player.
 
 *(Note: Real-time multi-device synchronization via WebSockets is covered in a separate architectural deep-dive.)*
+
+**The Result**  
+A unified, high-performance telemetry pipeline. Instructors get standardized, deeply granular analytics across all content types, while learners get a flawless, real-time "continue where you left off" experience across all their devices—all achieved with zero database bottlenecking.
+```
+
+**Step 2: Commit**
+
+```bash
+git add content/projects/lms-sertifikasi/unified-learning-telemetry.md public/projects/lms-sertifikasi/telemetry-infographic.png
+git commit -m "docs(portfolio): add unified learning telemetry sub-article and infographic"
+```
