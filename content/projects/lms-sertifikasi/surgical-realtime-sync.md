@@ -1,7 +1,7 @@
 ---
 title: "Surgical Real-time Synchronization"
 description: "Eliminating polling with Elixir-to-Frontend WebSocket backchannels for surgical TanStack Query invalidation."
-date: 2026-03-05
+date: 2026-01-25
 category: "Infrastructure"
 ---
 

@@ -1,8 +1,8 @@
 ---
 title: "Dynamic PDF Generation Engine"
 description: "How we built a 1:1 WYSIWYG certificate editor by separating React visual state from headless Chrome background workers."
-date: 2026-03-05
-category: "Content Architecture"
+date: 2026-02-08
+category: "Content Delivery"
 ---
 
 **The Problem**  

@@ -1,7 +1,7 @@
 ---
-title: "Building a Resilient Elixir-React WebSocket Bridge"
+title: "Engineering an Elixir-React WebSocket Bridge"
 description: "Secure token exchange, React lifecycle management, and smart reference counting for Phoenix Channels."
-date: 2026-03-05
+date: 2026-02-15
 category: "Infrastructure"
 ---
 

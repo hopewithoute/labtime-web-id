@@ -1,8 +1,8 @@
 ---
-title: "Building a Resilient Media Pipeline at the Edge"
+title: "High-Performance Media Pipeline at the Edge"
 description: "How we ingested, processed, and delivered multi-gigabyte video files securely using Cloudflare R2, Workers, and Elixir."
-date: 2026-03-05
-category: "Content Architecture"
+date: 2026-02-01
+category: "Content Delivery"
 ---
 
 **The Problem**  

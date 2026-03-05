@@ -1,8 +1,8 @@
 ---
 title: "Building an Immutable Certification Engine"
 description: "Protecting data integrity at scale using Ash Framework strict locking and deep clone versioning."
-date: 2026-03-05
-category: "Data Integrity"
+date: 2026-02-22
+category: "Backend Architecture"
 ---
 
 **The Mutability Trap**  

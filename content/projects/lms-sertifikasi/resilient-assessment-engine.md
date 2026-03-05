@@ -1,8 +1,8 @@
 ---
-title: "Architecting a Resilient Assessment Engine"
+title: "Architecting a Concurrent Assessment Engine"
 description: "Handling concurrency, preventing temporal manipulation, and orchestrating background jobs in an Exam system."
-date: 2026-03-05
-category: "Backend Systems"
+date: 2026-03-01
+category: "Backend Architecture"
 ---
 
 **State Management & Concurrency**  

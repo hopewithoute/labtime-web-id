@@ -1,8 +1,8 @@
 ---
 title: "Unified Learning Telemetry Tracker"
 description: "High-performance xAPI telemetry sync across all content types with backend Ash mapping and calculation."
-date: 2026-03-05
-category: "Content Architecture"
+date: 2026-01-20
+category: "Backend Architecture"
 ---
 
 **The Problem**  
