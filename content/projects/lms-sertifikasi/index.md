@@ -1,59 +1,40 @@
 ---
 title: "LMS Sertifikasi"
-description: "A full-stack learning management system for professional certification with real-time tracking and assessment."
+description: "A full-stack learning management system for professional certification—covering course authoring, proctored assessments, xAPI telemetry, and automated certificate issuance."
 date: 2026-01-15
-tags: ["elixir", "react", "websockets", "postgresql"]
+tags: ["elixir", "ash-framework", "react", "phoenix-channels", "xapi", "cloudflare-workers", "postgresql"]
 role: "Lead Full-Stack Developer"
-problem: "Organizations needed a scalable platform to manage certification programs, track learning progress in real-time, and deliver reliable assessments to thousands of concurrent learners."
-approach: "Built a modular system using Ash Framework for domain logic, Phoenix Channels for real-time sync, and a React 19 frontend with granular progress tracking via xAPI."
-outcome: "Serving 5,000+ concurrent learners with 99.9% uptime, 70% reduction in WebSocket CPU load, and sub-second progress synchronization."
+problem: "Professional certification programs require managing the entire lifecycle—from multi-format content authoring (video, PDF, xAPI packages) and hierarchical course structures, through secure proctored assessments with anti-cheat monitoring, to verifiable certificate issuance with expiry tracking and renewal workflows."
+approach: "Built a modular monolith on Ash Framework for declarative domain modeling with strict lifecycle policies. Phoenix Channels provide real-time multi-device synchronization, while a React 19 + TanStack frontend drives granular progress tracking via a custom xAPI Learning Record Store. Media delivery is pushed entirely to the Cloudflare edge via stateless JWT-authenticated Workers."
+outcome: "Implemented 21 user stories across 7 domains. Engineered for high-concurrency scenarios—edge-offloaded media delivery eliminates backend load from video traffic, batched Ecto writes replace N+1 notification storms, and O(1) progress store updates keep the UI responsive under predicted peak loads of thousands of simultaneous learners. Architecture enforces zero-trust media access, surgical cross-device cache invalidation, and immutable certification guarantees that protect active learners from live curriculum edits."
 tech_stack:
   frontend:
     - name: "React 19"
-      reason: "Server components & concurrent rendering for complex learning UIs"
+      reason: "Concurrent rendering for complex learning UIs (Course Player, Exam Engine)"
     - name: "TanStack Router/Query"
-      reason: "Type-safe routing with built-in cache invalidation via WebSocket"
+      reason: "Type-safe routing with real-time cache invalidation via Phoenix Channels"
+    - name: "TypeScript"
+      reason: "End-to-end type safety from Ash RPC schema to UI components"
   backend:
     - name: "Elixir/Phoenix"
-      reason: "Fault-tolerant concurrency for real-time learning sync"
+      reason: "Fault-tolerant concurrency for real-time WebSocket sync and background job orchestration"
     - name: "Ash Framework"
-      reason: "Declarative domain modeling with built-in authorization"
+      reason: "Declarative domain modeling with built-in authorization policies and lifecycle validations"
+    - name: "Oban"
+      reason: "Background job processing for exam auto-completion, video transcoding, and PDF generation"
   infrastructure:
     - name: "PostgreSQL"
-      reason: "JSONB for flexible content schemas + full-text search"
+      reason: "JSONB for flexible xAPI statements and content schemas with strategic composite indexes"
+    - name: "Cloudflare R2 + Workers"
+      reason: "Zero-egress media storage with stateless JWT gateway for secure HLS streaming"
+    - name: "ChromicPDF"
+      reason: "Server-side headless Chrome rendering for pixel-perfect certificate PDFs"
 screenshots: []
 ---
 
-## Technical Highlights & Decisions
+The system is organized around four architectural pillars, each explored in depth through the accompanying decision records.
 
-### 1. Unified Learning Telemetry (xAPI)
-Built a custom, fully compliant Learning Record Store (LRS) integrated into the Elixir backend. Instead of relying on fragmented frontend logic, an Ash Notifier (`ModuleCompletionVerifier`) processes a unified stream of xAPI statements from both native tools (Articulate/Captivate) and custom adapters, guaranteeing 100% accurate progress calculation.  
-[Read the Architecture Deep Dive →](/projects/lms-sertifikasi/unified-learning-telemetry)
+**Domain Integrity & Real-time Sync.** At the core, Ash Framework enforces strict lifecycle rules—published certifications become immutable ledgers, protecting active learners from curriculum edits via deep-clone versioning. Phoenix Channels bridge the Elixir backend and React frontend through a singleton WebSocket provider with reference-counted channel multiplexing, enabling surgical TanStack Query invalidation that eliminates REST polling entirely.
 
-### 2. Surgical Real-time Synchronization
-Completely eliminated REST polling for progress updates. Repurposed Phoenix Channels as a "Backchannel" where backend Ash Notifiers broadcast precise TanStack Query invalidation keys to the React frontend, instantly syncing learning state across multiple devices in O(1) time.  
-[Read the Implementation Deep Dive →](/projects/lms-sertifikasi/surgical-realtime-sync)
+**Content Pipeline & Secure Delivery.** Multi-gigabyte video uploads flow through a resumable TUS endpoint into Cloudflare R2, where Oban workers orchestrate parallel FFmpeg transcoding (adaptive HLS) and AI-powered VTT transcription. A stateless Cloudflare Worker acts as the media gateway, performing cryptographic JWT verification at the edge so the Elixir backend never handles media traffic. Certificate PDFs follow the same async pattern—structured JSON configs rendered server-side via HEEx templates and ChromicPDF, then stored on R2.
 
-### 3. High-Performance Media Pipeline
-Engineered a secure, multi-stage media pipeline using Cloudflare Stream and TUS. Implemented a robust architecture featuring secure pre-signed uploads (TUS), automated webhook-driven transcription via Elixir workers, and authenticated HLS playback using short-lived JWTs.  
-[Read the Engineering Deep Dive →](/projects/lms-sertifikasi/media-pipeline)
-
-### 4. Dynamic PDF Certificate Engine
-Replaced an unmaintainable React WYSIWYG editor with a declarative, server-rendered HEEx template approach. Leveraged Elixir's `PdfGenerator` and Chromium headless to generate pixel-perfect, dynamic certificates at scale, drastically simplifying the frontend and improving reliability.  
-[Read the System Deep Dive →](/projects/lms-sertifikasi/dynamic-pdf-engine)
-
-### 5. Elixir-React WebSocket Bridge
-Architected a bulletproof real-time connection lifecycle between React 19 and Phoenix. Implemented secure token-exchange via Ash RPC, a React Singleton Provider for persistent TCP connections, and a custom Reference Counting Multiplexer to prevent zombie connections and drastically reduce backend channel mounting overhead.  
-[Read the Architecture Deep Dive →](/projects/lms-sertifikasi/phoenix-react-websocket-bridge)
-
-### 6. Immutable Certification Engine
-Protected live student data integrity by enforcing strict lifecycle immutability at the domain layer. Leveraged Ash Framework policies to block mutations to published syllabuses, and built an atomic 'Deep Clone' operation (`Ash.DataLayer.transaction`) to recursively duplicate parent Certifications, Modules, and Exams while mapping relational UUIDs in-memory.  
-[Read the Deep Dive →](/projects/lms-sertifikasi/immutable-certification-engine)
-
-### 7. Concurrent Assessment Engine
-Re-engineered the Elixir exam backend for strict concurrency and temporality. Implemented instantaneous JSONB 'Question Snapshotting' to decouple inflight exams from live bank edits. Enforced `optimistic_lock` boundaries to prevent duplicate submission racing, and deployed `AshOban` background cron workers to forcefully sweep and auto-complete overdue exams.  
-[Read the System Architecture →](/projects/lms-sertifikasi/resilient-assessment-engine)
-
-### 8. Stateless Edge Media Gateway
-Solved the HLS video delivery dilemma ("The Thundering Herd") by deploying a custom Cloudflare Worker in front of private R2 buckets. Utilized strict Cookie-Priming on the frontend and instantaneous stateless JWT validation at the Edge to secure thousands of streaming video chunks without ever hitting or DDOSing the core Elixir backend.  
-[Read the Infrastructure Deep Dive →](/projects/lms-sertifikasi/media-gateway-architecture)
