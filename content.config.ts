@@ -21,8 +21,14 @@ export default defineContentConfig({
                 problem: z.string().optional(),
                 approach: z.string().optional(),
                 outcome: z.string().optional(),
-                // tech_stack and screenshots are complex nested objects
-                // They live in the 'meta' JSON field automatically
+                tech_stack: z.record(z.string(), z.array(z.object({
+                    name: z.string(),
+                    reason: z.string().optional()
+                }))).optional(),
+                screenshots: z.array(z.object({
+                    src: z.string(),
+                    alt: z.string().optional()
+                })).optional(),
             }),
         }),
         projectArticles: defineCollection({
@@ -36,6 +42,14 @@ export default defineContentConfig({
                 problem: z.string().optional(),
                 approach: z.string().optional(),
                 outcome: z.string().optional(),
+                tech_stack: z.record(z.string(), z.array(z.object({
+                    name: z.string(),
+                    reason: z.string().optional()
+                }))).optional(),
+                screenshots: z.array(z.object({
+                    src: z.string(),
+                    alt: z.string().optional()
+                })).optional(),
             }),
         }),
         content: defineCollection({
