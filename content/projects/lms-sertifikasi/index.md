@@ -53,3 +53,7 @@ Protected live student data integrity by enforcing strict lifecycle immutability
 ### 7. Resilient Assessment Engine
 Re-engineered the Elixir exam backend for strict concurrency and temporality. Implemented instantaneous JSONB 'Question Snapshotting' to decouple inflight exams from live bank edits. Enforced `optimistic_lock` boundaries to prevent duplicate submission racing, and deployed `AshOban` background cron workers to forcefully sweep and auto-complete overdue exams.  
 [Read the System Architecture →](/projects/lms-sertifikasi/resilient-assessment-engine)
+
+### 8. Stateless Edge Media Gateway
+Solved the HLS video delivery dilemma ("The Thundering Herd") by deploying a custom Cloudflare Worker in front of private R2 buckets. Utilized strict Cookie-Priming on the frontend and instantaneous stateless JWT validation at the Edge to secure thousands of streaming video chunks without ever hitting or DDOSing the core Elixir backend.  
+[Read the Infrastructure Deep Dive →](/projects/lms-sertifikasi/media-gateway-architecture)
