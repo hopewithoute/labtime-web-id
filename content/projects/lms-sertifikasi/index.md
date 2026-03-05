@@ -41,3 +41,7 @@ Engineered a secure, multi-stage media pipeline using Cloudflare Stream and TUS.
 ### 4. Dynamic PDF Certificate Engine
 Replaced an unmaintainable React WYSIWYG editor with a declarative, server-rendered HEEx template approach. Leveraged Elixir's `PdfGenerator` and Chromium headless to generate pixel-perfect, dynamic certificates at scale, drastically simplifying the frontend and improving reliability.  
 [Read the System Deep Dive →](/projects/lms-sertifikasi/dynamic-pdf-engine)
+
+### 5. Resilient Elixir-React WebSocket Bridge
+Architected a bulletproof real-time connection lifecycle between React 19 and Phoenix. Implemented secure token-exchange via Ash RPC, a React Singleton Provider for persistent TCP connections, and a custom Reference Counting Multiplexer to prevent zombie connections and drastically reduce backend channel mounting overhead.  
+[Read the Architecture Deep Dive →](/projects/lms-sertifikasi/phoenix-react-websocket-bridge)
