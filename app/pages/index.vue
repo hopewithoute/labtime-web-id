@@ -53,10 +53,10 @@
 
             <!-- Static System Dump (Decorative) -->
             <div class="mt-8 pt-4 border-t border-dashed border-foreground/20 text-[10px] leading-tight text-muted-foreground opacity-50 select-none">
-                 <div>> mem_alloc: 0x00FFa1</div>
-                 <div>> thread_pool: init [8]</div>
+                 <div>> mem_alloc: {{ memAlloc }}</div>
+                 <div>> thread_pool: {{ threadPoolState }}</div>
                  <div>> bind_socket: HTTP/3</div>
-                 <div>> sys_status: AWAITING_INPUT</div>
+                 <div>> sys_status: AWAITING_INPUT<span class="animate-pulse">_</span></div>
             </div>
           </div>
         </section>
@@ -189,16 +189,35 @@ const startBootSequence = () => {
   })
 }
 
+// --- NEW TELEMETRY LOGIC ---
+const memAlloc = ref<string>('0x00FFa1')
+const threadPoolState = ref<string>('init [8]')
+let telemetryInterval: ReturnType<typeof setInterval> | null = null
+
+const updateTelemetry = () => {
+    // Randomize memory hex
+    const randomHex = Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0').toUpperCase()
+    memAlloc.value = `0x${randomHex}`
+
+    // Jitter thread pool
+    const states = ['idle [8]', 'active [6/8]', 'wait [2/8]', 'init [8]']
+    threadPoolState.value = states[Math.floor(Math.random() * states.length)]
+}
+// ---------------------------
+
 onMounted(() => {
   uptimeInterval = setInterval(() => {
     sysUptime.value = new Date().toISOString()
   }, 1000)
+
+  telemetryInterval = setInterval(updateTelemetry, 2500)
 
   startBootSequence()
 })
 
 onUnmounted(() => {
   if (uptimeInterval) clearInterval(uptimeInterval)
+  if (telemetryInterval) clearInterval(telemetryInterval)
 })
 
 useHead({
