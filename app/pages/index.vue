@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-1 lg:grid-cols-[24rem_1fr] xl:grid-cols-[26rem_1fr] gap-12 items-start">
     <!-- LEFT PANEL: Sticky Operator Profile -->
-    <aside class="lg:sticky lg:top-24 space-y-8">
+    <aside class="lg:sticky lg:top-24 space-y-8 relative group/crt">
       <CornerFrame>
         <section class="p-6 md:p-8 border-foreground overflow-hidden font-mono">
           <div class="mb-8">
@@ -242,4 +242,24 @@ const { data: recentArticles } = await useAsyncData('home-recent-articles', () =
     .all()
 )
 </script>
+
+<style scoped>
+.group\/crt::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.1) 50%
+  );
+  background-size: 100% 4px; /* 4px scanlines */
+  z-index: 50;
+  pointer-events: none; /* Crucial so links still work */
+  border-radius: inherit; /* Match CornerFrame borders */
+}
+</style>
 
