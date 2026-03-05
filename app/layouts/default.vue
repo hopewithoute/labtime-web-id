@@ -100,12 +100,7 @@ onKeyStroke(['k', 'K'], (e) => {
   }
 })
 
-onKeyStroke(['m', 'M'], (e) => {
-  if ((e.ctrlKey || e.metaKey) && e.shiftKey) {
-    e.preventDefault()
-    themeToggleRef.value?.toggleTheme()
-  }
-})
+
 const showBootSequence = ref(false)
 const bootLines = ref<string[]>([])
 const allLines = [
