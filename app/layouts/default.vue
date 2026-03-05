@@ -100,7 +100,7 @@ onKeyStroke(['k', 'K'], (e) => {
   }
 })
 
-onKeyStroke(['t', 'T'], (e) => {
+onKeyStroke(['m', 'M'], (e) => {
   if ((e.ctrlKey || e.metaKey) && e.shiftKey) {
     e.preventDefault()
     themeToggleRef.value?.toggleTheme()
