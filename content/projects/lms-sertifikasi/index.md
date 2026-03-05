@@ -45,3 +45,11 @@ Replaced an unmaintainable React WYSIWYG editor with a declarative, server-rende
 ### 5. Resilient Elixir-React WebSocket Bridge
 Architected a bulletproof real-time connection lifecycle between React 19 and Phoenix. Implemented secure token-exchange via Ash RPC, a React Singleton Provider for persistent TCP connections, and a custom Reference Counting Multiplexer to prevent zombie connections and drastically reduce backend channel mounting overhead.  
 [Read the Architecture Deep Dive →](/projects/lms-sertifikasi/phoenix-react-websocket-bridge)
+
+### 6. Immutable Certification Engine
+Protected live student data integrity by enforcing strict lifecycle immutability at the domain layer. Leveraged Ash Framework policies to block mutations to published syllabuses, and built an atomic 'Deep Clone' operation (`Ash.DataLayer.transaction`) to recursively duplicate parent Certifications, Modules, and Exams while mapping relational UUIDs in-memory.  
+[Read the Deep Dive →](/projects/lms-sertifikasi/immutable-certification-engine)
+
+### 7. Resilient Assessment Engine
+Re-engineered the Elixir exam backend for strict concurrency and temporality. Implemented instantaneous JSONB 'Question Snapshotting' to decouple inflight exams from live bank edits. Enforced `optimistic_lock` boundaries to prevent duplicate submission racing, and deployed `AshOban` background cron workers to forcefully sweep and auto-complete overdue exams.  
+[Read the System Architecture →](/projects/lms-sertifikasi/resilient-assessment-engine)
