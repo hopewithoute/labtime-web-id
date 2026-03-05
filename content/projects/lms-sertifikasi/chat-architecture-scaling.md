@@ -9,6 +9,8 @@ category: "Infrastructure"
 When building the chat feature for LMS Sertifikasi, the goal was simple: make it feel as instantaneous as WhatsApp. On the surface, this meant utilizing React 19 and Phoenix Channels for typing indicators and zero-latency message delivery. But beneath the surface, ensuring that offline users received instant, un-choked notifications required breaking out of our standard ORM patterns.
 
 **The Dual-Channel Strategy**
+![Chat Architecture: Dual-Channel Sync](/projects/lms-sertifikasi/chat-architecture-infographic.png)
+
 To balance performance and global UI consistency, we split WebSocket traffic into two distinct tracks:
 
 1. **The Ephemeral Track (`chat:room:{id}`):** This high-bandwidth channel handles the raw message payloads, volatile typing state (`Presence`), and read receipts. Importantly, it *only* broadcasts to users actively looking at the room. This prevents a user reading an article from receiving a firehose of chat data they don't currently need.
