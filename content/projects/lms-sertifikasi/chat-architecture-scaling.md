@@ -20,3 +20,25 @@ The dual-channel system works perfectly for online users. But what happens when 
 Our standard backend architecture relies heavily on the **Ash Framework**. In a naive implementation, notifying offline users means looping through the 50 members and invoking `Ash.create()` for each. 
 
 Because Ash utilizes robust domain events to broadcast changes, this naive loop generates 50 individual database `INSERT` statements, plus 50 corresponding domain events, plus 50 PubSub broadcasts. For a single chat message, we've instantly choked the database connection pool. This is the "N+1 Notification Trap."
+**Deep Ecto Optimization: Opting Out of Magic**
+To solve this, we made an architectural decision to bypass Ash Framework's high-level semantics specifically for this highly-trafficked, critical path, reverting to raw **Ecto**.
+
+Instead of individual creates, we dump universally unique identifiers (UUIDs) to their binary representation, strip out broadcast metadata, and execute a single chunked `Repo.insert_all`:
+
+```elixir
+# Build 50 notification maps in memory, completely bypassing AshEvents
+notifications = build_notification_maps(offline_members, message)
+
+# A single raw SQL INSERT for all 50 offline members
+{inserted_count, _} = LmsSertifikasi.Repo.insert_all("notifications", notifications)
+
+# Broadcast the batch result manually
+Enum.each(notifications, fn n -> 
+  Endpoint.broadcast("user:#{n.user_id}", "new_notification", n)
+end)
+```
+
+We apply the exact same optimization (`Repo.delete_all`) when marking a room as read to clear out the ephemeral chat notifications. 
+
+**The Result**
+By dropping down to the bare metal of Ecto for this specific workflow, we reduced 50 database queries to exactly 1. The result is a chat system that remains blisteringly fast and a database connection pool that stays completely healthy, regardless of how large the room grows.
