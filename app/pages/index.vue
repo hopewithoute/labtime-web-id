@@ -40,13 +40,13 @@
                 <span class="ml-auto opacity-0 group-hover:opacity-100 animate-pulse">_</span>
               </NuxtLink>
               <a 
-                :href="appConfig.github ? String(appConfig.github) : '#'" 
+                :href="githubUrl" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 class="w-full inline-flex items-center gap-2 text-sm px-2 py-2 group hover:bg-foreground hover:text-background transition-colors"
               >
                 <span class="text-accent group-hover:text-background opacity-70">~ $</span>
-                <span class="font-bold">ping {{ String(appConfig.github).replace('https://', '').replace('http://', '').replace('www.', '').replace(/\/$/, '') || 'github.com' }}</span>
+                <span class="font-bold">ping {{ githubDisplay }}</span>
                 <span class="ml-auto font-normal opacity-50 group-hover:opacity-100 group-hover:text-background transition-opacity text-xs">ttl=50</span>
               </a>
             </div>
@@ -98,7 +98,11 @@
                     <span class="text-accent font-bold font-mono text-sm">[<span class="inline-block w-2 text-center">{{ project.path ? 'x' : ' ' }}</span>]</span>
                     <span v-if="project.role" class="font-mono text-xs uppercase text-muted-foreground font-bold tracking-wider">{{ project.role }}</span>
                   </div>
-                  <h3 class="text-3xl md:text-4xl font-black uppercase tracking-tighter leading-none group-hover:text-accent transition-colors">{{ project.title }}</h3>
+                  <h3 class="text-3xl md:text-4xl font-black uppercase tracking-tighter leading-none group-hover:text-accent transition-colors relative inline-block glitch-hover group-hover:animate-[glitch-jerk_0.4s_cubic-bezier(0.25,0.46,0.45,0.94)_infinite]">
+                      <span class="relative z-10">{{ project.title }}</span>
+                      <span class="absolute top-0 -left-0.5 -z-10 opacity-0 group-hover:opacity-100 group-hover:animate-[glitch-layer-1_0.4s_cubic-bezier(0.25,0.46,0.45,0.94)_infinite_both_alternate]" aria-hidden="true">{{ project.title }}</span>
+                      <span class="absolute top-0 left-0.5 -z-10 opacity-0 group-hover:opacity-100 group-hover:animate-[glitch-layer-2_0.4s_cubic-bezier(0.25,0.46,0.45,0.94)_infinite_both_alternate-reverse]" aria-hidden="true">{{ project.title }}</span>
+                  </h3>
                 </div>
                 <div v-if="project.date" class="font-mono text-xs opacity-60 text-right whitespace-nowrap">
                   VER: {{ new Date(project.date).getFullYear() }}
@@ -172,6 +176,9 @@ const appConfig = useAppConfig()
 
 const sysUptime = ref<string>('ONLINE')
 let uptimeInterval: ReturnType<typeof setInterval> | null = null
+
+const githubUrl = computed(() => appConfig.github ? String(appConfig.github) : '#')
+const githubDisplay = computed(() => githubUrl.value.replace('https://', '').replace('http://', '').replace('www.', '').replace(/\/$/, '') || 'github.com')
 
 const bootCommands = [
   'load_module "elixir_ash"',
