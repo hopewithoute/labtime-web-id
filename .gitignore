@@ -38,3 +38,4 @@ test-content.js
 
 # Debugging
 app/pages/debug-*.vue
+.worktrees/
