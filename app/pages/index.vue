@@ -3,56 +3,61 @@
     <!-- LEFT PANEL: Sticky Operator Profile -->
     <aside class="lg:sticky lg:top-24 space-y-8">
       <CornerFrame>
-        <section class="p-6 md:p-8 border-foreground overflow-hidden">
-          <h1 
-            class="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-4 inline-flex items-baseline animate-typewriter border-r-4 border-foreground pr-2"
-          >
-            LabTime<span class="text-accent">.init()</span>
-          </h1>
-          <p class="text-sm md:text-base font-medium leading-relaxed mb-6">
-            A technical journal documenting architectural decisions, performance optimizations, and the pursuit of elegant systems.
-          </p>
-          
-          <div class="flex gap-4 items-center mb-8 border-b border-foreground/10 pb-6">
-            <MetricTag label="Status" value="Ready" variant="status" />
+        <section class="p-6 md:p-8 border-foreground overflow-hidden font-mono">
+          <div class="mb-8">
+            <div class="text-accent font-bold opacity-80 mb-2">~ $ whoami</div>
+            <div class="space-y-1">
+              <div><span class="text-muted-foreground mr-2">USER:</span>Anggi Wibiyanto</div>
+              <div><span class="text-muted-foreground mr-2">ROLE:</span>Senior System Builder</div>
+              <div>
+                <span class="text-muted-foreground mr-2">SYS_UPTIME:</span>
+                <ClientOnly>
+                  <span class="text-accent">{{ sysUptime }}</span>
+                  <template #fallback><span>ONLINE</span></template>
+                </ClientOnly>
+              </div>
+            </div>
           </div>
 
-          <!-- Bento Resume Block -->
+          <!-- Terminal Boot Sequence Block -->
           <div class="space-y-6">
             <div>
-              <div class="font-mono text-xs uppercase text-muted-foreground mb-2">[CURRENT_ROLE]</div>
-              <div class="font-bold">Senior System Builder</div>
-              <div class="text-sm opacity-80">AI-Augmented Engineer</div>
-            </div>
-
-            <div>
-              <div class="font-mono text-xs uppercase text-muted-foreground mb-2">[CORE_STACK]</div>
-              <div class="flex flex-wrap gap-1.5">
-                <Badge variant="outline" class="font-mono uppercase text-[10px] rounded-none border-current px-1.5 py-0">Elixir/Ash</Badge>
-                <Badge variant="outline" class="font-mono uppercase text-[10px] rounded-none border-current px-1.5 py-0">Vue/Nuxt</Badge>
-                <Badge variant="outline" class="font-mono uppercase text-[10px] rounded-none border-current px-1.5 py-0">React</Badge>
-                <Badge variant="outline" class="font-mono uppercase text-[10px] rounded-none border-current px-1.5 py-0">Laravel</Badge>
-                <Badge variant="outline" class="font-mono uppercase text-[10px] rounded-none border-current px-1.5 py-0">AI-Augmented</Badge>
+              <div class="text-xs uppercase text-muted-foreground mb-3 opacity-60">-- Initialize Core Modules</div>
+              <div class="space-y-1.5 text-sm">
+                <div><span class="text-accent font-bold">[ OK ]</span> load_module "elixir_ash"</div>
+                <div><span class="text-accent font-bold">[ OK ]</span> load_module "vue_nuxt"</div>
+                <div><span class="text-accent font-bold">[ OK ]</span> load_module "react"</div>
+                <div><span class="text-accent font-bold">[ OK ]</span> load_module "laravel"</div>
               </div>
             </div>
 
-            <div class="pt-4 flex flex-col gap-3">
+            <div class="pt-6 flex flex-col gap-3 border-t border-foreground/10">
               <NuxtLink 
                 to="/resume" 
-                class="w-full inline-flex justify-between items-center bg-foreground text-background font-bold uppercase text-sm px-4 py-3 transition-colors group"
+                class="w-full inline-flex items-center gap-2 text-sm px-2 py-2 group hover:bg-foreground hover:text-background transition-colors"
               >
-                <span>Execute /resume</span>
-                <span class="font-mono opacity-70 group-hover:opacity-100 transition-opacity">-></span>
+                <span class="text-accent group-hover:text-background opacity-70">~ $</span>
+                <span class="font-bold">./execute_resume.sh</span>
+                <span class="ml-auto opacity-0 group-hover:opacity-100 animate-pulse">_</span>
               </NuxtLink>
               <a 
                 :href="appConfig.github ? String(appConfig.github) : '#'" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                class="w-full inline-flex justify-between items-center border border-foreground font-bold uppercase text-sm px-4 py-3 hover:border-accent hover:text-accent transition-colors group"
+                class="w-full inline-flex items-center gap-2 text-sm px-2 py-2 group hover:bg-foreground hover:text-background transition-colors"
               >
-                <span>GitHub Profile</span>
-                <span class="font-mono opacity-70 group-hover:opacity-100 transition-opacity">↗</span>
+                <span class="text-accent group-hover:text-background opacity-70">~ $</span>
+                <span class="font-bold">ping {{ String(appConfig.github).replace('https://', '').replace('http://', '').replace('www.', '').replace(/\/$/, '') || 'github.com' }}</span>
+                <span class="ml-auto font-normal opacity-50 group-hover:opacity-100 group-hover:text-background transition-opacity text-xs">ttl=50</span>
               </a>
+            </div>
+
+            <!-- Static System Dump (Decorative) -->
+            <div class="mt-8 pt-4 border-t border-dashed border-foreground/20 text-[10px] leading-tight text-muted-foreground opacity-50 select-none">
+                 <div>> mem_alloc: 0x00FFa1</div>
+                 <div>> thread_pool: init [8]</div>
+                 <div>> bind_socket: HTTP/3</div>
+                 <div>> sys_status: AWAITING_INPUT</div>
             </div>
           </div>
         </section>
@@ -162,7 +167,22 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
+
 const appConfig = useAppConfig()
+
+const sysUptime = ref<string>('ONLINE')
+let uptimeInterval: ReturnType<typeof setInterval> | null = null
+
+onMounted(() => {
+  uptimeInterval = setInterval(() => {
+    sysUptime.value = new Date().toISOString()
+  }, 1000)
+})
+
+onUnmounted(() => {
+  if (uptimeInterval) clearInterval(uptimeInterval)
+})
 
 useHead({
   title: 'Home | LabTime',

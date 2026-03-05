@@ -3,26 +3,29 @@ import { mountSuspended } from '@nuxt/test-utils/runtime'
 import IndexPage from '~/pages/index.vue'
 
 describe('Home Page', () => {
-  it('renders the page component', async () => {
+  it('renders the page component and terminal header', async () => {
     const wrapper = await mountSuspended(IndexPage)
-    expect(wrapper.find('h1').exists()).toBe(true)
+    // Removed h1 check since we replaced it with a terminal prompt
+    expect(wrapper.text()).toContain('whoami')
   })
 
-  it('displays the LabTime title', async () => {
+  it('displays the LabTime operator credentials', async () => {
     const wrapper = await mountSuspended(IndexPage)
-    expect(wrapper.text()).toContain('LabTime')
+    expect(wrapper.text()).toContain('Anggi Wibiyanto')
+    expect(wrapper.text()).toContain('Senior System Builder')
   })
 
-  it('contains hero section with Status tag', async () => {
+  it('contains hero section with Live Uptime', async () => {
     const wrapper = await mountSuspended(IndexPage)
-    expect(wrapper.text()).toContain('Status')
-    expect(wrapper.text()).toContain('Ready')
+    expect(wrapper.text()).toContain('SYS_UPTIME')
+    // It should at least mount with the fallback or live value
   })
 
-  it('has navigation link to resume', async () => {
+  it('has navigation link styled as executable', async () => {
     const wrapper = await mountSuspended(IndexPage)
     const resumeLink = wrapper.find('a[href="/resume"]')
     expect(resumeLink.exists()).toBe(true)
+    expect(resumeLink.text()).toContain('./execute_resume.sh')
   })
 
   it('has GitHub profile link', async () => {
