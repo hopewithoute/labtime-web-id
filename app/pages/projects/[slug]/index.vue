@@ -21,7 +21,7 @@
             <span v-if="project.role" class="font-mono text-sm uppercase text-muted-foreground">{{ project.role }}</span>
             <div class="flex gap-2 flex-wrap">
               <Badge
-                v-for="tech in flattenTechStack(project.meta?.tech_stack)"
+                v-for="tech in flattenTechStack(project.tech_stack)"
                 :key="tech"
                 variant="outline"
                 class="font-mono uppercase px-3 py-1 rounded-none border-foreground"
@@ -35,7 +35,7 @@
         <!-- Two-column layout: Main content (left) + ADR sidebar (right) -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-x-8 items-start">
           <!-- Left Column: Main Content -->
-          <div class="lg:col-span-8 xl:col-span-9">
+          <div class="lg:col-span-7 xl:col-span-8">
             <!-- Technical Brief: Problem → Approach → Outcome -->
             <section class="mb-16 space-y-8">
               <div v-if="project.problem" class="border-l-4 border-accent pl-6">
@@ -53,12 +53,12 @@
             </section>
 
             <!-- Tech Stack Detail -->
-            <section v-if="project.meta?.tech_stack && typeof project.meta?.tech_stack === 'object' && !Array.isArray(project.meta?.tech_stack)" class="mb-16">
+            <section v-if="project.tech_stack" class="mb-16">
               <h2 class="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-6 border-b border-foreground pb-2">
                 Tech Stack
               </h2>
               <div class="space-y-6">
-                <div v-for="(items, category) in project.meta?.tech_stack" :key="category">
+                <div v-for="(items, category) in project.tech_stack" :key="category">
                   <h3 class="font-mono text-xs uppercase tracking-wider text-accent mb-3">{{ category }}</h3>
                   <div class="space-y-3">
                     <div v-for="tech in items" :key="tech.name" class="border-l-2 border-foreground/20 pl-4">
@@ -71,12 +71,12 @@
             </section>
 
             <!-- Screenshots Gallery -->
-            <section v-if="project.meta?.screenshots?.length" class="mb-16">
+            <section v-if="project.screenshots?.length" class="mb-16">
               <h2 class="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-6 border-b border-foreground pb-2">
                 Screenshots
               </h2>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <figure v-for="(screenshot, index) in project.meta?.screenshots" :key="index" class="border border-foreground">
+                <figure v-for="(screenshot, index) in project.screenshots" :key="index" class="border border-foreground">
                   <img :src="screenshot.src" :alt="screenshot.alt" class="w-full" loading="lazy" />
                   <figcaption v-if="screenshot.alt" class="px-3 py-2 text-xs font-mono uppercase text-muted-foreground border-t border-foreground">
                     {{ screenshot.alt }}
@@ -87,7 +87,7 @@
 
             <!-- Project body content -->
             <div
-              v-if="project.body?.children?.length"
+              v-if="project.body"
               class="mb-16 prose prose-neutral prose-lg dark:prose-invert prose-link-fill
                           prose-headings:font-bold prose-headings:uppercase prose-headings:tracking-tighter
                           prose-a:no-underline
@@ -125,14 +125,14 @@
           </div>
 
           <!-- Right Column: ADR Sidebar (desktop only) -->
-          <aside v-if="articles?.length" class="hidden lg:block lg:col-span-4 xl:col-span-3 lg:sticky lg:top-24">
-            <h2 class="text-lg font-black uppercase tracking-tight mb-4 border-b-2 border-foreground pb-2">Architecture Decision Records</h2>
+          <aside v-if="articles?.length" class="hidden lg:block lg:col-span-5 xl:col-span-4 lg:sticky lg:top-24">
+            <h2 class="text-lg font-black uppercase tracking-tight mb-4">Architecture Decision Records</h2>
             <div class="border-y border-foreground">
               <NuxtLink
                 v-for="article in articles"
                 :key="article.path"
                 :to="article.path"
-                class="block p-4 border-b border-foreground last:border-b-0 group transition-none"
+                class="block py-4 pr-4 pl-0 border-b border-foreground last:border-b-0 group transition-none"
               >
                 <div class="flex justify-between items-start mb-1">
                   <Badge
