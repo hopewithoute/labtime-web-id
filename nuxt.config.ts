@@ -36,6 +36,20 @@ export default defineNuxtConfig({
 
     experimental: {
       database: true
+    },
+
+    watchOptions: {
+      usePolling: true,
+      interval: 1000
+    }
+  },
+
+  vite: {
+    server: {
+      watch: {
+        usePolling: true,
+        interval: 1000
+      }
     }
   },
 
