@@ -23,11 +23,10 @@
           <div class="space-y-6">
             <div>
               <div class="text-xs uppercase text-muted-foreground mb-3 opacity-60">-- Initialize Core Modules</div>
-              <div class="space-y-1.5 text-sm">
-                <div><span class="text-accent font-bold">[ OK ]</span> load_module "elixir_ash"</div>
-                <div><span class="text-accent font-bold">[ OK ]</span> load_module "vue_nuxt"</div>
-                <div><span class="text-accent font-bold">[ OK ]</span> load_module "react"</div>
-                <div><span class="text-accent font-bold">[ OK ]</span> load_module "laravel"</div>
+              <div class="space-y-1.5 text-sm min-h-[96px]">
+                <div v-for="cmd in activeCommands" :key="cmd" class="animate-in fade-in slide-in-from-bottom-2 duration-300">
+                  <span class="text-accent font-bold">[ OK ]</span> {{ cmd }}
+                </div>
               </div>
             </div>
 
@@ -174,10 +173,28 @@ const appConfig = useAppConfig()
 const sysUptime = ref<string>('ONLINE')
 let uptimeInterval: ReturnType<typeof setInterval> | null = null
 
+const bootCommands = [
+  'load_module "elixir_ash"',
+  'load_module "vue_nuxt"',
+  'load_module "react"',
+  'load_module "laravel"'
+]
+const activeCommands = ref<string[]>([])
+
+const startBootSequence = () => {
+  bootCommands.forEach((cmd, index) => {
+    setTimeout(() => {
+      activeCommands.value.push(cmd)
+    }, (index + 1) * 400 + Math.random() * 200) // Staggered delay
+  })
+}
+
 onMounted(() => {
   uptimeInterval = setInterval(() => {
     sysUptime.value = new Date().toISOString()
   }, 1000)
+
+  startBootSequence()
 })
 
 onUnmounted(() => {
