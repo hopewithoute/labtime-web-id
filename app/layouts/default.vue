@@ -33,6 +33,7 @@
             <button class="link-fill-accent hover:text-accent relative flex items-center gap-1.5 group" title="Search (Ctrl+K)" @click="openSearch">
               <span class="opacity-50 group-hover:opacity-100">[</span>
               <span>SEARCH</span>
+              <kbd class="hidden md:inline-block text-[10px] font-mono px-1 py-0.5 border border-foreground/30 text-muted-foreground group-hover:text-accent group-hover:border-accent/50 ml-1 transition-colors">⌘K</kbd>
               <span class="opacity-50 group-hover:opacity-100">]</span>
             </button>
             <a :href="appConfig.github ? String(appConfig.github) : '#'" target="_blank" rel="noopener noreferrer" class="link-fill-accent hover:text-accent relative flex items-center gap-1.5 group">
