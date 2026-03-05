@@ -16,7 +16,7 @@ Handling multi-gigabyte video uploads on unreliable connections guarantees timeo
 3. **Asynchronous Worker Cycle**: A completed upload triggers a background job (via Oban in Elixir), unblocking the UI while coordinating parallel heavy computation:
    - **HLS Transcoding**: FFmpeg slices the raw video into adaptive multi-bitrate chunks (1080p, 720p, 480p).
    - **Auto-Transcription**: The audio track is extracted and passed to an AI transcription service to automatically generate VTT subtitles.
-4. **Secure Edge Delivery**: Processed assets are stored in a secondary R2 bucket. A dedicated **Cloudflare Worker acts as the Media Gateway**, enforcing strict short-lived token authorization before serving any HLS chunks or subtitles to the player.
+4. **Secure Edge Delivery**: Processed assets are stored in a secondary R2 bucket. A dedicated **Cloudflare Worker acts as the Media Gateway**, enforcing strict short-lived token authorization before serving any HLS chunks or subtitles to the player. *(The Gateway's authentication architecture is detailed in a [dedicated deep-dive](/projects/lms-sertifikasi/media-gateway-architecture).)*
 
 **The Result**  
 Zero failed uploads, automated accessibility via VTT subtitles, and dynamic adaptive streaming—all coordinated asynchronously and delivered globally via Cloudflare's edge with zero egress taxation.

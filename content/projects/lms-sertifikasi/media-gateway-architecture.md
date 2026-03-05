@@ -29,3 +29,6 @@ Once that initial handshake is complete, the browser automatically and securely 
 Once the JWT is verified at the edge, the Worker fetches the raw `.ts` stream directly from the private R2 bucket and pipes it immediately to the end user. Because the Worker and R2 exist on the same internal Cloudflare network, egress costs to the processor are effectively zero. 
 
 By pushing authentication entirely to the Edge via stateless JWTs, our Elixir backend is completely shielded from media delivery traffic, allowing it to focus exclusively on tracking learning telemetry and calculating granular progress metrics.
+
+**The Result**  
+A global, zero-trust media delivery layer that authenticates thousands of concurrent HLS streams without a single database query. The Elixir backend's CPU load from media requests dropped to zero, while students experience seamless, buffer-free adaptive video playback secured entirely at the edge.
