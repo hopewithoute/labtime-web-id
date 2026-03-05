@@ -165,16 +165,18 @@
 </template>
 
 <script setup lang="ts">
+import type { ProjectArticlesCollectionItem } from '@nuxt/content'
+
 const route = useRoute()
 const slug = route.params.slug as string
 
-const { data: project } = await useAsyncData(`project-${slug}`, () =>
+const { data: project } = await useAsyncData<ProjectArticlesCollectionItem | null>(`project-${slug}`, () =>
   queryCollection('projectArticles')
     .path(`/projects/${slug}`)
     .first()
 )
 
-const { data: articles } = await useAsyncData(`project-${slug}-articles`, () =>
+const { data: articles } = await useAsyncData<ProjectArticlesCollectionItem[]>(`project-${slug}-articles`, () =>
   queryCollection('projectArticles')
     .where('path', 'LIKE', `/projects/${slug}/%`)
     .where('path', '<>', `/projects/${slug}`)
