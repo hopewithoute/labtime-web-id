@@ -16,7 +16,7 @@
     </Transition>
 
     <div class="flex-1 border-x 2xl:border-x-2 border-foreground max-w-7xl mx-auto flex flex-col w-full">
-      <header class="border-b border-foreground p-4 md:p-6 flex justify-between items-center bg-background z-10 sticky top-0">
+      <header class="border-b border-foreground p-4 md:p-6 flex justify-between items-center bg-background z-30 sticky top-0">
         <NuxtLink to="/" class="flex flex-col hover:opacity-80 transition-opacity w-fit">
           <div class="font-black text-xl md:text-2xl uppercase tracking-tighter leading-none flex items-baseline gap-1">
             LabTime<span class="text-accent">.init()</span><span class="animate-blink">_</span>
@@ -30,6 +30,11 @@
             <NuxtLink to="/projects" :class="[$route.path.startsWith('/projects') ? 'active before:content-[\'>_\'] text-accent' : '']" class="link-fill-accent hover:text-accent relative">Projects</NuxtLink>
             <NuxtLink to="/articles" :class="[$route.path.startsWith('/articles') ? 'active before:content-[\'>_\'] text-accent' : '']" class="link-fill-accent hover:text-accent relative">Articles</NuxtLink>
             <NuxtLink to="/resume" :class="[$route.path.startsWith('/resume') ? 'active before:content-[\'>_\'] text-accent' : '']" class="link-fill-accent hover:text-accent relative">Resume</NuxtLink>
+            <button class="link-fill-accent hover:text-accent relative flex items-center gap-1.5 group" title="Search (Ctrl+K)" @click="openSearch">
+              <span class="opacity-50 group-hover:opacity-100">[</span>
+              <span>SEARCH</span>
+              <span class="opacity-50 group-hover:opacity-100">]</span>
+            </button>
             <a :href="appConfig.github ? String(appConfig.github) : '#'" target="_blank" rel="noopener noreferrer" class="link-fill-accent hover:text-accent relative flex items-center gap-1.5 group">
               <span class="opacity-50 group-hover:opacity-100">[</span>
               <span>GITHUB</span>
@@ -74,6 +79,8 @@
         </div>
       </footer>
     </div>
+
+    <SearchPalette />
   </div>
 </template>
 
@@ -83,9 +90,17 @@ import { onKeyStroke } from '@vueuse/core'
 
 const appConfig = useAppConfig()
 const themeToggleRef = ref<{ toggleTheme: () => void } | null>(null)
+const { open: openSearch } = useGlobalSearch()
 
 onKeyStroke(['k', 'K'], (e) => {
   if (e.ctrlKey || e.metaKey) {
+    e.preventDefault()
+    openSearch()
+  }
+})
+
+onKeyStroke(['t', 'T'], (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey) {
     e.preventDefault()
     themeToggleRef.value?.toggleTheme()
   }
