@@ -26,15 +26,18 @@ screenshots: []
 
 ## Technical Highlights & Decisions
 
-### Real-time Learning Sync
-Phoenix Channels with multiplexed room model for efficient fan-out. Moved from per-user topics to shared rooms, reducing WebSocket CPU load by 70% during concurrent quiz sessions.
-[Deep Dive →](/projects/lms-sertifikasi/optimizing-websocket-fanout)
+### 1. Unified Learning Telemetry (xAPI)
+Built a custom, fully compliant Learning Record Store (LRS) integrated into the Elixir backend. Instead of relying on fragmented frontend logic, an Ash Notifier (`ModuleCompletionVerifier`) processes a unified stream of xAPI statements from both native tools (Articulate/Captivate) and custom adapters, guaranteeing 100% accurate progress calculation.  
+[Read the Architecture Deep Dive →](/projects/lms-sertifikasi/unified-learning-telemetry)
 
-### Granular Progress Tracking
-Vanilla TypeScript External Store paired with React 18's `useSyncExternalStore` for O(1) UI updates. Chose this over Context API to avoid full-tree re-renders in courses with 200+ items.
+### 2. Surgical Real-time Synchronization
+Completely eliminated REST polling for progress updates. Repurposed Phoenix Channels as a "Backchannel" where backend Ash Notifiers broadcast precise TanStack Query invalidation keys to the React frontend, instantly syncing learning state across multiple devices in O(1) time.  
+[Read the Implementation Deep Dive →](/projects/lms-sertifikasi/surgical-realtime-sync)
 
-### Assessment Engine
-Timed exams with snapshot-based grading and remedial cooldown logic. Snapshots ensure grading integrity even if questions are modified after submission.
+### 3. High-Performance Media Pipeline
+Engineered a secure, multi-stage media pipeline using Cloudflare Stream and TUS. Implemented a robust architecture featuring secure pre-signed uploads (TUS), automated webhook-driven transcription via Elixir workers, and authenticated HLS playback using short-lived JWTs.  
+[Read the Engineering Deep Dive →](/projects/lms-sertifikasi/media-pipeline)
 
-### xAPI Integration
-Full LRS compliance for learning analytics and session resumption. Implemented exit-only persistence strategy to reduce network noise while maintaining reliable session state via terminal browser events.
+### 4. Dynamic PDF Certificate Engine
+Replaced an unmaintainable React WYSIWYG editor with a declarative, server-rendered HEEx template approach. Leveraged Elixir's `PdfGenerator` and Chromium headless to generate pixel-perfect, dynamic certificates at scale, drastically simplifying the frontend and improving reliability.  
+[Read the System Deep Dive →](/projects/lms-sertifikasi/dynamic-pdf-engine)
