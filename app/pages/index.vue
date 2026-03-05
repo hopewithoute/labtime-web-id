@@ -261,9 +261,9 @@ const { data: recentArticles } = await useAsyncData('home-recent-articles', () =
   right: 0;
   background: linear-gradient(
     rgba(18, 16, 16, 0) 50%,
-    rgba(0, 0, 0, 0.1) 50%
+    rgba(0, 0, 0, 0.05) 50%
   );
-  background-size: 100% 4px; /* 4px scanlines */
+  background-size: 100% 8px; /* 8px scanlines to prevent fuzziness */
   z-index: 50;
   pointer-events: none; /* Crucial so links still work */
   border-radius: inherit; /* Match CornerFrame borders */
