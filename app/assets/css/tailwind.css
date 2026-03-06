@@ -221,3 +221,28 @@
 .animate-flicker {
   animation: flicker 4s infinite;
 }
+
+/* Article prose enhancements */
+@layer components {
+  .article-prose pre {
+    @apply relative;
+  }
+
+  .article-prose pre::before {
+    content: attr(data-language);
+    @apply absolute top-0 right-0 font-mono text-[10px] uppercase tracking-wider
+           text-muted-foreground bg-foreground/5 px-2 py-1 border-b border-l border-foreground;
+  }
+
+  .article-prose blockquote {
+    @apply border-l-4 border-accent bg-accent/5 py-3 px-5 not-italic;
+  }
+
+  .article-prose blockquote p {
+    @apply font-mono text-sm tracking-wide;
+  }
+
+  .article-prose blockquote strong {
+    @apply text-accent;
+  }
+}

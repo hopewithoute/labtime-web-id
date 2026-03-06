@@ -23,7 +23,7 @@
           <div class="space-y-6">
             <div>
               <div class="text-xs uppercase text-muted-foreground mb-3 opacity-60">-- Initialize Core Modules</div>
-              <div class="space-y-1.5 text-sm min-h-[96px]">
+              <div class="space-y-1.5 text-sm min-h-24">
                 <div v-for="cmd in activeCommands" :key="cmd" class="animate-in fade-in slide-in-from-bottom-2 duration-300">
                   <span class="text-accent font-bold">[ OK ]</span> {{ cmd }}
                 </div>
@@ -83,50 +83,48 @@
             :to="project.path"
             :initial="{ opacity: 0, y: 20 }"
             :enter="{ opacity: 1, y: 0, transition: { duration: 400, ease: 'easeOut' } }"
-            class="block group cursor-crosshair"
+            class="block group cursor-crosshair border-2 border-foreground hover:bg-foreground hover:text-background transition-colors relative crt-hover bg-background w-full"
           >
-            <div class="border-2 border-foreground p-6 md:p-8 hover:border-accent transition-colors relative bg-card">
+            <div class="p-6 md:p-8 relative z-10 flex flex-col h-full">
               <!-- Corner Accents -->
-              <div class="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-current -translate-x-0.5 -translate-y-0.5"></div>
-              <div class="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-current translate-x-0.5 -translate-y-0.5"></div>
-              <div class="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-current -translate-x-0.5 translate-y-0.5"></div>
-              <div class="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-current translate-x-0.5 translate-y-0.5"></div>
+              <div class="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-foreground group-hover:border-background transition-colors -translate-x-0.5 -translate-y-0.5"></div>
+              <div class="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-foreground group-hover:border-background transition-colors translate-x-0.5 -translate-y-0.5"></div>
+              <div class="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-foreground group-hover:border-background transition-colors -translate-x-0.5 translate-y-0.5"></div>
+              <div class="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-foreground group-hover:border-background transition-colors translate-x-0.5 translate-y-0.5"></div>
 
               <div class="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-6">
-                <div>
+                <div class="w-full">
                   <div class="flex items-center gap-3 mb-3">
-                    <span class="text-accent font-bold font-mono text-sm">[<span class="inline-block w-2 text-center">{{ project.path ? 'x' : ' ' }}</span>]</span>
-                    <span v-if="project.role" class="font-mono text-xs uppercase text-muted-foreground font-bold tracking-wider">{{ project.role }}</span>
+                    <span class="text-accent group-hover:text-background font-bold font-mono text-sm bg-accent/10 group-hover:bg-background/20 px-2 py-0.5 transition-colors">[<span class="inline-block w-2 text-center">{{ project.path ? 'x' : ' ' }}</span>]</span>
+                    <span v-if="project.role" class="font-mono text-[10px] md:text-xs uppercase opacity-60 font-bold tracking-widest group-hover:opacity-80 transition-opacity">{{ project.role }}</span>
                   </div>
-                  <h3 class="text-3xl md:text-4xl font-black uppercase tracking-tighter leading-none group-hover:text-accent transition-colors relative inline-block glitch-hover group-hover:animate-[glitch-jerk_0.4s_cubic-bezier(0.25,0.46,0.45,0.94)_infinite]">
-                      <span class="relative z-10">{{ project.title }}</span>
-                      <span class="absolute top-0 -left-0.5 -z-10 opacity-0 group-hover:opacity-100 group-hover:animate-[glitch-layer-1_0.4s_cubic-bezier(0.25,0.46,0.45,0.94)_infinite_both_alternate]" aria-hidden="true">{{ project.title }}</span>
-                      <span class="absolute top-0 left-0.5 -z-10 opacity-0 group-hover:opacity-100 group-hover:animate-[glitch-layer-2_0.4s_cubic-bezier(0.25,0.46,0.45,0.94)_infinite_both_alternate-reverse]" aria-hidden="true">{{ project.title }}</span>
+                  <h3 class="text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tighter leading-none group-hover:underline underline-offset-4 decoration-2 wrap-break-word text-foreground group-hover:text-background transition-colors">
+                    {{ project.title }}
                   </h3>
                 </div>
-                <div v-if="project.date" class="font-mono text-xs opacity-60 text-right whitespace-nowrap">
+                <div v-if="project.date" class="font-mono text-xs md:text-sm border border-foreground/20 group-hover:border-background/20 px-3 py-1 bg-background/50 group-hover:bg-background/10 backdrop-blur-sm shrink-0 opacity-80 group-hover:opacity-100 transition-colors mt-2 md:mt-0">
                   VER: {{ new Date(project.date).getFullYear() }}
                 </div>
               </div>
 
-              <p class="text-base md:text-lg mb-8 max-w-2xl leading-relaxed text-muted-foreground group-hover:text-foreground transition-colors">{{ project.description }}</p>
+              <p class="text-base md:text-lg mb-8 max-w-2xl leading-relaxed opacity-80 group-hover:opacity-90 transition-opacity">{{ project.description }}</p>
 
-              <div class="flex items-center justify-between pt-6 border-t border-foreground/20">
-                <div class="flex gap-2 flex-wrap max-w-[70%]">
-                  <Badge
+              <div class="flex flex-col sm:flex-row sm:items-end justify-between mt-auto pt-6 border-t-2 border-dashed border-foreground/20 group-hover:border-background/30 transition-colors gap-6 relative">
+                <div class="flex flex-wrap gap-2 text-[10px] md:text-xs font-mono items-center uppercase max-w-[70%]">
+                  <span class="opacity-60 font-bold tracking-widest bg-foreground text-background group-hover:bg-background group-hover:text-foreground px-2 py-1 transition-colors">DEPS</span>
+                  <span
                     v-for="tech in flattenTechStack(project.tech_stack)?.slice(0, 4)"
                     :key="tech"
-                    variant="outline"
-                    class="font-mono uppercase text-[10px] md:text-xs rounded-none border-foreground/30 px-2 py-0.5"
+                    class="border border-foreground/30 group-hover:border-background/30 px-2 py-0.5 transition-colors opacity-80"
                   >
                     {{ tech }}
-                  </Badge>
-                  <span v-if="flattenTechStack(project.tech_stack)?.length > 4" class="font-mono text-xs opacity-50 px-2 flex items-center">
+                  </span>
+                  <span v-if="flattenTechStack(project.tech_stack)?.length > 4" class="opacity-50 px-2 flex items-center font-bold">
                     +{{ flattenTechStack(project.tech_stack).length - 4 }}
                   </span>
                 </div>
-                <div class="font-mono text-xs font-bold uppercase group-hover:text-accent flex items-center gap-2">
-                  <span>Enter</span>
+                <div class="text-xs md:text-sm font-bold uppercase flex items-center gap-1.5 transition-colors bg-accent/10 sm:bg-transparent px-3 py-1 border-2 border-transparent group-hover:border-background/20 group-hover:text-accent">
+                  <span>ENTER</span>
                   <span class="group-hover:translate-x-1 transition-transform">-></span>
                 </div>
               </div>
@@ -145,22 +143,37 @@
           <NuxtLink to="/articles" class="text-sm font-bold uppercase hover:text-accent underline underline-offset-4">View All</NuxtLink>
         </div>
 
-        <div class="space-y-0 border border-foreground bg-card">
+        <div class="space-y-0 border-2 border-foreground bg-background">
           <NuxtLink
             v-for="(article, index) in recentArticles"
             :key="article.path"
             :to="article.path"
-            class="flex flex-col sm:flex-row sm:items-center justify-between p-4 transition-none group border-b last:border-b-0 border-foreground/20"
+            class="group flex w-full max-w-full hover:bg-foreground hover:text-background transition-colors relative crt-hover border-b-2 last:border-b-0 border-foreground/20 group-hover:border-background/20"
           >
-            <div class="flex items-center gap-4 mb-2 sm:mb-0">
-              <span class="font-mono text-xs text-muted-foreground group-hover:text-accent w-8">
-                {{ String(index + 1).padStart(2, '0') }}.
+            <!-- Number sidebar -->
+            <div class="w-12 sm:w-16 shrink-0 border-r-2 border-foreground/20 group-hover:border-background/20 flex flex-col items-center justify-center bg-foreground/5 group-hover:bg-transparent overflow-hidden relative z-10 transition-colors">
+              <span class="text-accent group-hover:text-background font-black text-xl sm:text-2xl transform -rotate-90 tracking-tighter whitespace-nowrap transition-colors">
+                #{{ String(index + 1).padStart(2, '0') }}
               </span>
-              <h3 class="text-lg font-bold uppercase tracking-tight">{{ article.title }}</h3>
             </div>
-            <div class="flex items-center gap-4 text-xs font-mono opacity-60 group-hover:opacity-100 sm:w-1/3 sm:justify-end">
-              <span class="truncate max-w-30 hidden sm:inline-block">[{{ article.category || article.tags?.[0] || 'Note' }}]</span>
-              <time class="whitespace-nowrap">{{ article.date }}</time>
+            
+            <div class="grow p-4 md:p-6 flex flex-col relative z-10 justify-center">
+              <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                <h3 class="text-lg md:text-xl font-black uppercase tracking-tight leading-tight group-hover:underline underline-offset-4 decoration-2 wrap-break-word">
+                  {{ article.title }}
+                </h3>
+                
+                <div class="flex items-center gap-3 md:gap-4 justify-between sm:justify-end shrink-0 w-full sm:w-auto mt-2 sm:mt-0 border-t border-dashed border-foreground/20 sm:border-t-0 pt-3 sm:pt-0 group-hover:border-background/30 transition-colors">
+                  <div class="flex gap-2 items-center">
+                    <span class="bg-foreground text-background group-hover:bg-background group-hover:text-foreground px-2 py-0.5 text-[10px] md:text-xs font-bold uppercase tracking-widest shrink-0">
+                      {{ article.category || article.tags?.[0] || 'LOG' }}
+                    </span>
+                  </div>
+                  <div class="text-[10px] md:text-xs font-mono border border-foreground/20 group-hover:border-background/20 px-2 py-0.5 transition-colors whitespace-nowrap shrink-0 opacity-80 group-hover:opacity-100">
+                    {{ article.date }}
+                  </div>
+                </div>
+              </div>
             </div>
           </NuxtLink>
         </div>
@@ -208,7 +221,7 @@ const updateTelemetry = () => {
 
     // Jitter thread pool
     const states = ['idle [8]', 'active [6/8]', 'wait [2/8]', 'init [8]']
-    threadPoolState.value = states[Math.floor(Math.random() * states.length)]
+    threadPoolState.value = states[Math.floor(Math.random() * states.length)] || states[0]!
 }
 // ---------------------------
 
@@ -267,6 +280,22 @@ const { data: recentArticles } = await useAsyncData('home-recent-articles', () =
   z-index: 50;
   pointer-events: none; /* Crucial so links still work */
   border-radius: inherit; /* Match CornerFrame borders */
+}
+.crt-hover:hover::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0) 50%,
+    rgba(255, 255, 255, 0.05) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 50;
+  pointer-events: none;
 }
 </style>
 
