@@ -1,33 +1,37 @@
 <template>
-  <main>
+  <main class="group/crt relative min-h-screen">
     <div v-if="project">
       <article>
         <!-- Header -->
-        <header class="mb-12 border-b-4 border-foreground pb-8">
-          <div class="flex items-center gap-4 mb-6 font-mono text-sm uppercase">
-            <NuxtLink to="/projects" class="hover:text-accent flex items-center gap-1">
-              <span class="text-lg leading-none">&larr;</span> Projects
+        <header class="mb-12 border-4 border-foreground bg-background p-6 md:p-8 lg:p-12 relative group">
+          <div class="flex items-center gap-4 mb-8 font-mono text-xs uppercase tracking-widest text-muted-foreground border-b border-dashed border-foreground/30 pb-4">
+            <NuxtLink to="/projects" class="hover:text-accent flex items-center gap-2 border border-foreground/20 px-2 py-1 transition-colors">
+              <span class="leading-none mt-0.5">&larr;</span> <span>PRJ_INDEX</span>
             </NuxtLink>
-            <span>/</span>
-            <time>{{ project.date }}</time>
+            <span class="opacity-30">/</span>
+            <time class="font-bold">[{{ project.date }}]</time>
           </div>
-          <h1 class="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-6">
+          
+          <h1 class="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-none mb-8">
             {{ project.title }}
           </h1>
-          <p class="text-xl md:text-2xl max-w-4xl border-l-[6px] border-accent pl-4 py-2 bg-muted/30">
+          
+          <div class="font-mono text-[10px] uppercase tracking-widest text-foreground/50 mb-2">SYS_DESC //</div>
+          <p class="text-lg md:text-xl max-w-4xl border-l-[6px] border-accent pl-6 py-2 bg-accent/5 font-medium mb-4">
             {{ project.description }}
           </p>
-          <div class="mt-6 flex items-center gap-4 flex-wrap">
-            <span v-if="project.role" class="font-mono text-sm uppercase text-muted-foreground">{{ project.role }}</span>
+          
+          <div class="mt-8 flex items-center gap-4 flex-wrap border-t border-foreground/20 pt-6">
+            <span v-if="project.role" class="font-mono text-xs uppercase font-bold tracking-widest bg-foreground text-background px-3 py-1">role: {{ project.role }}</span>
             <div class="flex gap-2 flex-wrap">
-              <Badge
+              <span
                 v-for="tech in flattenTechStack(project.tech_stack)"
                 :key="tech"
-                variant="outline"
-                class="font-mono uppercase px-3 py-1 rounded-none border-foreground"
+                class="font-mono text-xs uppercase px-2 py-1 border border-foreground font-bold"
+                title="stack_module"
               >
                 {{ tech }}
-              </Badge>
+              </span>
             </div>
           </div>
         </header>
@@ -37,33 +41,34 @@
           <!-- Left Column: Main Content -->
           <div class="lg:col-span-7 xl:col-span-8">
             <!-- Technical Brief: Problem → Approach → Outcome -->
-            <section class="mb-16 space-y-8">
-              <div v-if="project.problem" class="border-l-4 border-accent pl-6">
-                <h2 class="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-2">Problem</h2>
-                <p class="text-lg">{{ project.problem }}</p>
-              </div>
-              <div v-if="project.approach" class="border-l-4 border-foreground pl-6">
-                <h2 class="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-2">Approach</h2>
-                <p class="text-lg">{{ project.approach }}</p>
-              </div>
-              <div v-if="project.outcome" class="border-l-4 border-accent pl-6">
-                <h2 class="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-2">Outcome</h2>
-                <p class="text-lg">{{ project.outcome }}</p>
+            <section class="mb-16">
+              <h2 class="text-2xl font-black uppercase tracking-tight mb-8">System Diagnostics</h2>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-0.5 border-2 border-foreground bg-foreground">
+                <div v-if="project.problem" class="bg-background p-6 group relative">
+                  <div class="font-mono text-[10px] text-muted-foreground uppercase tracking-widest mb-4 border-b border-dashed border-foreground/20 pb-2">PROC_01 // Problem</div>
+                  <p class="text-sm font-medium leading-relaxed">{{ project.problem }}</p>
+                </div>
+                <div v-if="project.approach" class="bg-background p-6 group relative">
+                  <div class="font-mono text-[10px] text-muted-foreground uppercase tracking-widest mb-4 border-b border-dashed border-foreground/20 pb-2">PROC_02 // Approach</div>
+                  <p class="text-sm font-medium leading-relaxed">{{ project.approach }}</p>
+                </div>
+                <div v-if="project.outcome" class="bg-background p-6 group relative">
+                  <div class="font-mono text-[10px] text-muted-foreground uppercase tracking-widest mb-4 border-b border-dashed border-foreground/20 pb-2">PROC_03 // Outcome</div>
+                  <p class="text-sm font-medium leading-relaxed">{{ project.outcome }}</p>
+                </div>
               </div>
             </section>
 
             <!-- Tech Stack Detail -->
             <section v-if="project.tech_stack" class="mb-16">
-              <h2 class="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-6 border-b border-foreground pb-2">
-                Tech Stack
-              </h2>
-              <div class="space-y-6">
-                <div v-for="(items, category) in project.tech_stack" :key="category">
-                  <h3 class="font-mono text-xs uppercase tracking-wider text-accent mb-3">{{ category }}</h3>
-                  <div class="space-y-3">
-                    <div v-for="tech in items" :key="tech.name" class="border-l-2 border-foreground/20 pl-4">
-                      <span class="font-bold">{{ tech.name }}</span>
-                      <span class="text-muted-foreground"> — {{ tech.reason }}</span>
+              <h2 class="text-2xl font-black uppercase tracking-tight mb-8">System Components</h2>
+              <div class="space-y-0 border-2 border-foreground bg-background">
+                <div v-for="(items, category) in project.tech_stack" :key="category" class="relative group p-6 md:p-8 border-b-2 border-foreground/20 last:border-b-0">
+                  <h3 class="font-mono text-[10px] uppercase tracking-widest text-accent mb-4 border-b border-dashed border-foreground/20 pb-2">MOD // {{ category }}</h3>
+                  <div class="space-y-4">
+                    <div v-for="tech in items" :key="tech.name" class="flex flex-col md:flex-row md:items-baseline gap-2">
+                      <span class="font-bold uppercase tracking-tight text-lg w-48 shrink-0">{{ tech.name }}</span>
+                      <span class="text-sm font-medium text-muted-foreground leading-relaxed"><span class="text-accent hidden md:inline mr-2">>></span>{{ tech.reason }}</span>
                     </div>
                   </div>
                 </div>
@@ -72,14 +77,20 @@
 
             <!-- Screenshots Gallery -->
             <section v-if="project.screenshots?.length" class="mb-16">
-              <h2 class="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-6 border-b border-foreground pb-2">
-                Screenshots
-              </h2>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <figure v-for="(screenshot, index) in project.screenshots" :key="index" class="border border-foreground">
-                  <img :src="screenshot.src" :alt="screenshot.alt" class="w-full" loading="lazy" />
-                  <figcaption v-if="screenshot.alt" class="px-3 py-2 text-xs font-mono uppercase text-muted-foreground border-t border-foreground">
-                    {{ screenshot.alt }}
+              <h2 class="text-2xl font-black uppercase tracking-tight mb-8">Artifact Captures</h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <figure v-for="(screenshot, index) in project.screenshots" :key="index" class="border-4 border-foreground group relative">
+                  <!-- Decorative frame corners -->
+                  <div class="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-accent z-10 transition-colors"></div>
+                  <div class="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-accent z-10 transition-colors"></div>
+                  <div class="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-accent z-10 transition-colors"></div>
+                  <div class="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-accent z-10 transition-colors"></div>
+                  
+                  <div class="overflow-hidden bg-foreground">
+                    <img :src="screenshot.src" :alt="screenshot.alt" class="w-full opacity-90 group-hover:opacity-100 transition-opacity mix-blend-luminosity group-hover:mix-blend-normal" loading="lazy" />
+                  </div>
+                  <figcaption v-if="screenshot.alt" class="px-4 py-3 text-[10px] font-mono uppercase tracking-widest bg-foreground text-background transition-colors border-t-2 border-foreground">
+                    <span class="opacity-50 mr-2">_IMG_METADATA:</span>{{ screenshot.alt }}
                   </figcaption>
                 </figure>
               </div>
@@ -88,64 +99,75 @@
             <!-- Project body content -->
             <div
               v-if="project.body"
-              class="mb-16 prose prose-neutral prose-lg dark:prose-invert prose-link-fill
-                          prose-headings:font-bold prose-headings:uppercase prose-headings:tracking-tighter
-                          prose-a:no-underline
-                          prose-pre:border prose-pre:border-foreground prose-pre:rounded-none
-                          prose-img:border prose-img:border-foreground prose-img:rounded-none"
+              class="mb-16 prose prose-neutral prose-lg dark:prose-invert prose-link-fill max-w-none
+                          prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tight
+                          prose-h2:border-b-2 prose-h2:border-foreground/20 prose-h2:pb-2
+                          prose-a:no-underline prose-a:font-bold prose-a:text-foreground hover:prose-a:text-accent prose-a:transition-colors prose-a:px-1
+                          prose-pre:border-2 prose-pre:border-foreground prose-pre:rounded-none prose-pre:bg-muted/30
+                          prose-img:border-4 prose-img:border-foreground prose-img:rounded-none"
             >
               <ContentRenderer :value="project" />
             </div>
 
             <!-- Related Writings: shown below content on mobile only (when sidebar not visible) -->
-            <section v-if="articles?.length" class="lg:hidden border-t-4 border-foreground pt-8">
-              <h2 class="text-2xl font-black uppercase tracking-tight mb-8">Architecture Decision Records</h2>
-              <div class="grid grid-cols-1 gap-0 border-y border-foreground">
+            <section v-if="articles?.length" class="lg:hidden border-t-8 border-foreground pt-12">
+              <h2 class="text-2xl font-black uppercase tracking-tight mb-8">Architecture_Decision_Records</h2>
+              <div class="grid grid-cols-1 border-2 border-foreground bg-foreground gap-0.5">
                 <NuxtLink
-                  v-for="article in articles"
+                  v-for="(article, idx) in articles"
                   :key="article.path"
                   :to="article.path"
-                  class="block p-5 border-b border-foreground last:border-b-0 group transition-none"
+                  class="bg-background flex flex-row group hover:bg-foreground/5 transition-colors p-5 relative"
                 >
-                  <div class="flex justify-between items-start mb-2">
-                    <Badge
-                      v-if="article.category"
-                      variant="outline"
-                      class="font-mono uppercase text-xs rounded-none border-current"
-                    >
-                      {{ article.category }}
-                    </Badge>
-                    <time class="font-mono text-xs opacity-70 group-hover:opacity-100">{{ article.date }}</time>
+                  <div class="w-12 shrink-0 flex items-start justify-center pt-1 border-r border-dashed border-foreground/20 mr-6">
+                    <span class="font-mono text-sm font-bold text-accent -rotate-90 origin-center whitespace-nowrap inline-block mt-4 tracking-tighter">
+                      #{{ String(idx + 1).padStart(2, '0') }}
+                    </span>
                   </div>
-                  <h3 class="text-xl font-bold uppercase tracking-tight group-hover:text-accent">{{ article.title }}</h3>
-                  <p v-if="article.description" class="mt-1 text-sm text-muted-foreground group-hover:text-current line-clamp-2">{{ article.description }}</p>
+                  <div class="flex-1">
+                    <div class="flex justify-between items-start mb-4">
+                      <span class="font-mono text-[10px] uppercase font-bold tracking-widest bg-foreground text-background px-2 py-0.5 transition-colors">
+                        {{ article.category || 'LOG' }}
+                      </span>
+                      <time class="font-mono text-[10px] text-muted-foreground">[{{ article.date }}]</time>
+                    </div>
+                    <h3 class="text-xl font-black uppercase tracking-tight leading-snug group-hover:text-accent transition-colors mb-2">{{ article.title }}</h3>
+                    <p v-if="article.description" class="text-sm font-medium text-muted-foreground leading-relaxed">{{ article.description }}</p>
+                  </div>
                 </NuxtLink>
               </div>
             </section>
           </div>
 
           <!-- Right Column: ADR Sidebar (desktop only) -->
-          <aside v-if="articles?.length" class="hidden lg:block lg:col-span-5 xl:col-span-4 lg:sticky lg:top-24">
-            <h2 class="text-lg font-black uppercase tracking-tight mb-4">Architecture Decision Records</h2>
-            <div class="border-y border-foreground">
+          <aside v-if="articles?.length" class="hidden lg:block lg:col-span-5 xl:col-span-4 lg:sticky lg:top-8 mt-1 lg:mt-0">
+            <h2 class="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-4 border-b border-foreground pb-2 flex items-center justify-between">
+              <span>ARCH_DECISION_RECORDS</span>
+              <span class="text-accent">[{{ articles.length }}]</span>
+            </h2>
+            
+            <div class="border-2 border-foreground bg-foreground grid grid-cols-1 gap-0.5">
               <NuxtLink
-                v-for="article in articles"
+                v-for="(article, idx) in articles"
                 :key="article.path"
                 :to="article.path"
-                class="block py-4 pr-4 pl-0 border-b border-foreground last:border-b-0 group transition-none"
+                class="bg-background flex flex-row group hover:bg-foreground/5 transition-colors p-4 relative"
               >
-                <div class="flex justify-between items-start mb-1">
-                  <Badge
-                    v-if="article.category"
-                    variant="outline"
-                    class="font-mono uppercase text-[10px] rounded-none border-current"
-                  >
-                    {{ article.category }}
-                  </Badge>
-                  <time class="font-mono text-[10px] opacity-70 group-hover:opacity-100">{{ article.date }}</time>
+                <div class="w-8 shrink-0 items-start justify-center pt-1 border-r border-dashed border-foreground/20 mr-3 hidden xl:flex">
+                  <span class="font-mono text-xs font-bold text-accent -rotate-90 origin-center whitespace-nowrap inline-block mt-3 tracking-tighter">
+                    #{{ String(idx + 1).padStart(2, '0') }}
+                  </span>
                 </div>
-                <h3 class="text-sm font-bold uppercase tracking-tight group-hover:text-accent leading-snug">{{ article.title }}</h3>
-                <p v-if="article.description" class="mt-1 text-xs text-muted-foreground group-hover:text-current line-clamp-2">{{ article.description }}</p>
+                <div class="flex-1">
+                  <div class="flex justify-between items-start mb-3">
+                    <span class="font-mono text-[9px] uppercase font-bold tracking-widest bg-foreground text-background px-1.5 py-px transition-colors line-clamp-1 max-w-[60%]">
+                      {{ article.category || 'LOG' }}
+                    </span>
+                    <time class="font-mono text-[9px] text-muted-foreground">[{{ article.date?.slice(0, 4) }}]</time>
+                  </div>
+                  <h3 class="text-sm border-l-2 border-accent pl-2 font-bold uppercase tracking-tight leading-snug group-hover:text-accent transition-colors mb-1.5">{{ article.title }}</h3>
+                  <p v-if="article.description" class="text-xs font-medium text-muted-foreground leading-relaxed line-clamp-2">{{ article.description }}</p>
+                </div>
               </NuxtLink>
             </div>
           </aside>
@@ -192,3 +214,37 @@ useHead({
 })
 </script>
 
+<style scoped>
+.group\/crt::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.05) 50%
+  );
+  background-size: 100% 8px;
+  z-index: 50;
+  pointer-events: none;
+}
+.crt-hover:hover::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0) 50%,
+    rgba(255, 255, 255, 0.05) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 50;
+  pointer-events: none;
+}
+</style>
