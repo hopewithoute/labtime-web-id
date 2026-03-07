@@ -15,8 +15,8 @@
       </div>
     </Transition>
 
-    <div class="flex-1 border-x 2xl:border-x-2 border-foreground max-w-7xl mx-auto flex flex-col w-full overflow-x-clip">
-      <header class="border-b border-foreground p-4 md:p-6 flex justify-between items-center bg-background z-30 sticky top-0">
+    <div class="site-shell-frame flex-1 border-x 2xl:border-x-2 border-foreground max-w-7xl mx-auto flex flex-col w-full overflow-x-clip">
+      <header class="site-shell-header border-b border-foreground p-4 md:p-6 flex justify-between items-center bg-background z-30 sticky top-0">
         <NuxtLink to="/" class="flex flex-col hover:opacity-80 transition-opacity w-fit" @click="closeMobileMenu">
           <div class="font-black text-xl md:text-2xl uppercase tracking-tighter leading-none flex items-baseline gap-1">
             LabTime<span class="text-accent">.init()</span><span class="animate-blink">_</span>
@@ -64,7 +64,7 @@
         <slot />
       </main>
 
-      <footer class="border-t border-foreground p-3 md:p-4 text-[10px] md:text-xs font-mono flex justify-between items-center uppercase bg-background text-foreground">
+      <footer class="site-shell-footer border-t border-foreground p-3 md:p-4 text-[10px] md:text-xs font-mono flex justify-between items-center uppercase bg-background text-foreground">
         <div class="flex items-center gap-4">
           <div class="flex items-center gap-2">
             <div
@@ -305,3 +305,17 @@ onMounted(() => {
   }
 })
 </script>
+
+<style scoped>
+@media print {
+  .site-shell-header,
+  .site-shell-footer {
+    display: none !important;
+  }
+
+  .site-shell-frame {
+    border: 0 !important;
+    max-width: none !important;
+  }
+}
+</style>

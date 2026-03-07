@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-background text-foreground">
     <main class="mx-auto max-w-4xl px-6 py-10 md:px-10 md:py-14 lg:px-12">
-      <header class="ats-print-section border-b border-foreground/20 pb-6 md:pb-8">
+      <header class="ats-screen-header ats-print-section border-b border-foreground/20 pb-6 md:pb-8">
         <p class="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">ATS-Friendly Resume</p>
         <h1 class="mt-3 text-3xl font-black tracking-tight md:text-5xl">Anggi Wibiyanto</h1>
         <p class="mt-3 text-base font-semibold md:text-lg">Senior Software Engineer · Senior System Builder · AI-Augmented Engineer</p>
@@ -51,10 +51,10 @@
       </section>
 
       <section aria-labelledby="experience-heading" class="mt-8 md:mt-10">
-        <h2 id="experience-heading" class="text-xl font-black tracking-tight md:text-2xl">Professional Experience</h2>
+        <div class="ats-print-keep-with-next">
+          <h2 id="experience-heading" class="text-xl font-black tracking-tight md:text-2xl">Professional Experience</h2>
 
-        <div class="mt-5 space-y-6 md:space-y-8">
-          <article class="ats-print-section border-b border-foreground/15 pb-6">
+          <article class="ats-print-section mt-5 border-b border-foreground/15 pb-6">
             <div class="flex flex-col gap-1 md:flex-row md:items-start md:justify-between">
               <div>
                 <h3 class="text-lg font-bold">Senior Software Engineer</h3>
@@ -69,6 +69,9 @@
               <li>Lowered storage and egress cost through an HLS pipeline, Cloudflare R2, edge-side media authorization, and Oban-based transcription workflows.</li>
             </ul>
           </article>
+        </div>
+
+        <div class="mt-5 space-y-6 md:space-y-8">
 
           <article class="ats-print-section border-b border-foreground/15 pb-6">
             <div class="flex flex-col gap-1 md:flex-row md:items-start md:justify-between">
@@ -196,10 +199,23 @@ useHead({
     padding: 0 !important;
   }
 
+  .ats-screen-header {
+    display: none !important;
+  }
+
   .ats-print-section {
     break-inside: avoid;
     page-break-inside: avoid;
     margin-top: 1rem !important;
+  }
+
+  .ats-print-section:first-of-type {
+    margin-top: 0 !important;
+  }
+
+  .ats-print-keep-with-next {
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 
   article {
