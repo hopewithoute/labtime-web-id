@@ -1,52 +1,5 @@
 # LabTime
 
-## ID
-
-LabTime adalah website pribadi Anggi Wibiyanto.
-
-Website ini dipakai sebagai tempat untuk menampilkan proyek, menulis artikel teknis, dan menyimpan resume dalam bentuk yang lebih hidup daripada CV statis. Fokusnya bukan sekadar menunjukkan apa yang pernah dikerjakan, tapi bagaimana cara berpikir, menyusun sistem, dan menyelesaikan problem engineering.
-
-### Website ini tentang apa
-
-LabTime menggabungkan tiga hal utama dalam satu tempat:
-
-- **portfolio** untuk menampilkan proyek beserta konteks problem, approach, outcome, dan tech stack
-- **writing space** untuk artikel teknis, catatan arsitektur, dan dokumentasi pemikiran
-- **resume** dalam format web dan ATS-friendly
-
-Secara visual, website ini dibangun dengan nuansa terminal dan system console supaya presentasinya terasa lebih dekat dengan karakter engineering yang ingin ditampilkan.
-
-### Dibangun untuk apa
-
-Website ini dibuat untuk:
-
-- menghadirkan portfolio yang lebih representatif daripada daftar pengalaman biasa
-- mendokumentasikan hasil kerja dan keputusan teknis secara lebih rapi
-- memperlihatkan positioning sebagai system builder, bukan hanya implementer
-- memberi recruiter, collaborator, atau client gambaran yang lebih jelas tentang cara kerja dan kualitas engineering
-
-### Dibangun pakai apa
-
-Stack utama project ini:
-
-- **Nuxt 4**
-- **Vue 3**
-- **TypeScript**
-- **Tailwind CSS**
-- **Nuxt Content**
-- **shadcn-nuxt / Radix Vue / Reka UI**
-- **@vueuse/motion**
-- **Cloudflare Nitro preset / Wrangler**
-- **Vitest**
-- **Playwright**
-
-### Struktur konten
-
-- `app/` — halaman, layout, dan komponen UI
-- `content/articles/` — artikel teknis
-- `content/projects/` — halaman proyek dan studi kasus
-- `tests/` — unit, integration, dan e2e tests
-
 ## EN
 
 LabTime is Anggi Wibiyanto's personal website.
@@ -94,3 +47,49 @@ Core stack used in this project:
 - `content/projects/` — project pages and case studies
 - `tests/` — unit, integration, and e2e tests
 
+## ID
+
+LabTime adalah website pribadi Anggi Wibiyanto.
+
+Website ini dipakai sebagai tempat untuk menampilkan proyek, menulis artikel teknis, dan menyimpan resume dalam bentuk yang lebih hidup daripada CV statis. Fokusnya bukan sekadar menunjukkan apa yang pernah dikerjakan, tapi bagaimana cara berpikir, menyusun sistem, dan menyelesaikan problem engineering.
+
+### Website ini tentang apa
+
+LabTime menggabungkan tiga hal utama dalam satu tempat:
+
+- **portfolio** untuk menampilkan proyek beserta konteks problem, approach, outcome, dan tech stack
+- **writing space** untuk artikel teknis, catatan arsitektur, dan dokumentasi pemikiran
+- **resume** dalam format web dan ATS-friendly
+
+Secara visual, website ini dibangun dengan nuansa terminal dan system console supaya presentasinya terasa lebih dekat dengan karakter engineering yang ingin ditampilkan.
+
+### Dibangun untuk apa
+
+Website ini dibuat untuk:
+
+- menghadirkan portfolio yang lebih representatif daripada daftar pengalaman biasa
+- mendokumentasikan hasil kerja dan keputusan teknis secara lebih rapi
+- memperlihatkan positioning sebagai system builder, bukan hanya implementer
+- memberi recruiter, collaborator, atau client gambaran yang lebih jelas tentang cara kerja dan kualitas engineering
+
+### Dibangun pakai apa
+
+Stack utama project ini:
+
+- **Nuxt 4**
+- **Vue 3**
+- **TypeScript**
+- **Tailwind CSS**
+- **Nuxt Content**
+- **shadcn-nuxt / Radix Vue / Reka UI**
+- **@vueuse/motion**
+- **Cloudflare Nitro preset / Wrangler**
+- **Vitest**
+- **Playwright**
+
+### Struktur konten
+
+- `app/` — halaman, layout, dan komponen UI
+- `content/articles/` — artikel teknis
+- `content/projects/` — halaman proyek dan studi kasus
+- `tests/` — unit, integration, dan e2e tests
