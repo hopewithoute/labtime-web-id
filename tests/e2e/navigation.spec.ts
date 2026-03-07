@@ -53,10 +53,11 @@ test.describe('Navigation', () => {
     await page.goto('/resume')
 
     const atsLink = page.locator('a[href="/resume/ats"]')
+    const atsLabel = atsLink.locator('span').last()
     const exportLink = page.locator('a[href="/resume"]').filter({ hasText: 'Export PDF Resume' })
 
     await expect(atsLink).toBeVisible()
-    await expect(atsLink).toContainText('Open ATS-Friendly Resume')
+    await expect(atsLabel).toHaveText('Open ATS')
     await expect(exportLink).toBeVisible()
     await expect(exportLink).toContainText('Export PDF Resume')
 
