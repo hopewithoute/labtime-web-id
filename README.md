@@ -1,10 +1,9 @@
 # LabTime
 
-[English](#english) | [Bahasa Indonesia](#bahasa-indonesia)
+English · [Bahasa Indonesia](#id)
 
+<a id="en"></a>
 ## English
-
-[English](#english) | [Bahasa Indonesia](#bahasa-indonesia)
 
 LabTime is Anggi Wibiyanto's personal website.
 
@@ -51,9 +50,10 @@ Core stack used in this project:
 - `content/projects/` — project pages and case studies
 - `tests/` — unit, integration, and e2e tests
 
+<a id="id"></a>
 ## Bahasa Indonesia
 
-[English](#english) | [Bahasa Indonesia](#bahasa-indonesia)
+[Back to English](#en)
 
 LabTime adalah website pribadi Anggi Wibiyanto.
 
