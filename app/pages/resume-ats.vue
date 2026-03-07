@@ -224,6 +224,14 @@ useHead({
     margin-top: 0.875rem !important;
   }
 
+  .ats-print-stack > .ats-print-section {
+    margin-top: 0 !important;
+  }
+
+  .ats-print-stack > .ats-print-section + .ats-print-section {
+    margin-top: 0.875rem !important;
+  }
+
   .ats-section-heading {
     margin-bottom: 0.5rem;
   }
