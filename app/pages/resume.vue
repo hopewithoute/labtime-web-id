@@ -44,10 +44,19 @@
             </nav>
 
             <!-- Prominent CTA -->
-            <div class="mt-8 lg:mt-6">
+            <div class="mt-8 lg:mt-6 space-y-3">
+              <NuxtLink to="/resume/ats" class="block w-full border-2 border-foreground group hover:bg-foreground hover:text-background transition-colors relative crt-hover bg-background overflow-hidden text-center text-xs py-3 font-mono font-bold uppercase tracking-widest">
+                <span class="relative z-10 flex items-center justify-center gap-2 group-hover:text-background text-foreground transition-colors">
+                  <span class="text-accent group-hover:text-background">./sys/</span>
+                  <span>Open ATS-Friendly Resume</span>
+                </span>
+                <div class="absolute inset-0 bg-accent/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+              </NuxtLink>
+
               <NuxtLink to="/resume" class="block w-full border-2 border-foreground group hover:bg-foreground hover:text-background transition-colors relative crt-hover bg-background overflow-hidden text-center text-xs py-3 font-mono font-bold uppercase tracking-widest">
                 <span class="relative z-10 flex items-center justify-center gap-2 group-hover:text-background text-foreground transition-colors">
-                  <span class="text-accent group-hover:text-background">./bin/</span>export_pdf.sh
+                  <span class="text-accent group-hover:text-background">./bin/</span>
+                  <span>Export PDF Resume</span>
                 </span>
                 <div class="absolute inset-0 bg-accent/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
               </NuxtLink>

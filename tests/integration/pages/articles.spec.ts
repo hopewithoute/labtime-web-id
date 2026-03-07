@@ -8,14 +8,15 @@ describe('Articles Page', () => {
     expect(wrapper.find('h1').exists()).toBe(true)
   })
 
-  it('displays the Articles title', async () => {
+  it('displays the System Logs title', async () => {
     const wrapper = await mountSuspended(ArticlesPage)
-    expect(wrapper.text()).toContain('Articles')
+    expect(wrapper.text()).toContain('System Logs')
   })
 
-  it('displays the description', async () => {
+  it('displays the archive context', async () => {
     const wrapper = await mountSuspended(ArticlesPage)
-    expect(wrapper.text()).toContain('Short-form notes, tutorials, and development logs')
+    expect(wrapper.text()).toContain('/ARCHIVE/LOGS')
+    expect(wrapper.text()).toContain('READ_ONLY')
   })
 
   it('has grid layout for articles', async () => {

@@ -8,14 +8,15 @@ describe('Projects Page', () => {
     expect(wrapper.find('h1').exists()).toBe(true)
   })
 
-  it('displays the Projects title', async () => {
+  it('displays the Systems Built title', async () => {
     const wrapper = await mountSuspended(ProjectsPage)
-    expect(wrapper.text()).toContain('Projects')
+    expect(wrapper.text()).toContain('Systems Built')
   })
 
-  it('displays the description', async () => {
+  it('displays the systems context', async () => {
     const wrapper = await mountSuspended(ProjectsPage)
-    expect(wrapper.text()).toContain("Deep dives into systems I've built")
+    expect(wrapper.text()).toContain('/CORE/SYSTEMS')
+    expect(wrapper.text()).toContain('ONLINE')
   })
 
   it('has container for projects list', async () => {
