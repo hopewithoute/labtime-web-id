@@ -1,34 +1,40 @@
 ---
-title: "Building an Immutable Certification Engine"
-description: "Protecting data integrity at scale using Ash Framework strict locking and deep clone versioning."
+title: "Designing immutable certification versioning"
+description: "How I used Ash lifecycle rules and transactional deep cloning so instructors could revise certifications without breaking active learner progress."
 date: 2026-02-22
+tags: ["ash-framework", "versioning", "immutability", "certification"]
 category: "Backend Architecture"
 ---
 
-**The Mutability Trap**  
-In an LMS processing thousands of progress metrics simultaneously, data mutability is dangerous. Allowing administrators to directly edit a live certification—such as raising a passing grade, swapping out a final exam, or deleting a mandatory module—can silently corrupt the progress calculations and historical validity for hundreds of active learners.
+### Published certifications couldn't drift under active learners
+Certification content changes over time. Passing grades move, modules get restructured, final exams get replaced.
 
-**The Architecture**  
+That becomes a data integrity problem once learners are already in flight. If an instructor edits a published certification directly, the system can end up recalculating progress and eligibility against rules the learner never actually started with.
+
+I didn't want the admin UI to be responsible for preventing that. The domain model had to enforce it.
+
+### The lifecycle rules
 ![Immutable Certification Engine](/projects/lms-sertifikasi/certification-engine-infographic.png)
 
-To guarantee 100% data integrity for inflight learning, we treated published state as an immutable ledger and leveraged the power of Ash Framework to enforce strict lifecycle rules.
+The first step was treating published certifications as immutable at the resource layer.
 
-### 1. Strict Locking via Ash Policies
-We enforce structural immutability at the domain layer. Once a Certification’s status is set to `published`, the Ash resource utilizes custom validations to strictly reject any mutations to critical learning logic attributes (`passing_grade`, `validity_years`, `target_role`). 
+Once a certification reaches `published`, Ash validations block structural mutations to the parts of the record that define learning logic. Delete behavior is also constrained. Instead of hard deletion, archived records remain available for historical enrollments and auditability.
 
-Similarly, the standard backend `destroy` action is completely blocked. Administrative deletions are rerouted to a soft `archive` action using `AshArchival`, ensuring historical enrollments never encounter catastrophic foreign-key failures or cascading deletes.
+That gives the system a clean rule: published state is stable, and revisions happen by creating a new version.
 
-### 2. The Solution: Deep Cloning (Versioning)
-If an instructor must update a curriculum, they cannot edit the live `V1`; they must forge a `V2`.
+### Deep cloning instead of live editing
+When instructors need to change a curriculum, they create a new certification version rather than mutating the existing one.
 
-We implemented an atomic Elixir `clone` action that wraps the entire duplication process in a robust `Ash.DataLayer.transaction`. When initiated, the backend dynamically traverses and reproduces the entire hierarchical syllabus:
-1. Copies the parent `Certification` (incrementing a `version_number`).
-2. Iterates over and clones all nested `Modules`.
-3. Re-maps the individual `ModuleItems`.
-4. Executes isolated recursive clones of related `Exam` resources (including their `QuestionBanks` and `Options`).
+I implemented that as a transactional deep-clone flow that copies the certification hierarchy, including modules, module items, and related exam structures. The main technical challenge wasn't duplication itself. It was referential remapping.
 
-### Guaranteed Referential Integrity
-The greatest technical challenge during a Deep Clone is maintaining relational mapping within the same transaction bounds. As the transaction recursively generates new UUIDs, we constructed an in-memory `exam_id_map` dictionary that instantly maps original `V1` Exam UUIDs to their freshly minted `V2` counterparts. This mapping allows us to instantly hot-link the cloned `ModuleItems` and `final_exam_id` to the correct newly generated records before the transaction successfully commits.
+As new records are created inside the transaction, relationships that pointed at the original exam tree have to be rewired to the correct new records before commit. I handled that with in-memory ID maps so cloned module items and final exam references always point to the right versioned entities.
 
-**The Result**  
-A versioning system that treats published certifications as sacred, immutable records. Instructors gain the power to iterate on curricula freely via deep cloning, while active learners are guaranteed absolute data consistency throughout their entire certification journey.
+### Why this mattered
+This design let the platform support two things at the same time: safe curriculum iteration for instructors and stable historical truth for learners.
+
+The system can evolve without retroactively changing what an enrolled learner was asked to complete. That reduces a whole class of support issues and makes certification state easier to trust later during verification, renewal, and reporting.
+
+### The result
+Published certifications behave like stable records, and revisions become explicit versioned changes.
+
+That gave instructors room to improve programs while protecting in-flight learners from silent rule changes. For this product, that wasn't a nice property. It was required.

@@ -1,24 +1,42 @@
 ---
-title: "Unified Learning Telemetry Tracker"
-description: "High-performance xAPI telemetry sync across all content types with backend Ash mapping and calculation."
+title: "Unifying learning telemetry across content types"
+description: "How I built a backend xAPI ingestion and progress-mapping layer that kept completion logic consistent across video, quizzes, PDFs, and third-party learning packages."
 date: 2026-01-20
+tags: ["xapi", "telemetry", "progress-tracking", "learning-record-store"]
 category: "Backend Architecture"
 ---
 
-**The Problem**  
-Tracking learning progress across wildly different mediums (Interactive Videos, Interactive Quizzes, PDFs) usually results in fragmented, messy data tables. Furthermore, relying on the frontend to calculate "completion" is inherently unreliable due to network drops or browser closures.
+### Different content types still need one progress model
+A certification platform rarely gets to track progress in one clean format.
 
-**The Architecture**  
+Videos emit heartbeat-style updates. Quizzes and exams have completion events. PDFs behave differently again. Third-party learning packages bring their own telemetry shape. Users don't care about any of that. They expect one consistent answer to a simple question: what have I completed, and what still blocks certification?
+
+That pushed progress logic into the backend.
+
+### The telemetry mapping layer
 ![Unified Learning Telemetry Architecture](/projects/lms-sertifikasi/telemetry-infographic.png)
 
-We solved this by building a **Unified Telemetry Mapping** layer that resides in our Elixir/Ash backend, turning raw xAPI streams into actionable progress metrics:
+The platform accepts xAPI statements from both internal experiences and third-party tools, then maps those raw events into the domain model used by certifications, modules, and enrollments.
 
-1. **The Backend LRS Sink**: The platform acts as a native Learning Record Store (LRS). Whether a statement comes from internal players or third-party tools like **Articulate Storyline** or **Adobe Captivate**, it hits a unified `LrsController` that validates and persists standard xAPI statements.
-2. **Asynchronous Completion Notifiers**: We implemented an **Ash Notifier (`ModuleCompletionVerifier`)** that reactively watches the `XapiStatement` resource. When a `COMPLETED` verb arrives—even from an opaque Articulate package—the notifier automatically triggers the business logic to update the user's `ModuleProgress`.
-3. **Multi-Level Progress Calculation**: Instead of a "God table" for progress, we use a cascading calculation logic. The `ModuleCompletionVerifier` ensures that once a module is marked complete via xAPI, it immediately triggers a `sync_progress` action on the parent `Enrollment`, providing real-time certification eligibility checks.
-4. **Decoupled Local State**: On the frontend, we use a **Vanilla TypeScript External Store** (ProgressStore) to handle high-frequency events (like 1s video heartbeats) in O(1) time. This ensures the user feels a zero-lag UI while the heavy lifting of mapping and verification happens reliably on the backend.
+I used the backend as the ingestion and calculation boundary. Statements are validated and persisted first. From there, notifier-driven logic updates module progress and rolls those changes upward into enrollment-level state.
 
-**The Result**  
-A "Zero-Trust" progress engine. By centralizing the calculation logic in backend notifiers rather than relying on frontend calls, we ensured that completion remains 100% accurate even if a user closes their browser mid-session or uses an offline-capable xAPI player.
+That means completion isn't inferred from browser state alone. It is calculated from durable events that the backend can process consistently.
 
-*(Note: Real-time multi-device synchronization via WebSockets is covered in a separate architectural deep-dive.)*
+### Why the backend had to own this
+If completion logic lives mainly in the client, it becomes fragile fast.
+
+A browser tab closes. A network drops in the middle of a session. A third-party package sends delayed completion events. Those are all normal conditions in learning products, and none of them should create a different definition of progress.
+
+By centralizing telemetry mapping in Elixir and Ash, I kept the rules for module completion and certification eligibility in one place. The frontend still handles high-frequency local updates for responsiveness, but the business truth stays server-side.
+
+### What this unlocked
+This gave the platform a cleaner interoperability story.
+
+Internal players, quizzes, PDFs, and packaged learning tools can all feed the same certification engine without each format inventing its own progress model. That reduces branching logic in the product and makes reporting more consistent.
+
+It also pairs well with the platform's real-time update path. Once backend state changes, the frontend can sync to it quickly without becoming the authority for whether something is complete.
+
+### The result
+Progress tracking became more reliable across all learning formats.
+
+The system can accept mixed telemetry sources, calculate completion centrally, and keep certification eligibility current without trusting the browser to be the final judge. That's what this platform needed.

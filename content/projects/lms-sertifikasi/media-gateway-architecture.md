@@ -1,34 +1,38 @@
 ---
-title: "Securing Edge Media Delivery with a Stateless Gateway"
-description: "How we prevented HLS piracy and backend DDOS using Cloudflare Workers and Cookie Priming."
+title: "Authenticating HLS streaming at the edge"
+description: "How I designed a stateless media gateway that secures segmented video playback with edge-side token verification instead of per-request backend authorization."
 date: 2026-03-05
+tags: ["cloudflare-workers", "hls", "streaming", "jwt"]
 category: "Infrastructure"
 ---
 
-**The Thundering Herd of Video Chunks**  
-Delivering premium video content presents a dual-sided problem: you must absolutely prevent hotlinking and piracy, but if you authenticate every single 2-second HLS `.ts` chunk against your primary database, a single class of 100 students will inadvertently DDOS your own backend. 
+### HLS authentication breaks if the backend stays in the hot path
+Segmented video playback creates a request pattern that doesn't fit normal application authorization.
 
-Furthermore, native video players (like iOS Safari) cannot easily attach `Authorization: Bearer` headers to the hundreds of dynamic background requests made for HLS playlist (`.m3u8`) and segment (`.ts`) files.
+Players fetch playlists and media chunks in the background, often without a clean way to attach custom headers on every request. If each of those requests had to round-trip through the application and database for authorization, the system would spend too much time proving access instead of delivering content.
 
-**The Architecture**  
+I wanted the authorization check closer to the media itself.
+
+### The gateway design
 ![Edge Media Gateway Streaming Architecture](/projects/lms-sertifikasi/media-gateway-infographic.png)
 
-To solve the HLS authentication dilemma without sacrificing backend stability, we built a Stateless Edge Media Gateway.
+I put a Cloudflare Worker in front of a private R2 bucket and used it as a stateless verification layer.
 
-### 1. The Stateless Cloudflare Worker
-We deployed a custom Cloudflare Worker acting as a reverse proxy directly in front of a strictly private Cloudflare R2 bucket. 
+The backend issues short-lived signed tokens for media access. The Worker validates those tokens at the edge before proxying playlist or segment requests to the private bucket. That removes the application and database from the request path for every `.m3u8` and `.ts` fetch.
 
-Instead of querying the Elixir database to validate every incoming video chunk request, the Worker performs instantaneous, stateless cryptographic verification of a JWT token signed by our Elixir backend. If the token is cryptographically sound and hasn't expired, the Worker acts as a massive decentralized bouncer.
+### Why cookie priming mattered
+One protocol constraint shaped the rest of the design.
 
-### 2. The Cookie-Priming Strategy
-Because video players struggle with custom Bearer tokens for segmented streams, the React frontend executes a single initial request to the gateway to "prime" an HTTP-Only, `SameSite=Lax` cookie (`lms_media_token`).
+Many video players don't make it easy to attach bearer tokens consistently across segmented requests. So the frontend performs an initial request that sets an HTTP-only cookie for the media gateway. After that, the browser attaches the credential automatically while the player keeps working with ordinary media URLs.
 
-Once that initial handshake is complete, the browser automatically and securely attaches this cookie to every subsequent background request for video chunks. The video player simply requests the raw URL, and the browser handles the secure session layer natively, providing seamless, unhackable authentication.
+That wasn't a gimmick. It was the compatibility layer that made edge-side authorization work with real browser behavior.
 
-### 3. Zero-Egress Proxying
-Once the JWT is verified at the edge, the Worker fetches the raw `.ts` stream directly from the private R2 bucket and pipes it immediately to the end user. Because the Worker and R2 exist on the same internal Cloudflare network, egress costs to the processor are effectively zero. 
+### Why this was worth doing
+The main gain wasn't just security. It was removing media authorization fan-out from the application backend.
 
-By pushing authentication entirely to the Edge via stateless JWTs, our Elixir backend is completely shielded from media delivery traffic, allowing it to focus exclusively on tracking learning telemetry and calculating granular progress metrics.
+Once the edge can validate access on its own, Elixir is free to focus on learning telemetry, assessments, certification state, and the rest of the product logic. Streaming traffic stops competing with the core system for the same resources.
 
-**The Result**  
-A global, zero-trust media delivery layer that authenticates thousands of concurrent HLS streams without a single database query. The Elixir backend's CPU load from media requests dropped to zero, while students experience seamless, buffer-free adaptive video playback secured entirely at the edge.
+### The result
+The media path stays authenticated without turning every segment request into a backend concern.
+
+That made playback cheaper to serve, easier to scale, and more isolated from the rest of the platform. For this workload, pushing auth to the edge was the right boundary.

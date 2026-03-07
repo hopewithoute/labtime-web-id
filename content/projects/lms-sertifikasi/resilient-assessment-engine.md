@@ -1,31 +1,37 @@
 ---
-title: "Architecting a Concurrent Assessment Engine"
-description: "Handling concurrency, preventing temporal manipulation, and orchestrating background jobs in an Exam system."
+title: "Building a reliable assessment engine"
+description: "How I combined question snapshots, optimistic locking, and background enforcement so timed exams stayed consistent under concurrency and time-based edge cases."
 date: 2026-03-01
+tags: ["assessment", "ash-framework", "optimistic-locking", "background-jobs"]
 category: "Backend Architecture"
 ---
 
-**State Management & Concurrency**  
-Building a reliable assessment engine goes beyond simply rendering a form and recording a score. It requires guarding against temporal edge cases (like an instructor altering an answer key mid-exam), thwarting concurrent submission manipulations, and securely enforcing time limits outside the client's browser environment.
+### Timed exams need backend ownership
+An assessment engine can't rely on the browser to keep the rules honest.
 
-**The Architecture**  
+In a certification product, the system has to preserve exam integrity even when users refresh, disconnect, double-submit, or when instructors update question banks after attempts have already started. That pushed the important logic into the backend.
+
+### The three controls that mattered most
 ![Resilient Assessment Engine](/projects/lms-sertifikasi/assessment-engine-infographic.png)
 
-Our exam engine relies on three core backend strategies—Snapshotting, Optimistic Locking, and Cron Workers—to maintain an impenetrable state.
+I used three main controls to keep exam attempts stable.
 
-### 1. Point-in-Time Integrity (Question Snapshotting)
-To decouple active exam sessions from the volatility of the master Question Bank, our Elixir backend executes a "Snapshot" operation the exact microsecond an `ExamAttempt` is started. 
+**Question snapshots.** When an `ExamAttempt` starts, the backend captures the question set, options, and correct answers into a snapshot stored with the attempt itself. That means the learner is graded against the version they actually received, even if the source question bank changes later.
 
-We serialize the entire active syllabus of questions, options, and correct answers into an immutable JSONB column (`questions_snapshot`) directly on the attempt payload. The user’s eventual submission is strictly graded against this static snapshot, natively immunizing inflight exams against live administrative edits to the global Question Bank.
+**Optimistic locking.** Submit and grade flows use Ash optimistic locking so duplicate requests can't both mutate the same attempt successfully. That protects against accidental double submits, overlapping requests, and race conditions between autosave and final submission.
 
-### 2. Preventing Race Conditions (Optimistic Locking)
-A common attack vector (or simple UI bug) involves a user rapidly double-clicking the submit button or firing sequential API requests simultaneously to alter grading logic. 
+**Background time enforcement.** Time limits are enforced in backend jobs rather than trusting the client's countdown timer. A scheduled sweep checks for attempts that have crossed their allowed duration, applies a small grace window for network instability, and finalizes them through the same server-side flow.
 
-We defend the Elixir `submit` and `grade` actions using Ash Framework's `optimistic_lock(:version)`. A lightweight integer version counter is attached to the attempt payload. If two requests attempt to mutate the attempt concurrently, the first request bumps the version number, causing the second request to instantly crash on a version mismatch, cleanly avoiding duplicate grading operations or lost updates.
+### Why I chose this shape
+Each piece solves a different failure mode.
 
-### 3. The Invisible Hand (AshOban Cron Workers)
-We cannot rely on the React frontend to trigger a submission sequence when an exam timer hits zero (a user could simply close their laptop lid to "pause" time).
+Snapshotting protects correctness when source data changes. Locking protects correctness when multiple writes happen at once. Background enforcement protects correctness when the client disappears.
 
-To guarantee strict compliance with duration bounds, we integrated `AshOban` as an orchestrator. A lightweight background worker is triggered by a cron scheduler (`* * * * *`) every 60 seconds. It sweeps the database looking for `in_progress` attempts where the `started_at` plus `duration_minutes` (plus a 5-minute network grace period) has eclipsed the current UTC time. 
+Together they make the exam lifecycle easier to reason about. An attempt has a fixed question set, a controlled write path, and a server-owned end state.
 
-If flagged, the `auto_complete` action forcefully scoops the user's latest autosaved drafts, halts the session, triggers the synchronous grading engine, and finalizes the attempt, ensuring absolute administrative time fidelity.
+That matters in support and operations too. Edge cases become easier to explain because the system has firmer rules about what an attempt is allowed to do.
+
+### The result
+The assessment engine behaves more predictably under real user behavior, not just ideal demos.
+
+Learners are graded against a stable snapshot, duplicate submissions don't create inconsistent state, and time limits still hold even if the browser stops cooperating. That's the level of backend control the product needed.

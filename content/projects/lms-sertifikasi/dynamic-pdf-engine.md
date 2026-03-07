@@ -1,22 +1,35 @@
 ---
-title: "Dynamic PDF Generation Engine"
-description: "How we built a 1:1 WYSIWYG certificate editor by separating React visual state from headless Chrome background workers."
+title: "Building a server-driven PDF pipeline"
+description: "How I separated certificate configuration, HTML rendering, and background PDF generation to produce consistent documents without pushing print logic into the browser."
 date: 2026-02-08
+tags: ["pdf", "chromicpdf", "certificate", "document-generation"]
 category: "Content Delivery"
 ---
 
-**The Problem**  
-Building a reliable certificate generator is notoriously difficult. Relying on frontend Javascript to convert HTML to PDF often results in broken layouts across different browsers and requires downloading massive font files to the client. We needed a robust, server-side PDF generator that still allowed instructors to customize their certificate's look and feel without writing code.
+### Certificate generation needed consistency more than visual freedom
+Certificates are part of the product's trust layer.
 
-**The Architecture**  
+They need to look consistent, carry the right learner data, and remain stable when generated repeatedly over time. Browser-side HTML-to-PDF approaches make that harder than it needs to be. Output varies by environment, heavy assets move into the client, and layout control becomes fragile.
+
+I wanted the browser to configure certificates, not render them.
+
+### The pipeline split
 ![Dynamic PDF Generation Engine](/projects/lms-sertifikasi/pdf-engine-infographic.png)
 
-We solved this by building a highly structured, data-driven rendering pipeline that offloads the heavy lifting to the backend:
+The frontend produces structured certificate configuration through forms and controlled design options. Instead of a freeform editor, the UI captures a bounded set of layout and styling choices and serializes them into a predictable payload.
 
-1. **Structured Frontend Configuration**: Instead of a brittle WYSIWYG drag-and-drop editor, the React frontend provides a structured form. Instructors select predefined, responsive layouts (Classic, Modern, Elegant, Minimal) and customize design tokens (fonts, HEX colors, custom labels). This is serialized into a clean JSON `styleConfig`.
-2. **Dynamic Server-Side Rendering (Elixir)**: When a certificate needs to be generated, the Elixir backend takes this JSON payload and passes it to a dedicated `CertificateTemplateRenderer`. Using Elixir's HEEx templates, it dynamically generates the HTML structure and injects custom CSS on the fly based on the chosen design tokens.
-3. **Asynchronous Headless Rendering**: Since PDF rendering is CPU-intensive, generation is offloaded to an asynchronous **Oban Worker Queue**. The worker spins up **ChromicPDF** (a Headless Chrome instance) to render the exact pixel-perfect PDF binary from the generated HTML.
-4. **Edge Storage & Delivery**: The finalized high-fidelity PDF is streamed directly to **Cloudflare R2**. The database is updated, and the React frontend safely serves the `pdfUrl` to the user via the Media Gateway.
+The backend then turns that payload into HTML through HEEx templates and generated CSS. Once the template is ready, Oban pushes the rendering work into the background and ChromicPDF produces the final PDF artifact.
 
-**The Result**  
-A bulletproof, 100% consistent PDF generation engine that never blocks the main web threads. By utilizing structured JSON configs mapped to server-side HEEx templates, we eliminated CSS-to-print cross-browser inconsistencies while still giving instructors full creative control.
+That separation matters. Configuration happens in the product UI, deterministic rendering happens on the server, and CPU-heavy document generation stays off the request path.
+
+### Why I chose structure over a looser editor
+A wide-open WYSIWYG tool sounds flexible, but it shifts too much layout risk into the client.
+
+For certificates, controlled customization was a better trade. Instructors can change branding and presentation, but the rendering system still owns the final document shape. That keeps generated PDFs consistent and makes the output easier to support.
+
+It also fits the rest of the platform architecture. Certificate generation becomes a backend capability with stored configuration, repeatable rendering, and asynchronous execution, not a browser trick.
+
+### The result
+The platform can generate certificate PDFs more predictably without blocking interactive traffic.
+
+Instructors still get meaningful customization, but the final document path stays structured, repeatable, and easier to operate. For a certification product, that was the right trade.
