@@ -49,6 +49,30 @@ test.describe('Navigation', () => {
     await expect(page).toHaveURL('/resume')
   })
 
+  test('resume page exposes ATS route access', async ({ page }) => {
+    await page.goto('/resume')
+
+    const atsLink = page.locator('a[href="/resume/ats"]')
+    const exportLink = page.locator('a[href="/resume"]').filter({ hasText: 'Export PDF Resume' })
+
+    await expect(atsLink).toBeVisible()
+    await expect(atsLink).toContainText('Open ATS-Friendly Resume')
+    await expect(exportLink).toBeVisible()
+    await expect(exportLink).toContainText('Export PDF Resume')
+
+    const atsBox = await atsLink.boundingBox()
+    const exportBox = await exportLink.boundingBox()
+
+    expect(atsBox).not.toBeNull()
+    expect(exportBox).not.toBeNull()
+    expect(atsBox!.y).toBeLessThan(exportBox!.y)
+
+    await atsLink.click()
+    await expect(page).toHaveURL('/resume/ats')
+    await expect(page.getByRole('heading', { name: 'Anggi Wibiyanto' })).toBeVisible()
+    await expect(page.getByText('anggi.wibiyanto@gmail.com')).toBeVisible()
+  })
+
   test('back navigation works', async ({ page }) => {
     await page.goto('/')
     await page.click('a[href="/articles"]')
