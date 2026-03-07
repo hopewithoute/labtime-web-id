@@ -1,5 +1,7 @@
 # LabTime
 
+[English](#en) | [Bahasa Indonesia](#id)
+
 ## EN
 
 LabTime is Anggi Wibiyanto's personal website.
@@ -48,6 +50,8 @@ Core stack used in this project:
 - `tests/` — unit, integration, and e2e tests
 
 ## ID
+
+[Back to English](#en)
 
 LabTime adalah website pribadi Anggi Wibiyanto.
 
