@@ -51,7 +51,7 @@
       </section>
 
       <section aria-labelledby="experience-heading" class="mt-8 md:mt-10">
-        <div class="ats-print-section">
+        <div class="ats-print-keep-with-next">
           <h2 id="experience-heading" class="ats-section-heading text-xl font-black tracking-tight md:text-2xl">Professional Experience</h2>
 
           <article class="border-b border-foreground/15 pb-6">
@@ -205,6 +205,11 @@ useHead({
     page-break-inside: avoid;
   }
 
+  .ats-print-keep-with-next {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
   .education-print-group {
     break-inside: avoid;
     page-break-inside: avoid;
@@ -215,7 +220,7 @@ useHead({
     page-break-inside: avoid;
   }
 
-  .ats-print-stack > .ats-print-section + .ats-print-section {
+  .ats-print-stack {
     margin-top: 0.875rem !important;
   }
 
