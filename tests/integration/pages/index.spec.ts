@@ -3,22 +3,28 @@ import { mountSuspended } from '@nuxt/test-utils/runtime'
 import IndexPage from '~/pages/index.vue'
 
 describe('Home Page', () => {
-  it('renders the page component and terminal header', async () => {
+  it('renders the page terminal header', async () => {
     const wrapper = await mountSuspended(IndexPage)
-    // Removed h1 check since we replaced it with a terminal prompt
     expect(wrapper.text()).toContain('whoami')
   })
 
-  it('displays the LabTime operator credentials', async () => {
+  it('displays the LabTime operator name', async () => {
     const wrapper = await mountSuspended(IndexPage)
     expect(wrapper.text()).toContain('Anggi Wibiyanto')
+  })
+
+  it('displays the operator role', async () => {
+    const wrapper = await mountSuspended(IndexPage)
     expect(wrapper.text()).toContain('Senior System Builder')
   })
 
-  it('contains hero section with Live Uptime', async () => {
+  it('renders core operator content without relying on live decorative timers', async () => {
     const wrapper = await mountSuspended(IndexPage)
     expect(wrapper.text()).toContain('SYS_UPTIME')
-    // It should at least mount with the fallback or live value
+    expect(wrapper.text()).toContain('ONLINE')
+    expect(wrapper.text()).toContain('load_module "elixir_ash"')
+    expect(wrapper.text()).toContain('> mem_alloc: 0x00FFA1')
+    expect(wrapper.text()).toContain('> thread_pool: idle [8]')
   })
 
   it('has navigation link styled as executable', async () => {

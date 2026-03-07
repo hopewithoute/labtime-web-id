@@ -149,8 +149,16 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, nextTick } from 'vue'
+import type { SearchableItem } from '~/composables/useGlobalSearch'
 
-const { isOpen, query, results, close } = useGlobalSearch()
+const { data: preparedItems } = await useFetch<SearchableItem[]>('/api/search.json', {
+  key: 'global-search-items',
+  default: () => [],
+})
+
+const { isOpen, query, results, close } = useGlobalSearch({
+  preparedItems,
+})
 const router = useRouter()
 const inputRef = ref<HTMLInputElement | null>(null)
 

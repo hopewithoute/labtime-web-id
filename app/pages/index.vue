@@ -11,10 +11,7 @@
               <div><span class="text-muted-foreground mr-2">ROLE:</span>Senior System Builder</div>
               <div>
                 <span class="text-muted-foreground mr-2">SYS_UPTIME:</span>
-                <ClientOnly>
-                  <span class="text-accent">{{ sysUptime }}</span>
-                  <template #fallback><span>ONLINE</span></template>
-                </ClientOnly>
+                <span class="text-accent">ONLINE</span>
               </div>
             </div>
           </div>
@@ -183,62 +180,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
-
 const appConfig = useAppConfig()
-
-const sysUptime = ref<string>('ONLINE')
-let uptimeInterval: ReturnType<typeof setInterval> | null = null
 
 const githubUrl = computed(() => appConfig.github ? String(appConfig.github) : '#')
 const githubDisplay = computed(() => githubUrl.value.replace('https://', '').replace('http://', '').replace('www.', '').replace(/\/$/, '') || 'github.com')
 
-const bootCommands = [
+const activeCommands = [
   'load_module "elixir_ash"',
   'load_module "vue_nuxt"',
   'load_module "react"',
   'load_module "laravel"'
 ]
-const activeCommands = ref<string[]>([])
 
-const startBootSequence = () => {
-  bootCommands.forEach((cmd, index) => {
-    setTimeout(() => {
-      activeCommands.value.push(cmd)
-    }, (index + 1) * 400 + Math.random() * 200) // Staggered delay
-  })
-}
-
-// --- NEW TELEMETRY LOGIC ---
-const memAlloc = ref<string>('0x00FFa1')
-const threadPoolState = ref<string>('init [8]')
-let telemetryInterval: ReturnType<typeof setInterval> | null = null
-
-const updateTelemetry = () => {
-    // Randomize memory hex
-    const randomHex = Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0').toUpperCase()
-    memAlloc.value = `0x${randomHex}`
-
-    // Jitter thread pool
-    const states = ['idle [8]', 'active [6/8]', 'wait [2/8]', 'init [8]']
-    threadPoolState.value = states[Math.floor(Math.random() * states.length)] || states[0]!
-}
-// ---------------------------
-
-onMounted(() => {
-  uptimeInterval = setInterval(() => {
-    sysUptime.value = new Date().toISOString()
-  }, 1000)
-
-  telemetryInterval = setInterval(updateTelemetry, 2500)
-
-  startBootSequence()
-})
-
-onUnmounted(() => {
-  if (uptimeInterval) clearInterval(uptimeInterval)
-  if (telemetryInterval) clearInterval(telemetryInterval)
-})
+const memAlloc = '0x00FFA1'
+const threadPoolState = 'idle [8]'
 
 useHead({
   title: 'Home | LabTime',

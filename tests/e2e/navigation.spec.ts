@@ -3,7 +3,8 @@ import { expect, test } from '@playwright/test'
 test.describe('Navigation', () => {
   test('home page loads successfully', async ({ page }) => {
     await page.goto('/')
-    await expect(page.locator('h1')).toContainText('LabTime')
+    await expect(page.getByRole('heading', { name: 'Systems Built' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Recent Logs' })).toBeVisible()
   })
 
   test('mobile menu opens and navigates without overflow', async ({ page }) => {
@@ -17,6 +18,7 @@ test.describe('Navigation', () => {
     await expect(page.getByRole('dialog', { name: 'Mobile navigation' })).toBeVisible()
     await page.getByRole('link', { name: 'Projects' }).click()
     await expect(page).toHaveURL('/projects')
+    await expect(page.getByRole('heading', { name: 'Systems Built' })).toBeVisible()
   })
 
   test('mobile search action shows keyboard shortcut hint', async ({ page }) => {
@@ -25,22 +27,38 @@ test.describe('Navigation', () => {
 
     await page.getByRole('button', { name: 'Open navigation menu' }).click()
 
-    const searchButton = page.getByRole('button', { name: 'Search' })
+    const searchButton = page.getByRole('button', { name: 'SEARCH' })
 
     await expect(searchButton).toBeVisible()
     await expect(searchButton).toContainText('⌘K')
   })
 
+  test('search opens and returns results', async ({ page }) => {
+    await page.goto('/')
+    await page.waitForFunction(() => window.sessionStorage.getItem('booted') === 'true')
+    await expect(page.locator('button[aria-controls="mobile-navigation-drawer"]')).toHaveCount(1)
+    await expect(page.getByRole('button', { name: '[ SEARCH ⌘K ]' })).toBeVisible()
+    await page.getByRole('button', { name: '[ SEARCH ⌘K ]' }).click()
+
+    const input = page.getByPlaceholder("grep -i 'query' ~/content/*")
+    await expect(input).toBeVisible()
+    await input.fill('cloudflare')
+
+    await expect(page.getByRole('option', {
+      name: 'LMS Sertifikasi / Authenticating HLS streaming at the edge How I designed a stateless media gateway that secures segmented video playback with edge-side token verification instead of per-request backend authorization.',
+    })).toBeVisible()
+  })
+
   test('navigate to articles page', async ({ page }) => {
     await page.goto('/')
     await page.click('a[href="/articles"]')
-    await expect(page.locator('h1')).toContainText('Articles')
+    await expect(page.getByRole('heading', { name: 'System Logs' })).toBeVisible()
   })
 
   test('navigate to projects page', async ({ page }) => {
     await page.goto('/')
     await page.click('a[href="/projects"]')
-    await expect(page.locator('h1')).toContainText('Projects')
+    await expect(page.getByRole('heading', { name: 'Systems Built' })).toBeVisible()
   })
 
   test('navigate to resume page', async ({ page }) => {

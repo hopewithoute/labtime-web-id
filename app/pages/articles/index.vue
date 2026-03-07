@@ -58,7 +58,7 @@
                   {{ article.category || article.tags?.[0] || 'DATA' }}
                 </span>
                 <span class="text-[10px] hidden sm:flex items-center opacity-50 px-2 py-1 border border-foreground/30 group-hover:border-background/30 font-bold">
-                  {{ Math.floor(Math.random() * 800 + 200) }}KB
+                  {{ getArchiveSizeLabel(article, index) }}
                 </span>
               </div>
               <div class="text-xs md:text-sm font-bold uppercase group-hover:text-accent flex items-center gap-1.5 transition-colors bg-accent/10 px-3 py-1 group-hover:bg-transparent">
@@ -116,7 +116,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { computed } from 'vue'
 
 const { data: articles } = await useAsyncData('all-articles', () =>
   queryCollection('content')
@@ -126,18 +126,9 @@ const { data: articles } = await useAsyncData('all-articles', () =>
 )
 
 // Telemetry state
-const memAlloc = ref<string>('0x00FFa1')
-const threadPoolState = ref<string>('active [8/8]')
-const bufferWidth = ref<number>(85)
-let telemetryInterval: ReturnType<typeof setInterval> | null = null
-
-const updateTelemetry = () => {
-    const randomHex = Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0').toUpperCase()
-    memAlloc.value = `0x${randomHex}`
-    const states = ['idle [8]', 'active [8/8]', 'wait [4/8]', 'syncing...']
-    threadPoolState.value = states[Math.floor(Math.random() * states.length)]
-    bufferWidth.value = Math.max(30, Math.min(100, bufferWidth.value + (Math.random() * 20 - 10)))
-}
+const memAlloc = '0x00FFa1'
+const threadPoolState = 'active [8/8]'
+const bufferWidth = 85
 
 // Commands sequence
 const bootCommands = [
@@ -146,29 +137,15 @@ const bootCommands = [
   'Decrypting metadata headers...',
   'Index compilation successful.',
   'Awaiting operator input_'
-]
-const activeCommands = ref<string[]>([])
+] as const
+const activeCommands = computed(() => [...bootCommands])
 
-const startBootSequence = () => {
-  bootCommands.forEach((cmd, index) => {
-    setTimeout(() => {
-      // Keep only last 5 commands
-      if (activeCommands.value.length >= 5) {
-         activeCommands.value.shift()
-      }
-      activeCommands.value.push(cmd)
-    }, (index + 1) * 800 + Math.random() * 400)
-  })
+const getArchiveSizeLabel = (article: { title?: string; category?: string; tags?: string[] }, index: number) => {
+  const seed = `${article.title ?? ''}:${article.category ?? article.tags?.[0] ?? ''}:${index}`
+  const hash = Array.from(seed).reduce((total, character) => total + character.charCodeAt(0), 0)
+
+  return `${200 + (hash % 800)}KB`
 }
-
-onMounted(() => {
-  telemetryInterval = setInterval(updateTelemetry, 2200)
-  startBootSequence()
-})
-
-onUnmounted(() => {
-  if (telemetryInterval) clearInterval(telemetryInterval)
-})
 
 useHead({
   title: 'System Logs | LabTime',

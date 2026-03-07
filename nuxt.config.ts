@@ -21,6 +21,16 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/tailwind.css'],
 
+  routeRules: {
+    '/': { prerender: true },
+    '/articles': { prerender: true },
+    '/articles/**': { swr: 3600 },
+    '/projects': { prerender: true },
+    '/projects/**': { swr: 3600 },
+    '/resume': { prerender: true },
+    '/resume/ats': { prerender: true },
+  },
+
   nitro: {
     preset: 'cloudflare_module',
 
