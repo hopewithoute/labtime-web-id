@@ -144,17 +144,19 @@
       </section>
 
       <section aria-labelledby="education-heading" class="ats-print-section mt-8 md:mt-10">
-        <h2 id="education-heading" class="text-xl font-black tracking-tight md:text-2xl">Education</h2>
-        <div class="mt-4 space-y-4 text-sm leading-7 text-foreground/80">
-          <div>
-            <h3 class="font-bold">S1 Teknik Informatika</h3>
-            <p>Universitas Komputer Indonesia (UNIKOM) · 2011 – 2016</p>
-            <p>Software Engineering, Information System</p>
-          </div>
-          <div>
-            <h3 class="font-bold">Teknik Komputer &amp; Jaringan</h3>
-            <p>SMKN 1 Cimahi · 2006 – 2010</p>
-            <p>Network Engineering</p>
+        <div class="education-print-group">
+          <h2 id="education-heading" class="text-xl font-black tracking-tight md:text-2xl">Education</h2>
+          <div class="mt-4 space-y-4 text-sm leading-7 text-foreground/80">
+            <div>
+              <h3 class="font-bold">S1 Teknik Informatika</h3>
+              <p>Universitas Komputer Indonesia (UNIKOM) · 2011 – 2016</p>
+              <p>Software Engineering, Information System</p>
+            </div>
+            <div>
+              <h3 class="font-bold">Teknik Komputer &amp; Jaringan</h3>
+              <p>SMKN 1 Cimahi · 2006 – 2010</p>
+              <p>Network Engineering</p>
+            </div>
           </div>
         </div>
       </section>
@@ -199,7 +201,12 @@ useHead({
   .ats-print-section {
     break-inside: avoid;
     page-break-inside: avoid;
-    margin-top: 1rem !important;
+    margin-top: 0.875rem !important;
+  }
+
+  .education-print-group {
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 
   article {
@@ -207,12 +214,16 @@ useHead({
     page-break-inside: avoid;
   }
 
+  h2 {
+    margin-bottom: 0.5rem;
+  }
+
   ul {
-    margin-top: 0.5rem !important;
+    margin-top: 0.375rem !important;
   }
 
   li {
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.2rem;
   }
 
   a {
