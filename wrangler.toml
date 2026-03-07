@@ -1,4 +1,4 @@
-name = "labtime-web-id"
+name = "hopewithoute-labtime-web-id"
 main = ".output/server/index.mjs"
 compatibility_date = "2024-04-01"
 
