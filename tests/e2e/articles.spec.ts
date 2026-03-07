@@ -18,4 +18,26 @@ test.describe('Articles', () => {
     const content = page.locator('article .prose')
     await expect(content).toBeVisible()
   })
+
+  test('project article code blocks show highlighted syntax metadata', async ({ page }) => {
+    await page.goto('/projects/lms-sertifikasi/chat-architecture-scaling')
+
+    const codeBlock = page.locator('article pre.language-elixir').first()
+    await expect(codeBlock).toBeVisible()
+    await expect(codeBlock).toHaveClass(/shiki/)
+
+    const highlightedTokenCount = await codeBlock.locator('code span').count()
+    expect(highlightedTokenCount).toBeGreaterThan(0)
+  })
+
+  test('regular article code blocks show highlighted syntax metadata', async ({ page }) => {
+    await page.goto('/articles/02-code-highlighting-example')
+
+    const codeBlock = page.locator('article pre.language-css').first()
+    await expect(codeBlock).toBeVisible()
+    await expect(codeBlock).toHaveClass(/shiki/)
+
+    const highlightedTokenCount = await codeBlock.locator('code span').count()
+    expect(highlightedTokenCount).toBeGreaterThan(0)
+  })
 })

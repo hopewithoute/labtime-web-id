@@ -63,7 +63,7 @@
 
         <!-- Content -->
         <div
-          class="mb-16 prose prose-neutral prose-lg dark:prose-invert prose-link-fill max-w-none
+          class="article-prose mb-16 prose prose-neutral prose-lg dark:prose-invert prose-link-fill max-w-none
                       prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tight
                       prose-h2:border-b-2 prose-h2:border-foreground/20 prose-h2:pb-2
                       prose-a:no-underline prose-a:font-bold prose-a:text-foreground hover:prose-a:text-accent prose-a:transition-colors prose-a:px-1

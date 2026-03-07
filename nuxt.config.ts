@@ -80,4 +80,14 @@ export default defineNuxtConfig({
   colorMode: {
     classSuffix: '',
   },
+
+  mdc: {
+    highlight: {
+      theme: {
+        default: 'github-light',
+        dark: 'github-dark'
+      },
+      preload: ['elixir']
+    }
+  },
 })
