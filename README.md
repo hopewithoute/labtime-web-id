@@ -32,16 +32,16 @@ This website was built to:
 
 Core stack used in this project:
 
-▲ **Nuxt 4**
-◇ **Vue 3**
-⌘ **TypeScript**
-▦ **Tailwind CSS**
-▣ **Nuxt Content**
-◫ **shadcn-nuxt / Radix Vue / Reka UI**
-✦ **@vueuse/motion**
-☁ **Cloudflare Nitro preset / Wrangler**
-◍ **Vitest**
-◈ **Playwright**
+Ⓝ **Nuxt 4**
+Ⓥ **Vue 3**
+Ⓣ **TypeScript**
+Ⓣ **Tailwind CSS**
+Ⓒ **Nuxt Content**
+Ⓤ **shadcn-nuxt / Radix Vue / Reka UI**
+Ⓜ **@vueuse/motion**
+Ⓦ **Cloudflare Nitro preset / Wrangler**
+Ⓥ **Vitest**
+Ⓟ **Playwright**
 
 ### Content structure
 
@@ -82,16 +82,16 @@ Website ini dibuat untuk:
 
 Stack utama project ini:
 
-▲ **Nuxt 4**
-◇ **Vue 3**
-⌘ **TypeScript**
-▦ **Tailwind CSS**
-▣ **Nuxt Content**
-◫ **shadcn-nuxt / Radix Vue / Reka UI**
-✦ **@vueuse/motion**
-☁ **Cloudflare Nitro preset / Wrangler**
-◍ **Vitest**
-◈ **Playwright**
+Ⓝ **Nuxt 4**
+Ⓥ **Vue 3**
+Ⓣ **TypeScript**
+Ⓣ **Tailwind CSS**
+Ⓒ **Nuxt Content**
+Ⓤ **shadcn-nuxt / Radix Vue / Reka UI**
+Ⓜ **@vueuse/motion**
+Ⓦ **Cloudflare Nitro preset / Wrangler**
+Ⓥ **Vitest**
+Ⓟ **Playwright**
 
 ### Struktur konten
 
