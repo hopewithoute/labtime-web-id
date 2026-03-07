@@ -15,7 +15,7 @@
       </header>
 
       <section aria-labelledby="summary-heading" class="ats-print-section mt-8 md:mt-10">
-        <h2 id="summary-heading" class="text-xl font-black tracking-tight md:text-2xl">Professional Summary</h2>
+        <h2 id="summary-heading" class="ats-section-heading text-xl font-black tracking-tight md:text-2xl">Professional Summary</h2>
         <p class="mt-3 text-sm leading-7 text-foreground/80 md:text-base">
           End-to-end system builder with 10+ years of experience turning complex business needs into scalable,
           resource-efficient digital systems. Focused on full-cycle architecture, high-performance SaaS
@@ -25,7 +25,7 @@
       </section>
 
       <section aria-labelledby="skills-heading" class="ats-print-section mt-8 md:mt-10">
-        <h2 id="skills-heading" class="text-xl font-black tracking-tight md:text-2xl">Technical Skills</h2>
+        <h2 id="skills-heading" class="ats-section-heading text-xl font-black tracking-tight md:text-2xl">Technical Skills</h2>
         <div class="mt-4 grid gap-4">
           <div>
             <h3 class="font-bold">Architecture</h3>
@@ -51,7 +51,7 @@
       </section>
 
       <section aria-labelledby="experience-heading" class="mt-8 md:mt-10">
-        <h2 id="experience-heading" class="text-xl font-black tracking-tight md:text-2xl">Professional Experience</h2>
+        <h2 id="experience-heading" class="ats-section-heading text-xl font-black tracking-tight md:text-2xl">Professional Experience</h2>
 
         <div class="mt-5 space-y-6 md:space-y-8">
           <article class="ats-print-section border-b border-foreground/15 pb-6">
@@ -62,7 +62,7 @@
               </div>
               <p class="text-sm text-foreground/70">2025 – Present</p>
             </div>
-            <ul class="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-foreground/80">
+            <ul class="ats-print-list mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-foreground/80">
               <li>Independently architected and delivered a certification-focused LMS covering immutable certification workflows, real-time assessments, xAPI telemetry, and edge-based media delivery.</li>
               <li>Increased feature delivery speed by 3x by combining architecture ownership with AI-assisted full-stack implementation across frontend, backend, and infrastructure.</li>
               <li>Built a React 19 and Phoenix WebSocket architecture with O(1) progress updates, chat, and notification flows without relying on coarse polling.</li>
@@ -78,7 +78,7 @@
               </div>
               <p class="text-sm text-foreground/70">2019 – 2025</p>
             </div>
-            <ul class="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-foreground/80">
+            <ul class="ats-print-list mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-foreground/80">
               <li>Directed the initial engineering and independently architected the major v2 rebuild of an integrated school management and LMS platform.</li>
               <li>Engineered an online exam system that handled 3,000 concurrent student sessions on cost-efficient infrastructure.</li>
               <li>Applied Google OR-Tools to automate complex academic scheduling and reduce manual timetable generation effort.</li>
@@ -94,7 +94,7 @@
               </div>
               <p class="text-sm text-foreground/70">2022 – 2024</p>
             </div>
-            <ul class="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-foreground/80">
+            <ul class="ats-print-list mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-foreground/80">
               <li>Delivered a centralized asset platform covering 50,000+ university assets, automated depreciation, lifecycle tracking, and audit-ready change history.</li>
               <li>Built a cooperation management system with two-way synchronization to Kemdikbud, reducing manual compliance reporting and improving institutional visibility.</li>
             </ul>
@@ -108,7 +108,7 @@
               </div>
               <p class="text-sm text-foreground/70">2024</p>
             </div>
-            <ul class="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-foreground/80">
+            <ul class="ats-print-list mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-foreground/80">
               <li>Built an Azure OCR-based real-count pipeline to process ID cards and C1 voting forms from large numbers of polling stations.</li>
               <li>Engineered mapping and territory analytics for voter distribution, logistics tracking, and field-team coordination.</li>
               <li>Designed a resilient backend with Redis, Horizon, and SQL optimization to stay responsive during election-day traffic spikes.</li>
@@ -123,7 +123,7 @@
               </div>
               <p class="text-sm text-foreground/70">2016 – 2024</p>
             </div>
-            <ul class="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-foreground/80">
+            <ul class="ats-print-list mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-foreground/80">
               <li>Built and maintained long-running media infrastructure covering 16,000+ published articles, layered WordPress and server security, Core Web Vitals optimization, technical SEO, and incident recovery with zero permanent data loss across major outages.</li>
             </ul>
           </article>
@@ -136,7 +136,7 @@
               </div>
               <p class="text-sm text-foreground/70">2013 – 2016</p>
             </div>
-            <ul class="mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-foreground/80">
+            <ul class="ats-print-list mt-3 list-disc space-y-2 pl-5 text-sm leading-7 text-foreground/80">
               <li>Built and deployed 10+ e-government systems, including licensing, village finance, citizen notification, and agency web platforms, helping move manual public-service workflows into digital operations.</li>
             </ul>
           </article>
@@ -145,7 +145,7 @@
 
       <section aria-labelledby="education-heading" class="ats-print-section mt-8 md:mt-10">
         <div class="education-print-group">
-          <h2 id="education-heading" class="text-xl font-black tracking-tight md:text-2xl">Education</h2>
+          <h2 id="education-heading" class="ats-section-heading text-xl font-black tracking-tight md:text-2xl">Education</h2>
           <div class="mt-4 space-y-4 text-sm leading-7 text-foreground/80">
             <div>
               <h3 class="font-bold">S1 Teknik Informatika</h3>
@@ -214,15 +214,15 @@ useHead({
     page-break-inside: avoid;
   }
 
-  h2 {
+  .ats-section-heading {
     margin-bottom: 0.5rem;
   }
 
-  ul {
+  .ats-print-list {
     margin-top: 0.375rem !important;
   }
 
-  li {
+  .ats-print-list li {
     margin-bottom: 0.2rem;
   }
 
