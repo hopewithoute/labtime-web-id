@@ -51,10 +51,10 @@
       </section>
 
       <section aria-labelledby="experience-heading" class="mt-8 md:mt-10">
-        <h2 id="experience-heading" class="ats-section-heading text-xl font-black tracking-tight md:text-2xl">Professional Experience</h2>
+        <div class="ats-print-section">
+          <h2 id="experience-heading" class="ats-section-heading text-xl font-black tracking-tight md:text-2xl">Professional Experience</h2>
 
-        <div class="mt-5 space-y-6 md:space-y-8">
-          <article class="ats-print-section border-b border-foreground/15 pb-6">
+          <article class="border-b border-foreground/15 pb-6">
             <div class="flex flex-col gap-1 md:flex-row md:items-start md:justify-between">
               <div>
                 <h3 class="text-lg font-bold">Senior Software Engineer</h3>
@@ -69,7 +69,9 @@
               <li>Lowered storage and egress cost through an HLS pipeline, Cloudflare R2, edge-side media authorization, and Oban-based transcription workflows.</li>
             </ul>
           </article>
+        </div>
 
+        <div class="ats-print-stack mt-5 space-y-6 md:space-y-8">
           <article class="ats-print-section border-b border-foreground/15 pb-6">
             <div class="flex flex-col gap-1 md:flex-row md:items-start md:justify-between">
               <div>
@@ -201,7 +203,6 @@ useHead({
   .ats-print-section {
     break-inside: avoid;
     page-break-inside: avoid;
-    margin-top: 0.875rem !important;
   }
 
   .education-print-group {
@@ -212,6 +213,10 @@ useHead({
   article {
     break-inside: avoid;
     page-break-inside: avoid;
+  }
+
+  .ats-print-stack > .ats-print-section + .ats-print-section {
+    margin-top: 0.875rem !important;
   }
 
   .ats-section-heading {
