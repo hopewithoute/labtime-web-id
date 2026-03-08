@@ -6,22 +6,22 @@
 </template>
 
 <style>
-/* Page Transition: Monochrome to Color */
+/* Page Transition: CRT Warm-up */
 .page-enter-active {
-  transition: filter 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .page-leave-active {
-  transition: filter 0.2s ease, opacity 0.2s ease;
+  transition: all 0.2s ease-out;
 }
 
 .page-enter-from {
   opacity: 0;
-  filter: grayscale(1);
+  filter: grayscale(1) blur(2px) contrast(1.2);
 }
 
 .page-leave-to {
   opacity: 0;
-  filter: grayscale(1);
+  filter: grayscale(1) blur(1px);
 }
 </style>
