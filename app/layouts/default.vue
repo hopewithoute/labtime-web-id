@@ -8,7 +8,9 @@
       <div v-if="showBootSequence" class="fixed inset-0 z-100 bg-background text-foreground font-mono uppercase p-6 md:p-12 flex flex-col justify-end">
         <div class="max-w-7xl mx-auto w-full mb-12 lg:px-12">
           <div class="space-y-2 text-sm md:text-base">
-            <div v-for="(line, index) in bootLines" :key="index">{{ line }}</div>
+            <div v-if="bootLine1">{{ bootLine1 }}</div>
+            <div v-if="bootLine2">{{ bootLine2 }}</div>
+            <div v-if="bootLine3">{{ bootLine3 }}</div>
             <div class="animate-blink mt-1">_</div>
           </div>
         </div>
@@ -280,7 +282,9 @@ onBeforeUnmount(() => {
 
 const bootedCookie = useCookie('booted', { maxAge: undefined })
 const showBootSequence = ref(!bootedCookie.value)
-const bootLines = ref<string[]>([])
+const bootLine1 = ref('')
+const bootLine2 = ref('')
+const bootLine3 = ref('')
 const allLines = [
   '> INITIALIZING KERNEL...',
   '> MOUNTING FILE SYSTEM...',
@@ -293,10 +297,10 @@ onMounted(() => {
   if (!bootedCookie.value) {
     showBootSequence.value = true
 
-    setTimeout(() => { bootLines.value.push(allLines[0] as string) }, 300)
-    setTimeout(() => { bootLines.value.push(allLines[1] as string) }, 800)
+    setTimeout(() => { bootLine1.value = allLines[0] as string }, 300)
+    setTimeout(() => { bootLine2.value = allLines[1] as string }, 800)
     setTimeout(() => {
-      bootLines.value.push(allLines[2] as string)
+      bootLine3.value = allLines[2] as string
 
       setTimeout(() => {
         showBootSequence.value = false
