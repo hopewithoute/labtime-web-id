@@ -1,5 +1,6 @@
 <template>
   <div class="min-h-screen flex flex-col">
+    <NavigationLoader />
     <Transition
       leave-active-class="transition-opacity duration-700 ease-in-out"
       leave-from-class="opacity-100"
@@ -83,7 +84,7 @@
               }"
               class="w-2 h-2 bg-accent rounded-full"
             ></div>
-            <span class="font-bold">System Operational</span>
+            <span class="font-bold">{{ isLoading ? 'System Busy' : 'System Operational' }}</span>
           </div>
           <div class="hidden md:flex gap-4 opacity-70">
             <span>[✓] Connected</span>
@@ -183,6 +184,7 @@ import { ref, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { onKeyStroke } from '@vueuse/core'
 
 const appConfig = useAppConfig()
+const { isLoading } = useLoadingIndicator()
 const themeToggleRef = ref<{ toggleTheme: () => void } | null>(null)
 const { open: openSearch } = useGlobalSearch()
 const isHydrated = ref(false)

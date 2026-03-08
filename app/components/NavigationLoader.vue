@@ -24,7 +24,7 @@ const barDisplay = computed(() => {
   >
     <div
       v-if="isLoading"
-      class="fixed top-0 left-0 w-full z-[100] bg-background border-b border-foreground p-2 px-6 flex items-center gap-4 font-mono text-xs uppercase shadow-lg"
+      class="fixed top-0 left-0 w-full z-100 bg-background border-b border-foreground p-2 px-6 flex items-center gap-4 font-mono text-xs uppercase shadow-lg"
     >
       <div class="flex items-center gap-2">
         <span class="text-accent animate-blink">></span>
@@ -33,7 +33,7 @@ const barDisplay = computed(() => {
       </div>
       <div class="flex-1 flex items-center gap-3 overflow-hidden">
         <span class="tracking-tighter hidden sm:inline">[{{ barDisplay }}]</span>
-        <span class="min-w-[3rem]">{{ Math.round(progress) }}%</span>
+        <span class="min-w-12">{{ Math.round(progress) }}%</span>
       </div>
       <div class="text-[10px] opacity-70 hidden md:block whitespace-nowrap">
         STATUS: IN_PROGRESS
