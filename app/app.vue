@@ -6,31 +6,23 @@
 </template>
 
 <style>
-/* Page Transition: Kernel Refresh */
-@keyframes terminal-flicker {
-  0% { opacity: 1; }
-  25% { opacity: 0.7; }
-  50% { opacity: 0.9; }
-  75% { opacity: 0.4; }
-  100% { opacity: 1; }
-}
-
-@keyframes terminal-reveal {
-  from { clip-path: inset(0 0 100% 0); }
-  to { clip-path: inset(0 0 0 0); }
-}
-
+/* Page Transition: Kernel Refresh (Smooth) */
 .page-enter-active {
-  animation: terminal-reveal 0.3s cubic-bezier(0.19, 1, 0.22, 1),
-             terminal-flicker 0.15s steps(2);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .page-leave-active {
-  animation: terminal-flicker 0.2s steps(4) reverse;
+  transition: all 0.15s cubic-bezier(0.4, 0, 1, 1);
 }
 
-.page-enter-from,
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(6px);
+  filter: brightness(1.3);
+}
+
 .page-leave-to {
   opacity: 0;
+  filter: brightness(0.7);
 }
 </style>
