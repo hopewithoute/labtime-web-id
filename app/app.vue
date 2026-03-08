@@ -8,11 +8,11 @@
 <style>
 /* Page Transition: Kernel Refresh (Smooth) */
 .page-enter-active {
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .page-leave-active {
-  transition: all 0.15s cubic-bezier(0.4, 0, 1, 1);
+  transition: all 0.25s cubic-bezier(0.4, 0, 1, 1);
 }
 
 .page-enter-from {
