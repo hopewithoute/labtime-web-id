@@ -1,7 +1,7 @@
 ---
 title: "Designing an edge-based media pipeline"
 description: "How I moved large-video upload, processing, and delivery off the core application path using Cloudflare Workers, R2, and asynchronous Elixir jobs."
-date: 2026-02-01
+date: 2026-03-12
 tags: ["cloudflare-r2", "media-pipeline", "hls", "oban"]
 category: "Content Delivery"
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Building a stable Phoenix WebSocket layer"
 description: "How I handled authentication, connection lifecycle, and channel reuse between React 19 and Phoenix so real-time features stayed secure and efficient under heavy navigation."
-date: 2026-02-15
+date: 2026-03-14
 tags: ["phoenix-channels", "react", "websockets", "authentication"]
 category: "Infrastructure"
 ---

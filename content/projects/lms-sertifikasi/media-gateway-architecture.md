@@ -1,7 +1,7 @@
 ---
 title: "Authenticating HLS streaming at the edge"
 description: "How I designed a stateless media gateway that secures segmented video playback with edge-side token verification instead of per-request backend authorization."
-date: 2026-03-05
+date: 2026-03-18
 tags: ["cloudflare-workers", "hls", "streaming", "jwt"]
 category: "Infrastructure"
 ---

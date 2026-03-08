@@ -1,7 +1,7 @@
 ---
 title: "Designing immutable certification versioning"
 description: "How I used Ash lifecycle rules and transactional deep cloning so instructors could revise certifications without breaking active learner progress."
-date: 2026-02-22
+date: 2026-03-15
 tags: ["ash-framework", "versioning", "immutability", "certification"]
 category: "Backend Architecture"
 ---

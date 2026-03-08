@@ -1,7 +1,7 @@
 ---
 title: "Real-time progress sync without polling"
 description: "How I used Phoenix Channels and TanStack Query to keep learner progress and shared views synchronized across devices without turning the frontend into the source of truth."
-date: 2026-01-25
+date: 2026-03-11
 tags: ["phoenix-channels", "tanstack-query", "realtime", "cache-invalidation"]
 category: "Infrastructure"
 ---

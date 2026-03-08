@@ -1,7 +1,7 @@
 ---
 title: "LMS Sertifikasi"
 description: "A certification platform I independently architected and shipped, covering real-time assessments, immutable certification workflows, xAPI telemetry, and edge-based media delivery."
-date: 2026-01-15
+date: 2026-03-19
 tags: ["elixir", "ash-framework", "react", "phoenix-channels", "xapi", "cloudflare-workers", "postgresql"]
 role: "Senior Software Engineer"
 problem: "Certification platforms need more than course delivery. They have to enforce high-stakes assessment rules, keep learner progress accurate across devices, issue verifiable certificates, and handle large media workloads without letting the backend become the bottleneck."

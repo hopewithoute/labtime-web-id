@@ -1,7 +1,7 @@
 ---
 title: "Building a reliable assessment engine"
 description: "How I combined question snapshots, optimistic locking, and background enforcement so timed exams stayed consistent under concurrency and time-based edge cases."
-date: 2026-03-01
+date: 2026-03-16
 tags: ["assessment", "ash-framework", "optimistic-locking", "background-jobs"]
 category: "Backend Architecture"
 ---
