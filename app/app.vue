@@ -6,23 +6,22 @@
 </template>
 
 <style>
-/* Page Transition: Kernel Refresh (Smooth) */
+/* Page Transition: Monochrome to Color */
 .page-enter-active {
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: filter 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
 }
 
 .page-leave-active {
-  transition: all 0.25s cubic-bezier(0.4, 0, 1, 1);
+  transition: filter 0.2s ease, opacity 0.2s ease;
 }
 
 .page-enter-from {
   opacity: 0;
-  transform: translateY(6px);
-  filter: brightness(1.3);
+  filter: grayscale(1);
 }
 
 .page-leave-to {
   opacity: 0;
-  filter: brightness(0.7);
+  filter: grayscale(1);
 }
 </style>
