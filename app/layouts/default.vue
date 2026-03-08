@@ -1,22 +1,24 @@
 <template>
   <div class="min-h-screen flex flex-col">
     <NavigationLoader />
-    <Transition
-      leave-active-class="transition-opacity duration-700 ease-in-out"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
-    >
-      <div v-if="showBootSequence" class="fixed inset-0 z-100 bg-background text-foreground font-mono uppercase p-6 md:p-12 flex flex-col justify-end">
-        <div class="max-w-7xl mx-auto w-full mb-12 lg:px-12">
-          <div class="space-y-2 text-sm md:text-base">
-            <div v-if="bootLine1">{{ bootLine1 }}</div>
-            <div v-if="bootLine2">{{ bootLine2 }}</div>
-            <div v-if="bootLine3">{{ bootLine3 }}</div>
-            <div class="animate-blink mt-1">_</div>
+    <Teleport to="body">
+      <Transition
+        leave-active-class="transition-opacity duration-700 ease-in-out"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+      >
+        <div v-if="showBootSequence" class="fixed inset-0 z-100 bg-background text-foreground font-mono uppercase p-6 md:p-12 flex flex-col justify-end">
+          <div class="max-w-7xl mx-auto w-full mb-12 lg:px-12">
+            <div class="space-y-2 text-sm md:text-base">
+              <div v-if="bootLine1">{{ bootLine1 }}</div>
+              <div v-if="bootLine2">{{ bootLine2 }}</div>
+              <div v-if="bootLine3">{{ bootLine3 }}</div>
+              <div class="animate-blink mt-1">_</div>
+            </div>
           </div>
         </div>
-      </div>
-    </Transition>
+      </Transition>
+    </Teleport>
 
     <div class="site-shell-frame flex-1 border-x 2xl:border-x-2 border-foreground max-w-7xl mx-auto flex flex-col w-full overflow-x-clip">
       <header class="site-shell-header border-b border-foreground p-4 md:p-6 flex justify-between items-center bg-background z-30 sticky top-0">
