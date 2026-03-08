@@ -10,6 +10,7 @@ test.describe('Navigation', () => {
   test('mobile menu opens and navigates without overflow', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 })
     await page.goto('/')
+    await page.waitForFunction(() => document.cookie.includes('booted=true'))
 
     const menuButton = page.getByRole('button', { name: 'Open navigation menu' })
 
@@ -24,6 +25,7 @@ test.describe('Navigation', () => {
   test('mobile search action shows keyboard shortcut hint', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 })
     await page.goto('/')
+    await page.waitForFunction(() => document.cookie.includes('booted=true'))
 
     await page.getByRole('button', { name: 'Open navigation menu' }).click()
 
@@ -35,7 +37,7 @@ test.describe('Navigation', () => {
 
   test('search opens and returns results', async ({ page }) => {
     await page.goto('/')
-    await page.waitForFunction(() => window.sessionStorage.getItem('booted') === 'true')
+    await page.waitForFunction(() => document.cookie.includes('booted=true'))
     await expect(page.locator('button[aria-controls="mobile-navigation-drawer"]')).toHaveCount(1)
     await expect(page.getByRole('button', { name: '[ SEARCH ⌘K ]' })).toBeVisible()
     await page.getByRole('button', { name: '[ SEARCH ⌘K ]' }).click()

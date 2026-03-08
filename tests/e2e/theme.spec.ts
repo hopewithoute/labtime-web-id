@@ -1,7 +1,7 @@
 import { expect, test, type Page } from '@playwright/test'
 
 const waitForAppReady = async (page: Page) => {
-  await page.waitForFunction(() => window.sessionStorage.getItem('booted') === 'true')
+  await page.waitForFunction(() => document.cookie.includes('booted=true'))
 }
 
 test.describe('Theme Toggle', () => {

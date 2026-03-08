@@ -278,7 +278,8 @@ onBeforeUnmount(() => {
   }
 })
 
-const showBootSequence = ref(false)
+const bootedCookie = useCookie('booted', { maxAge: undefined })
+const showBootSequence = ref(!bootedCookie.value)
 const bootLines = ref<string[]>([])
 const allLines = [
   '> INITIALIZING KERNEL...',
@@ -289,7 +290,7 @@ const allLines = [
 onMounted(() => {
   isHydrated.value = true
 
-  if (!sessionStorage.getItem('booted')) {
+  if (!bootedCookie.value) {
     showBootSequence.value = true
 
     setTimeout(() => { bootLines.value.push(allLines[0] as string) }, 300)
@@ -299,7 +300,7 @@ onMounted(() => {
 
       setTimeout(() => {
         showBootSequence.value = false
-        sessionStorage.setItem('booted', 'true')
+        bootedCookie.value = 'true'
       }, 700)
     }, 1300)
   }
