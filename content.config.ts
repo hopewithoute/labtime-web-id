@@ -4,7 +4,7 @@ export default defineContentConfig({
     collections: {
         articles: defineCollection({
             type: 'page',
-            source: 'articles/**/*.md',
+            source: 'articles/*.md', // Only top-level articles
             schema: z.object({
                 date: z.string(),
                 tags: z.array(z.string()).optional(),
@@ -13,7 +13,7 @@ export default defineContentConfig({
         }),
         projects: defineCollection({
             type: 'page',
-            source: 'projects/**/index.md',
+            source: 'projects/*/index.md', // Only project index files
             schema: z.object({
                 date: z.string(),
                 tags: z.array(z.string()).optional(),
@@ -33,7 +33,10 @@ export default defineContentConfig({
         }),
         projectArticles: defineCollection({
             type: 'page',
-            source: 'projects/**/*.md',
+            source: {
+                include: 'projects/**/*.md',
+                exclude: ['projects/*/index.md'] // Exclude the parent project files
+            },
             schema: z.object({
                 date: z.string(),
                 tags: z.array(z.string()).optional(),
@@ -50,16 +53,6 @@ export default defineContentConfig({
                     src: z.string(),
                     alt: z.string().optional()
                 })).optional(),
-            }),
-        }),
-        content: defineCollection({
-            type: 'page',
-            source: '**/*.md',
-            schema: z.object({
-                date: z.string(),
-                tags: z.array(z.string()).optional(),
-                category: z.string().optional(),
-                role: z.string().optional(),
             }),
         }),
     },

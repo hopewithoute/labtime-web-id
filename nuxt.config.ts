@@ -47,21 +47,11 @@ export default defineNuxtConfig({
 
     experimental: {
       database: true
-    },
-
-    watchOptions: {
-      usePolling: true,
-      interval: 1000
     }
   },
 
   vite: {
-    server: {
-      watch: {
-        usePolling: true,
-        interval: 1000
-      }
-    }
+    // Vite defaults are usually better for HMR on Linux unless in a container/VM
   },
 
   modules: ['@nuxt/eslint', 'shadcn-nuxt', '@nuxtjs/color-mode', 'nitro-cloudflare-dev', '@nuxtjs/tailwindcss', '@nuxt/content', '@vueuse/motion/nuxt'],
