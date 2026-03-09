@@ -1,12 +1,12 @@
 ---
 title: "Digital School"
-description: "A school operations platform I architected as a modular Laravel system with a separate Python scheduling runtime, contextual workspace access, and operational guardrails for high-friction academic workflows."
+description: "A school operations platform I architected as a modular Laravel system with a separate optimization runtime, contextual workspace access, and operational guardrails for high-friction academic workflows."
 date: 2026-03-09
 tags: ["laravel", "vue", "inertiajs", "python", "or-tools", "architecture", "education"]
 role: "System Architect / Lead Engineer"
-problem: "School software usually breaks at the points where academic planning, attendance, billing, and access control need to share the same institutional truth. Timetables drift into spreadsheets, finance loses academic context, and permissions become brittle once one person can operate across more than one school or role."
-approach: "I designed Digital School as a modular monolith on Laravel 12 with Inertia and Vue 3, then split timetable optimization into a separate Python OR-Tools runtime behind an explicit contract. Laravel owns domain context, workspace selection, business workflows, and operational controls. The solver consumes normalized scheduling payloads, returns reviewable results, and stays outside the web runtime."
-outcome: "Delivered one coherent operational platform for academic setup, scheduling, attendance, LMS workflows, assignments, exams, grading, billing, announcements, and integrations. The architecture keeps shared school context local, pushes optimization into the right runtime, and adds preflight checks, queue-backed execution, cache retrieval, and narrow webhook boundaries so the system stays usable under real operational pressure."
+problem: "School software usually breaks where academic planning, attendance, billing, and access control need to share the same institutional truth. Timetables drift into spreadsheets, finance loses academic context, and permissions become brittle once one person can operate across more than one school or responsibility."
+approach: "I designed Digital School as a modular Laravel application with a separate optimization runtime behind an explicit contract. The main application owns domain context, workspace selection, business workflows, and operational controls. The optimization layer consumes normalized scheduling input, returns reviewable results, and stays outside the main web runtime."
+outcome: "Delivered one coherent operational platform for academic setup, scheduling, attendance, learning workflows, assessments, grading, billing, announcements, and integrations. The architecture keeps shared school context local, pushes optimization into the right runtime, and adds validation, asynchronous execution, retrieval paths, and narrow integration boundaries so the system stays usable under ordinary operational pressure."
 tech_stack:
   frontend:
     - name: "Vue 3"
@@ -48,7 +48,9 @@ The hard part was never adding modules. The hard part was keeping scheduling, at
 
 **Access and deployment shape.** Users don't just log in. They select a workspace made up of role, school, and academic context. I keep the product as a modular monolith because most of the expensive problems still come from shared domain context, not from a need to distribute every feature.
 
-**Scheduling and operational guardrails.** Automatic timetable generation runs through a separate Python OR-Tools runtime fed by normalized Laravel payloads. The workflow starts with preflight validation, supports queued and direct execution paths, and separates solve, preview, and commit. Around that, Horizon, cache-backed retrieval, device-ingestion flows, and narrow webhook boundaries keep noisy operational traffic away from the main request path.
+**Scheduling and operational guardrails.** Automatic timetable generation runs through a separate optimization runtime fed by normalized application payloads. The workflow starts with preflight validation, supports queued and direct execution paths, and separates solve, preview, and commit. Around that, queue visibility, retrieval paths, device-ingestion flows, and narrow webhook boundaries keep noisy operational traffic away from the main request path.
+
+To respect prior employer confidentiality, some identifiers and implementation details in the supporting writeups are intentionally generalized while keeping the architectural decisions and trade-offs intact.
 
 The result is a school platform that behaves like one system instead of a collection of admin pages. It supports academic planning, attendance, LMS flows, assignments, exams, grading, billing, announcements, and timetable generation without letting one subsystem distort the rest.
 

@@ -9,38 +9,28 @@ category: "Problem Solving"
 ### The solver should not be the first place the system discovers broken school data
 Automatic scheduling gets blamed for failures that are really data and readiness failures.
 
+![Preflight Solver Pipeline Architecture](/projects/digital-school/preflight-solver.png)
+
 I wanted Digital School to surface those problems before search begins. That is why scheduling starts with a preflight layer, not with a solver button.
 
 ### Preflight is part of the product
-`PreflightService` checks whether the school is actually schedulable. It validates teaching capacity, teacher presence, rare-room availability, class overload, time-slot readiness, parity feasibility, and core data sanity before the engine starts placing anything.
+Before the optimizer runs, the application checks whether the school is actually schedulable. It validates teaching capacity, teacher presence, scarce-room availability, class overload, time-slot readiness, parity feasibility, and core data sanity.
 
-```php
-$summary = ['pass' => 0, 'warn' => 0, 'fail' => 0];
-
-if ($waktuCount <= 0) {
-    $issuesGlobal[] = [
-        'code' => 'NO_WAKTU',
-        'level' => 'FAIL',
-        'message' => 'Tidak ada slot waktu aktif untuk sekolah ini.',
-    ];
-}
-```
-
-That changes the operator experience. Instead of throwing everything into a search process and hoping the failure is interpretable later, the platform reports structural problems while they are still actionable. PASS, WARN, and FAIL semantics matter here because the user needs to know what to fix, not just that the run did not work.
+Those findings are grouped into clear severity levels so operators can see what must be fixed first and what is merely a warning. That changes the experience. Instead of throwing everything into a search process and hoping the failure is interpretable later, the platform reports structural problems while they are still actionable.
 
 ### The solve itself is staged
 The pipeline is deliberately split.
 
-Stage 0 assigns providers. Stage 1 places rare-room sessions first. Stage 2 handles general placement. Stage 3 compacts the result. I prefer that shape because rare resources and general resources behave differently, and the system is easier to debug when those pressures are visible instead of buried inside one giant search pass.
+Rare-resource placement runs before broader placement, and compaction happens after the main scheduling pressure has been handled. I prefer that shape because scarce resources and general resources behave differently, and the system is easier to debug when those pressures are visible instead of buried inside one giant search pass.
 
-The output also moves through separate steps: solve, preview, then commit. A generated timetable is not production state until an operator reviews it.
+The output also moves through separate steps: solve, preview, then commit. That keeps the operator in control of the final state instead of treating the first generated timetable as something that should immediately become live data.
 
-### Why this is the real problem-solving layer
-The hard part is not only solving constraints. It is building a workflow around the solver that operators can trust.
+### Why this design held up
+The preflight layer does more than prevent wasted compute. It gives the scheduling workflow a clearer product shape.
 
-That means trusted input from live school data, structural checks before execution, staged search, reviewable output, and deliberate commit paths. The solver is one part of that. The surrounding workflow is what makes the feature safe enough to use in a real school environment.
+Users do not need a black-box failure. They need a report they can act on. Once that is in place, the optimizer becomes one step in a broader scheduling workflow rather than the only place where the system reveals whether the input made sense.
 
 ### The result
-Scheduling behaves like an operational system, not like an isolated optimization demo.
+Scheduling becomes more predictable before optimization even begins.
 
 Bad input gets caught earlier, hard constraints are handled in a controllable order, and the final timetable stays reviewable before it becomes committed state.

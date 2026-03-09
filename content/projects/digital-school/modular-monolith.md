@@ -7,29 +7,23 @@ category: "Architecture"
 ---
 
 ### The hardest problems here still come from shared context
-Digital School covers scheduling, attendance, LMS workflows, assignments, exams, grading, billing, announcements, and integrations.
+Digital School covers scheduling, attendance, learning workflows, assignments, exams, grading, billing, announcements, and integrations.
+
+![Modular Monolith Architecture](/projects/digital-school/modular-monolith.png)
 
 That footprint is large enough to make a microservices diagram look tempting. I still keep the product as one application because the expensive problems are not isolated compute problems. They are shared-context problems. Academic year, school, class group, teaching assignment, student identity, and billing state overlap too heavily to push across network boundaries by default.
 
 ### The product stays monolithic, the internals do not
 I treat the deployment unit and the internal structure as separate decisions.
 
-Routes are loaded by feature through `RouteHelper::loadRoutesFromDirectory`. Vue pages follow domain paths. Features carry their own controllers, DTOs, actions, services, pages, and components. That gives each module local ownership without forcing the business to pay distributed-systems cost too early.
-
-```php
-Route::get('/', function () {
-    return redirect()->route('dashboard.index');
-})->name('home');
-
-RouteHelper::loadRoutesFromDirectory(__DIR__.'/web');
-```
+Routes, pages, and backend slices are organized by feature. Each domain owns its own request handling, data contracts, business operations, services, pages, and UI components. That gives each module local ownership without forcing the business to pay distributed-systems cost too early.
 
 This is the part people often miss about a modular monolith. One deployment unit does not mean one code pile. It means local boundaries stay inside the application until there is a real operational reason to move them out.
 
 ### Why this trade-off fits the product
 Most changes in a school platform cut across several domains. Scheduling touches teaching assignments, room types, and academic year. Billing depends on student and school context. Access control affects nearly every operational surface.
 
-Inside one application, those changes stay local. Across distributed services, they become schema negotiation, API coordination, retries, and more operational drag. I don't want that cost unless the boundary has become undeniably real.
+Inside one application, those changes stay local. Across distributed services, they become schema negotiation, API coordination, retries, and more operational drag. I do not want that cost unless the boundary has become undeniably real.
 
 ### The result
 The platform keeps strong internal slices without pretending every module needs its own deployment unit.
