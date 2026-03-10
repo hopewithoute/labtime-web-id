@@ -1,7 +1,7 @@
 ---
 title: "Building a server-driven certificate PDF pipeline"
 description: "How I split certificate configuration, server-side rendering, and background PDF generation so document output stayed consistent without pushing print logic into the browser."
-date: 2026-03-13
+date: 2026-03-12
 tags: ["pdf", "chromicpdf", "certificate", "document-generation"]
 category: "Content Delivery"
 ---

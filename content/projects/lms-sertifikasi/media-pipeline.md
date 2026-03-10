@@ -1,7 +1,7 @@
 ---
 title: "Designing an edge-based media pipeline"
 description: "How I moved large video upload, processing, and delivery off the core application path with edge storage and asynchronous background jobs."
-date: 2026-03-12
+date: 2026-03-11
 tags: ["cloudflare-r2", "media-pipeline", "hls", "oban"]
 category: "Content Delivery"
 ---

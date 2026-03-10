@@ -1,7 +1,7 @@
 ---
 title: "Designing versioned certification workflows"
 description: "How I used lifecycle rules and explicit versioning so instructors could revise certifications without rewriting the rules for learners already in progress."
-date: 2026-03-15
+date: 2026-03-13
 tags: ["ash-framework", "versioning", "immutability", "certification"]
 category: "Backend Architecture"
 ---

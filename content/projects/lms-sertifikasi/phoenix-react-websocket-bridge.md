@@ -1,7 +1,7 @@
 ---
 title: "Building a stable Phoenix WebSocket layer"
 description: "How I handled connection auth, lifecycle, and subscription reuse so Phoenix WebSocket features stayed stable under heavy navigation."
-date: 2026-03-14
+date: 2026-03-18
 tags: ["phoenix-channels", "react", "websockets", "authentication"]
 category: "Infrastructure"
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Scaling chat for certification workflows"
 description: "How I split chat into room delivery and user-scoped unread updates so notifications stayed fast under load without falling back to polling."
-date: 2026-03-17
+date: 2026-03-16
 tags: ["chat", "phoenix-channels", "ecto", "realtime"]
 category: "Infrastructure"
 ---

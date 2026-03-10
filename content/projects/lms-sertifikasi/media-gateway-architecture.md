@@ -1,7 +1,7 @@
 ---
 title: "Authenticating HLS streaming at the edge"
 description: "How I built an edge-side media gateway to secure HLS playback without sending every playlist and segment request back through the application."
-date: 2026-03-18
+date: 2026-03-10
 tags: ["cloudflare-workers", "hls", "streaming", "jwt"]
 category: "Infrastructure"
 ---

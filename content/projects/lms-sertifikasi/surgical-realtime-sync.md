@@ -1,7 +1,7 @@
 ---
 title: "Keeping real-time progress in sync without polling"
 description: "How I used backend-driven invalidation and targeted cache updates to keep learner progress in sync across devices without turning the frontend into the source of truth."
-date: 2026-03-11
+date: 2026-03-17
 tags: ["phoenix-channels", "tanstack-query", "realtime", "cache-invalidation"]
 category: "Infrastructure"
 ---

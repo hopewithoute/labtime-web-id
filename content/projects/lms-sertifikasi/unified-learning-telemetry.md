@@ -1,7 +1,7 @@
 ---
 title: "Unifying learning telemetry across content types"
 description: "How I built a backend telemetry and progress-mapping layer that kept completion logic consistent across video, quizzes, PDFs, and third-party learning packages."
-date: 2026-03-10
+date: 2026-03-15
 tags: ["xapi", "telemetry", "progress-tracking", "learning-record-store"]
 category: "Backend Architecture"
 ---
