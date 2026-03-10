@@ -23,13 +23,9 @@ export default defineNuxtConfig({
   css: ['~/assets/css/tailwind.css'],
 
   routeRules: {
-    '/': { prerender: true },
-    '/articles': { prerender: true },
-    '/articles/**': { prerender: true },
-    '/projects': { prerender: true },
-    '/projects/**': { prerender: true },
-    '/resume': { prerender: true },
-    '/resume/ats': { prerender: true },
+    // Prerendering disabled for content routes - Nuxt Content with Cloudflare D1
+    // requires D1 bindings which are only available at runtime on Cloudflare.
+    // SSR will handle these routes dynamically with D1 access.
   },
 
   nitro: {
