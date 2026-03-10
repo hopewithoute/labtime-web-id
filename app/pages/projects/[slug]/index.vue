@@ -293,7 +293,7 @@ const slug = route.params.slug as string
 
 const { data: project } = await useAsyncData<ProjectArticlesCollectionItem | null>(
   `project-${slug}`,
-  () => queryCollection('projectArticles').path(`/projects/${slug}`).first()
+  () => queryCollection('projects').path(`/projects/${slug}`).first()
 )
 
 const { data: articles } = await useAsyncData<ProjectArticlesCollectionItem[]>(
@@ -302,7 +302,7 @@ const { data: articles } = await useAsyncData<ProjectArticlesCollectionItem[]>(
     queryCollection('projectArticles')
       .where('path', 'LIKE', `/projects/${slug}/%`)
       .where('path', '<>', `/projects/${slug}`)
-      .order('date', 'DESC')
+      .order('order', 'ASC')
       .all()
 )
 

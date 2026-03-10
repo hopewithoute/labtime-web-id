@@ -39,6 +39,7 @@ export default defineContentConfig({
             },
             schema: z.object({
                 date: z.string(),
+                order: z.number().optional(),
                 tags: z.array(z.string()).optional(),
                 category: z.string().optional(),
                 role: z.string().optional(),
