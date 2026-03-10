@@ -57,7 +57,7 @@
                 {{ article.title }}
               </h2>
               <div
-                v-if="!article.path?.startsWith('/projects/')"
+                v-if="!article.isProjectArticle"
                 class="text-xs font-mono opacity-60 group-hover:opacity-100 text-left sm:text-right shrink-0 whitespace-nowrap mt-1 border border-foreground/20 group-hover:border-background/20 px-2 py-0.5 transition-colors"
               >
                 {{ article.date }}
@@ -73,7 +73,14 @@
             <div
               class="flex items-end justify-between mt-auto pt-4 border-t-2 border-dashed border-foreground/20 group-hover:border-background/30"
             >
-              <div class="flex gap-2 items-center">
+              <div class="flex gap-2 items-center flex-wrap">
+                <!-- Project Article Marker -->
+                <span
+                  v-if="article.isProjectArticle"
+                  class="bg-accent text-background px-2 py-1 text-[10px] md:text-xs font-bold uppercase tracking-widest"
+                >
+                  PROJECT → {{ article.projectSlug?.replace(/-/g, ' ').toUpperCase() }}
+                </span>
                 <span
                   class="bg-foreground text-background group-hover:bg-background group-hover:text-foreground px-2 py-1 text-[10px] md:text-xs font-bold uppercase tracking-widest"
                 >
@@ -160,12 +167,58 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-const { data: articles } = await useAsyncData('all-articles', () =>
-  queryCollection('content')
-    .where('stem', 'NOT LIKE', 'projects/%/index')
-    .order('date', 'DESC')
-    .all()
-)
+interface ArticleItem {
+  path: string
+  title?: string
+  description?: string
+  date?: string
+  tags?: string[]
+  category?: string
+  isProjectArticle?: boolean
+  projectSlug?: string
+}
+
+const { data: articles } = await useAsyncData('all-articles', async () => {
+  const [regularArticles, projectArticles] = await Promise.all([
+    queryCollection('articles').all(),
+    queryCollection('projectArticles').all(),
+  ])
+
+  // Transform and merge both collections
+  const allItems: ArticleItem[] = [
+    ...regularArticles.map((a) => ({
+      path: a.path,
+      title: a.title,
+      description: a.description,
+      date: a.date,
+      tags: a.tags,
+      category: a.category,
+      isProjectArticle: false,
+    })),
+    ...projectArticles.map((a) => {
+      // Extract project slug from path like /projects/digital-school/hybrid-solver
+      const pathParts = a.path?.split('/') || []
+      const projectSlug = pathParts[2] || ''
+      return {
+        path: a.path,
+        title: a.title,
+        description: a.description,
+        date: a.date,
+        tags: a.tags,
+        category: a.category,
+        isProjectArticle: true,
+        projectSlug,
+      }
+    }),
+  ]
+
+  // Sort by date descending
+  return allItems.sort((a, b) => {
+    const dateA = new Date(a.date || 0).getTime()
+    const dateB = new Date(b.date || 0).getTime()
+    return dateB - dateA
+  })
+})
 
 // Telemetry state
 const memAlloc = '0x00FFa1'
@@ -183,7 +236,7 @@ const bootCommands = [
 const activeCommands = computed(() => [...bootCommands])
 
 const getArchiveSizeLabel = (
-  article: { title?: string; category?: string; tags?: string[] },
+  article: ArticleItem,
   index: number
 ) => {
   const seed = `${article.title ?? ''}:${article.category ?? article.tags?.[0] ?? ''}:${index}`
