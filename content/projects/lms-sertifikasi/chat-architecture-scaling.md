@@ -1,7 +1,7 @@
 ---
 title: "Chat at certification scale"
 description: "How I split real-time chat into room and user channels, then replaced per-user Ash events with batched Ecto writes to keep unread notifications fast under load."
-date: 2026-03-05
+date: 2026-03-16
 tags: ["chat", "phoenix-channels", "ecto", "realtime"]
 category: "Infrastructure"
 ---
