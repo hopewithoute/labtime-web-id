@@ -2,6 +2,7 @@
 title: "One system, two runtimes"
 description: "Why I separate business orchestration and timetable optimization into an application runtime and a dedicated solver runtime, with a narrow contract between them."
 date: 2026-03-09
+order: 5
 tags: ["laravel", "python", "or-tools", "scheduling", "architecture"]
 category: "Infrastructure"
 ---
@@ -27,9 +28,7 @@ This is not a language split for its own sake. The product has two different res
 
 One side preserves institutional truth and operator workflow. The other computes feasible timetable placements under constraints. Those are different jobs, so I give them different runtimes and keep the handoff narrow.
 
-I also keep rule ownership on the application side. Preferences around contiguity, daily caps, and placement behavior are product decisions first. The optimizer enforces them, but their meaning still belongs to the product.
+I also keep rule ownership on the application side. Preferences around contiguity, daily caps, and placement behavior are product decisions first. The optimizer enforces them, but their meaning belongs to the product.
 
 ### The result
-The runtime split strengthens the system instead of fragmenting it.
-
 The application stays focused on product logic. The optimization runtime stays focused on search. The contract between them is explicit enough that the boundary is easy to reason about and evolve.

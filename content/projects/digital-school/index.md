@@ -38,20 +38,22 @@ tech_stack:
 screenshots: []
 ---
 
-I independently architected and shipped this platform end to end.
+I built this platform end to end, independently.
 
-The hard part was never adding modules. The hard part was keeping scheduling, attendance, learning workflows, billing, and access control aligned to the same school model. That drove a system shape where Laravel owns institutional truth, operator context, and product workflows, while Python owns the timetable search problem.
+The hard part was not adding features. The hard part was keeping scheduling, attendance, learning workflows, billing, and access control attached to the same institutional truth. That shaped the whole system. Laravel owns the domain, the operator context, and the product workflows. Python owns the search problem.
 
-**Data model and shared context.** I centered the platform on schools, academic years, class groups, teaching assignments, schedules, exams, invoices, and payments. That lets scheduling, finance, and learning workflows operate on the same institutional graph instead of passing partial context between disconnected modules.
+I structured the platform around a few deliberate boundaries:
 
-**Backend boundaries.** Requests enter through DTOs, controllers stay thin, action classes own write-heavy workflows, and services handle orchestration. That keeps state changes explicit across academic setup, finance, attendance, and scheduling.
+- **One institutional graph.** Schools, academic years, class groups, teaching assignments, schedules, exams, invoices, and payments live in one model. Scheduling, finance, and learning workflows read from the same graph instead of stitching context together from separate modules.
 
-**Access and deployment shape.** Users don't just log in. They select a workspace made up of role, school, and academic context. I keep the product as a modular monolith because most of the expensive problems still come from shared domain context, not from a need to distribute every feature.
+- **Explicit backend boundaries.** Requests enter through typed inputs. Controllers stay thin. Named operations own state changes. Services handle orchestration. That separation keeps the write path legible across academic setup, finance, attendance, and scheduling.
 
-**Scheduling and operational guardrails.** Automatic timetable generation runs through a separate optimization runtime fed by normalized application payloads. The workflow starts with preflight validation, supports queued and direct execution paths, and separates solve, preview, and commit. Around that, queue visibility, retrieval paths, device-ingestion flows, and narrow webhook boundaries keep noisy operational traffic away from the main request path.
+- **Workspace-based access.** Users do not just log in. They activate a workspace made of role, school, and academic context. That makes authorization concrete instead of abstract, and it gives every request a clear operating position before feature code runs.
 
-To respect prior employer confidentiality, some identifiers and implementation details in the supporting writeups are intentionally generalized while keeping the architectural decisions and trade-offs intact.
+- **A separate optimization runtime.** Automatic scheduling runs in Python, not inside the web request. The application normalizes school state into a typed payload, the solver searches, and the results come back for preview and commit. That split keeps the application focused on product logic and the solver focused on search.
 
-The result is a school platform that behaves like one system instead of a collection of admin pages. It supports academic planning, attendance, LMS flows, assignments, exams, grading, billing, announcements, and timetable generation without letting one subsystem distort the rest.
+- **Operational guardrails.** Long-running workflows go through queues with retrieval paths. Integration endpoints stay narrow. Device traffic and webhooks do not get to reshape the main application path.
 
-The supporting writeups below break down the architectural decisions behind that shape.
+To respect prior employer confidentiality, some identifiers and implementation details in the supporting writeups are intentionally generalized. The architectural decisions and trade-offs remain intact.
+
+The writeups below go deeper into each of those boundaries.

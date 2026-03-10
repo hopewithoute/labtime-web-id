@@ -2,21 +2,22 @@
 title: "Where the controller stops"
 description: "Why I use typed inputs, named write operations, and orchestration services to keep application boundaries explicit as the platform grows across scheduling, finance, and academic workflows."
 date: 2026-03-09
+order: 3
 tags: ["laravel", "dto", "service-layer", "actions", "architecture"]
 category: "Backend"
 ---
 
 ### The controller cannot be the application layer
-Laravel codebases usually get messy when request handling, orchestration, and state changes all collapse into one place.
+Laravel codebases get messy when request handling, orchestration, and state changes collapse into the same place.
 
 ![Laravel Backend Boundaries Architecture](/projects/digital-school/backend-boundaries.png)
 
-I wanted a clearer boundary than that. In Digital School, controllers receive input, delegate, and exit. Typed input objects define the accepted payload, named write operations own state-changing workflows, and services handle orchestration or read composition.
+I wanted a cleaner boundary than that. In Digital School, controllers receive input, delegate, and exit. Typed input objects define the accepted payload. Named write operations own state-changing workflows. Services handle orchestration or read composition.
 
 ### The boundary split
-Typed input contracts were the first step. They make the accepted payload visible before business logic starts mutating anything.
+Typed input contracts came first. They make the accepted payload visible before business logic starts mutating anything.
 
-That helps in two places. Inside Laravel, it keeps controllers from repeatedly parsing raw request state. Across runtimes, it gives the scheduling pipeline an explicit handoff before data leaves the main application and enters the optimization layer.
+That helps in two places. Inside Laravel, controllers do not repeatedly parse raw request state. Across runtimes, the scheduling pipeline gets an explicit handoff before data leaves the main application and enters the optimization layer.
 
 For writes, I prefer named business operations over generic helpers. Each transaction has a clear owner and a visible failure surface. That makes the write path easier to reason about, test, and extend.
 
@@ -30,6 +31,6 @@ Typed inputs make request shape explicit. Named operations make state changes ex
 That matters in a product that spans academic planning, attendance, finance, exams, and optimizer integration. Without clear ownership, transactions scatter, external payloads become implicit, and business rules end up buried in convenience methods.
 
 ### The result
-The backend stays readable even as the workflow count grows.
+The backend stays readable as the workflow count grows.
 
-When I revisit a feature months later, I can still answer the important questions quickly: what enters the system, where the state change lives, and which layer owns orchestration. For this product, that clarity is an architectural requirement, not a stylistic preference.
+When I revisit a feature months later, I can answer the important questions quickly: what enters the system, where the state change lives, which layer owns orchestration. That clarity is not a stylistic preference here. It is the only way the system stays maintainable.
