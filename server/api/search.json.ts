@@ -1,4 +1,4 @@
-import { queryCollection } from '#imports'
+import { queryCollection } from '@nuxt/content/server'
 import { cachedEventHandler } from 'nitropack/runtime'
 
 interface SearchPayloadItem {
@@ -20,14 +20,19 @@ function toSearchPayloadItem(
   type: SearchPayloadItem['_type'],
   parentProject?: string,
 ): SearchPayloadItem {
-  return {
+  const payload: SearchPayloadItem = {
     path: item.path,
     title: item.title || '',
     description: item.description || '',
     tags: item.tags || [],
     _type: type,
-    ...(parentProject ? { _parentProject: parentProject } : {}),
   }
+
+  if (parentProject) {
+    payload._parentProject = parentProject
+  }
+
+  return payload
 }
 
 export default cachedEventHandler(
