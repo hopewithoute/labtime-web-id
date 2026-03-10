@@ -25,9 +25,9 @@ export default defineNuxtConfig({
   routeRules: {
     '/': { prerender: true },
     '/articles': { prerender: true },
-    '/articles/**': { swr: 3600 },
+    '/articles/**': { prerender: true },
     '/projects': { prerender: true },
-    '/projects/**': { swr: 3600 },
+    '/projects/**': { prerender: true },
     '/resume': { prerender: true },
     '/resume/ats': { prerender: true },
   },

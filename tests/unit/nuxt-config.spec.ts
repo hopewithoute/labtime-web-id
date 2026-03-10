@@ -18,10 +18,10 @@ describe('nuxt.config route rules', () => {
     })
   })
 
-  it('keeps dynamic content routes cache-friendly', () => {
+  it('prerenders dynamic content routes', () => {
     expect(nuxtConfig.routeRules).toMatchObject({
-      '/articles/**': { swr: 3600 },
-      '/projects/**': { swr: 3600 },
+      '/articles/**': { prerender: true },
+      '/projects/**': { prerender: true },
     })
   })
 })
