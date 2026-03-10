@@ -1,12 +1,12 @@
 ---
 title: "LMS Sertifikasi"
-description: "A certification platform I independently architected and shipped, covering real-time assessments, immutable certification workflows, xAPI telemetry, and edge-based media delivery."
+description: "I architected and shipped this certification platform end to end, with real-time assessments, versioned certification workflows, centralized telemetry, and edge-based media delivery."
 date: 2026-03-19
 tags: ["elixir", "ash-framework", "react", "phoenix-channels", "xapi", "cloudflare-workers", "postgresql"]
 role: "Senior Software Engineer"
-problem: "Certification platforms need more than course delivery. They have to enforce high-stakes assessment rules, keep learner progress accurate across devices, issue verifiable certificates, and handle large media workloads without letting the backend become the bottleneck."
-approach: "I designed and delivered the platform as a full-stack system built on Elixir, Ash Framework, Phoenix WebSockets, React 19, and TanStack. The backend owns lifecycle rules, progress calculation, and asynchronous processing, while the frontend stays responsive through targeted real-time updates. Media upload and delivery move to the Cloudflare edge through Workers and R2."
-outcome: "Delivered 21 user stories across 7 domains. Batched Ecto writes replaced N+1 notification fan-out, O(1) progress updates kept the UI responsive under heavy event volume, immutable versioning protected active learners from live curriculum edits, and edge-offloaded media delivery reduced backend load while keeping streaming secure and cost-efficient."
+problem: "Certification platforms need more than course delivery. They have to preserve exam integrity, keep learner progress accurate across devices, issue trustworthy certificates, and handle media-heavy delivery without letting the core application become the bottleneck."
+approach: "I designed and delivered the platform as a full-stack system where the backend owns lifecycle rules, progress calculation, and asynchronous processing, while the frontend stays responsive through targeted real-time updates. Media ingestion and delivery move toward the edge so large transfers and segmented playback do not dominate the application runtime."
+outcome: "Delivered a certification platform with stronger real-time behavior, safer versioned learning rules, more reliable progress calculation, and a media path that no longer competes directly with the core business system. The product stayed responsive under operational pressure without moving business truth into the browser."
 tech_stack:
   frontend:
     - name: "React 19"
@@ -38,20 +38,20 @@ tech_stack:
 screenshots: []
 ---
 
-I independently architected and shipped this certification platform end to end.
+I architected and shipped this certification platform end to end.
 
-The core challenge was keeping several hard requirements working together: high-stakes assessments, accurate cross-device progress, verifiable certificate issuance, and media-heavy learning content. That drove a system design where correctness stayed in the backend, real-time updates stayed targeted, and media traffic stayed off the core application path.
+The hard part was not building course pages. It was getting several strict requirements to coexist: high-stakes assessments, accurate cross-device progress, verifiable certificate issuance, and media-heavy learning delivery. That pushed the system in a clear direction. Business truth stayed in the backend, real-time updates stayed narrow, and media traffic stayed off the core application path whenever possible.
 
-**Frontend and real-time UX.** React 19, TypeScript, Tailwind CSS 4.0, and TanStack power the client. Phoenix WebSockets handle progress, chat, notifications, and assessment updates without polling. For high-frequency events like video progress and unread state, I used targeted invalidation and O(1) local updates so the UI stayed responsive under load.
+On the frontend, React and targeted real-time updates keep progress, chat, notifications, and assessment views in sync without falling back to coarse polling. For high-frequency events, the client updates only the state that actually changed, which kept dense learning screens responsive.
 
-**Backend integrity and certification rules.** Elixir and Ash Framework handle lifecycle policy, progress calculation, and assessment state. Published certifications are versioned instead of edited in place, which protects in-flight learners from silent rule changes. The backend also stays the source of truth for telemetry, eligibility, and completion logic.
+On the backend, lifecycle rules, progress calculation, and assessment state all live on the server. Published certifications are versioned instead of edited in place, so learners already in progress are not silently moved onto a different set of rules. The backend also remains the source of truth for telemetry, eligibility, and completion logic.
 
-**Telemetry and interoperability.** The platform ingests xAPI statements from internal and third-party learning tools, then maps them into a unified progress model. That keeps completion logic consistent across videos, quizzes, PDFs, and packaged learning content.
+Telemetry had to work across both internal tools and third-party learning content. The platform ingests those events, normalizes them into one progress model, and uses that model to drive completion across videos, quizzes, PDFs, and packaged content.
 
-**Media pipeline and delivery.** Video ingestion, transcoding, transcription, and HLS delivery run through Cloudflare Workers, R2, and Oban-based background processing. That keeps large media workloads off the main Elixir request path and makes delivery cheaper and easier to scale.
+Media needed its own boundary. Uploads, processing, transcription, and segmented delivery run through edge-oriented services and background workers, which keeps large media workloads out of the main request path.
 
-A few implementation details had outsized impact. Chat and notification fan-out were split into room and user channels. High-volume unread writes dropped from N inserts to a single batched write on the hot path. Curriculum changes moved through deep-clone versioning instead of live mutation. Progress synchronization became backend-driven, so the product stayed fast without making the browser the authority.
+A few implementation details ended up mattering more than they first appeared. Real-time delivery paths were split by audience. High-volume notification writes were collapsed into a batched hot path. Curriculum changes moved through explicit versioning instead of live mutation. Progress synchronization became backend-driven so the product could feel immediate without making the browser the authority.
 
-The result is a system built for certification workflows, not just course pages. It handles real-time interaction, strict domain rules, and media-heavy delivery without letting one part of the product destabilize the rest.
+To respect prior employer confidentiality, some identifiers, metrics, and implementation details in the supporting writeups are intentionally generalized. The architectural decisions and trade-offs are still real.
 
-The supporting writeups below break down the major architectural decisions in more detail.
+This was a certification system, not a course catalog with an exam feature taped onto it. It had to hold up under real operational pressure: live learners, changing curricula, media traffic, and strict completion rules. The supporting writeups below break down the parts that mattered most.

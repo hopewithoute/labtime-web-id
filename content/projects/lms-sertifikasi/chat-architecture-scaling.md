@@ -1,91 +1,49 @@
 ---
-title: "Chat at certification scale"
-description: "How I split real-time chat into room and user channels, then replaced per-user Ash events with batched Ecto writes to keep unread notifications fast under load."
+title: "Scaling chat for certification workflows"
+description: "How I split chat into room delivery and user-scoped unread updates so notifications stayed fast under load without falling back to polling."
 date: 2026-03-17
 tags: ["chat", "phoenix-channels", "ecto", "realtime"]
 category: "Infrastructure"
 ---
 
-> **50 → 1** database queries per message &middot; **Instant** room delivery &middot; **Targeted** unread fan-out without polling
+> **Lower write amplification** &middot; **Instant room delivery** &middot; **Targeted unread updates without polling**
 
-### Chat is easy right up until fan-out shows up
-Real-time chat looks straightforward when everyone is online in the same room.
+### Chat feels simple until unread state gets involved
+Real-time chat looks easy when everyone is active in the same room.
 
-React 19 renders the thread, Phoenix Channels push messages immediately, Presence handles typing state, and the whole thing feels local. That's the easy part.
+Messages show up instantly, typing feels local, and the whole thing seems straightforward. The pain starts when one message also needs to affect people who are not currently there.
 
-The hard part starts when one message has to reach people who aren't in the room anymore.
+In a certification product, chat is woven into the workflow. Learners, instructors, and admins move between assessments, course views, and review screens. If someone posts in a room with many inactive members, they still expect instant delivery. Everyone else still expects their unread state to change right away.
 
-In LMS Sertifikasi, chat isn't a nice extra. It sits inside a certification platform where learners, instructors, and admins move across exams, course players, and review pages. If someone sends a message into a room with 50 offline members, the sender still expects instant delivery, and everyone else still expects their unread badge to update right away.
+That is where the write path starts to matter more than the message itself.
 
-That's where architecture matters.
-
-### The two-channel split
+### The two-lane model
 ![Chat Architecture: Dual-Channel Sync](/projects/lms-sertifikasi/chat-architecture-infographic.png)
 
-I split chat traffic into two separate lanes.
+I split chat traffic into two lanes.
 
-1. **Room channel (`chat:room:{id}`)**
-   This carries the noisy, high-frequency events: message payloads, typing indicators through `Presence`, and read receipts. It only reaches users who are actively inside the room.
+One lane handles noisy room activity: message delivery, typing state, and in-room read behavior. The other handles user-scoped state the rest of the app cares about, especially unread counts and notification updates.
 
-2. **User channel (`user:{id}`)**
-   This carries personal state changes that the rest of the app needs to react to, especially unread counts and notification updates when someone is outside the room.
+That split kept active rooms fast without forcing every connected client to subscribe to every message body.
 
-That separation keeps active chat rooms fast and keeps the wider React shell synchronized without forcing every connected client to subscribe to every message body.
+### The real scaling problem was unread fan-out
+Online delivery was cheap. Broadcast to the room and move on.
 
-It also lines up with how the rest of the platform works. The frontend already uses TanStack Query and targeted invalidation patterns in other domains, so chat follows the same rule: broadcast only what each client actually needs.
+Unread state was different because it had to be durable. The first implementation followed the normal domain path: create an unread record for each affected recipient through the usual abstractions. It was correct, but it also did too much per-recipient work on a hot path that could spike hard.
 
-### The scaling problem wasn't the message
-Online delivery is cheap. Broadcast once to the room and you're done.
+### What I changed
+The goal became simple: keep the immediate UX, shrink the write path.
 
-Offline delivery is where the cost explodes, because unread state has to be durable.
+Instead of treating unread fan-out as a series of unrelated writes, I built the affected records in memory, persisted them in a single batched operation, and then emitted targeted user-scoped events so each client could update its unread UI in place.
 
-The backend is built heavily around Ash Framework, so the obvious implementation was also the most natural one: loop through each offline member and call `Ash.create()` for a notification record.
+That bought me the part that actually mattered. Active users still saw instant room activity. Inactive users still got precise unread updates. The database did less repetitive work to make that happen.
 
-That implementation was correct. It just wasn't cheap.
+### Why I stepped outside the usual abstraction
+I generally prefer staying inside framework conventions.
 
-A single room message with 50 offline members turned into 50 inserts, 50 resource events, and 50 PubSub broadcasts. The message payload stayed small, but the write amplification around it got expensive fast.
-
-### What I ruled out
-The first option was `bulk_create` inside Ash.
-
-That cleaned up the API surface, but it didn't remove the underlying cost. Per-record events were still part of the path, which meant the hot spot stayed hot.
-
-I also considered pushing unread notification creation into Oban. That would smooth the spike, but it would also delay the badge update. For certification workflows, delayed unread state is a product problem, not just an engineering tradeoff. If a learner gets a time-sensitive instruction, "eventual unread consistency" isn't good enough.
-
-So the requirement became simple: keep the immediate UX, collapse the write path.
-
-### The hot path drops below the framework
-For this flow, I stopped asking the framework to do work it didn't need to do.
-
-Instead of creating notifications one by one through Ash, I build the rows in memory, normalize the IDs up front, and write the full batch with `Repo.insert_all`.
-
-```elixir
-notifications = build_notification_maps(offline_members, message)
-
-{inserted_count, _} =
-  LmsSertifikasi.Repo.insert_all("notifications", notifications)
-
-Enum.each(notifications, fn n ->
-  Endpoint.broadcast("user:#{n.user_id}", "new_notification", n)
-end)
-```
-
-Now persistence happens in one write, and delivery still stays targeted. Online users get the room broadcast. Offline users get a focused event on their personal channel so the unread UI updates in place.
-
-The same idea applies in reverse when a room gets marked as read. Clear the durable unread state in bulk, then notify only the clients that care.
-
-### Why this trade made sense
-I like staying inside framework conventions for most of the system.
-
-This path didn't deserve that abstraction tax.
-
-Chat notifications sit directly on the user experience. They are high-frequency, latency-sensitive, and easy to amplify accidentally. Once I looked at the shape of the workload, the right answer was obvious: keep Ash for the broader domain model, and let raw Ecto handle the narrow path where every extra event hurts.
-
-That's not a failure of the architecture. That's the architecture doing its job.
+This was one of the places where that would have been expensive for no good reason. Chat notifications sit right on the user experience. They are frequent, latency-sensitive, and easy to amplify accidentally. Once I looked at the workload shape, the answer was pretty clear: keep the broader domain model expressive, but make the unread hot path narrower and cheaper.
 
 ### The result
-The offline notification write path drops from 50 queries to 1.
+Unread notification fan-out got cheaper without going stale.
 
-Room delivery stays instant. Unread badges still move right away. The database pool stays calmer as room size grows, and the frontend doesn't need to fall back to polling or coarse refreshes.
-
-That was the real goal from the start: real-time chat that still feels instant when the room isn't small anymore.
+Room delivery still felt instant. Unread badges still moved right away. As room size grew, the database stayed calmer and the frontend never had to fall back to polling or coarse refreshes.

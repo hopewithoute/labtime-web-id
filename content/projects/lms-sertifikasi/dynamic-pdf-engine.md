@@ -1,35 +1,35 @@
 ---
-title: "Building a server-driven PDF pipeline"
-description: "How I separated certificate configuration, HTML rendering, and background PDF generation to produce consistent documents without pushing print logic into the browser."
+title: "Building a server-driven certificate PDF pipeline"
+description: "How I split certificate configuration, server-side rendering, and background PDF generation so document output stayed consistent without pushing print logic into the browser."
 date: 2026-03-13
 tags: ["pdf", "chromicpdf", "certificate", "document-generation"]
 category: "Content Delivery"
 ---
 
-### Certificate generation needed consistency more than visual freedom
-Certificates are part of the product's trust layer.
+### Certificate generation needed consistency more than freedom
+Certificates sit close to the trust boundary of the product.
 
-They need to look consistent, carry the right learner data, and remain stable when generated repeatedly over time. Browser-side HTML-to-PDF approaches make that harder than it needs to be. Output varies by environment, heavy assets move into the client, and layout control becomes fragile.
+They need to carry the right learner data, render the same way every time, and stay stable long after the original configuration was saved. Browser-side HTML-to-PDF flows make that harder than it should be. Output can vary by environment, layout gets brittle, and too much rendering logic leaks into the client.
 
-I wanted the browser to configure certificates, not render them.
+I wanted the browser to define the certificate, not be responsible for producing the final file.
 
 ### The pipeline split
 ![Dynamic PDF Generation Engine](/projects/lms-sertifikasi/pdf-engine-infographic.png)
 
-The frontend produces structured certificate configuration through forms and controlled design options. Instead of a freeform editor, the UI captures a bounded set of layout and styling choices and serializes them into a predictable payload.
+The frontend collects structured certificate configuration through forms and constrained design options. It is not a freeform editor. The UI captures a bounded set of layout and styling choices, then serializes them into a predictable payload.
 
-The backend then turns that payload into HTML through HEEx templates and generated CSS. Once the template is ready, Oban pushes the rendering work into the background and ChromicPDF produces the final PDF artifact.
+The backend turns that payload into server-rendered HTML and generated styles. Once the template is ready, background workers run the expensive rendering step and produce the final PDF.
 
-That separation matters. Configuration happens in the product UI, deterministic rendering happens on the server, and CPU-heavy document generation stays off the request path.
+That separation kept responsibilities clean. Configuration lives in the product UI. Deterministic rendering lives on the server. CPU-heavy generation stays out of the request path.
 
 ### Why I chose structure over a looser editor
-A wide-open WYSIWYG tool sounds flexible, but it shifts too much layout risk into the client.
+A wide-open WYSIWYG editor sounds flexible, but for certificates it pushes too much layout risk into the browser.
 
-For certificates, controlled customization was a better trade. Instructors can change branding and presentation, but the rendering system still owns the final document shape. That keeps generated PDFs consistent and makes the output easier to support.
+Controlled customization was the better trade. Instructors can still change branding and presentation, but the rendering system owns the final document shape. That makes the output more consistent and a lot easier to support when something goes wrong.
 
-It also fits the rest of the platform architecture. Certificate generation becomes a backend capability with stored configuration, repeatable rendering, and asynchronous execution, not a browser trick.
+It also matches the rest of the platform. Certificate generation is a backend capability with stored configuration, repeatable rendering, and asynchronous execution. It is not a browser trick.
 
 ### The result
-The platform can generate certificate PDFs more predictably without blocking interactive traffic.
+The platform can generate certificate PDFs predictably without blocking interactive traffic.
 
-Instructors still get meaningful customization, but the final document path stays structured, repeatable, and easier to operate. For a certification product, that was the right trade.
+Instructors still get useful customization, but the document path stays structured, repeatable, and easier to operate. In this case, that mattered more than giving the browser unlimited layout freedom.

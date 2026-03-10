@@ -1,42 +1,40 @@
 ---
 title: "Building a stable Phoenix WebSocket layer"
-description: "How I handled authentication, connection lifecycle, and channel reuse between React 19 and Phoenix so real-time features stayed secure and efficient under heavy navigation."
+description: "How I handled connection auth, lifecycle, and subscription reuse so Phoenix WebSocket features stayed stable under heavy navigation."
 date: 2026-03-14
 tags: ["phoenix-channels", "react", "websockets", "authentication"]
 category: "Infrastructure"
 ---
 
-### Real-time features need a dependable transport layer
-Chat, notifications, and progress sync all depend on the same thing: the WebSocket layer has to behave predictably.
+### Real-time features need a transport layer that behaves
+Chat, notifications, and progress sync all depend on the same thing: the WebSocket layer has to be predictable.
 
-In a decoupled React SPA, that isn't automatic. HTTP session state doesn't map cleanly onto the socket handshake, and a naive implementation creates a second problem on the client side. Route changes, repeated mounts, and overlapping consumers can leave behind duplicate joins, dead subscriptions, and unnecessary reconnect churn.
+In a decoupled React application, that is not automatic. HTTP session state does not map cleanly onto the socket handshake, and a naive client implementation creates another set of problems. Route changes, repeated mounts, and overlapping consumers can leave behind duplicate joins, dead subscriptions, and unnecessary reconnect churn.
 
-I treated that as an architecture problem, not a hook problem.
+I treated that as an architecture problem, not just a hook problem.
 
 ### The authentication boundary
 ![Phoenix React WebSocket Bridge](/projects/lms-sertifikasi/websocket-integration-infographic.png)
 
-I didn't want long-lived credentials traveling through the WebSocket handshake.
+I did not want long-lived credentials traveling through the WebSocket handshake.
 
-So the client requests a short-lived signed token from the backend through an Ash RPC before connecting to Phoenix. That token becomes the boundary between the user's authenticated HTTP session and the socket connection itself.
+So the client first requests a short-lived connection credential from the application backend before connecting to the socket transport. That creates a cleaner boundary between the user's authenticated web session and the real-time connection itself.
 
-This also made reconnect behavior easier to reason about. If a reconnect fails because the token expires, the client can request a fresh one and retry without forcing a full-page auth dance.
+It also made reconnect behavior easier to reason about. If a reconnect failed because the credential expired, the client could fetch a fresh one and retry without forcing a full-page auth flow.
 
 ### One connection, many consumers
-The app uses a shared `<WebSocketProvider>` so the socket connection lives above normal route churn.
+The application uses a shared connection layer so the socket transport lives above normal route churn.
 
-That matters in a product with many real-time surfaces. Navigation between dashboards, course players, exams, and admin views shouldn't create a new handshake every time a component tree changes. A single persistent connection gives the frontend a stable transport and keeps avoidable connection overhead off the backend.
+That matters in a product with many real-time surfaces. Moving between dashboards, course players, assessments, and admin views should not create a new handshake every time the component tree changes. A single persistent connection gives the frontend a stable transport and keeps avoidable connection overhead off the backend.
 
-### Reusing channel subscriptions
-The other problem shows up inside the connection itself.
+### Reusing subscriptions
+The next problem shows up inside the connection itself.
 
-Multiple components often need the same channel at once. A navbar, a notifications panel, and a page-level component can all want the same `user:{id}` stream. If each one joins independently, the client and server both do duplicate work for no product benefit.
+Multiple components often need the same user-scoped stream at once. A navigation shell, a notifications panel, and a page-level view can all want the same updates. If each one joins independently, both client and server do duplicate work for no real benefit.
 
-So I added reference counting around channel joins. The first consumer creates the subscription. Later consumers reuse it. The channel only leaves once the final consumer unmounts.
-
-That kept the real-time layer cheaper and easier to operate, especially when the same user state was visible in several parts of the UI at once.
+So I added reference-counted subscription reuse. The first consumer creates the subscription. Later consumers reuse it. The transport only leaves once the final consumer unmounts.
 
 ### The result
-This gave the platform a more stable foundation for chat, notifications, unread state, and progress synchronization.
+That made the real-time layer cheaper and less fragile, especially when the same user state appeared in several places at once.
 
-The frontend behaves better under route churn, reconnects are easier to recover from, and the backend sees fewer duplicate joins and less unnecessary channel overhead. That's the kind of plumbing users never notice when it works, which is exactly the point.
+The frontend behaves better under route churn, reconnects are easier to recover from, and the backend sees less duplicate connection work. Ideally, users never notice this layer at all.

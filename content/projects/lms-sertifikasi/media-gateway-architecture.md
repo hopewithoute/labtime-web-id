@@ -1,38 +1,38 @@
 ---
 title: "Authenticating HLS streaming at the edge"
-description: "How I designed a stateless media gateway that secures segmented video playback with edge-side token verification instead of per-request backend authorization."
+description: "How I built an edge-side media gateway to secure HLS playback without sending every playlist and segment request back through the application."
 date: 2026-03-18
 tags: ["cloudflare-workers", "hls", "streaming", "jwt"]
 category: "Infrastructure"
 ---
 
-### HLS authentication breaks if the backend stays in the hot path
-Segmented video playback creates a request pattern that doesn't fit normal application authorization.
+### HLS authentication falls apart if the backend stays in the hot path
+Segmented video playback creates a request pattern that does not fit normal application authorization.
 
-Players fetch playlists and media chunks in the background, often without a clean way to attach custom headers on every request. If each of those requests had to round-trip through the application and database for authorization, the system would spend too much time proving access instead of delivering content.
+Players fetch playlists and media chunks in the background, often without a reliable way to attach custom headers on every request. If each of those requests had to round-trip through the application and database for authorization, the system would spend too much effort proving access instead of delivering content.
 
-I wanted the authorization check closer to the media itself.
+I wanted that check closer to the media itself.
 
 ### The gateway design
 ![Edge Media Gateway Streaming Architecture](/projects/lms-sertifikasi/media-gateway-infographic.png)
 
-I put a Cloudflare Worker in front of a private R2 bucket and used it as a stateless verification layer.
+I put an edge-side verification layer in front of private object storage and used it as a stateless media gate.
 
-The backend issues short-lived signed tokens for media access. The Worker validates those tokens at the edge before proxying playlist or segment requests to the private bucket. That removes the application and database from the request path for every `.m3u8` and `.ts` fetch.
+The application issues a short-lived media credential. The edge layer validates that credential before proxying playlist or segment requests to protected storage. That removes the core application and database from the request path for every playback fetch.
 
-### Why cookie priming mattered
-One protocol constraint shaped the rest of the design.
+### The browser compatibility constraint
+One protocol detail shaped the whole design.
 
-Many video players don't make it easy to attach bearer tokens consistently across segmented requests. So the frontend performs an initial request that sets an HTTP-only cookie for the media gateway. After that, the browser attaches the credential automatically while the player keeps working with ordinary media URLs.
+A lot of players do not make it easy to attach custom credentials consistently across segmented requests. So the playback flow starts with a browser-compatible credential handoff before segmented streaming begins. After that, the normal media requests can continue without asking the UI to re-authorize every chunk.
 
-That wasn't a gimmick. It was the compatibility layer that made edge-side authorization work with real browser behavior.
+That was the piece that made edge-side authorization practical in actual browsers instead of just on a diagram.
 
-### Why this was worth doing
-The main gain wasn't just security. It was removing media authorization fan-out from the application backend.
+### Why it was worth the extra boundary
+The main win was not only security. It was getting media authorization fan-out out of the application backend.
 
-Once the edge can validate access on its own, Elixir is free to focus on learning telemetry, assessments, certification state, and the rest of the product logic. Streaming traffic stops competing with the core system for the same resources.
+Once the edge can validate access on its own, the core system can spend its time on telemetry, assessments, certification state, and the rest of the product logic. Streaming traffic stops competing with the business system for the same resources.
 
 ### The result
-The media path stays authenticated without turning every segment request into a backend concern.
+The media path stays authenticated without turning every segment request into an application concern.
 
-That made playback cheaper to serve, easier to scale, and more isolated from the rest of the platform. For this workload, pushing auth to the edge was the right boundary.
+Playback became easier to scale, and media traffic became much less likely to disturb the rest of the platform.
