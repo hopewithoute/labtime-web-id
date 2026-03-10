@@ -39,8 +39,7 @@ export default cachedEventHandler(
   async (event) => {
     const [projects, articles, projectArticles] = await Promise.all([
       queryCollection(event, 'projects').order('date', 'DESC').all(),
-      queryCollection(event, 'content')
-        .where('stem', 'NOT LIKE', 'projects/%/index')
+      queryCollection(event, 'articles')
         .order('date', 'DESC')
         .all(),
       queryCollection(event, 'projectArticles')
