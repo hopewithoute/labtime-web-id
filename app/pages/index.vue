@@ -304,13 +304,18 @@ const { data: projects } = await useAsyncData('home-projects', () =>
   queryCollection('projects').order('date', 'DESC').limit(3).all()
 )
 
-const { data: recentArticles } = await useAsyncData('home-recent-articles', () =>
-  queryCollection('content')
-    .where('stem', 'NOT LIKE', 'projects/%/index')
-    .order('date', 'DESC')
-    .limit(4)
-    .all()
-)
+const { data: recentArticles } = await useAsyncData('home-recent-articles', async () => {
+  // Ambil maksimal 4 artikel dari masing-masing koleksi secara paralel
+  const [generalArticles, projectLogs] = await Promise.all([
+    queryCollection('articles').order('date', 'DESC').limit(4).all(),
+    queryCollection('projectArticles').order('date', 'DESC').limit(4).all(),
+  ])
+
+  // Gabungkan hasil dari kedua koleksi dan urutkan ulang berdasarkan waktu terbaru
+  return [...generalArticles, ...projectLogs]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 4) // Ambil hanya 4 artikel teratas
+})
 </script>
 
 <style scoped>
