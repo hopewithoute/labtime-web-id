@@ -13,7 +13,7 @@
 
     <!-- Main Content Layout -->
     <div
-      class="grid grid-cols-1 lg:grid-cols-[250px_1fr] xl:grid-cols-[300px_1fr] gap-8 xl:gap-16 flex-grow items-start pb-24"
+      class="grid grid-cols-1 lg:grid-cols-[250px_1fr] xl:grid-cols-[300px_1fr] gap-8 xl:gap-16 grow items-start pb-24"
     >
       <!-- Left Side Module Tree -->
       <aside class="hidden lg:block relative z-10 w-full min-w-0">

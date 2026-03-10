@@ -10,9 +10,7 @@
         <div v-if="showBootSequence" class="fixed inset-0 z-100 bg-background text-foreground font-mono uppercase p-6 md:p-12 flex flex-col justify-end">
           <div class="max-w-7xl mx-auto w-full mb-12 lg:px-12">
             <div class="space-y-2 text-sm md:text-base">
-              <div v-if="bootLine1">{{ bootLine1 }}</div>
-              <div v-if="bootLine2">{{ bootLine2 }}</div>
-              <div v-if="bootLine3">{{ bootLine3 }}</div>
+              <div v-for="line in bootLines" :key="line">{{ line }}</div>
               <div class="animate-blink mt-1">_</div>
             </div>
           </div>
@@ -94,7 +92,7 @@
           </div>
         </div>
         <div class="flex items-center gap-4">
-          <ThemeToggle ref="themeToggleRef" />
+          <ThemeToggle />
           <span class="opacity-70 hidden sm:inline">© {{ new Date().getFullYear() }}</span>
           <MetricTag variant="status" value="STABLE" />
         </div>
@@ -138,27 +136,27 @@
             @keydown.tab="trapMobileMenuFocus"
           >
             <div class="flex items-start justify-between gap-4 border-b border-foreground pb-4">
-            <div class="space-y-1">
-              <div class="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Nav://Mobile</div>
-              <div class="text-sm uppercase tracking-wide">Quick access panel</div>
+              <div class="space-y-1">
+                <div class="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">Nav://Mobile</div>
+                <div class="text-sm uppercase tracking-wide">Quick access panel</div>
+              </div>
+              <button
+                ref="mobileMenuCloseButtonRef"
+                type="button"
+                class="link-fill-accent hover:text-accent relative inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wide group"
+                aria-label="Close navigation menu"
+                @click="closeMobileMenu"
+              >
+                <span class="opacity-50 group-hover:opacity-100">[</span>
+                <span>CLOSE</span>
+                <span class="opacity-50 group-hover:opacity-100">]</span>
+              </button>
             </div>
-            <button
-              ref="mobileMenuCloseButtonRef"
-              type="button"
-              class="link-fill-accent hover:text-accent relative inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wide group"
-              aria-label="Close navigation menu"
-              @click="closeMobileMenu"
-            >
-              <span class="opacity-50 group-hover:opacity-100">[</span>
-              <span>CLOSE</span>
-              <span class="opacity-50 group-hover:opacity-100">]</span>
-            </button>
-          </div>
-          <nav class="flex flex-col gap-2 text-sm font-medium uppercase">
-            <NuxtLink to="/projects" :class="[$route.path.startsWith('/projects') ? 'text-accent before:content-[\'>_\'] before:mr-1' : '']" class="link-fill-accent hover:text-accent relative flex w-fit items-center gap-2 py-1.5 tracking-wide" @click="closeMobileMenu">Projects</NuxtLink>
-            <NuxtLink to="/articles" :class="[$route.path.startsWith('/articles') ? 'text-accent before:content-[\'>_\'] before:mr-1' : '']" class="link-fill-accent hover:text-accent relative flex w-fit items-center gap-2 py-1.5 tracking-wide" @click="closeMobileMenu">Articles</NuxtLink>
-            <NuxtLink to="/resume" :class="[$route.path.startsWith('/resume') ? 'text-accent before:content-[\'>_\'] before:mr-1' : '']" class="link-fill-accent hover:text-accent relative flex w-fit items-center gap-2 py-1.5 tracking-wide" @click="closeMobileMenu">Resume</NuxtLink>
-          </nav>
+            <nav class="flex flex-col gap-2 text-sm font-medium uppercase">
+              <NuxtLink to="/projects" :class="[$route.path.startsWith('/projects') ? 'text-accent before:content-[\'> _\'] before:mr-1' : '']" class="link-fill-accent hover:text-accent relative flex w-fit items-center gap-2 py-1.5 tracking-wide" @click="closeMobileMenu">Projects</NuxtLink>
+              <NuxtLink to="/articles" :class="[$route.path.startsWith('/articles') ? 'text-accent before:content-[\'> _\'] before:mr-1' : '']" class="link-fill-accent hover:text-accent relative flex w-fit items-center gap-2 py-1.5 tracking-wide" @click="closeMobileMenu">Articles</NuxtLink>
+              <NuxtLink to="/resume" :class="[$route.path.startsWith('/resume') ? 'text-accent before:content-[\'> _\'] before:mr-1' : '']" class="link-fill-accent hover:text-accent relative flex w-fit items-center gap-2 py-1.5 tracking-wide" @click="closeMobileMenu">Resume</NuxtLink>
+            </nav>
             <div class="mt-auto space-y-3 border-t border-foreground pt-4">
               <button type="button" class="link-fill-accent hover:text-accent relative flex items-center gap-1.5 text-left font-mono text-xs uppercase tracking-wide group" @click="handleMobileSearch">
                 <span class="opacity-50 group-hover:opacity-100">[</span>
@@ -187,7 +185,6 @@ import { onKeyStroke } from '@vueuse/core'
 
 const appConfig = useAppConfig()
 const { isLoading } = useLoadingIndicator()
-const themeToggleRef = ref<{ toggleTheme: () => void } | null>(null)
 const { open: openSearch } = useGlobalSearch()
 const isHydrated = ref(false)
 const mobileMenuOpen = ref(false)
@@ -286,31 +283,31 @@ onBeforeUnmount(() => {
 
 const bootedCookie = useCookie('booted', { maxAge: undefined })
 const showBootSequence = ref(!bootedCookie.value)
-const bootLine1 = ref('')
-const bootLine2 = ref('')
-const bootLine3 = ref('')
-const allLines = [
-  '> INITIALIZING KERNEL...',
-  '> MOUNTING FILE SYSTEM...',
-  '> STARTING LABTIME...'
-]
+const bootLines = ref<string[]>([])
+
+const BOOT_SEQUENCE = [
+  { message: '> INITIALIZING KERNEL...', delay: 300 },
+  { message: '> MOUNTING FILE SYSTEM...', delay: 800 },
+  { message: '> STARTING LABTIME...', delay: 1300 },
+] as const
+
+const BOOT_DISMISS_DELAY = 700
 
 onMounted(() => {
   isHydrated.value = true
 
   if (!bootedCookie.value) {
-    showBootSequence.value = true
-
-    setTimeout(() => { bootLine1.value = allLines[0] as string }, 300)
-    setTimeout(() => { bootLine2.value = allLines[1] as string }, 800)
-    setTimeout(() => {
-      bootLine3.value = allLines[2] as string
-
+    for (const { message, delay } of BOOT_SEQUENCE) {
       setTimeout(() => {
-        showBootSequence.value = false
-        bootedCookie.value = 'true'
-      }, 700)
-    }, 1300)
+        bootLines.value = [...bootLines.value, message]
+      }, delay)
+    }
+
+    const lastDelay = BOOT_SEQUENCE[BOOT_SEQUENCE.length - 1]!.delay
+    setTimeout(() => {
+      showBootSequence.value = false
+      bootedCookie.value = 'true'
+    }, lastDelay + BOOT_DISMISS_DELAY)
   }
 })
 </script>

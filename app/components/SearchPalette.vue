@@ -53,77 +53,31 @@
 
                 <!-- Grouped results -->
                 <template v-else>
-                  <!-- Projects -->
-                  <div v-if="results.projects.length">
+                  <div v-for="group in resultGroups" :key="group.type">
                     <div class="px-6 py-2 text-[10px] font-mono font-bold uppercase tracking-widest text-accent bg-foreground/5 border-b border-foreground/10">
-                      [SYSTEMS] — {{ results.projects.length }} match{{ results.projects.length > 1 ? 'es' : '' }}
+                      {{ group.label }} — {{ group.items.length }} match{{ group.items.length > 1 ? 'es' : '' }}
                     </div>
                     <button
-                      v-for="(item, i) in results.projects"
+                      v-for="(item, i) in group.items"
                       :key="item.path"
                       role="option"
-                      :aria-selected="isSelected('project', i)"
+                      :aria-selected="isSelected(group.type, i)"
                       class="w-full text-left px-6 py-3 font-mono text-sm flex flex-col gap-1 transition-colors border-b border-foreground/5"
-                      :class="isSelected('project', i) ? 'bg-foreground text-background' : 'hover:bg-foreground/5'"
+                      :class="isSelected(group.type, i) ? 'bg-foreground text-background' : 'hover:bg-foreground/5'"
                       @click="navigateTo(item.path)"
-                      @mouseenter="setSelection('project', i)"
+                      @mouseenter="setSelection(group.type, i)"
                     >
-                      <span class="font-bold uppercase tracking-tight">{{ item.title }}</span>
-                      <span
-                        class="text-xs opacity-70 line-clamp-1"
-                        :class="isSelected('project', i) ? 'text-background/70' : 'text-muted-foreground'"
-                      >{{ item.description }}</span>
-                    </button>
-                  </div>
-
-                  <!-- Articles -->
-                  <div v-if="results.articles.length">
-                    <div class="px-6 py-2 text-[10px] font-mono font-bold uppercase tracking-widest text-accent bg-foreground/5 border-b border-foreground/10">
-                      [LOGS] — {{ results.articles.length }} match{{ results.articles.length > 1 ? 'es' : '' }}
-                    </div>
-                    <button
-                      v-for="(item, i) in results.articles"
-                      :key="item.path"
-                      role="option"
-                      :aria-selected="isSelected('article', i)"
-                      class="w-full text-left px-6 py-3 font-mono text-sm flex flex-col gap-1 transition-colors border-b border-foreground/5"
-                      :class="isSelected('article', i) ? 'bg-foreground text-background' : 'hover:bg-foreground/5'"
-                      @click="navigateTo(item.path)"
-                      @mouseenter="setSelection('article', i)"
-                    >
-                      <span class="font-bold uppercase tracking-tight">{{ item.title }}</span>
-                      <span
-                        class="text-xs opacity-70 line-clamp-1"
-                        :class="isSelected('article', i) ? 'text-background/70' : 'text-muted-foreground'"
-                      >{{ item.description }}</span>
-                    </button>
-                  </div>
-
-                  <!-- Project Articles (Sub-modules) -->
-                  <div v-if="results.projectArticles.length">
-                    <div class="px-6 py-2 text-[10px] font-mono font-bold uppercase tracking-widest text-accent bg-foreground/5 border-b border-foreground/10">
-                      [SUB_MODULES] — {{ results.projectArticles.length }} match{{ results.projectArticles.length > 1 ? 'es' : '' }}
-                    </div>
-                    <button
-                      v-for="(item, i) in results.projectArticles"
-                      :key="item.path"
-                      role="option"
-                      :aria-selected="isSelected('projectArticle', i)"
-                      class="w-full text-left px-6 py-3 font-mono text-sm flex flex-col gap-1 transition-colors border-b border-foreground/5"
-                      :class="isSelected('projectArticle', i) ? 'bg-foreground text-background' : 'hover:bg-foreground/5'"
-                      @click="navigateTo(item.path)"
-                      @mouseenter="setSelection('projectArticle', i)"
-                    >
-                      <div class="flex items-center gap-2">
+                      <div v-if="group.type === 'projectArticle'" class="flex items-center gap-2">
                         <span
                           class="text-[10px] shrink-0"
-                          :class="isSelected('projectArticle', i) ? 'text-background/50' : 'opacity-50'"
+                          :class="isSelected(group.type, i) ? 'text-background/50' : 'opacity-50'"
                         >{{ item._parentProject }} /</span>
                         <span class="font-bold uppercase tracking-tight truncate">{{ item.title }}</span>
                       </div>
+                      <span v-else class="font-bold uppercase tracking-tight">{{ item.title }}</span>
                       <span
                         class="text-xs opacity-70 line-clamp-1"
-                        :class="isSelected('projectArticle', i) ? 'text-background/70' : 'text-muted-foreground'"
+                        :class="isSelected(group.type, i) ? 'text-background/70' : 'text-muted-foreground'"
                       >{{ item.description }}</span>
                     </button>
                   </div>
@@ -175,19 +129,23 @@ type SelectionType = 'project' | 'article' | 'projectArticle'
 const selectedType = ref<SelectionType>('project')
 const selectedIndex = ref(0)
 
+const resultGroups = computed(() => {
+  return [
+    { type: 'project' as const, label: '[SYSTEMS]', items: results.value.projects },
+    { type: 'article' as const, label: '[LOGS]', items: results.value.articles },
+    { type: 'projectArticle' as const, label: '[SUB_MODULES]', items: results.value.projectArticles }
+  ].filter(g => g.items.length > 0)
+})
+
 // Flatten results into ordered list for keyboard navigation
 const flatList = computed(() => {
-  const list: Array<{ type: SelectionType; index: number; path: string }> = []
-  results.value.projects.forEach((item, i) =>
-    list.push({ type: 'project', index: i, path: item.path }),
+  return resultGroups.value.flatMap(group =>
+    group.items.map((item, index) => ({
+      type: group.type,
+      index,
+      path: item.path
+    }))
   )
-  results.value.articles.forEach((item, i) =>
-    list.push({ type: 'article', index: i, path: item.path }),
-  )
-  results.value.projectArticles.forEach((item, i) =>
-    list.push({ type: 'projectArticle', index: i, path: item.path }),
-  )
-  return list
 })
 
 const flatIndex = computed(() =>
@@ -196,23 +154,18 @@ const flatIndex = computed(() =>
   ),
 )
 
-const hasResults = computed(
-  () =>
-    results.value.projects.length > 0 ||
-    results.value.articles.length > 0 ||
-    results.value.projectArticles.length > 0,
-)
+const hasResults = computed(() => resultGroups.value.length > 0)
 
-function isSelected(type: SelectionType, index: number) {
+function isSelected(type: SelectionType, index: number): boolean {
   return selectedType.value === type && selectedIndex.value === index
 }
 
-function setSelection(type: SelectionType, index: number) {
+function setSelection(type: SelectionType, index: number): void {
   selectedType.value = type
   selectedIndex.value = index
 }
 
-function moveSelection(direction: number) {
+function moveSelection(direction: number): void {
   const newFlat = flatIndex.value + direction
   if (newFlat < 0 || newFlat >= flatList.value.length) return
   const entry = flatList.value[newFlat]
@@ -222,24 +175,22 @@ function moveSelection(direction: number) {
   }
 }
 
-function navigateTo(path: string) {
+function navigateTo(path: string): void {
   router.push(path)
   close()
 }
 
-function navigateToSelected() {
+function navigateToSelected(): void {
   const entry = flatList.value[flatIndex.value]
   if (entry) navigateTo(entry.path)
 }
 
 // Reset selection when results change
 watch(results, () => {
-  selectedType.value = 'project'
-  selectedIndex.value = 0
-  if (results.value.projects.length === 0) {
-    if (results.value.articles.length > 0) selectedType.value = 'article'
-    else if (results.value.projectArticles.length > 0)
-      selectedType.value = 'projectArticle'
+  const firstGroup = resultGroups.value[0]
+  if (firstGroup) {
+    selectedType.value = firstGroup.type
+    selectedIndex.value = 0
   }
 })
 </script>

@@ -9,7 +9,7 @@ const filledLength = computed(() => Math.floor((progress.value / 100) * barLengt
 const barDisplay = computed(() => {
   const filled = '█'.repeat(filledLength.value)
   const empty = '░'.repeat(Math.max(0, barLength - filledLength.value))
-  return [filled, empty].join('')
+  return filled + empty
 })
 const statusMessages = [
   'FETCH_PAGE_BUFFER',

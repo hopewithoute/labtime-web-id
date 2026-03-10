@@ -1,4 +1,5 @@
 import { ref, watch, type Ref, type WatchStopHandle } from 'vue'
+import { watchDebounced } from '@vueuse/core'
 import Fuse from 'fuse.js'
 
 export interface SearchableItem {
@@ -57,10 +58,9 @@ function search(q: string) {
   }
 
   const fuseResults = fuseIndex.search(q, { limit: 15 })
-  const grouped: GroupedResults = emptyResults()
+  const grouped = emptyResults()
 
-  for (const r of fuseResults) {
-    const item = r.item
+  for (const { item } of fuseResults) {
     if (item._type === 'project') grouped.projects.push(item)
     else if (item._type === 'article') grouped.articles.push(item)
     else if (item._type === 'projectArticle') grouped.projectArticles.push(item)
@@ -85,11 +85,7 @@ function applyPreparedItems(items: SearchableItem[] | null | undefined) {
 function initializeSearchWatcher() {
   if (searchWatcherStop) return
 
-  let debounceTimer: ReturnType<typeof setTimeout> | null = null
-  searchWatcherStop = watch(query, (q) => {
-    if (debounceTimer) clearTimeout(debounceTimer)
-    debounceTimer = setTimeout(() => search(q), 150)
-  })
+  searchWatcherStop = watchDebounced(query, (q) => search(q), { debounce: 150 })
 }
 
 function stopPreparedItemsWatcher() {

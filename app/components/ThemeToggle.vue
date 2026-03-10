@@ -1,13 +1,3 @@
-<script setup lang="ts">
-const colorMode = useColorMode()
-
-const toggleTheme = () => {
-  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
-}
-
-defineExpose({ toggleTheme })
-</script>
-
 <template>
   <button 
     class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2 relative group flex items-center gap-1 uppercase font-mono"
@@ -18,3 +8,12 @@ defineExpose({ toggleTheme })
     <span class="opacity-0 group-hover:opacity-100 transition-opacity">]</span>
   </button>
 </template>
+<script setup lang="ts">
+const colorMode = useColorMode()
+
+function toggleTheme(): void {
+  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+}
+
+defineExpose({ toggleTheme })
+</script>
