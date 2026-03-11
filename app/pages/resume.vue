@@ -52,14 +52,6 @@
                 </span>
                 <div class="absolute inset-0 bg-accent/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
               </NuxtLink>
-
-              <NuxtLink to="/resume" class="block w-full border-2 border-foreground group hover:bg-foreground hover:text-background transition-colors relative crt-hover bg-background overflow-hidden text-center text-xs py-3 font-mono font-bold uppercase tracking-widest">
-                <span class="relative z-10 flex items-center justify-center gap-2 group-hover:text-background text-foreground transition-colors">
-                  <span class="text-accent group-hover:text-background">./bin/</span>
-                  <span>Export PDF Resume</span>
-                </span>
-                <div class="absolute inset-0 bg-accent/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-              </NuxtLink>
             </div>
           </div>
         </CornerFrame>
@@ -76,11 +68,11 @@
             <div class="bg-background p-6 md:p-8 lg:p-10">
               <div class="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-4">/* 01. Profile Summary */</div>
               <div class="mb-5 flex flex-wrap gap-2">
-                <span class="border border-accent/30 bg-accent/10 px-3 py-1 text-[11px] font-mono font-black uppercase tracking-[0.2em] text-accent">Senior Software Engineer</span>
+                <span class="border border-accent/30 bg-accent/10 px-3 py-1 text-[11px] font-mono font-black uppercase tracking-[0.2em] text-accent">Tech Partner & Senior Engineer</span>
                 <span class="border border-foreground/20 px-3 py-1 text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-foreground/70">Bandung / Remote</span>
               </div>
               <p class="text-xl md:text-2xl leading-relaxed max-w-3xl font-medium">
-                End-to-end system builder with 10+ years of experience turning complex business needs into scalable, resource-efficient digital systems. Focused on full-cycle architecture, high-performance SaaS infrastructure, and AI-augmented engineering workflows that accelerate delivery without lowering engineering quality.
+                Tech partner and system builder with 10+ years of experience delivering end-to-end software systems for clients across education, government, and media. Focused on full-cycle architecture, high-performance infrastructure, and AI-augmented engineering workflows that accelerate delivery without lowering engineering quality.
               </p>
             </div>
 
@@ -119,7 +111,7 @@
           <div class="bg-background p-4 md:p-5">
             <div class="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-2">Signal_01</div>
             <div class="text-2xl md:text-3xl font-black tracking-tight">10+</div>
-            <div class="text-xs md:text-sm font-medium text-muted-foreground">years building production systems</div>
+            <div class="text-xs md:text-sm font-medium text-muted-foreground">years delivering production systems</div>
           </div>
           <div class="bg-background p-4 md:p-5">
             <div class="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-2">Signal_02</div>
@@ -146,134 +138,125 @@
           <div class="h-px bg-foreground flex-1 opacity-20"></div>
         </div>
 
-        <div class="space-y-0 border-2 border-foreground bg-background">
-
-          <!-- LMS -->
-          <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20 last:border-b-0">
-            <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
-              <h3 class="text-2xl font-black uppercase tracking-tight">Senior Software Engineer</h3>
-              <span class="font-mono text-xs font-bold tracking-widest text-background bg-foreground shrink-0 px-2 py-1">2025 - PRES</span>
+        <div class="border-2 border-foreground bg-background">
+          <!-- Company Header -->
+          <div class="p-6 md:p-8 bg-foreground/5 border-b-2 border-foreground">
+            <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
+              <div>
+                <h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight">Rail System</h3>
+                <div class="font-mono text-sm text-accent font-bold mt-1">Tech Partner & Senior Software Engineer</div>
+              </div>
+              <div class="flex flex-col md:items-end gap-1">
+                <span class="font-mono text-xs font-bold tracking-widest text-background bg-foreground shrink-0 px-3 py-1.5">2013 - PRESENT</span>
+                <span class="font-mono text-xs uppercase tracking-widest text-muted-foreground">Remote</span>
+              </div>
             </div>
-            <div class="font-mono font-bold mb-6 uppercase text-xs tracking-widest text-foreground/70">
-              <span class="text-accent">#01</span> [ LMS Certification Platform ]
-            </div>
-            <ul class="space-y-4 text-sm md:text-base text-muted-foreground font-medium">
-              <li class="flex items-start gap-4">
-                <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Architecture ownership</strong> Independently architected and delivered a certification-focused LMS covering immutable certification workflows, real-time assessments, xAPI telemetry, and edge-based media delivery.</span>
-              </li>
-              <li class="flex items-start gap-4">
-                <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">AI-augmented execution</strong> Increased feature delivery speed by 3x by combining architecture ownership with AI-assisted full-stack implementation across frontend, backend, and infrastructure.</span>
-              </li>
-              <li class="flex items-start gap-4">
-                <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Real-time frontend</strong> Built a React 19 and Phoenix WebSocket architecture with O(1) progress updates, chat, and notification flows without relying on coarse polling.</span>
-              </li>
-              <li class="flex items-start gap-4">
-                <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Media pipeline</strong> Lowered storage and egress cost through an HLS pipeline, Cloudflare R2, edge-side media authorization, and Oban-based transcription workflows.</span>
-              </li>
-            </ul>
+            <p class="text-sm md:text-base text-muted-foreground mt-4 max-w-3xl">
+              Independent tech partner delivering end-to-end software systems for clients across education, government, and media sectors. Responsible for architecture, full-stack implementation, infrastructure, and long-term operational ownership.
+            </p>
           </div>
 
-          <!-- Digital School -->
-          <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20 last:border-b-0">
-            <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
-              <h3 class="text-2xl font-black uppercase tracking-tight">Senior Software Engineer</h3>
-              <span class="font-mono text-xs font-bold tracking-widest text-background bg-foreground shrink-0 px-2 py-1">2019 - 2025</span>
-            </div>
-            <div class="font-mono font-bold mb-6 uppercase text-xs tracking-widest text-foreground/70">
-              <span class="text-accent">#02</span> [ Digital School ]
-            </div>
-            <ul class="space-y-4 text-sm md:text-base text-muted-foreground font-medium">
-              <li class="flex items-start gap-4">
-                <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Platform rebuild</strong> Directed the initial engineering and independently architected the major v2 rebuild of an integrated school management and LMS platform.</span>
-              </li>
-              <li class="flex items-start gap-4">
-                <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Scalability</strong> Engineered an online exam system that handled 3,000 concurrent student sessions on cost-efficient infrastructure.</span>
-              </li>
-              <li class="flex items-start gap-4">
-                <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Scheduling automation</strong> Applied Google OR-Tools to automate complex academic scheduling and reduce manual timetable generation effort.</span>
-              </li>
-              <li class="flex items-start gap-4">
-                <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Async architecture</strong> Used Laravel Octane, Horizon, and Redis-backed queues to handle billing, notifications, and other heavy background workloads efficiently.</span>
-              </li>
-            </ul>
-          </div>
+          <!-- Project Engagements -->
+          <div class="space-y-0">
 
-          <!-- UPI -->
-          <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20 last:border-b-0">
-            <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
-              <h3 class="text-2xl font-black uppercase tracking-tight">Senior Software Engineer</h3>
-              <span class="font-mono text-xs border border-foreground/30 font-bold tracking-widest shrink-0 px-2 py-1">2022 - 2024</span>
+            <!-- LMS -->
+            <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20">
+              <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
+                <h4 class="text-xl font-black uppercase tracking-tight">LMS Certification Platform</h4>
+                <span class="font-mono text-xs font-bold tracking-widest text-accent border border-accent/30 shrink-0 px-2 py-1">2025 - PRES</span>
+              </div>
+              <ul class="space-y-3 text-sm md:text-base text-muted-foreground font-medium">
+                <li class="flex items-start gap-4">
+                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Architecture ownership</strong> Independently architected and delivered a certification-focused LMS covering immutable certification workflows, real-time assessments, xAPI telemetry, and edge-based media delivery.</span>
+                </li>
+                <li class="flex items-start gap-4">
+                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">AI-augmented execution</strong> Increased feature delivery speed by 3x by combining architecture ownership with AI-assisted full-stack implementation.</span>
+                </li>
+                <li class="flex items-start gap-4">
+                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Real-time infrastructure</strong> React 19 + Phoenix WebSocket architecture with O(1) progress updates. HLS media pipeline with edge-side authorization.</span>
+                </li>
+              </ul>
             </div>
-            <div class="font-mono font-bold mb-6 uppercase text-xs tracking-widest text-foreground/70">
-              <span class="text-accent">#03</span> [ Universitas Pendidikan Indonesia ]
-            </div>
-            <ul class="space-y-4 text-sm md:text-base text-muted-foreground font-medium">
-              <li class="flex items-start gap-4">
-                <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">SIMSARPRAS</strong> Delivered a centralized asset platform covering 50,000+ university assets, automated depreciation, lifecycle tracking, and audit-ready change history.</span>
-              </li>
-              <li class="flex items-start gap-4">
-                <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">SIMKERMA</strong> Built a cooperation management system with two-way synchronization to Kemdikbud, reducing manual compliance reporting and improving institutional visibility.</span>
-              </li>
-            </ul>
-          </div>
 
-          <!-- SIBER -->
-          <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20 last:border-b-0">
-            <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
-              <h3 class="text-2xl font-black uppercase tracking-tight">Senior Software Engineer</h3>
-              <span class="font-mono text-xs border border-foreground/30 font-bold tracking-widest shrink-0 px-2 py-1">2024</span>
+            <!-- Digital School -->
+            <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20">
+              <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
+                <h4 class="text-xl font-black uppercase tracking-tight">Digital School Platform</h4>
+                <span class="font-mono text-xs font-bold tracking-widest text-muted-foreground border border-foreground/30 shrink-0 px-2 py-1">2019 - 2025</span>
+              </div>
+              <ul class="space-y-3 text-sm md:text-base text-muted-foreground font-medium">
+                <li class="flex items-start gap-4">
+                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Platform rebuild</strong> Architected the major v2 rebuild of an integrated school management and LMS platform.</span>
+                </li>
+                <li class="flex items-start gap-4">
+                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Scale</strong> Online exam system handling 3,000 concurrent sessions. Google OR-Tools for automatic scheduling.</span>
+                </li>
+                <li class="flex items-start gap-4">
+                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Async architecture</strong> Laravel Octane, Horizon, Redis-backed queues for billing, notifications, and heavy workloads.</span>
+                </li>
+              </ul>
             </div>
-            <div class="font-mono font-bold mb-6 uppercase text-xs tracking-widest text-foreground/70">
-              <span class="text-accent">#04</span> [ SIBER ]
-            </div>
-            <ul class="space-y-4 text-sm md:text-base text-muted-foreground font-medium">
-              <li class="flex items-start gap-4">
-                <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">OCR pipeline</strong> Built an Azure OCR-based real-count pipeline to process ID cards and C1 voting forms from large numbers of polling stations.</span>
-              </li>
-              <li class="flex items-start gap-4">
-                <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Geospatial analytics</strong> Engineered mapping and territory analytics for voter distribution, logistics tracking, and field-team coordination.</span>
-              </li>
-              <li class="flex items-start gap-4">
-                <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">High availability</strong> Designed a resilient backend with Redis, Horizon, and SQL optimization to stay responsive during election-day traffic spikes.</span>
-              </li>
-            </ul>
-          </div>
 
-          <!-- Media Infrastructure -->
-          <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20 last:border-b-0">
-            <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
-              <h3 class="text-2xl font-black uppercase tracking-tight">Software Engineer / System Administrator</h3>
-              <span class="font-mono text-xs border border-foreground/30 font-bold tracking-widest shrink-0 px-2 py-1">2016 - 2024</span>
+            <!-- UPI -->
+            <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20">
+              <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
+                <h4 class="text-xl font-black uppercase tracking-tight">Universitas Pendidikan Indonesia</h4>
+                <span class="font-mono text-xs font-bold tracking-widest text-muted-foreground border border-foreground/30 shrink-0 px-2 py-1">2022 - 2024</span>
+              </div>
+              <ul class="space-y-3 text-sm md:text-base text-muted-foreground font-medium">
+                <li class="flex items-start gap-4">
+                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">SIMSARPRAS</strong> Centralized asset platform for 50,000+ university assets with automated depreciation and audit trails.</span>
+                </li>
+                <li class="flex items-start gap-4">
+                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">SIMKERMA</strong> Cooperation management with Kemdikbud synchronization for compliance reporting.</span>
+                </li>
+              </ul>
             </div>
-            <div class="font-mono font-bold mb-6 uppercase text-xs tracking-widest text-foreground/70">
-              <span class="text-accent">#05</span> [ limawaktu.id + bandungkita.id ]
-            </div>
-            <p class="text-sm md:text-base text-muted-foreground font-medium ml-8">Built and maintained long-running media infrastructure covering 16,000+ published articles, layered WordPress and server security, Core Web Vitals optimization, technical SEO, and incident recovery with zero permanent data loss across major outages.</p>
-          </div>
 
-          <!-- Gov -->
-          <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20 last:border-b-0">
-            <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
-              <h3 class="text-2xl font-black uppercase tracking-tight">Software Engineer</h3>
-              <span class="font-mono text-xs border border-foreground/30 font-bold tracking-widest shrink-0 px-2 py-1">2013 - 2016</span>
+            <!-- SIBER -->
+            <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20">
+              <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
+                <h4 class="text-xl font-black uppercase tracking-tight">SIBER Election Platform</h4>
+                <span class="font-mono text-xs font-bold tracking-widest text-muted-foreground border border-foreground/30 shrink-0 px-2 py-1">2024</span>
+              </div>
+              <ul class="space-y-3 text-sm md:text-base text-muted-foreground font-medium">
+                <li class="flex items-start gap-4">
+                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">OCR pipeline</strong> Azure OCR-based real-count pipeline for ID cards and C1 voting forms.</span>
+                </li>
+                <li class="flex items-start gap-4">
+                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">High availability</strong> Resilient backend design for election-day traffic spikes with Redis, Horizon, SQL optimization.</span>
+                </li>
+              </ul>
             </div>
-            <div class="font-mono font-bold mb-6 uppercase text-xs tracking-widest text-foreground/70">
-              <span class="text-accent">#06</span> [ Pemkab Bandung Barat ]
+
+            <!-- Media Infrastructure -->
+            <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20">
+              <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
+                <h4 class="text-xl font-black uppercase tracking-tight">Media Infrastructure</h4>
+                <span class="font-mono text-xs font-bold tracking-widest text-muted-foreground border border-foreground/30 shrink-0 px-2 py-1">2016 - 2024</span>
+              </div>
+              <p class="text-sm md:text-base text-muted-foreground font-medium ml-6">Long-running media infrastructure for limawaktu.id + bandungkita.id: 16,000+ published articles, layered security, Core Web Vitals optimization, incident recovery with zero permanent data loss.</p>
             </div>
-            <p class="text-sm md:text-base text-muted-foreground font-medium ml-8">Built and deployed 10+ e-government systems, including licensing, village finance, citizen notification, and agency web platforms, helping move manual public-service workflows into digital operations.</p>
+
+            <!-- Gov -->
+            <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20 last:border-b-0">
+              <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
+                <h4 class="text-xl font-black uppercase tracking-tight">Pemkab Bandung Barat</h4>
+                <span class="font-mono text-xs font-bold tracking-widest text-muted-foreground border border-foreground/30 shrink-0 px-2 py-1">2013 - 2016</span>
+              </div>
+              <p class="text-sm md:text-base text-muted-foreground font-medium ml-6">10+ e-government systems including licensing, village finance, citizen notification, and agency web platforms.</p>
+            </div>
+
           </div>
         </div>
       </section>
