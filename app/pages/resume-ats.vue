@@ -90,14 +90,23 @@
               <h4 class="text-base font-bold">Digital School Platform</h4>
               <p class="text-sm text-foreground/70">2019 – 2025 · <em>Scope: Backend Architect & Infrastructure</em></p>
             </div>
-            <p class="text-xs text-foreground/60 mt-1">Tech: Vue 3, Inertia.js, PrimeVue, Tailwind CSS, Laravel 12 (Octane &amp; Horizon), PHP 8.4, Python (OR-Tools), MySQL, Redis, AWS S3, Docker</p>
-            <p class="text-xs text-muted-foreground mt-1 italic"><strong>v1 (2019–2024):</strong> Team of 4 — backend architecture, API design, and infrastructure. <strong>v2 Rebuild (2024–2025):</strong> Led full platform rewrite with complete architecture ownership.</p>
-            <ul class="ats-print-list mt-2 list-disc space-y-1.5 pl-5 text-sm leading-7 text-foreground/80">
-              <li><strong>High-Scale Examination Engine:</strong> Engineered highly optimized testing engine handling 3,000+ concurrent student test sessions on low-cost server infrastructure.</li>
-              <li><strong>Automated Assessment Pipeline:</strong> Eliminated manual grading workloads to near-zero by implementing automated assessment pipeline for objective tests.</li>
-              <li><strong>Advanced Scheduling Solver:</strong> Architected multi-stage automated scheduling solver using Python (Google OR-Tools) from PHP, providing realistic time estimates for clash-free timetables.</li>
-              <li><strong>Multi-Curriculum Support:</strong> Designed flexible JSON-backed data model to process diverse academic standards (Merdeka, 2013 curriculum) simultaneously.</li>
-              <li><strong>Async Processing:</strong> Developed modular backend using Laravel Octane and Redis-backed queues (Horizon) for heavy workloads like tuition billing and Telegram notifications.</li>
+
+            <!-- v1 -->
+            <p class="text-xs font-semibold text-foreground mt-3">[V1] Team-based Development (2019–2024)</p>
+            <p class="text-xs text-muted-foreground italic">Team of 4 — backend architecture, API design, infrastructure collaboration with frontend engineers.</p>
+            <ul class="ats-print-list mt-1 list-disc space-y-1 pl-5 text-sm leading-7 text-foreground/80">
+              <li><strong>High-Scale Examination Engine:</strong> Engineered testing engine handling 3,000+ concurrent sessions on low-cost infrastructure.</li>
+              <li><strong>Async Processing:</strong> Developed modular backend using Laravel Octane and Redis-backed queues (Horizon).</li>
+            </ul>
+
+            <!-- v2 -->
+            <p class="text-xs font-semibold text-foreground mt-4">[V2] Platform Rebuild (2024–2025)</p>
+            <p class="text-xs text-muted-foreground italic">Led full platform rewrite with complete architecture ownership — solo execution from design to deployment.</p>
+            <p class="text-xs text-foreground/60 mt-1">Tech: Vue 3, Inertia.js, Laravel 12, PHP 8.4, Python (OR-Tools), MySQL, Redis</p>
+            <ul class="ats-print-list mt-1 list-disc space-y-1 pl-5 text-sm leading-7 text-foreground/80">
+              <li><strong>Automated Assessment Pipeline:</strong> Eliminated manual grading to near-zero with automated assessment pipeline.</li>
+              <li><strong>Advanced Scheduling Solver:</strong> Architected multi-stage solver using Python (Google OR-Tools) for clash-free timetables.</li>
+              <li><strong>Multi-Curriculum Support:</strong> Designed flexible JSON-backed data model for diverse academic standards (Merdeka, 2013).</li>
             </ul>
           </article>
 

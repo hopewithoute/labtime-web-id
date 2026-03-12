@@ -214,46 +214,55 @@
                 <span class="font-mono text-xs font-bold tracking-widest text-muted-foreground border border-foreground/30 shrink-0 px-2 py-1">2019 - 2025</span>
               </div>
 
-              <!-- Tech Stack Chips -->
-              <div class="flex flex-wrap gap-1.5 mb-4">
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Vue 3</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Inertia.js</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">PrimeVue</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Tailwind CSS</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Laravel 12</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">PHP 8.4</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Python (OR-Tools)</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">MySQL</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Redis</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">AWS S3</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Docker</span>
+              <!-- v1 Sub-section -->
+              <div class="mb-6">
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="text-accent font-mono text-xs font-bold">[V1]</span>
+                  <span class="text-muted-foreground text-xs">Team-based Development (2019–2024)</span>
+                </div>
+                <p class="text-xs text-muted-foreground italic mb-3">Team of 4 — responsible for backend architecture, API design, and infrastructure while collaborating with frontend engineers.</p>
+                <ul class="space-y-2 text-sm text-muted-foreground font-medium ml-4">
+                  <li class="flex items-start gap-3">
+                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
+                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">High-Scale Examination Engine:</strong> Engineered testing engine handling 3,000+ concurrent sessions on low-cost infrastructure.</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
+                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Async Processing:</strong> Developed modular backend using Laravel Octane and Redis-backed queues (Horizon).</span>
+                  </li>
+                </ul>
               </div>
 
-              <!-- Team Context -->
-              <p class="text-xs text-muted-foreground italic mb-4"><strong class="text-foreground">v1 (2019–2024):</strong> Team of 4 — backend architecture, API design, infrastructure. <strong class="text-foreground">v2 Rebuild (2024–2025):</strong> Led full platform rewrite with complete architecture ownership.</p>
-
-              <ul class="space-y-3 text-sm md:text-base text-muted-foreground font-medium">
-                <li class="flex items-start gap-4">
-                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">High-Scale Examination Engine</strong> Engineered highly optimized testing engine handling 3,000+ concurrent student test sessions on low-cost server infrastructure.</span>
-                </li>
-                <li class="flex items-start gap-4">
-                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Automated Assessment Pipeline</strong> Eliminated manual grading workloads to near-zero by implementing automated assessment pipeline for objective tests.</span>
-                </li>
-                <li class="flex items-start gap-4">
-                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Advanced Scheduling Solver</strong> Architected multi-stage automated scheduling solver using Python (Google OR-Tools) from PHP, providing realistic time estimates for clash-free timetables.</span>
-                </li>
-                <li class="flex items-start gap-4">
-                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Multi-Curriculum Support</strong> Designed flexible JSON-backed data model to process diverse academic standards (Merdeka, 2013 curriculum) simultaneously.</span>
-                </li>
-                <li class="flex items-start gap-4">
-                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Async Processing</strong> Developed modular backend using Laravel Octane and Redis-backed queues (Horizon) for heavy workloads like tuition billing and Telegram notifications.</span>
-                </li>
-              </ul>
+              <!-- v2 Sub-section -->
+              <div>
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="text-accent font-mono text-xs font-bold">[V2]</span>
+                  <span class="text-muted-foreground text-xs">Platform Rebuild (2024–2025)</span>
+                </div>
+                <p class="text-xs text-muted-foreground italic mb-3">Led full platform rewrite with complete architecture ownership — solo execution from design to deployment.</p>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Vue 3</span>
+                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Inertia.js</span>
+                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Laravel 12</span>
+                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Python (OR-Tools)</span>
+                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">MySQL</span>
+                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Redis</span>
+                </div>
+                <ul class="space-y-2 text-sm text-muted-foreground font-medium ml-4">
+                  <li class="flex items-start gap-3">
+                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
+                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Automated Assessment Pipeline:</strong> Eliminated manual grading to near-zero with automated assessment pipeline.</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
+                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Advanced Scheduling Solver:</strong> Architected multi-stage solver using Python (Google OR-Tools) for clash-free timetables.</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
+                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Multi-Curriculum Support:</strong> Designed flexible JSON-backed data model for diverse academic standards.</span>
+                  </li>
+                </ul>
+              </div>
             </div>
 
             <!-- UPI -->
