@@ -256,19 +256,75 @@
             <!-- UPI -->
             <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20">
               <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
-                <h4 class="text-xl font-black uppercase tracking-tight">Universitas Pendidikan Indonesia</h4>
+                <div class="flex flex-wrap items-baseline gap-2">
+                  <h4 class="text-xl font-black uppercase tracking-tight">Universitas Pendidikan Indonesia</h4>
+                  <span class="font-mono text-[10px] px-2 py-0.5 border border-foreground/30 text-foreground/70 uppercase tracking-[0.15em] font-bold">Architect & Engineer</span>
+                </div>
                 <span class="font-mono text-xs font-bold tracking-widest text-muted-foreground border border-foreground/30 shrink-0 px-2 py-1">2022 - 2024</span>
               </div>
-              <ul class="space-y-3 text-sm md:text-base text-muted-foreground font-medium">
-                <li class="flex items-start gap-4">
-                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">SIMSARPRAS</strong> Centralized asset platform for 50,000+ university assets with automated depreciation and audit trails.</span>
-                </li>
-                <li class="flex items-start gap-4">
-                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">SIMKERMA</strong> Cooperation management with Kemdikbud synchronization for compliance reporting.</span>
-                </li>
-              </ul>
+
+              <!-- SIMSARPRAS Sub-section -->
+              <div class="mb-6">
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="text-accent font-mono text-xs font-bold">[SIMSARPRAS]</span>
+                  <span class="text-muted-foreground text-xs">Asset Management System</span>
+                </div>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Vue 3</span>
+                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Inertia.js</span>
+                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Laravel 11</span>
+                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">PHP 8.3</span>
+                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">MySQL</span>
+                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Redis</span>
+                </div>
+                <ul class="space-y-2 text-sm text-muted-foreground font-medium ml-4">
+                  <li class="flex items-start gap-3">
+                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
+                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Unified Data Model:</strong> Engineered extensible single asset schema unifying procurement types (purchase, donation, grants), eliminating data silos.</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
+                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Depreciation Engine:</strong> Developed module auto-computing real-time straight-line depreciation for 50,000+ assets.</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
+                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Immutable Audit Trail:</strong> Architected tamper-proof change history for all asset mutations, satisfying university compliance.</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
+                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Hierarchical RBAC:</strong> Implemented granular access controls governing asset visibility across departments.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- SIMKERMA Sub-section -->
+              <div>
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="text-accent font-mono text-xs font-bold">[SIMKERMA]</span>
+                  <span class="text-muted-foreground text-xs">Cooperation Information System</span>
+                </div>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Vue 3</span>
+                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Inertia.js</span>
+                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Laravel 11</span>
+                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">MySQL</span>
+                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Redis</span>
+                </div>
+                <ul class="space-y-2 text-sm text-muted-foreground font-medium ml-4">
+                  <li class="flex items-start gap-3">
+                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
+                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Fault-Tolerant Sync:</strong> Designed robust synchronization bridging local workflows with Kemdikbud national schemas.</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
+                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Compliance Workflow:</strong> Streamlined national reporting with real-time Report Weight calculations and scoring simulations.</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
+                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Performance Tracking:</strong> Developed comprehensive monitoring for cooperation activities per organizational unit.</span>
+                  </li>
+                </ul>
+              </div>
             </div>
 
             <!-- SIBER -->
