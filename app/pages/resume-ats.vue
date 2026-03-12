@@ -65,7 +65,7 @@
               <p class="text-sm text-foreground/70">2013 – Present · Remote</p>
             </div>
             <p class="mt-2 text-sm leading-7 text-foreground/80">
-              Independent software consultancy delivering end-to-end systems for clients across education, government, and media sectors. Responsible for architecture, full-stack implementation, infrastructure, and long-term operational ownership.
+              Software consultancy delivering end-to-end systems for clients across education, government, and media sectors. Responsible for architecture, full-stack implementation, infrastructure, and long-term operational ownership.
             </p>
           </div>
 
