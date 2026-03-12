@@ -330,17 +330,38 @@
             <!-- SIBER -->
             <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20">
               <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
-                <h4 class="text-xl font-black uppercase tracking-tight">SIBER Election Platform</h4>
+                <div class="flex flex-wrap items-baseline gap-2">
+                  <h4 class="text-xl font-black uppercase tracking-tight">SIBER Election Platform</h4>
+                  <span class="font-mono text-[10px] px-2 py-0.5 border border-foreground/30 text-foreground/70 uppercase tracking-[0.15em] font-bold">Architect & Engineer</span>
+                </div>
                 <span class="font-mono text-xs font-bold tracking-widest text-muted-foreground border border-foreground/30 shrink-0 px-2 py-1">2024</span>
               </div>
+
+              <!-- Tech Stack Chips -->
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Vue 3</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Inertia.js</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Laravel 11</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">PHP 8.2</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">MySQL</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Redis</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Laravel Horizon</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Azure OCR API</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Google Maps API</span>
+              </div>
+
               <ul class="space-y-3 text-sm md:text-base text-muted-foreground font-medium">
                 <li class="flex items-start gap-4">
                   <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">OCR pipeline</strong> Azure OCR-based real-count pipeline for ID cards and C1 voting forms.</span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Automated Real-Count OCR Pipeline</strong> Architected automated data extraction pipeline leveraging Azure OCR API to process ID cards and C1 voting forms from thousands of polling stations (TPS).</span>
                 </li>
                 <li class="flex items-start gap-4">
                   <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">High availability</strong> Resilient backend design for election-day traffic spikes with Redis, Horizon, SQL optimization.</span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Real-Time Geospatial Analytics</strong> Engineered dynamic territory mapping using Google Maps API, providing real-time visual insights into voter distribution and logistics tracking.</span>
+                </li>
+                <li class="flex items-start gap-4">
+                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">High-Availability Architecture</strong> Built resilient high-load system using Redis and Laravel Horizon. Eliminated N+1 query bottlenecks, ensuring sub-second response times during Election Day traffic spikes.</span>
                 </li>
               </ul>
             </div>
