@@ -366,13 +366,70 @@
               </ul>
             </div>
 
-            <!-- Media Infrastructure -->
+            <!-- limawaktu.id -->
             <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20">
               <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
-                <h4 class="text-xl font-black uppercase tracking-tight">Media Infrastructure</h4>
+                <div class="flex flex-wrap items-baseline gap-2">
+                  <h4 class="text-xl font-black uppercase tracking-tight">limawaktu.id</h4>
+                  <span class="font-mono text-[10px] px-2 py-0.5 border border-foreground/30 text-foreground/70 uppercase tracking-[0.15em] font-bold">Founder & Engineer</span>
+                </div>
                 <span class="font-mono text-xs font-bold tracking-widest text-muted-foreground border border-foreground/30 shrink-0 px-2 py-1">2016 - 2024</span>
               </div>
-              <p class="text-sm md:text-base text-muted-foreground font-medium ml-6">Long-running media infrastructure for limawaktu.id + bandungkita.id: 16,000+ published articles, layered security, Core Web Vitals optimization, incident recovery with zero permanent data loss.</p>
+
+              <!-- Tech Stack Chips -->
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">PHP</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Yii2 Framework</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Bulma CSS</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">MySQL</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Nginx</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Linux</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Cloudflare</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Google Analytics</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Matomo</span>
+              </div>
+
+              <ul class="space-y-3 text-sm md:text-base text-muted-foreground font-medium">
+                <li class="flex items-start gap-4">
+                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Solo Platform Architecture</strong> Designed, developed, and solely maintained entire media portal using Yii2 and Bulma CSS, managing 16,000+ news articles over 9 years.</span>
+                </li>
+                <li class="flex items-start gap-4">
+                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Technical SEO & Traffic Analytics</strong> Architected frontend and server pipelines with SEO best practices. Integrated Google Analytics alongside Matomo for robust tracking.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- bandungkita.id -->
+            <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20">
+              <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
+                <div class="flex flex-wrap items-baseline gap-2">
+                  <h4 class="text-xl font-black uppercase tracking-tight">bandungkita.id</h4>
+                  <span class="font-mono text-[10px] px-2 py-0.5 border border-foreground/30 text-foreground/70 uppercase tracking-[0.15em] font-bold">System Administrator</span>
+                </div>
+                <span class="font-mono text-xs font-bold tracking-widest text-muted-foreground border border-foreground/30 shrink-0 px-2 py-1">2017 - 2024</span>
+              </div>
+
+              <!-- Tech Stack Chips -->
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">WordPress</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Linux Server</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Nginx</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Cloudflare WAF</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Fail2Ban</span>
+              </div>
+
+              <ul class="space-y-3 text-sm md:text-base text-muted-foreground font-medium">
+                <li class="flex items-start gap-4">
+                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Infrastructure & Reliability</strong> Managed and optimized Nginx and server resources for high-volume WordPress architecture.</span>
+                </li>
+                <li class="flex items-start gap-4">
+                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Security Hardening & Disaster Recovery</strong> Fortified defenses using multi-layered protocols. Led recovery for 3 major security incidents with zero permanent data loss.</span>
+                </li>
+              </ul>
             </div>
 
             <!-- Gov -->
