@@ -10,7 +10,7 @@
               <span class="relative z-10">Resume</span>
             </h1>
             <p class="text-sm font-mono text-muted-foreground leading-snug mb-8 opacity-80">
-              <span class="text-accent font-bold">></span> Senior System Builder
+              <span class="text-accent font-bold">></span> Senior Software Engineer
               <br/>
               <span class="text-accent font-bold">></span> AI-Augmented Engineer
             </p>
@@ -68,11 +68,11 @@
             <div class="bg-background p-6 md:p-8 lg:p-10">
               <div class="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-4">/* 01. Profile Summary */</div>
               <div class="mb-5 flex flex-wrap gap-2">
-                <span class="border border-accent/30 bg-accent/10 px-3 py-1 text-[11px] font-mono font-black uppercase tracking-[0.2em] text-accent">Tech Partner & Senior Engineer</span>
+                <span class="border border-accent/30 bg-accent/10 px-3 py-1 text-[11px] font-mono font-black uppercase tracking-[0.2em] text-accent">Senior Software Engineer</span>
                 <span class="border border-foreground/20 px-3 py-1 text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-foreground/70">Bandung / Remote</span>
               </div>
               <p class="text-xl md:text-2xl leading-relaxed max-w-3xl font-medium">
-                Tech partner and system builder with 10+ years of experience delivering end-to-end software systems for clients across education, government, and media. Focused on full-cycle architecture, high-performance infrastructure, and AI-augmented engineering workflows that accelerate delivery without lowering engineering quality.
+                Senior Software Engineer with 10+ years delivering end-to-end systems across education, government, and media sectors. Experienced in full product ownership — from requirements gathering and client consultation to architecture, implementation, UAT, and long-term maintenance. Combines systems thinking with AI-augmented execution to ship production-grade software at 3x velocity without compromising quality.
               </p>
             </div>
 
@@ -357,7 +357,7 @@
 useHead({
   title: 'Resume | LabTime',
   meta: [
-    { name: 'description', content: 'Anggi Wibiyanto — Senior System Builder & AI-Augmented Engineer with 10+ years designing scalable digital systems.' }
+    { name: 'description', content: 'Anggi Wibiyanto — Senior Software Engineer & AI-Augmented Engineer with 10+ years designing scalable digital systems.' }
   ]
 })
 </script>
