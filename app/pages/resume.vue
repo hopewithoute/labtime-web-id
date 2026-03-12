@@ -162,21 +162,44 @@
             <!-- LMS -->
             <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20">
               <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
-                <h4 class="text-xl font-black uppercase tracking-tight">LMS Certification Platform</h4>
+                <div class="flex flex-wrap items-baseline gap-2">
+                  <h4 class="text-xl font-black uppercase tracking-tight">LMS Certification Platform</h4>
+                  <span class="font-mono text-[10px] px-2 py-0.5 border border-accent/30 text-accent uppercase tracking-[0.15em] font-bold">Full Product Owner</span>
+                </div>
                 <span class="font-mono text-xs font-bold tracking-widest text-accent border border-accent/30 shrink-0 px-2 py-1">2025 - PRES</span>
               </div>
+
+              <!-- Tech Stack Chips -->
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">React 19</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">TypeScript</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">TanStack</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Elixir</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Ash Framework</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Phoenix WebSockets</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Oban</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">PostgreSQL</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Hono</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Cloudflare Workers</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">xAPI</span>
+              </div>
+
               <ul class="space-y-3 text-sm md:text-base text-muted-foreground font-medium">
                 <li class="flex items-start gap-4">
                   <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Architecture ownership</strong> Independently architected and delivered a certification-focused LMS covering immutable certification workflows, real-time assessments, xAPI telemetry, and edge-based media delivery.</span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">AI-Augmented Delivery</strong> Accelerated feature delivery cycles by 3x, acting as Architect and driver while orchestrating AI tools for high-quality full-stack code execution.</span>
                 </li>
                 <li class="flex items-start gap-4">
                   <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">AI-augmented execution</strong> Increased feature delivery speed by 3x by combining architecture ownership with AI-assisted full-stack implementation.</span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Real-Time Infrastructure</strong> Engineered React 19 + Phoenix WebSocket architecture with O(1) granular progress tracking, powering real-time chat/notifications with zero perceived latency.</span>
                 </li>
                 <li class="flex items-start gap-4">
                   <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Real-time infrastructure</strong> React 19 + Phoenix WebSocket architecture with O(1) progress updates. HLS media pipeline with edge-side authorization.</span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Backend Resilience</strong> Built scalable Elixir/Ash backend enforcing strict data immutability, coupled with modern xAPI architecture enabling deep learning analytics and full data interoperability.</span>
+                </li>
+                <li class="flex items-start gap-4">
+                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Cost-Optimized Media Pipeline</strong> Designed resilient Media Gateway and custom HLS pipeline using Cloudflare Worker &amp; R2, drastically reducing storage and egress costs while automating Oban-based video transcription.</span>
                 </li>
               </ul>
             </div>
