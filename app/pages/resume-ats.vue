@@ -147,7 +147,7 @@
           <article class="border-b border-foreground/15 pb-5">
             <div class="flex flex-col gap-1 md:flex-row md:items-start md:justify-between">
               <h4 class="text-base font-bold">limawaktu.id — Media Portal</h4>
-              <p class="text-sm text-foreground/70">2016 – 2024 · <em>Scope: Founder & Engineer</em></p>
+              <p class="text-sm text-foreground/70">2016 – 2024 · <em>Scope: Software Engineer</em></p>
             </div>
             <p class="text-xs text-foreground/60 mt-1">Tech: PHP, Yii2 Framework, Bulma CSS, MySQL, Nginx, Linux, Cloudflare, Google Analytics, Matomo</p>
             <ul class="ats-print-list mt-2 list-disc space-y-1.5 pl-5 text-sm leading-7 text-foreground/80">
