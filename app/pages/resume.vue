@@ -221,14 +221,16 @@
                   <span class="text-muted-foreground text-xs">Team-based Development (2019–2024)</span>
                 </div>
                 <p class="text-xs text-muted-foreground italic mb-3">Team of 4 — responsible for backend architecture, API design, and infrastructure while collaborating with frontend engineers.</p>
+                <div class="flex flex-wrap gap-1.5 mb-3">
+                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Yii2</span>
+                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Vue</span>
+                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">MySQL</span>
+                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Redis</span>
+                </div>
                 <ul class="space-y-2 text-sm text-muted-foreground font-medium ml-4">
                   <li class="flex items-start gap-3">
                     <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
                     <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">High-Scale Examination Engine:</strong> Engineered testing engine handling 3,000+ concurrent sessions on low-cost infrastructure.</span>
-                  </li>
-                  <li class="flex items-start gap-3">
-                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
-                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Async Processing:</strong> Developed modular backend using Laravel Octane and Redis-backed queues (Horizon).</span>
                   </li>
                 </ul>
               </div>

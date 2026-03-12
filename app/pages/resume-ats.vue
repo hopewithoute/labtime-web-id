@@ -94,9 +94,9 @@
             <!-- v1 -->
             <p class="text-xs font-semibold text-foreground mt-3">[V1] Team-based Development (2019–2024)</p>
             <p class="text-xs text-muted-foreground italic">Team of 4 — backend architecture, API design, infrastructure collaboration with frontend engineers.</p>
+            <p class="text-xs text-foreground/60 mt-1">Tech: Yii2, Vue, MySQL, Redis</p>
             <ul class="ats-print-list mt-1 list-disc space-y-1 pl-5 text-sm leading-7 text-foreground/80">
               <li><strong>High-Scale Examination Engine:</strong> Engineered testing engine handling 3,000+ concurrent sessions on low-cost infrastructure.</li>
-              <li><strong>Async Processing:</strong> Developed modular backend using Laravel Octane and Redis-backed queues (Horizon).</li>
             </ul>
 
             <!-- v2 -->
