@@ -435,10 +435,38 @@
             <!-- Gov -->
             <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20 last:border-b-0">
               <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
-                <h4 class="text-xl font-black uppercase tracking-tight">Pemkab Bandung Barat</h4>
+                <div class="flex flex-wrap items-baseline gap-2">
+                  <h4 class="text-xl font-black uppercase tracking-tight">Pemkab Bandung Barat</h4>
+                  <span class="font-mono text-[10px] px-2 py-0.5 border border-foreground/30 text-foreground/70 uppercase tracking-[0.15em] font-bold">Software Engineer</span>
+                </div>
                 <span class="font-mono text-xs font-bold tracking-widest text-muted-foreground border border-foreground/30 shrink-0 px-2 py-1">2013 - 2016</span>
               </div>
-              <p class="text-sm md:text-base text-muted-foreground font-medium ml-6">10+ e-government systems including licensing, village finance, citizen notification, and agency web platforms.</p>
+
+              <!-- Tech Stack Chips -->
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">PHP</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Yii2 Framework</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Bootstrap</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">jQuery</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">MySQL</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Kannel SMS Gateway</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Linux</span>
+              </div>
+
+              <ul class="space-y-3 text-sm md:text-base text-muted-foreground font-medium">
+                <li class="flex items-start gap-4">
+                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">E-Government Ecosystem</strong> Designed and developed 10+ critical public service platforms including One-Stop Licensing (SIMPPTSP) and Village Finance Systems.</span>
+                </li>
+                <li class="flex items-start gap-4">
+                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Public Communication Channel</strong> Architected reliable SMS notification system using Kannel SMS Gateway for real-time citizen status updates.</span>
+                </li>
+                <li class="flex items-start gap-4">
+                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Agency Web Infrastructure</strong> Built, deployed, and maintained official portals across multiple government agencies.</span>
+                </li>
+              </ul>
             </div>
 
           </div>
