@@ -207,21 +207,48 @@
             <!-- Digital School -->
             <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20">
               <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
-                <h4 class="text-xl font-black uppercase tracking-tight">Digital School Platform</h4>
+                <div class="flex flex-wrap items-baseline gap-2">
+                  <h4 class="text-xl font-black uppercase tracking-tight">Digital School Platform</h4>
+                  <span class="font-mono text-[10px] px-2 py-0.5 border border-foreground/30 text-foreground/70 uppercase tracking-[0.15em] font-bold">Architect & Lead</span>
+                </div>
                 <span class="font-mono text-xs font-bold tracking-widest text-muted-foreground border border-foreground/30 shrink-0 px-2 py-1">2019 - 2025</span>
               </div>
+
+              <!-- Tech Stack Chips -->
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Vue 3</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Inertia.js</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">PrimeVue</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Tailwind CSS</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Laravel 12</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">PHP 8.4</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Python (OR-Tools)</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">MySQL</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Redis</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">AWS S3</span>
+                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Docker</span>
+              </div>
+
               <ul class="space-y-3 text-sm md:text-base text-muted-foreground font-medium">
                 <li class="flex items-start gap-4">
                   <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Platform rebuild</strong> Architected the major v2 rebuild of an integrated school management and LMS platform.</span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">High-Scale Examination Engine</strong> Engineered highly optimized testing engine handling 3,000+ concurrent student test sessions on low-cost server infrastructure.</span>
                 </li>
                 <li class="flex items-start gap-4">
                   <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Scale</strong> Online exam system handling 3,000 concurrent sessions. Google OR-Tools for automatic scheduling.</span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Automated Assessment Pipeline</strong> Eliminated manual grading workloads to near-zero by implementing automated assessment pipeline for objective tests.</span>
                 </li>
                 <li class="flex items-start gap-4">
                   <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Async architecture</strong> Laravel Octane, Horizon, Redis-backed queues for billing, notifications, and heavy workloads.</span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Advanced Scheduling Solver</strong> Architected multi-stage automated scheduling solver using Python (Google OR-Tools) from PHP, providing realistic time estimates for clash-free timetables.</span>
+                </li>
+                <li class="flex items-start gap-4">
+                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Multi-Curriculum Support</strong> Designed flexible JSON-backed data model to process diverse academic standards (Merdeka, 2013 curriculum) simultaneously.</span>
+                </li>
+                <li class="flex items-start gap-4">
+                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
+                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Async Processing</strong> Developed modular backend using Laravel Octane and Redis-backed queues (Horizon) for heavy workloads like tuition billing and Telegram notifications.</span>
                 </li>
               </ul>
             </div>
