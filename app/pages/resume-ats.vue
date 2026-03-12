@@ -88,7 +88,7 @@
           <article class="border-b border-foreground/15 pb-5">
             <div class="flex flex-col gap-1 md:flex-row md:items-start md:justify-between">
               <h4 class="text-base font-bold">Digital School Platform</h4>
-              <p class="text-sm text-foreground/70">2019 – 2025 · <em>Scope: Backend Architect & Infrastructure</em></p>
+              <p class="text-sm text-foreground/70">2019 – 2025 · <em>Scope: Software Engineer</em></p>
             </div>
 
             <!-- v1 -->
