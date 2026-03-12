@@ -73,7 +73,7 @@
           <article class="border-b border-foreground/15 pb-5">
             <div class="flex flex-col gap-1 md:flex-row md:items-start md:justify-between">
               <h4 class="text-base font-bold">LMS Certification Platform</h4>
-              <p class="text-sm text-foreground/70">2025 – Present · <em>Scope: Full Product Owner</em></p>
+              <p class="text-sm text-foreground/70">2025 – Present · <em>Scope: Software Engineer</em></p>
             </div>
             <p class="text-xs text-foreground/60 mt-1">Tech: React 19, TypeScript, TanStack, Elixir, Ash Framework, Phoenix WebSockets, Oban, PostgreSQL, Hono, Cloudflare Workers &amp; R2, xAPI</p>
             <ul class="ats-print-list mt-2 list-disc space-y-1.5 pl-5 text-sm leading-7 text-foreground/80">
@@ -88,7 +88,7 @@
           <article class="border-b border-foreground/15 pb-5">
             <div class="flex flex-col gap-1 md:flex-row md:items-start md:justify-between">
               <h4 class="text-base font-bold">Digital School Platform</h4>
-              <p class="text-sm text-foreground/70">2019 – 2025 · <em>Scope: Architect & Lead Engineer</em></p>
+              <p class="text-sm text-foreground/70">2019 – 2025 · <em>Scope: Software Engineer</em></p>
             </div>
             <p class="text-xs text-foreground/60 mt-1">Tech: Vue 3, Inertia.js, PrimeVue, Tailwind CSS, Laravel 12 (Octane &amp; Horizon), PHP 8.4, Python (OR-Tools), MySQL, Redis, AWS S3, Docker</p>
             <ul class="ats-print-list mt-2 list-disc space-y-1.5 pl-5 text-sm leading-7 text-foreground/80">
@@ -104,7 +104,7 @@
           <article class="border-b border-foreground/15 pb-5">
             <div class="flex flex-col gap-1 md:flex-row md:items-start md:justify-between">
               <h4 class="text-base font-bold">SIMSARPRAS — Universitas Pendidikan Indonesia</h4>
-              <p class="text-sm text-foreground/70">2022 – 2024 · <em>Scope: Architect & Engineer</em></p>
+              <p class="text-sm text-foreground/70">2022 – 2024 · <em>Scope: Software Engineer</em></p>
             </div>
             <p class="text-xs text-foreground/60 mt-1">Tech: Vue 3, Inertia.js, PrimeVue, Laravel 11, PHP 8.3, MySQL, Redis</p>
             <ul class="ats-print-list mt-2 list-disc space-y-1.5 pl-5 text-sm leading-7 text-foreground/80">
@@ -119,7 +119,7 @@
           <article class="border-b border-foreground/15 pb-5">
             <div class="flex flex-col gap-1 md:flex-row md:items-start md:justify-between">
               <h4 class="text-base font-bold">SIMKERMA — Universitas Pendidikan Indonesia</h4>
-              <p class="text-sm text-foreground/70">2022 – 2024 · <em>Scope: Architect & Engineer</em></p>
+              <p class="text-sm text-foreground/70">2022 – 2024 · <em>Scope: Software Engineer</em></p>
             </div>
             <p class="text-xs text-foreground/60 mt-1">Tech: Vue 3, Inertia.js, PrimeVue, Laravel 11, PHP 8.3, MySQL, Redis</p>
             <ul class="ats-print-list mt-2 list-disc space-y-1.5 pl-5 text-sm leading-7 text-foreground/80">
@@ -133,7 +133,7 @@
           <article class="border-b border-foreground/15 pb-5">
             <div class="flex flex-col gap-1 md:flex-row md:items-start md:justify-between">
               <h4 class="text-base font-bold">SIBER Election Platform</h4>
-              <p class="text-sm text-foreground/70">2024 · <em>Scope: Architect & Engineer</em></p>
+              <p class="text-sm text-foreground/70">2024 · <em>Scope: Software Engineer</em></p>
             </div>
             <p class="text-xs text-foreground/60 mt-1">Tech: Vue 3, Inertia.js, PrimeVue, Tailwind CSS, Laravel 11, PHP 8.2, MySQL, Redis, Laravel Horizon, Azure OCR API, Google Maps API</p>
             <ul class="ats-print-list mt-2 list-disc space-y-1.5 pl-5 text-sm leading-7 text-foreground/80">
@@ -160,7 +160,7 @@
           <article class="border-b border-foreground/15 pb-5">
             <div class="flex flex-col gap-1 md:flex-row md:items-start md:justify-between">
               <h4 class="text-base font-bold">bandungkita.id — Media Infrastructure</h4>
-              <p class="text-sm text-foreground/70">2017 – 2024 · <em>Scope: System Administrator</em></p>
+              <p class="text-sm text-foreground/70">2017 – 2024 · <em>Scope: Software Engineer</em></p>
             </div>
             <p class="text-xs text-foreground/60 mt-1">Tech: WordPress, Linux Server, Nginx, Cloudflare WAF, Fail2Ban</p>
             <ul class="ats-print-list mt-2 list-disc space-y-1.5 pl-5 text-sm leading-7 text-foreground/80">
