@@ -152,7 +152,7 @@
               </div>
             </div>
             <p class="text-sm md:text-base text-muted-foreground mt-4 max-w-3xl">
-              Software consultancy delivering end-to-end systems for clients across education, government, and media sectors. Responsible for architecture, full-stack implementation, infrastructure, and long-term operational ownership.
+              Software company building digital products and platforms for education, government, and media sectors. Responsible for architecture, full-stack implementation, infrastructure, and long-term operational ownership across multiple product lines.
             </p>
           </div>
 
