@@ -144,7 +144,7 @@
             <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
               <div>
                 <h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight">Rail System</h3>
-                <div class="font-mono text-sm text-accent font-bold mt-1">Tech Partner & Senior Software Engineer</div>
+                <div class="font-mono text-sm text-accent font-bold mt-1">Senior Software Engineer</div>
               </div>
               <div class="flex flex-col md:items-end gap-1">
                 <span class="font-mono text-xs font-bold tracking-widest text-background bg-foreground shrink-0 px-3 py-1.5">2013 - PRESENT</span>
@@ -152,7 +152,7 @@
               </div>
             </div>
             <p class="text-sm md:text-base text-muted-foreground mt-4 max-w-3xl">
-              Independent tech partner delivering end-to-end software systems for clients across education, government, and media sectors. Responsible for architecture, full-stack implementation, infrastructure, and long-term operational ownership.
+              Independent software consultancy delivering end-to-end systems for clients across education, government, and media sectors. Responsible for architecture, full-stack implementation, infrastructure, and long-term operational ownership.
             </p>
           </div>
 

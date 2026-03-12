@@ -60,12 +60,12 @@
             <div class="flex flex-col gap-1 md:flex-row md:items-start md:justify-between">
               <div>
                 <h3 class="text-xl font-bold">Rail System</h3>
-                <p class="text-sm font-semibold text-foreground/80">Tech Partner & Senior Software Engineer</p>
+                <p class="text-sm font-semibold text-foreground/80">Senior Software Engineer</p>
               </div>
               <p class="text-sm text-foreground/70">2013 – Present · Remote</p>
             </div>
             <p class="mt-2 text-sm leading-7 text-foreground/80">
-              Independent tech partner delivering end-to-end software systems for clients across education, government, and media sectors. Responsible for architecture, full-stack implementation, infrastructure, and long-term operational ownership.
+              Independent software consultancy delivering end-to-end systems for clients across education, government, and media sectors. Responsible for architecture, full-stack implementation, infrastructure, and long-term operational ownership.
             </p>
           </div>
 
