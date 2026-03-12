@@ -395,58 +395,86 @@
           <div class="h-px bg-foreground flex-1 opacity-20"></div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-0.5 bg-foreground border-2 border-foreground">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0.5 bg-foreground border-2 border-foreground">
           <div class="bg-background p-6 md:p-8 group relative">
             <div class="font-mono text-[10px] text-muted-foreground uppercase tracking-widest mb-6 border-b border-dashed border-foreground/20 pb-2">IDX_01 // Architecture</div>
-            <h3 class="font-black uppercase mb-4 text-xl md:text-2xl tracking-tight">System Design</h3>
+            <h3 class="font-black uppercase mb-4 text-xl md:text-2xl tracking-tight">Architecture &amp; Design</h3>
             <div class="flex flex-wrap gap-2">
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">AI-Augmented Engineering</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">System Design Patterns</span>
               <span class="border px-2 py-1 text-xs font-mono uppercase bg-accent/10 border-accent/20 text-accent font-black tracking-widest">Multi-Tenant SaaS</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">System Design Patterns</span>
               <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">High Availability</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Event-Driven Arch</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">API Design</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Database Schema Design</span>
             </div>
           </div>
 
           <div class="bg-background p-6 md:p-8 group relative">
-            <div class="font-mono text-[10px] text-muted-foreground uppercase tracking-widest mb-6 border-b border-dashed border-foreground/20 pb-2">IDX_02 // Backend</div>
-            <h3 class="font-black uppercase mb-4 text-xl md:text-2xl tracking-tight">Backend &amp; Performance</h3>
+            <div class="font-mono text-[10px] text-muted-foreground uppercase tracking-widest mb-6 border-b border-dashed border-foreground/20 pb-2">IDX_02 // Frontend</div>
+            <h3 class="font-black uppercase mb-4 text-xl md:text-2xl tracking-tight">Frontend</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="border px-2 py-1 text-xs font-mono uppercase bg-accent/10 border-accent/20 text-accent font-black tracking-widest">Vue 3</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">React 19</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">TypeScript</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Tailwind CSS 4</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Inertia.js</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">TanStack</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">PrimeVue</span>
+            </div>
+          </div>
+
+          <div class="bg-background p-6 md:p-8 group relative">
+            <div class="font-mono text-[10px] text-muted-foreground uppercase tracking-widest mb-6 border-b border-dashed border-foreground/20 pb-2">IDX_03 // Backend</div>
+            <h3 class="font-black uppercase mb-4 text-xl md:text-2xl tracking-tight">Backend</h3>
             <div class="flex flex-wrap gap-2">
               <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Elixir</span>
               <span class="border px-2 py-1 text-xs font-mono uppercase bg-accent/10 border-accent/20 text-accent font-black tracking-widest">Ash Framework</span>
               <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Phoenix</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Laravel</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Laravel 11/12</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">PHP 8.4</span>
               <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Hono</span>
               <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Yii2</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Python (OR-Tools)</span>
             </div>
           </div>
 
           <div class="bg-background p-6 md:p-8 group relative">
-            <div class="font-mono text-[10px] text-muted-foreground uppercase tracking-widest mb-6 border-b border-dashed border-foreground/20 pb-2">IDX_03 // Frontend</div>
-            <h3 class="font-black uppercase mb-4 text-xl md:text-2xl tracking-tight">Frontend</h3>
-            <div class="flex flex-wrap gap-2">
-              <span class="border px-2 py-1 text-xs font-mono uppercase bg-accent/10 border-accent/20 text-accent font-black tracking-widest">Vue 3</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">React</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">TypeScript</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Tailwind CSS</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Inertia.js</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">TanStack</span>
-            </div>
-          </div>
-
-          <div class="bg-background p-6 md:p-8 group relative">
-            <div class="font-mono text-[10px] text-muted-foreground uppercase tracking-widest mb-6 border-b border-dashed border-foreground/20 pb-2">IDX_04 // Data + Ops</div>
-            <h3 class="font-black uppercase mb-4 text-xl md:text-2xl tracking-tight">Infrastructure &amp; Tools</h3>
+            <div class="font-mono text-[10px] text-muted-foreground uppercase tracking-widest mb-6 border-b border-dashed border-foreground/20 pb-2">IDX_04 // Data</div>
+            <h3 class="font-black uppercase mb-4 text-xl md:text-2xl tracking-tight">Database &amp; Data</h3>
             <div class="flex flex-wrap gap-2">
               <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">PostgreSQL</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">MySQL</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">MySQL/MariaDB</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Redis</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">xAPI/LRS</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Query Optimization</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Data Modeling</span>
+            </div>
+          </div>
+
+          <div class="bg-background p-6 md:p-8 group relative">
+            <div class="font-mono text-[10px] text-muted-foreground uppercase tracking-widest mb-6 border-b border-dashed border-foreground/20 pb-2">IDX_05 // Infra</div>
+            <h3 class="font-black uppercase mb-4 text-xl md:text-2xl tracking-tight">Infrastructure &amp; DevOps</h3>
+            <div class="flex flex-wrap gap-2">
               <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Docker</span>
               <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Nginx</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Redis</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Linux Server</span>
               <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Cloudflare</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Azure OCR</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Google OR-Tools</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">xAPI</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">WebSockets</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Azure Services</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">AWS S3</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">CI/CD</span>
+            </div>
+          </div>
+
+          <div class="bg-background p-6 md:p-8 group relative">
+            <div class="font-mono text-[10px] text-muted-foreground uppercase tracking-widest mb-6 border-b border-dashed border-foreground/20 pb-2">IDX_06 // Process</div>
+            <h3 class="font-black uppercase mb-4 text-xl md:text-2xl tracking-tight">Product &amp; Process</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="border px-2 py-1 text-xs font-mono uppercase bg-accent/10 border-accent/20 text-accent font-black tracking-widest">Full Product Ownership</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Requirements Gathering</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Client Consultation</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">UAT Coordination</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">AI-Assisted Dev</span>
+              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">System Maintenance</span>
             </div>
           </div>
         </div>
