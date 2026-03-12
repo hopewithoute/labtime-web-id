@@ -230,7 +230,7 @@
               </div>
 
               <!-- Team Context -->
-              <p class="text-xs text-muted-foreground italic mb-4">Team-based development — responsible for backend architecture, API design, and infrastructure while collaborating with frontend engineers.</p>
+              <p class="text-xs text-muted-foreground italic mb-4"><strong class="text-foreground">v1 (2019–2024):</strong> Team of 4 — backend architecture, API design, infrastructure. <strong class="text-foreground">v2 Rebuild (2024–2025):</strong> Led full platform rewrite with complete architecture ownership.</p>
 
               <ul class="space-y-3 text-sm md:text-base text-muted-foreground font-medium">
                 <li class="flex items-start gap-4">

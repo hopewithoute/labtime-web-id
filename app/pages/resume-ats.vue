@@ -91,7 +91,7 @@
               <p class="text-sm text-foreground/70">2019 – 2025 · <em>Scope: Backend Architect & Infrastructure</em></p>
             </div>
             <p class="text-xs text-foreground/60 mt-1">Tech: Vue 3, Inertia.js, PrimeVue, Tailwind CSS, Laravel 12 (Octane &amp; Horizon), PHP 8.4, Python (OR-Tools), MySQL, Redis, AWS S3, Docker</p>
-            <p class="text-xs text-muted-foreground mt-1 italic">Team-based development — responsible for backend architecture, API design, and infrastructure while collaborating with frontend engineers.</p>
+            <p class="text-xs text-muted-foreground mt-1 italic"><strong>v1 (2019–2024):</strong> Team of 4 — backend architecture, API design, and infrastructure. <strong>v2 Rebuild (2024–2025):</strong> Led full platform rewrite with complete architecture ownership.</p>
             <ul class="ats-print-list mt-2 list-disc space-y-1.5 pl-5 text-sm leading-7 text-foreground/80">
               <li><strong>High-Scale Examination Engine:</strong> Engineered highly optimized testing engine handling 3,000+ concurrent student test sessions on low-cost server infrastructure.</li>
               <li><strong>Automated Assessment Pipeline:</strong> Eliminated manual grading workloads to near-zero by implementing automated assessment pipeline for objective tests.</li>
