@@ -209,7 +209,7 @@
               <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
                 <div class="flex flex-wrap items-baseline gap-2">
                   <h4 class="text-xl font-black uppercase tracking-tight">Digital School Platform</h4>
-                  <span class="font-mono text-[10px] px-2 py-0.5 border border-foreground/30 text-foreground/70 uppercase tracking-[0.15em] font-bold">Software Engineer</span>
+                  <span class="font-mono text-[10px] px-2 py-0.5 border border-foreground/30 text-foreground/70 uppercase tracking-[0.15em] font-bold">Backend Architect & Infra</span>
                 </div>
                 <span class="font-mono text-xs font-bold tracking-widest text-muted-foreground border border-foreground/30 shrink-0 px-2 py-1">2019 - 2025</span>
               </div>
@@ -228,6 +228,9 @@
                 <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">AWS S3</span>
                 <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Docker</span>
               </div>
+
+              <!-- Team Context -->
+              <p class="text-xs text-muted-foreground italic mb-4">Team-based development — responsible for backend architecture, API design, and infrastructure while collaborating with frontend engineers.</p>
 
               <ul class="space-y-3 text-sm md:text-base text-muted-foreground font-medium">
                 <li class="flex items-start gap-4">
