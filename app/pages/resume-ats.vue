@@ -105,9 +105,8 @@
             <p class="text-xs text-muted-foreground italic">Led full platform rewrite with complete architecture ownership — solo execution from design to deployment.</p>
             <p class="text-xs text-foreground/60 mt-1">Tech: Vue 3, Inertia.js, Laravel 12, PHP 8.4, Python (OR-Tools), MySQL, Redis</p>
             <ul class="ats-print-list mt-1 list-disc space-y-1 pl-5 text-sm leading-7 text-foreground/80">
-              <li><strong>Automated Assessment Pipeline:</strong> Eliminated manual grading to near-zero with automated assessment pipeline.</li>
-              <li><strong>Advanced Scheduling Solver:</strong> Architected multi-stage solver using Python (Google OR-Tools) for clash-free timetables.</li>
-              <li><strong>Multi-Curriculum Support:</strong> Designed flexible JSON-backed data model for diverse academic standards (Merdeka, 2013).</li>
+              <li><strong>Soft Proctoring & Exam Integrity:</strong> Built soft-proctoring and exam integrity workflows with tokenized sessions, device-bound access, activity tracking, and auditable session logs for digital assessments.</li>
+              <li><strong>Payment Reconciliation & Attendance Operations:</strong> Integrated signed payment reconciliation workflows with biometric and web attendance operations, including geofencing and evidence-backed attendance records.</li>
             </ul>
           </article>
 

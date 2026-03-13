@@ -257,15 +257,11 @@
                 <ul class="space-y-2 text-sm text-muted-foreground font-medium ml-4">
                   <li class="flex items-start gap-3">
                     <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
-                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Automated Assessment Pipeline:</strong> Eliminated manual grading to near-zero with automated assessment pipeline.</span>
+                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Soft Proctoring &amp; Exam Integrity:</strong> Built soft-proctoring and exam integrity workflows with tokenized sessions, device-bound access, activity tracking, and auditable session logs for digital assessments.</span>
                   </li>
                   <li class="flex items-start gap-3">
                     <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
-                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Advanced Scheduling Solver:</strong> Architected multi-stage solver using Python (Google OR-Tools) for clash-free timetables.</span>
-                  </li>
-                  <li class="flex items-start gap-3">
-                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
-                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Multi-Curriculum Support:</strong> Designed flexible JSON-backed data model for diverse academic standards.</span>
+                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Payment Reconciliation &amp; Attendance Operations:</strong> Integrated signed payment reconciliation workflows with biometric and web attendance operations, including geofencing and evidence-backed attendance records.</span>
                   </li>
                 </ul>
               </div>
