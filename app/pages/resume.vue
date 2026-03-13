@@ -230,7 +230,11 @@
                 <ul class="space-y-2 text-sm text-muted-foreground font-medium ml-4">
                   <li class="flex items-start gap-3">
                     <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
-                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">High-Scale Examination Engine:</strong> Engineered testing engine handling 3,000+ concurrent sessions on low-cost infrastructure.</span>
+                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Cache Architecture &amp; Invalidation:</strong> Architected backend caching and invalidation patterns using Redis and controller-level response caching to reduce repeated database load across academic workflows.</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
+                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Exam Processing Reliability:</strong> Engineered resilient exam-processing flows with strict session validation, batch answer handling, and async background jobs to support reliable assessment operations.</span>
                   </li>
                 </ul>
               </div>

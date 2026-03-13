@@ -96,7 +96,8 @@
             <p class="text-xs text-muted-foreground italic">Team of 4 — backend architecture, API design, infrastructure collaboration with frontend engineers.</p>
             <p class="text-xs text-foreground/60 mt-1">Tech: Yii2, Vue, MySQL, Redis</p>
             <ul class="ats-print-list mt-1 list-disc space-y-1 pl-5 text-sm leading-7 text-foreground/80">
-              <li><strong>High-Scale Examination Engine:</strong> Engineered testing engine handling 3,000+ concurrent sessions on low-cost infrastructure.</li>
+              <li><strong>Cache Architecture & Invalidation:</strong> Architected backend caching and invalidation patterns using Redis and controller-level response caching to reduce repeated database load across academic workflows.</li>
+              <li><strong>Exam Processing Reliability:</strong> Engineered resilient exam-processing flows with strict session validation, batch answer handling, and async background jobs to support reliable assessment operations.</li>
             </ul>
 
             <!-- v2 -->
