@@ -65,7 +65,7 @@
               <p class="text-sm text-foreground/70">2013 – Present · Remote</p>
             </div>
             <p class="mt-2 text-sm leading-7 text-foreground/80">
-              Software company building digital products and platforms for education, government, and media sectors. Responsible for architecture, full-stack implementation, infrastructure, and long-term operational ownership across multiple product lines.
+              Software company building digital products while also delivering external client platforms across education, government, and media sectors. Responsible for architecture, full-stack implementation, infrastructure, and long-term operational ownership across both internal products and client engagements.
             </p>
           </div>
 
