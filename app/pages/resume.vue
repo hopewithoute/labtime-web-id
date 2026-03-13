@@ -152,7 +152,7 @@
               </div>
             </div>
             <p class="text-sm md:text-base text-muted-foreground mt-4 max-w-3xl">
-              Independent tech partner delivering end-to-end software systems for clients across education, government, and media sectors. Responsible for architecture, full-stack implementation, infrastructure, and long-term operational ownership.
+              Software company building digital products while also delivering external client platforms across education, government, and media sectors. Responsible for architecture, full-stack implementation, infrastructure, and long-term operational ownership across both internal products and client engagements.
             </p>
           </div>
 
