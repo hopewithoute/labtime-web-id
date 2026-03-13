@@ -15,7 +15,7 @@
               </div>
               <div>
                 <span class="text-muted-foreground mr-2">ROLE:</span>
-                Senior System Builder
+                Senior Software Engineer
               </div>
               <div>
                 <span class="text-muted-foreground mr-2">SYS_UPTIME:</span>

@@ -15,7 +15,7 @@ describe('Home Page', () => {
 
   it('displays the operator role', async () => {
     const wrapper = await mountSuspended(IndexPage)
-    expect(wrapper.text()).toContain('Senior System Builder')
+    expect(wrapper.text()).toContain('Senior Software Engineer')
   })
 
   it('renders core operator content without relying on live decorative timers', async () => {
