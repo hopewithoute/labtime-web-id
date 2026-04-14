@@ -12,6 +12,16 @@
           <p><strong>Website:</strong> <a href="https://labtime.web.id" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2">labtime.web.id</a></p>
           <p><strong>GitHub:</strong> <a href="https://github.com/hopewithoute" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2">github.com/hopewithoute</a></p>
         </div>
+        <div class="mt-8 flex flex-wrap gap-4 print:hidden">
+          <button @click="typeof window !== 'undefined' && window.print()" class="inline-flex h-10 items-center gap-2 border-2 border-foreground bg-foreground px-4 py-2 text-xs font-bold uppercase tracking-widest text-background transition-colors hover:bg-background hover:text-foreground">
+            <span class="text-accent">PDF</span>
+            <span>Print Resume</span>
+          </button>
+          <a href="/resume.md" download="Anggi-Wibiyanto-Resume.md" class="inline-flex h-10 items-center gap-2 border-2 border-foreground bg-background px-4 py-2 text-xs font-bold uppercase tracking-widest text-foreground transition-colors hover:bg-foreground hover:text-background">
+            <span class="text-accent">MD</span>
+            <span>Download Markdown</span>
+          </a>
+        </div>
       </header>
 
       <section aria-labelledby="summary-heading" class="ats-print-section mt-8 md:mt-10">
