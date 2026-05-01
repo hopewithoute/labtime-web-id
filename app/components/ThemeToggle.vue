@@ -1,11 +1,9 @@
 <template>
   <button 
-    class="hover:text-accent transition-none hover:underline underline-offset-4 decoration-2 relative group flex items-center gap-1 uppercase font-mono"
+    class="hover:text-background transition-colors hover:bg-foreground relative group flex items-center p-1 border border-transparent hover:border-border font-sans font-bold text-xs uppercase tracking-widest"
     @click="toggleTheme"
   >
-    <span class="opacity-0 group-hover:opacity-100 transition-opacity">[</span>
-    <span>> TOGGLE_THEME --{{ colorMode.value === 'dark' ? 'LIGHT' : 'DARK' }}</span>
-    <span class="opacity-0 group-hover:opacity-100 transition-opacity">]</span>
+    MODE : {{ colorMode.value === 'dark' ? 'LIGHT' : 'DARK' }}
   </button>
 </template>
 <script setup lang="ts">

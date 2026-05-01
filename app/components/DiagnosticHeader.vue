@@ -8,17 +8,17 @@
       <div>
         <div class="text-accent text-sm md:text-base font-bold mb-3 flex items-center gap-2">
           <span class="animate-pulse">_</span>
-          <span>> SYS_REQ: {{ systemRequest }}</span>
+          <span>> SYS_REQ: <YorhaScramble :text="systemRequest" /></span>
         </div>
-        <h1 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-none group-hover/header:text-accent transition-colors group/header break-words">
-          {{ title }}
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-none group-hover/header:text-accent transition-colors group/header wrap-break-word">
+          <YorhaScramble :text="title" />
         </h1>
       </div>
       
       <div class="text-xs md:text-sm text-muted-foreground opacity-80 text-left md:text-right border-l-2 md:border-l-0 md:border-r-2 border-accent pl-4 md:pl-0 md:pr-4 py-1">
-        <div>{{ countLabel }}: <span class="text-foreground font-bold">{{ count }}</span></div>
-        <div>{{ contextLabel }}: <span class="text-foreground font-bold">{{ contextValue }}</span></div>
-        <div>STATUS: <span class="text-accent font-bold animate-pulse">{{ status }}</span></div>
+        <div>{{ countLabel }}: <span class="text-foreground font-bold"><YorhaScramble :text="String(count)" /></span></div>
+        <div>{{ contextLabel }}: <span class="text-foreground font-bold"><YorhaScramble :text="contextValue" /></span></div>
+        <div>STATUS: <span class="text-accent font-bold animate-pulse"><YorhaScramble :text="status" /></span></div>
       </div>
     </div>
   </header>

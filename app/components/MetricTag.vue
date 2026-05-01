@@ -12,7 +12,9 @@ defineProps<{
     <span v-if="label" class="opacity-20">|</span>
     <span v-if="value || $slots.default" class="font-bold flex items-center gap-1.5">
       <span v-if="variant === 'status'" class="w-1.5 h-1.5 bg-accent animate-pulse"></span>
-      <slot>{{ value }}</slot>
+      <YorhaScramble :text="value || ''">
+        <slot />
+      </YorhaScramble>
     </span>
   </div>
 </template>
