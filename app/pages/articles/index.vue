@@ -1,164 +1,165 @@
 <template>
-  <div class="relative min-h-[80vh] group/crt font-mono text-foreground flex flex-col">
-    <!-- Header Area -->
-    <DiagnosticHeader
-      title="System Logs"
-      system-request="/ARCHIVE/LOGS"
-      :count="articles?.length || 0"
-      count-label="RECORDS"
-      context-label="MODE"
-      context-value="READ_ONLY"
-      status="LIVE"
-    />
+  <div class="relative min-h-[80vh] flex flex-col font-sans">
+    <div class="flex items-end justify-between pb-4">
+      <div>
+        <div class="text-[10px] font-mono tracking-[0.2em] uppercase text-foreground-secondary mb-1">
+          <YorhaScramble text="[ /ARCHIVE/LOGS ]" />
+        </div>
+        <h1 class="text-4xl md:text-5xl font-display font-bold uppercase tracking-wider text-foreground">
+          <YorhaScramble text="System Logs" />
+        </h1>
+      </div>
+      <div class="text-right hidden sm:block">
+        <div class="font-bold text-lg text-foreground"><YorhaScramble :text="String(articles?.length || 0)" /> RECS</div>
+        <div class="text-[10px] uppercase tracking-widest text-foreground-secondary"><YorhaScramble text="MODE : READ_ONLY" /></div>
+      </div>
+    </div>
+    <div class="yorha-divider-double mb-10"></div>
 
     <!-- Content Layout -->
     <div
-      class="grid grid-cols-1 lg:grid-cols-[1fr_300px] xl:grid-cols-[1fr_350px] gap-8 xl:gap-16 flex-grow items-start pb-24"
+      class="grid grid-cols-1 lg:grid-cols-[1fr_250px] xl:grid-cols-[1fr_300px] gap-8 xl:gap-16 grow items-start pb-24"
     >
       <!-- Main Log List -->
       <main class="space-y-6 relative z-10">
         <div
-          class="text-xs uppercase text-muted-foreground mb-8 opacity-60 border-b border-dashed border-foreground/30 pb-2 flex justify-between"
+          class="text-[10px] uppercase text-foreground-secondary mb-8 border-b border-yorha-faint pb-2 flex justify-between tracking-widest font-mono"
         >
-          <span>[INDEX_TABLE]</span>
+          <span><YorhaScramble text="[ INDEX_TABLE ]" /></span>
           <span class="hidden sm:inline-block">/var/log/entries/*</span>
         </div>
 
-        <NuxtLink
+        <YorhaPanel
           v-for="(article, index) in articles"
           :key="article.path"
+          as="NuxtLink"
           v-motion
           :to="article.path"
-          :initial="{ opacity: 0, y: 20 }"
+          :initial="{ opacity: 0, y: 15 }"
           :enter="{
             opacity: 1,
             y: 0,
-            transition: { duration: 450, delay: index * 80, ease: 'easeOut' },
+            transition: { duration: 400, delay: index * 60, ease: 'linear' },
           }"
-          class="group flex w-full max-w-full border-2 border-foreground hover:bg-foreground hover:text-background transition-colors relative crt-hover bg-background"
+          variant="simple"
+          hover
+          padding="p-0"
+          class="group flex w-full max-w-full relative"
           :class="{ 'sm:ml-auto sm:mr-8 lg:mr-12': index % 2 === 1 }"
         >
-          <!-- Number sidebar -->
           <div
-            class="w-12 sm:w-16 shrink-0 border-r-2 border-foreground group-hover:border-background flex flex-col items-center justify-center bg-foreground/5 group-hover:bg-transparent overflow-hidden relative z-10 transition-colors"
+            class="w-12 sm:w-16 shrink-0 border-r border-yorha-faint flex flex-col items-center justify-start pt-12 bg-transparent relative"
           >
             <span
-              class="text-accent group-hover:text-background font-black text-xl sm:text-2xl transform -rotate-90 tracking-tighter whitespace-nowrap transition-colors"
+              class="text-foreground font-display font-bold text-xl sm:text-2xl transform rotate-90 tracking-widest whitespace-nowrap group-hover:text-background transition-colors"
             >
-              #{{ String(index).padStart(2, '0') }}
+              No.{{ String(index + 1).padStart(2, '0') }}
             </span>
           </div>
 
-          <div class="grow p-5 lg:p-8 flex flex-col relative z-10">
-            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 gap-2">
+          <div class="grow p-6 lg:p-12 flex flex-col relative z-10 justify-between">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 gap-4">
               <h2
-                class="text-2xl md:text-3xl lg:text-4xl font-black uppercase tracking-tighter leading-none group-hover:underline underline-offset-4 decoration-2 break-words"
+                class="text-2xl md:text-3xl font-display font-bold uppercase tracking-wider leading-none wrap-break-word group-hover:text-background transition-colors"
               >
                 {{ article.title }}
               </h2>
               <div
                 v-if="!article.isProjectArticle"
-                class="text-xs font-mono opacity-60 group-hover:opacity-100 text-left sm:text-right shrink-0 whitespace-nowrap mt-1 border border-foreground/20 group-hover:border-background/20 px-2 py-0.5 transition-colors"
+                class="text-[10px] uppercase font-bold tracking-widest opacity-60 text-left sm:text-right shrink-0 whitespace-nowrap mt-1 border border-yorha-faint px-2 py-0.5 group-hover:text-background group-hover:border-background/50 group-hover:opacity-100 transition-all"
               >
                 {{ article.date }}
               </div>
             </div>
 
             <p
-              class="text-sm md:text-base opacity-80 mb-8 line-clamp-2 sm:line-clamp-3 leading-relaxed font-sans max-w-2xl mt-auto"
+              class="text-sm md:text-base opacity-80 mb-8 line-clamp-2 sm:line-clamp-3 leading-relaxed max-w-2xl mt-auto group-hover:text-background/80 transition-colors"
             >
               {{ article.description }}
             </p>
 
             <div
-              class="flex items-end justify-between mt-auto pt-4 border-t-2 border-dashed border-foreground/20 group-hover:border-background/30"
+              class="flex items-end justify-between mt-auto pt-4 border-t border-yorha-faint"
             >
               <div class="flex gap-2 items-center flex-wrap">
                 <!-- Project Article Marker -->
                 <span
                   v-if="article.isProjectArticle"
-                  class="bg-accent text-background px-2 py-1 text-[10px] md:text-xs font-bold uppercase tracking-widest"
+                  class="bg-foreground text-background border border-transparent px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest group-hover:bg-background group-hover:text-foreground transition-colors"
                 >
                   PROJECT → {{ article.projectSlug?.replace(/-/g, ' ').toUpperCase() }}
                 </span>
                 <span
-                  class="bg-foreground text-background group-hover:bg-background group-hover:text-foreground px-2 py-1 text-[10px] md:text-xs font-bold uppercase tracking-widest"
+                  v-if="!article.isProjectArticle"
+                  class="bg-foreground text-background border border-transparent px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest group-hover:bg-background group-hover:text-foreground transition-colors"
                 >
                   {{ article.category || article.tags?.[0] || 'DATA' }}
                 </span>
                 <span
-                  class="text-[10px] hidden sm:flex items-center opacity-50 px-2 py-1 border border-foreground/30 group-hover:border-background/30 font-bold"
+                  class="text-[10px] hidden sm:flex items-center opacity-50 px-2 py-0.5 border border-yorha-faint font-bold uppercase tracking-widest group-hover:text-background group-hover:border-background/50 group-hover:opacity-100 transition-colors"
                 >
                   {{ getArchiveSizeLabel(article, index) }}
                 </span>
               </div>
-              <div
-                class="text-xs md:text-sm font-bold uppercase group-hover:text-accent flex items-center gap-1.5 transition-colors bg-accent/10 px-3 py-1 group-hover:bg-transparent"
-              >
-                <span>OPEN</span>
-                <span class="group-hover:translate-x-1 transition-transform">-></span>
+              <div class="text-[10px] font-bold uppercase flex items-center gap-1.5 px-2 py-0.5 tracking-widest group-hover:text-background transition-colors">
+                <span>[ READ ]</span>
               </div>
             </div>
           </div>
-        </NuxtLink>
+        </YorhaPanel>
       </main>
 
       <!-- Right Side Diagnostic Panel -->
       <aside class="hidden lg:block relative z-10 w-full min-w-0">
-        <CornerFrame class="sticky top-24 bg-background">
-          <div class="p-6 md:p-8">
-            <div
-              class="text-accent font-black tracking-tight text-xl mb-6 flex items-center gap-3 border-b-2 border-foreground pb-4"
-            >
-              <span class="w-2.5 h-2.5 bg-accent inline-block animate-pulse"></span>
-              SYS_MONITOR
+        <YorhaPanel brackets variant="panel" class="sticky top-24">
+          <div class="text-[10px] uppercase font-mono tracking-[0.2em] mb-6 flex items-center gap-2 border-b border-yorha-faint pb-3 text-foreground-secondary">
+            <YorhaScramble text="[ SYS_MONITOR ]" />
+          </div>
+
+          <div class="space-y-3 text-xs font-sans font-bold uppercase tracking-widest">
+            <div class="flex justify-between border-b border-yorha-faint pb-1.5">
+              <span class="text-foreground-secondary"><YorhaScramble text="MEM_ALLOC" /></span>
+              <span class="text-foreground"><YorhaScramble :text="memAlloc" /></span>
+            </div>
+            <div class="flex justify-between border-b border-yorha-faint pb-1.5">
+              <span class="text-foreground-secondary"><YorhaScramble text="UPLINK" /></span>
+              <span class="text-yorha-green"><YorhaScramble text="SECURE" /></span>
+            </div>
+            <div class="flex justify-between border-b border-yorha-faint pb-1.5">
+              <span class="text-foreground-secondary"><YorhaScramble text="THREADS" /></span>
+              <span><YorhaScramble :text="threadPoolState" /></span>
             </div>
 
-            <div class="space-y-4 text-xs font-bold">
-              <div class="flex justify-between border-b border-dashed border-foreground/20 pb-2">
-                <span class="opacity-60">MEM_ALLOC</span>
-                <span class="font-mono text-accent">{{ memAlloc }}</span>
+            <div class="pt-4">
+              <div class="text-foreground-secondary mb-2 text-[10px]">
+                <YorhaScramble text="[ BUFFER_STATUS ]" />
               </div>
-              <div class="flex justify-between border-b border-dashed border-foreground/20 pb-2">
-                <span class="opacity-60">UPLINK</span>
-                <span class="text-green-500">SECURE</span>
-              </div>
-              <div class="flex justify-between border-b border-dashed border-foreground/20 pb-2">
-                <span class="opacity-60">THREADS</span>
-                <span>{{ threadPoolState }}</span>
-              </div>
-
-              <div class="pt-6">
-                <div class="opacity-60 mb-2 text-[10px] uppercase tracking-widest">
-                  Buffer Status
-                </div>
-                <div class="h-3 w-full border-2 border-foreground p-0.5">
-                  <div
-                    class="h-full bg-accent animate-pulse opacity-80"
-                    :style="{ width: bufferWidth + '%' }"
-                  ></div>
-                </div>
-              </div>
-
-              <!-- Terminal Boot Sequence -->
-              <div class="pt-8 space-y-2 min-h-[140px] text-[11px] leading-tight">
+              <div class="h-2 w-full border border-yorha-strong p-0.5">
                 <div
-                  class="opacity-50 mb-3 uppercase tracking-widest border-b border-foreground/20 pb-1"
-                >
-                  Activity Log
-                </div>
-                <div
-                  v-for="cmd in activeCommands"
-                  :key="cmd"
-                  class="animate-in fade-in slide-in-from-bottom-2 duration-300 opacity-80 break-words"
-                >
-                  <span class="text-accent font-black mr-1">></span>
-                  {{ cmd }}
-                </div>
+                  class="h-full bg-foreground opacity-80"
+                  :style="{ width: bufferWidth + '%' }"
+                ></div>
+              </div>
+            </div>
+
+            <!-- Terminal Boot Sequence -->
+            <div class="pt-6 space-y-1.5 min-h-35">
+              <div
+                class="text-foreground-secondary mb-3 text-[10px] border-b border-yorha-faint pb-1"
+              >
+                <YorhaScramble text="[ ACTIVITY_LOG ]" />
+              </div>
+              <div
+                v-for="cmd in activeCommands"
+                :key="cmd"
+                class="flex items-center gap-2 text-[10px]"
+              >
+                <span class="text-foreground font-black">></span>
+                <span class="truncate"><YorhaScramble :text="cmd" /></span>
               </div>
             </div>
           </div>
-        </CornerFrame>
+        </YorhaPanel>
       </aside>
     </div>
   </div>
@@ -184,7 +185,6 @@ const { data: articles } = await useAsyncData('all-articles', async () => {
     queryCollection('projectArticles').all(),
   ])
 
-  // Transform and merge both collections
   const allItems: ArticleItem[] = [
     ...regularArticles.map((a) => ({
       path: a.path,
@@ -196,7 +196,6 @@ const { data: articles } = await useAsyncData('all-articles', async () => {
       isProjectArticle: false,
     })),
     ...projectArticles.map((a) => {
-      // Extract project slug from path like /projects/digital-school/hybrid-solver
       const pathParts = a.path?.split('/') || []
       const projectSlug = pathParts[2] || ''
       return {
@@ -212,7 +211,6 @@ const { data: articles } = await useAsyncData('all-articles', async () => {
     }),
   ]
 
-  // Sort by date descending
   return allItems.sort((a, b) => {
     const dateA = new Date(a.date || 0).getTime()
     const dateB = new Date(b.date || 0).getTime()
@@ -220,18 +218,16 @@ const { data: articles } = await useAsyncData('all-articles', async () => {
   })
 })
 
-// Telemetry state
 const memAlloc = '0x00FFa1'
-const threadPoolState = 'active [8/8]'
+const threadPoolState = 'ACTIVE [8/8]'
 const bufferWidth = 85
 
-// Commands sequence
 const bootCommands = [
-  'Querying archive shards...',
-  'Manifest validation: OK',
-  'Decrypting metadata headers...',
-  'Index compilation successful.',
-  'Awaiting operator input_',
+  'QUERYING ARCHIVE SHARDS...',
+  'MANIFEST VALIDATION: OK',
+  'DECRYPTING HEADERS...',
+  'INDEX COMPILED.',
+  'AWAITING INPUT_',
 ] as const
 const activeCommands = computed(() => [...bootCommands])
 
@@ -250,32 +246,3 @@ useHead({
   meta: [{ name: 'description', content: 'Short-form notes, tutorials, and development logs.' }],
 })
 </script>
-
-<style scoped>
-.group\/crt::after {
-  content: ' ';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.05) 50%);
-  background-size: 100% 8px;
-  z-index: 50;
-  pointer-events: none;
-}
-.crt-hover:hover::after {
-  content: ' ';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: linear-gradient(rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.05) 50%);
-  background-size: 100% 4px;
-  z-index: 50;
-  pointer-events: none;
-}
-</style>

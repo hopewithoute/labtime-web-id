@@ -1,54 +1,67 @@
 <template>
   <main class="group/crt relative min-h-screen">
-    <div v-if="article">
+    <!-- Reading Progress Bar -->
+    <Teleport to="body">
+      <div class="fixed top-0 left-0 right-0 h-1.5 z-50 bg-foreground/10 pointer-events-none">
+        <div
+          class="h-full bg-foreground transition-[width] duration-150 ease-out"
+          :style="{ width: `${scrollProgress}%` }"
+        />
+      </div>
+    </Teleport>
+
+    <div v-if="article" ref="articleRef" class="max-w-5xl mx-auto px-4">
       <article>
-        <!-- Header -->
-        <header class="mb-12 border-4 border-foreground bg-background p-6 md:p-8 lg:p-12 relative group mt-8">
-          <div class="flex justify-between items-start mb-6">
-            <span
-              v-if="article.tags && article.tags.length > 0"
-              class="font-mono text-xs uppercase font-bold tracking-widest bg-foreground text-background px-3 py-1"
-            >
-              {{ article.tags[0] }}
-            </span>
-            <span v-else class="font-mono text-xs uppercase font-bold tracking-widest bg-foreground text-background px-3 py-1">
-              ARTICLE
-            </span>
-            <time class="font-mono text-xs font-bold tracking-widest text-muted-foreground">[{{ article.date }}]</time>
-          </div>
-          
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter leading-none mb-6">
-            {{ article.title }}
-          </h1>
-          
-          <div class="font-mono text-[10px] uppercase tracking-widest text-foreground/50 mb-2">DOC_DESC //</div>
-          <p v-if="article.description" class="text-lg md:text-xl max-w-4xl border-l-[6px] border-accent pl-6 py-2 bg-accent/5 font-medium mb-8">
-            {{ article.description }}
-          </p>
-          
-          <div class="flex items-center justify-between border-t border-dashed border-foreground/30 pt-6 mt-auto">
-            <div class="flex gap-2 flex-wrap">
+        <YorhaPanel
+          as="article"
+          variant="panel"
+          brackets
+          padding="p-0 mt-8 mb-32"
+        >
+          <!-- Header Area -->
+          <header class="p-6 md:p-12 border-b border-yorha-faint">
+            <div class="flex justify-between items-start mb-8">
               <span
-                v-for="tag in (article.tags || []).slice(1)"
-                :key="tag"
-                class="font-mono text-[10px] uppercase px-2 py-1 border border-foreground font-bold"
+                v-if="article.tags && article.tags.length > 0"
+                class="font-mono text-xs uppercase font-bold tracking-widest bg-foreground text-background px-3 py-1"
               >
-                {{ tag }}
+                {{ article.tags[0] }}
               </span>
+              <span v-else class="font-mono text-xs uppercase font-bold tracking-widest bg-foreground text-background px-3 py-1">
+                ARTICLE
+              </span>
+              <time class="font-mono text-xs font-bold tracking-widest text-muted-foreground">[{{ article.date }}]</time>
+            </div>
+            
+            <h1 class="text-4xl md:text-5xl lg:text-7xl font-black uppercase tracking-tighter leading-none mb-8">
+              {{ article.title }}
+            </h1>
+            
+            <div class="font-mono text-[10px] uppercase tracking-widest text-foreground/50 mb-2">DOC_DESC //</div>
+            <p v-if="article.description" class="text-xl md:text-2xl max-w-4xl border-l-[6px] border-accent pl-4 md:pl-8 py-4 bg-accent/5 font-medium mb-10 leading-relaxed">
+              {{ article.description }}
+            </p>
+            
+            <div class="flex items-center justify-between mt-auto">
+              <div class="flex gap-2 flex-wrap">
+                <span
+                  v-for="tag in (article.tags || []).slice(1)"
+                  :key="tag"
+                  class="font-mono text-[10px] uppercase px-2 py-1 border border-foreground font-bold"
+                >
+                  {{ tag }}
+                </span>
+              </div>
+            </div>
+          </header>
+
+          <!-- Content Area -->
+          <div class="p-6 md:p-12 lg:p-16">
+            <div class="article-prose">
+              <ContentRenderer :value="article" />
             </div>
           </div>
-        </header>
-        
-        <div
-          class="article-prose mb-16 prose prose-neutral prose-lg dark:prose-invert prose-link-fill max-w-none
-                      prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tight
-                      prose-h2:border-b-2 prose-h2:border-foreground/20 prose-h2:pb-2
-                      prose-a:no-underline prose-a:font-bold prose-a:text-foreground hover:prose-a:text-accent prose-a:transition-colors prose-a:px-1
-                      prose-pre:border-2 prose-pre:border-foreground prose-pre:rounded-none prose-pre:bg-muted/30
-                      prose-img:border-4 prose-img:border-foreground prose-img:rounded-none"
-        >
-          <ContentRenderer :value="article" />
-        </div>
+        </YorhaPanel>
       </article>
     </div>
 
@@ -56,12 +69,14 @@
     <div v-else class="py-20 text-center border-4 border-foreground mt-8 bg-foreground text-background">
       <h1 class="text-8xl font-black mb-4 uppercase">404</h1>
       <p class="text-xl mb-8 font-mono tracking-widest uppercase">SYS_ERR // Article not found.</p>
-      <NuxtLink to="/articles" class="text-accent hover:text-background underline font-mono uppercase tracking-widest font-bold">Return to Index</NuxtLink>
+      <NuxtLink to="/articles" class="text-accent underline font-mono uppercase tracking-widest font-bold">Return to Index</NuxtLink>
     </div>
   </main>
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
+
 const route = useRoute()
 const slug = route.params.slug as string
 
@@ -70,6 +85,32 @@ const { data: article } = await useAsyncData(`article-${slug}`, () =>
     .path(`/articles/${slug}`)
     .first()
 )
+
+// Scroll progress tracking
+const scrollProgress = ref(0)
+const articleRef = ref<HTMLElement | null>(null)
+
+function updateProgress() {
+  if (!articleRef.value) return
+  const el = articleRef.value
+  const rect = el.getBoundingClientRect()
+  const total = el.scrollHeight - window.innerHeight
+  if (total <= 0) {
+    scrollProgress.value = 0
+    return
+  }
+  const scrolled = -rect.top
+  scrollProgress.value = Math.min(100, Math.max(0, (scrolled / total) * 100))
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', updateProgress, { passive: true })
+  updateProgress()
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', updateProgress)
+})
 
 useHead({
   title: () => article.value ? `${article.value.title} | LabTime` : 'Article | LabTime',

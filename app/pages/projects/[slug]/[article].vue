@@ -1,12 +1,14 @@
 <template>
-  <main class="group/crt relative min-h-screen">
+  <main class="relative min-h-screen">
     <!-- Reading Progress Bar -->
-    <div class="fixed top-0 left-0 right-0 h-1.5 z-50 bg-foreground/10 pointer-events-none">
-      <div
-        class="h-full bg-foreground transition-[width] duration-150 ease-out"
-        :style="{ width: `${scrollProgress}%` }"
-      />
-    </div>
+    <Teleport to="body">
+      <div class="fixed top-0 left-0 right-0 h-1.5 z-50 bg-foreground/10 pointer-events-none">
+        <div
+          class="h-full bg-foreground transition-[width] duration-150 ease-out"
+          :style="{ width: `${scrollProgress}%` }"
+        />
+      </div>
+    </Teleport>
 
     <div v-if="article" ref="articleRef">
       <article>
@@ -16,14 +18,14 @@
         >
           <NuxtLink
             to="/projects"
-            class="hover:text-background hover:bg-foreground px-1 border border-transparent hover:border-foreground transition-colors"
+            class="px-1 border border-transparent"
           >
             PRJ_ROOT
           </NuxtLink>
           <span class="opacity-50">/</span>
           <NuxtLink
             :to="`/projects/${slug}`"
-            class="hover:text-background hover:bg-foreground px-1 border border-transparent hover:border-foreground transition-colors"
+            class="px-1 border border-transparent"
           >
             {{ parentProject?.title || slug }}
           </NuxtLink>
@@ -35,83 +37,90 @@
           </span>
         </nav>
 
-        <!-- Header -->
-        <header
-          class="mb-12 border-4 border-foreground bg-background p-6 md:p-8 lg:p-12 relative group mt-8"
+        <YorhaPanel
+          as="article"
+          variant="panel"
+          brackets
+          padding="p-0 mt-8 mb-16"
         >
-          <div class="flex justify-between items-start mb-6">
-            <span
-              v-if="article.category"
-              class="font-mono text-xs uppercase font-bold tracking-widest bg-foreground text-background px-3 py-1"
-            >
-              {{ article.category }}
-            </span>
-            <span
-              v-else
-              class="font-mono text-xs uppercase font-bold tracking-widest bg-foreground text-background px-3 py-1"
-            >
-              LOG
-            </span>
-          </div>
-
-          <h1
-            class="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter leading-none mb-6"
-          >
-            {{ article.title }}
-          </h1>
-
-          <div class="font-mono text-[10px] uppercase tracking-widest text-foreground/50 mb-2">
-            RECORD_DESC //
-          </div>
-          <p
-            v-if="article.description"
-            class="text-lg md:text-xl max-w-4xl border-l-[6px] border-accent pl-6 py-2 bg-accent/5 font-medium mb-8"
-          >
-            {{ article.description }}
-          </p>
-
-          <div
-            class="flex items-center justify-between border-t border-dashed border-foreground/30 pt-6 mt-auto"
-          >
-            <div class="flex gap-2 flex-wrap">
+          <!-- Header Area -->
+          <header class="p-6 md:p-8 lg:p-12 border-b border-yorha-faint">
+            <div class="flex justify-between items-start mb-6">
               <span
-                v-for="tag in article.tags"
-                :key="tag"
-                class="font-mono text-[10px] uppercase px-2 py-1 border border-foreground font-bold"
+                v-if="article.category"
+                class="font-mono text-xs uppercase font-bold tracking-widest bg-foreground text-background px-3 py-1"
               >
-                {{ tag }}
+                {{ article.category }}
+              </span>
+              <span
+                v-else
+                class="font-mono text-xs uppercase font-bold tracking-widest bg-foreground text-background px-3 py-1"
+              >
+                LOG
               </span>
             </div>
-            <span
-              v-if="estimatedReadTime"
-              class="font-mono text-[10px] uppercase font-bold tracking-widest text-accent ml-4 shrink-0"
-            >
-              [ {{ estimatedReadTime }} MIN_READ ]
-            </span>
-          </div>
-        </header>
 
-        <!-- Content -->
-        <div
-          class="article-prose mb-16 prose prose-neutral prose-lg dark:prose-invert prose-link-fill max-w-none prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tight prose-h2:border-b-2 prose-h2:border-foreground/20 prose-h2:pb-2 prose-a:no-underline prose-a:font-bold prose-a:text-foreground hover:prose-a:text-accent prose-a:transition-colors prose-a:px-1 prose-pre:border-2 prose-pre:border-foreground prose-pre:rounded-none prose-pre:bg-muted/30 prose-img:border-4 prose-img:border-foreground prose-img:rounded-none"
-        >
-          <ContentRenderer :value="article" />
-        </div>
+            <h1
+              class="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tighter leading-none mb-6"
+            >
+              {{ article.title }}
+            </h1>
+
+            <div class="font-mono text-[10px] uppercase tracking-widest text-foreground/50 mb-2">
+              RECORD_DESC //
+            </div>
+            <p
+              v-if="article.description"
+              class="text-lg md:text-xl max-w-4xl border-l-[6px] border-accent pl-6 py-2 bg-accent/5 font-medium mb-8"
+            >
+              {{ article.description }}
+            </p>
+
+            <div
+              class="flex items-center justify-between mt-auto"
+            >
+              <div class="flex gap-2 flex-wrap">
+                <span
+                  v-for="tag in article.tags"
+                  :key="tag"
+                  class="font-mono text-[10px] uppercase px-2 py-1 border border-foreground font-bold"
+                >
+                  {{ tag }}
+                </span>
+              </div>
+              <span
+                v-if="estimatedReadTime"
+                class="font-mono text-[10px] uppercase font-bold tracking-widest text-accent ml-4 shrink-0"
+              >
+                [ {{ estimatedReadTime }} MIN_READ ]
+              </span>
+            </div>
+          </header>
+
+          <!-- Content Area -->
+          <div class="p-6 md:p-10 lg:p-12">
+            <div
+              class="article-prose prose prose-neutral prose-lg dark:prose-invert prose-link-fill max-w-none prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tight prose-h2:border-b-2 prose-h2:border-foreground/20 prose-h2:pb-2 prose-a:no-underline prose-a:font-bold prose-a:text-foreground prose-a:px-1 prose-pre:border-2 prose-pre:border-foreground prose-pre:rounded-none prose-pre:bg-muted/30 prose-img:border-4 prose-img:border-foreground prose-img:rounded-none"
+            >
+              <ContentRenderer :value="article" />
+            </div>
+          </div>
+        </YorhaPanel>
 
         <!-- Prev / Next Navigation -->
         <nav v-if="prevArticle || nextArticle" class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-4">
           <NuxtLink
             v-if="prevArticle"
             :to="prevArticle.path"
-            class="block p-6 border-4 border-foreground bg-background group hover:bg-foreground/5 transition-colors relative"
+            class="block p-6 yorha-panel group hover:bg-foreground/5 transition-colors relative"
           >
             <span
-              class="font-mono text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-2 block border-b border-dashed border-foreground/30 pb-2"
+              class="font-mono text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-2 block border-b border-border pb-2"
             >
               &lt;&lt; PROC_PREV
             </span>
             <p
-              class="font-black text-xl uppercase tracking-tight group-hover:text-accent transition-colors mt-2"
+              class="font-black text-xl uppercase tracking-tight mt-2"
             >
               {{ prevArticle.title }}
             </p>
@@ -120,15 +129,15 @@
           <NuxtLink
             v-if="nextArticle"
             :to="nextArticle.path"
-            class="block p-6 border-4 border-foreground bg-background group hover:bg-foreground/5 transition-colors relative text-right"
+            class="block p-6 yorha-panel group hover:bg-foreground/5 transition-colors relative text-right"
           >
             <span
-              class="font-mono text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-2 block border-b border-dashed border-foreground/30 pb-2"
+              class="font-mono text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-2 block border-b border-border pb-2"
             >
               PROC_NEXT &gt;&gt;
             </span>
             <p
-              class="font-black text-xl uppercase tracking-tight group-hover:text-accent transition-colors mt-2"
+              class="font-black text-xl uppercase tracking-tight mt-2"
             >
               {{ nextArticle.title }}
             </p>
@@ -136,9 +145,10 @@
         </nav>
 
         <!-- Back to top -->
-        <div class="mt-16 text-center border-t-4 border-foreground pt-12">
+        <div class="mt-16 text-center pt-8">
+          <div class="yorha-divider-double mb-12"></div>
           <button
-            class="font-mono text-sm uppercase font-bold tracking-widest text-muted-foreground hover:text-foreground transition-colors hover:underline decoration-2 underline-offset-4"
+            class="font-mono text-sm uppercase font-bold tracking-widest text-muted-foreground"
             @click="scrollToTop"
           >
             [&uarr; SYS_TOP]
@@ -237,31 +247,3 @@ useHead({
 })
 </script>
 
-<style scoped>
-.group\/crt::after {
-  content: ' ';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.05) 50%);
-  background-size: 100% 8px;
-  z-index: 50;
-  pointer-events: none;
-}
-.crt-hover:hover::after {
-  content: ' ';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: linear-gradient(rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.05) 50%);
-  background-size: 100% 4px;
-  z-index: 50;
-  pointer-events: none;
-}
-</style>
