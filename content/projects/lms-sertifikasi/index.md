@@ -1,9 +1,9 @@
 ---
-title: "LMS Sertifikasi"
+title: "LMS Certification Platform"
 description: "I architected and shipped this certification platform end to end, with real-time assessments, versioned certification workflows, centralized telemetry, and edge-based media delivery."
 date: 2026-03-19
 tags: ["elixir", "ash-framework", "react", "phoenix-channels", "xapi", "cloudflare-workers", "postgresql"]
-role: "Senior Software Engineer"
+role: "Senior Full-Stack Engineer / Long-Term Core Engineer"
 problem: "Certification platforms need more than course delivery. They have to preserve exam integrity, keep learner progress accurate across devices, issue trustworthy certificates, and handle media-heavy delivery without letting the core application become the bottleneck."
 approach: "I designed and delivered the platform as a full-stack system where the backend owns lifecycle rules, progress calculation, and asynchronous processing, while the frontend stays responsive through targeted real-time updates. Media ingestion and delivery move toward the edge so large transfers and segmented playback do not dominate the application runtime."
 outcome: "Delivered a certification platform with stronger real-time behavior, safer versioned learning rules, more reliable progress calculation, and a media path that no longer competes directly with the core business system. The product stayed responsive under operational pressure without moving business truth into the browser."

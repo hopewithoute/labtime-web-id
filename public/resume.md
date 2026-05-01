@@ -1,128 +1,135 @@
 # Anggi Wibiyanto
-**Senior Software Engineer · Full Product Owner · AI-Augmented Engineer**
+**Senior Full-Stack Engineer**
 
 - **Email:** anggi.wibiyanto@gmail.com
+- **Phone:** +6285723960603
 - **Location:** Bandung, Indonesia
-- **Website:** [labtime.web.id](https://labtime.web.id)
+- **Portfolio:** [labtime.web.id](https://labtime.web.id)
 - **GitHub:** [github.com/hopewithoute](https://github.com/hopewithoute)
+- **LinkedIn:** [linkedin.com/in/hopewithoute](https://www.linkedin.com/in/hopewithoute/)
 
 ---
 
 ## Professional Summary
 
-Senior Software Engineer with 10+ years delivering end-to-end systems across education, government, and media sectors. Experienced in full product ownership — from requirements gathering and client consultation to architecture, implementation, UAT, and long-term maintenance. Combines systems thinking with AI-augmented execution to ship production-grade software at 3x velocity without compromising quality.
+Senior Full-Stack Engineer with 10+ years of experience building and operating business-critical platforms across education, government, and media. Strong in turning ambiguous requirements into production systems end to end, spanning stakeholder discovery, system design, backend development, frontend integration, testing discipline, infrastructure, and long-term production support. Best suited for lean teams that need a hands-on technical owner who can ship reliably with strong cost and operational discipline.
 
 ---
 
-## Technical Skills
+## Selected Achievements
 
-### Architecture & Design
-Multi-Tenant SaaS Architecture, System Design Patterns, High Availability Systems, Event-Driven Architecture, API Design, Database Schema Design
+- Delivered and operated a digital school platform serving 5,000+ students and supporting peaks of 2,000 concurrent exam users while keeping infrastructure costs below USD 50 per month.
+- Rebuilt a university cooperation-management platform that removed duplicate reporting into the national system and introduced real-time progress tracking across faculties, campuses, and study programs.
+- Replaced a failing academic and LMS platform for a private high school serving around 800 students across 4 years of operation, keeping online exams stable without recurring exam incidents.
+- Designed an institutional asset-governance platform covering 68 organizational units and 80K+ records with audit trails, ownership tracking, and automated depreciation workflows.
 
-### Frontend
-Vue 3, React 19, TypeScript, Tailwind CSS 4, Inertia.js, TanStack (Query, Router, Form), PrimeVue, Bulma CSS
+---
 
-### Backend
-Elixir, Ash Framework, Phoenix, Laravel 11/12 (Octane, Horizon), PHP 8.4, Hono, Yii2, Python (OR-Tools)
+## Core Skills
 
-### Database & Data
-PostgreSQL, MySQL/MariaDB, Redis, xAPI/LRS, Query Optimization, Data Modeling
+### Full-Stack Delivery
+Laravel, Vue, PHP, Inertia.js, React, TypeScript, Hono, Elixir, Phoenix, Ash Framework
 
-### Infrastructure & DevOps
-Docker, Nginx, Linux Server Administration, Cloudflare (Workers, R2, WAF), Azure Services, AWS S3, CI/CD
+### Backend & Architecture
+REST API Design, Multi-Tenant SaaS, Background Jobs, Real-Time Systems, Event-Driven Patterns
 
-### Product & Process
-Requirements Gathering, Client Consultation, UAT Coordination, Technical Documentation, System Maintenance, AI-Assisted Development
+### Data & Infrastructure
+MySQL/MariaDB, PostgreSQL, Redis, Docker, Nginx, Linux Server Administration, Cloudflare, AWS S3, CI/CD
+
+### Product & Operations
+Requirements Discovery, Stakeholder Communication, Technical Documentation, UAT Coordination, QA Discipline, Production Support, xAPI/LRS
+
 
 ---
 
 ## Professional Experience
 
 ### Rail System
-**Senior Software Engineer** | 2013 – Present | Remote
+**Senior Full-Stack Engineer / Long-Term Core Engineer** | 2013 - Present | Remote
 
-*Software company building digital products while also delivering external client platforms across education, government, and media sectors.*
+*Rail System is a software house and product studio delivering internal products and custom platforms for university, government, and media clients. I work there full-time as a long-term core engineer, leading some systems independently end to end while also partnering with frontend, mobile, PM, and stakeholder teams when projects require cross-functional delivery.*
 
-#### LMS Certification Platform (2025 – Present)
-*Scope: Software Engineer*  
-*Tech: React 19, TypeScript, TanStack, Elixir, Ash Framework, Phoenix WebSockets, Oban, PostgreSQL, Hono, Cloudflare Workers & R2, xAPI*
+#### Digital School Platform (2019 - 2025)
+*Internal Product*  
+*Tech: Laravel, Vue, Inertia.js, PHP, MySQL, Redis, Python, OR-Tools*
 
-- **AI-Augmented Delivery:** Accelerated feature delivery cycles by 3x, acting as Architect and Driver while orchestrating AI tools for high-quality full-stack code execution.
-- **Real-Time Infrastructure:** Engineered React 19 + Phoenix WebSocket architecture with O(1) granular progress tracking, powering real-time chat/notifications with zero perceived latency.
-- **Backend Resilience:** Built scalable Elixir/Ash backend enforcing strict data immutability, coupled with modern xAPI architecture enabling deep learning analytics and full data interoperability.
-- **Cost-Optimized Media Pipeline:** Designed resilient Media Gateway and custom HLS pipeline using Cloudflare Worker & R2, drastically reducing storage and egress costs while automating Oban-based video transcription.
+- Led backend architecture and production operations for a digital school platform used by 5,000+ students, collaborating with frontend, mobile, and PM contributors across delivery.
+- Kept online exam operations stable at peaks of 2,000 concurrent users while maintaining infrastructure costs below USD 50 per month.
+- Served as the backend and infrastructure decision maker, defining feature implementation patterns, rollout strategy, and multi-tenant architecture for multi-school deployments.
+- Worked with frontend and mobile contributors through contract-based API design and joint debugging during rollout and production issue resolution.
+- Replaced paper-based exams with online assessment and automatic grading, and built a scheduling solver with Google OR-Tools to reduce manual academic planning.
 
-#### Digital School Platform (2019 – 2025)
-*Scope: Software Engineer*
+#### SIMKERMA - Universitas Pendidikan Indonesia (2022 - 2024)
+*Client Platform*  
+*Tech: Laravel 11, Vue 3, Inertia.js, PrimeVue, PHP 8.3, MySQL, Redis*
 
-**[V1] Team-based Development (2019–2024)**  
-*Tech: Yii2, Vue, MySQL, Redis*
-- **Cache Architecture & Invalidation:** Architected backend caching and invalidation patterns using Redis and controller-level response caching to reduce repeated database load across academic workflows.
-- **Exam Processing Reliability:** Engineered resilient exam-processing flows with strict session validation, batch answer handling, and async background jobs to support reliable assessment operations.
-- **Soft Proctoring & Exam Integrity:** Built soft-proctoring and exam integrity workflows with tokenized sessions, device-bound access, activity tracking, and auditable session logs for digital assessments.
-- **Payment Reconciliation & Attendance Operations:** Integrated signed payment reconciliation workflows with biometric and web attendance operations, including geofencing and evidence-backed attendance records.
+- Rebuilt a university cooperation-management platform from scratch after the prior implementation diverged from operational requirements, restoring delivery quality and stakeholder trust.
+- Reverse engineered an undocumented external reporting API and designed a reporting-compatible data model and synchronization workflow for 8,000+ cooperation records across 9 faculties, 5 regional campuses, and 176 study programs.
+- Enabled units to submit reports directly from SIMKERMA without re-entering data into the central government reporting system, reducing duplicate work and reporting friction.
+- Defined clear boundaries between internal workflow and external compliance reporting, adding real-time progress tracking and local scoring simulation before final submission.
+- Reduced sync ambiguity and state drift where the central system acted as the reporting source of truth.
 
-**[V2] Platform Rebuild (2024–2025)**  
-*Tech: Vue 3, Inertia.js, Laravel 12, PHP 8.4, Python (OR-Tools), MySQL, Redis*
-- **Automated Assessment Pipeline:** Eliminated manual grading to near-zero with automated assessment pipeline.
-- **Advanced Scheduling Solver:** Architected multi-stage solver using Python (Google OR-Tools) for clash-free timetables.
-- **Multi-Curriculum Support:** Designed flexible JSON-backed data model for diverse academic standards (Merdeka, 2013).
+#### SIMSARPRAS - Universitas Pendidikan Indonesia (2022 - 2024)
+*Client Platform*  
+*Tech: Laravel 11, Vue 3, Inertia.js, PrimeVue, PHP 8.3, MySQL, Redis*
 
-#### SIMSARPRAS — Universitas Pendidikan Indonesia (2022 – 2024)
-*Scope: Software Engineer*  
-*Tech: Vue 3, Inertia.js, PrimeVue, Laravel 11, PHP 8.3, MySQL, Redis*
+- Built an asset management platform used across 68 organizational units, unifying 3 procurement channels and 8 asset classes in one operational system.
+- Designed a database-backed asset lifecycle model to track ownership, location, distribution state, and depreciation across 80K+ asset and inventory records.
+- Added audit trails and role-based access controls to strengthen accountability, traceability, and compliance across university units.
+- Automated fixed-asset depreciation and related workflows, reducing manual reconciliation effort for finance and operations teams.
+- Sustained the platform through more than two years of ongoing maintenance and production support.
 
-- **Unified Polymorphic Data Model:** Engineered highly extensible single asset schema unifying disparate procurement types (purchase, donation, grants), eliminating data silos.
-- **Automated Depreciation Engine:** Developed high-performance module auto-computing real-time straight-line depreciation for 50,000+ assets.
-- **Immutable Audit Trail:** Architected tamper-proof change history integrated into all asset mutation records, satisfying university audits and compliance.
-- **Hierarchical RBAC:** Implemented granular access controls governing asset visibility and mutation rights across departments.
+#### LMS Certification Platform (2025 - Present)
+*Internal Product*  
+*Tech: React 19, TypeScript, TanStack, Elixir, Ash Framework, Phoenix WebSockets, Oban, PostgreSQL, Hono, Cloudflare Workers, Cloudflare R2, xAPI*
 
-#### SIMKERMA — Universitas Pendidikan Indonesia (2022 – 2024)
-*Scope: Software Engineer*  
-*Tech: Vue 3, Inertia.js, PrimeVue, Laravel 11, PHP 8.3, MySQL, Redis*
+- Leading the design and implementation of an in-development certification LMS intended to unify learning, exams, certification, and audit workflows in a single platform.
+- Translated 22 product user stories into a domain model with 40+ data entities supporting academic and certification workflows.
+- Designed a real-time architecture and immutable xAPI-based learning records to support auditability, reporting, and interoperability.
+- Built a media pipeline on Cloudflare Workers and R2 to improve delivery resilience while controlling storage and bandwidth costs.
+- Established automated testing practices and code quality standards to support stable delivery without a dedicated QA team.
 
-- **Fault-Tolerant Sync Engine:** Designed robust synchronization bridging complex local workflows with strict Kemdikbud national schemas.
-- **Compliance & Simulation Workflow:** Streamlined national reporting with real-time Report Weight calculations and scoring simulations.
-- **Granular Performance Tracking:** Developed comprehensive monitoring for cooperation activities per organizational unit.
+#### limawaktu.id - Media Portal (2016 - 2024)
+*Internal Product*  
+*Tech: PHP, Yii2, MySQL, Nginx, Linux, Cloudflare, Google Analytics, Matomo*
 
-#### SIBER Election Platform (2024)
-*Scope: Software Engineer*  
-*Tech: Vue 3, Inertia.js, PrimeVue, Tailwind CSS, Laravel 11, PHP 8.2, MySQL, Redis, Laravel Horizon, Azure OCR API, Google Maps API*
+- Designed, built, and maintained a media portal supporting 16,000+ published articles over 9 years.
+- Owned the application and infrastructure end to end for 2.3M+ monthly requests on USD 10 per month hosting.
+- Improved search visibility and editorial insight through SEO-friendly delivery and analytics instrumentation.
 
-- **Automated Real-Count OCR Pipeline:** Architected automated data extraction pipeline leveraging Azure OCR API to process ID cards and C1 voting forms from thousands of polling stations (TPS).
-- **Real-Time Geospatial Analytics:** Engineered dynamic territory mapping using Google Maps API, providing real-time visual insights into voter distribution and logistics tracking.
-- **High-Availability Architecture:** Built resilient high-load system using Redis and Laravel Horizon. Eliminated N+1 query bottlenecks, ensuring sub-second response times during Election Day traffic spikes.
-
-#### limawaktu.id — Media Portal (2016 – 2024)
-*Scope: Software Engineer*  
-*Tech: PHP, Yii2 Framework, Bulma CSS, MySQL, Nginx, Linux, Cloudflare, Google Analytics, Matomo*
-
-- **Solo Platform Architecture:** Designed, developed, and solely maintained entire media portal using Yii2 and Bulma CSS, managing 16,000+ news articles over 9 years.
-- **Technical SEO & Traffic Analytics:** Architected frontend and server pipelines with SEO best practices. Integrated Google Analytics alongside Matomo for robust tracking.
-
-#### bandungkita.id — Media Infrastructure (2017 – 2024)
-*Scope: Software Engineer*  
+#### bandungkita.id - Media Infrastructure (2017 - 2024)
+*Client Infrastructure*  
 *Tech: WordPress, Linux Server, Nginx, Cloudflare WAF, Fail2Ban*
 
-- **Infrastructure & Reliability:** Managed and optimized Nginx and server resources for high-volume WordPress architecture.
-- **Security Hardening & Disaster Recovery:** Fortified defenses using multi-layered protocols. Led recovery for 3 major security incidents with zero permanent data loss.
+- Managed infrastructure reliability and server performance for a WordPress-based media platform handling up to 4.2M+ requests per month on USD 10 per month hosting.
+- Recovered from three major security incidents, including rogue-plugin takeovers, through backup restoration and system rebuilds with no permanent data loss.
 
-#### Pemkab Kabupaten Bandung Barat (2013 – 2016)
-*Scope: Software Engineer*  
-*Tech: PHP, Yii2 Framework, Bootstrap, jQuery, MySQL, Kannel SMS Gateway, Linux*
+#### West Bandung Regency Government (2013 - 2016)
+*Client Delivery*  
+*Tech: PHP, Yii2, MySQL, Kannel SMS Gateway, Linux*
 
-- **E-Government Ecosystem:** Designed and developed 10+ critical public service platforms including One-Stop Licensing (SIMPPTSP) and Village Finance Systems.
-- **Public Communication Channel:** Architected reliable SMS notification system using Kannel SMS Gateway for real-time citizen status updates.
-- **Agency Web Infrastructure:** Built, deployed, and maintained official portals across multiple government agencies.
+- Delivered 10+ public service and internal government systems, including licensing, village finance, and agency websites.
+- Built SMS-based notification services to improve status communication for citizens and administrative users.
+
+### Independent Freelance Delivery
+**Full-Stack Engineer** | 2022 - 2023 | Remote
+
+#### Academic System & LMS - SMA PGRI Depok
+*Client Platform*  
+*Tech: Laravel, Inertia.js, Vue, Vuetify, Redis, MySQL, S3 Storage*
+
+- Replaced a failing academic and LMS platform serving around 800 students across 4 years of operation, resolving online exam instability, emergency server scaling, and high operating costs during peak periods.
+- Built the system end to end as a solo engineer, covering exams, automatic grading, attendance, and learning-material delivery.
+- Provided one year of post-launch maintenance; the platform has remained in active use across 4 years of operation without recurring exam-related issues.
 
 ---
 
 ## Education
 
-### S1 Teknik Informatika
-- **Universitas Komputer Indonesia (UNIKOM)** | 2011 – 2016
-- Software Engineering, Information System
+### Bachelor of Informatics Engineering
+- **Universitas Komputer Indonesia (UNIKOM)** | 2011 - 2016
+- Focus: Software Engineering, Information Systems
 
-### Teknik Komputer & Jaringan
-- **SMKN 1 Cimahi** | 2006 – 2010
-- Network Engineering
+### Vocational High School, Computer and Network Engineering
+- **SMKN 1 Cimahi** | 2006 - 2010
+- Four-year vocational program in network engineering

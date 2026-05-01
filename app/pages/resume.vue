@@ -1,664 +1,767 @@
 <template>
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 relative group/crt pb-24">
-
-    <!-- Left Column: Sticky Header & Navigation -->
+  <div class="grid grid-cols-1 gap-8 pb-24 font-sans text-foreground lg:grid-cols-12">
     <aside class="lg:col-span-4 xl:col-span-3">
-      <div class="lg:sticky lg:top-32 flex flex-col">
-        <CornerFrame class="bg-background">
-          <div class="p-6 md:p-8">
-            <h1 class="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-4 border-l-[6px] border-accent pl-4 leading-none glitch-hover relative inline-block">
-              <span class="relative z-10">Resume</span>
-            </h1>
-            <p class="text-sm font-mono text-muted-foreground leading-snug mb-8 opacity-80">
-              <span class="text-accent font-bold">></span> Senior Software Engineer
-              <br/>
-              <span class="text-accent font-bold">></span> AI-Augmented Engineer
-            </p>
+      <div class="flex flex-col space-y-6 lg:sticky lg:top-24">
+        <YorhaPanel brackets variant="panel">
+          <div
+            class="mb-4 border-b border-yorha-faint pb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground-secondary"
+          >
+            [ OPERATOR_IDENTITY ]
+          </div>
 
-            <!-- Desktop Navigation Map -->
-            <nav class="hidden lg:block space-y-1 font-mono text-xs uppercase mb-12">
-              <div class="text-[10px] text-muted-foreground mb-4 tracking-widest border-b border-dashed border-foreground/30 pb-2 flex justify-between">
-                <span>[INDEX_MAP]</span>
-                <span>/sys/docs</span>
-              </div>
-              <a href="#summary" class="flex items-center gap-2 py-2 text-foreground/70 hover:text-accent group transition-colors border-b border-foreground/10 hover:border-accent/40 relative">
-                <span class="opacity-0 group-hover:opacity-100 text-accent transition-opacity w-6 shrink-0">[x]</span>
-                <span class="opacity-100 group-hover:opacity-0 text-muted-foreground transition-opacity w-6 absolute left-0">[ ]</span>
-                <span class="ml-1">01. Summary</span>
-              </a>
-              <a href="#experience" class="flex items-center gap-2 py-2 text-foreground/70 hover:text-accent group transition-colors border-b border-foreground/10 hover:border-accent/40 relative">
-                <span class="opacity-0 group-hover:opacity-100 text-accent transition-opacity w-6 shrink-0">[x]</span>
-                <span class="opacity-100 group-hover:opacity-0 text-muted-foreground transition-opacity w-6 absolute left-0">[ ]</span>
-                <span class="ml-1">02. Execution_Logs</span>
-              </a>
-              <a href="#skills" class="flex items-center gap-2 py-2 text-foreground/70 hover:text-accent group transition-colors border-b border-foreground/10 hover:border-accent/40 relative">
-                <span class="opacity-0 group-hover:opacity-100 text-accent transition-opacity w-6 shrink-0">[x]</span>
-                <span class="opacity-100 group-hover:opacity-0 text-muted-foreground transition-opacity w-6 absolute left-0">[ ]</span>
-                <span class="ml-1">03. Tech_Matrix</span>
-              </a>
-              <a href="#education" class="flex items-center gap-2 py-2 text-foreground/70 hover:text-accent group transition-colors border-b border-foreground/10 hover:border-accent/40 relative">
-                <span class="opacity-0 group-hover:opacity-100 text-accent transition-opacity w-6 shrink-0">[x]</span>
-                <span class="opacity-100 group-hover:opacity-0 text-muted-foreground transition-opacity w-6 absolute left-0">[ ]</span>
-                <span class="ml-1">04. Education</span>
-              </a>
-            </nav>
+          <h1
+            class="mb-2 text-3xl leading-none font-display font-bold uppercase tracking-wider md:text-4xl"
+          >
+            Resume
+          </h1>
 
-            <!-- Prominent CTA -->
-            <div class="mt-8 lg:mt-6 space-y-3">
-              <NuxtLink to="/resume/ats" class="block w-full border-2 border-foreground group hover:bg-foreground hover:text-background transition-colors relative crt-hover bg-background overflow-hidden text-center text-xs py-3 font-mono font-bold uppercase tracking-widest">
-                <span class="relative z-10 flex items-center justify-center gap-2 group-hover:text-background text-foreground transition-colors">
-                  <span class="text-accent group-hover:text-background">./sys/</span>
-                  <span>Open ATS</span>
-                </span>
-                <div class="absolute inset-0 bg-accent/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-              </NuxtLink>
+          <div
+            class="mb-8 space-y-1 text-xs font-bold uppercase tracking-widest text-foreground-secondary"
+          >
+            <div class="flex items-center gap-2">
+              <span class="text-foreground">></span>
+              <span>Senior Full-Stack Engineer</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-foreground">></span>
+              <span>End-to-End Technical Ownership</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-foreground">></span>
+              <span>Education, Government, Media</span>
             </div>
           </div>
-        </CornerFrame>
+
+          <nav
+            class="mb-8 hidden space-y-1 font-mono text-[10px] uppercase tracking-widest lg:block"
+          >
+            <div
+              class="mb-4 flex justify-between border-b border-yorha-faint pb-2 text-foreground-secondary"
+            >
+              <span>[ INDEX_MAP ]</span>
+              <span>/sys/docs</span>
+            </div>
+            <a
+              v-for="item in navItems"
+              :key="item.href"
+              :href="item.href"
+              class="group flex items-center gap-2 border-b border-yorha-faint py-1.5 text-foreground-secondary transition-colors hover:text-foreground"
+            >
+              <span
+                class="w-4 shrink-0 font-bold opacity-0 transition-opacity group-hover:opacity-100"
+              >
+                >
+              </span>
+              <span
+                class="absolute left-0 w-4 opacity-100 transition-opacity group-hover:opacity-0"
+              >
+                -
+              </span>
+              <span class="ml-1 font-bold">{{ item.label }}</span>
+            </a>
+          </nav>
+
+          <NuxtLink
+            to="/resume/ats"
+            class="yorha-btn relative flex w-full! justify-center text-center group"
+          >
+            <span class="flex items-center gap-2 transition-colors">
+              <span>[ VIEW_ATS_FORMAT ]</span>
+            </span>
+          </NuxtLink>
+        </YorhaPanel>
       </div>
     </aside>
 
-    <!-- Right Column: Scrolling Content -->
-    <div class="lg:col-span-8 xl:col-span-9 space-y-20 lg:pl-8 lg:border-l lg:border-foreground/20">
+    <div class="space-y-16 lg:col-span-8 xl:col-span-9">
+      <section id="summary" class="scroll-mt-24 space-y-6">
+        <div class="flex items-end justify-between border-b-2 border-yorha-strong pb-2">
+          <h2 class="text-2xl font-display font-bold uppercase tracking-wider text-foreground">
+            01. Summary
+          </h2>
+        </div>
 
-      <!-- 01. Summary Section -->
-      <section id="summary" class="scroll-mt-24 space-y-8">
-        <div class="border-2 border-foreground bg-background">
-          <div class="grid grid-cols-1 xl:grid-cols-[minmax(0,1.6fr)_minmax(320px,0.9fr)] gap-0.5 bg-foreground">
-            <div class="bg-background p-6 md:p-8 lg:p-10">
-              <div class="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-4">/* 01. Profile Summary */</div>
-              <div class="mb-5 flex flex-wrap gap-2">
-                <span class="border border-accent/30 bg-accent/10 px-3 py-1 text-[11px] font-mono font-black uppercase tracking-[0.2em] text-accent">Senior Software Engineer</span>
-                <span class="border border-foreground/20 px-3 py-1 text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-foreground/70">Bandung / Remote</span>
+        <YorhaPanel as="div" variant="panel" brackets padding="p-0">
+          <div class="grid grid-cols-1 xl:grid-cols-[minmax(0,1.6fr)_minmax(320px,0.9fr)]">
+            <div class="p-6 md:p-8">
+              <div
+                class="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground-secondary"
+              >
+                [ PROFILE_DATA ]
               </div>
-              <p class="text-xl md:text-2xl leading-relaxed max-w-3xl font-medium">
-                Senior Software Engineer with 10+ years delivering end-to-end systems across education, government, and media sectors. Experienced in full product ownership — from requirements gathering and client consultation to architecture, implementation, UAT, and long-term maintenance. Combines systems thinking with AI-augmented execution to ship production-grade software at 3x velocity without compromising quality.
+
+              <div class="mb-6 flex flex-wrap gap-2">
+                <span
+                  class="border-2 border-transparent bg-foreground px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-background"
+                >
+                  Senior Full-Stack Engineer
+                </span>
+                <span
+                  class="border border-yorha-strong px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-foreground"
+                >
+                  Bandung / Remote
+                </span>
+              </div>
+
+              <p class="max-w-3xl text-base leading-relaxed tracking-wide md:text-xl">
+                Senior Full-Stack Engineer with 10+ years of experience building and operating
+                business-critical platforms across education, government, and media. Strong in
+                turning ambiguous requirements into production systems end to end, spanning
+                stakeholder discovery, system design, backend development, frontend integration,
+                testing discipline, infrastructure, and long-term production support. Best suited
+                for lean teams that need a hands-on technical owner who can ship reliably with
+                strong cost and operational discipline.
               </p>
             </div>
 
-            <div class="bg-background p-6 md:p-8 border-t xl:border-t-0 xl:border-l border-foreground/20">
-              <div class="flex items-center justify-between gap-4 mb-5 border-b border-dashed border-foreground/20 pb-3">
+            <div
+              class="border-t border-yorha-faint bg-background/50 p-6 md:p-8 xl:border-t-0 xl:border-l"
+            >
+              <div
+                class="mb-5 flex items-center justify-between gap-4 border-b border-yorha-faint pb-3"
+              >
                 <div>
-                  <div class="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">[CONTACT_BLOCK]</div>
-                  <h2 class="text-xl font-black uppercase tracking-tight mt-1">Anggi Wibiyanto</h2>
+                  <div
+                    class="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground-secondary"
+                  >
+                    [ CONTACT_BLOCK ]
+                  </div>
+                  <h3 class="mt-1 text-xl font-display font-bold uppercase tracking-wider">
+                    Anggi Wibiyanto
+                  </h3>
                 </div>
-                <span class="font-mono text-[10px] px-2 py-1 border border-accent/30 text-accent uppercase tracking-[0.2em] font-bold">Open to role</span>
+                <span
+                  class="border border-yorha-strong px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-widest text-foreground"
+                >
+                  Open
+                </span>
               </div>
 
-              <div class="space-y-3 text-sm md:text-[15px]">
-                <div class="flex items-start justify-between gap-4 border-b border-foreground/10 pb-3">
-                  <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Email</span>
-                  <a href="mailto:anggi.wibiyanto@gmail.com" class="text-right font-semibold text-foreground hover:text-accent transition-colors break-all">anggi.wibiyanto@gmail.com</a>
-                </div>
-                <div class="flex items-start justify-between gap-4 border-b border-foreground/10 pb-3">
-                  <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Location</span>
-                  <span class="text-right font-semibold text-foreground">Bandung, Indonesia</span>
-                </div>
-                <div class="flex items-start justify-between gap-4 border-b border-foreground/10 pb-3">
-                  <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Website</span>
-                  <a href="https://labtime.web.id" target="_blank" rel="noopener noreferrer" class="text-right font-semibold text-foreground hover:text-accent transition-colors break-all">labtime.web.id</a>
-                </div>
-                <div class="flex items-start justify-between gap-4">
-                  <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">GitHub</span>
-                  <a href="https://github.com/hopewithoute" target="_blank" rel="noopener noreferrer" class="text-right font-semibold text-foreground hover:text-accent transition-colors break-all">github.com/hopewithoute</a>
+              <div class="space-y-4 text-sm font-sans uppercase tracking-widest">
+                <div
+                  v-for="item in contactItems"
+                  :key="item.label"
+                  class="flex flex-col gap-1 border-b border-yorha-faint pb-3 last:border-b-0 last:pb-0"
+                >
+                  <span class="text-[10px] font-bold text-foreground-secondary">
+                    {{ item.label }}
+                  </span>
+                  <a
+                    v-if="item.href"
+                    :href="item.href"
+                    :target="item.external ? '_blank' : undefined"
+                    :rel="item.external ? 'noopener noreferrer' : undefined"
+                    class="self-start px-1 -ml-1 font-bold text-foreground transition-colors hover:bg-foreground hover:text-background"
+                  >
+                    {{ item.value }}
+                  </a>
+                  <span v-else class="font-bold text-foreground">{{ item.value }}</span>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </YorhaPanel>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-0.5 bg-foreground border-2 border-foreground">
-          <div class="bg-background p-4 md:p-5">
-            <div class="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-2">Signal_01</div>
-            <div class="text-2xl md:text-3xl font-black tracking-tight">10+</div>
-            <div class="text-xs md:text-sm font-medium text-muted-foreground">years delivering production systems</div>
-          </div>
-          <div class="bg-background p-4 md:p-5">
-            <div class="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-2">Signal_02</div>
-            <div class="text-2xl md:text-3xl font-black tracking-tight">21</div>
-            <div class="text-xs md:text-sm font-medium text-muted-foreground">user stories shipped in LMS rollout</div>
-          </div>
-          <div class="bg-background p-4 md:p-5">
-            <div class="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-2">Signal_03</div>
-            <div class="text-2xl md:text-3xl font-black tracking-tight">3x</div>
-            <div class="text-xs md:text-sm font-medium text-muted-foreground">faster delivery with AI-augmented execution</div>
-          </div>
-          <div class="bg-background p-4 md:p-5">
-            <div class="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-2">Signal_04</div>
-            <div class="text-2xl md:text-3xl font-black tracking-tight">3,000</div>
-            <div class="text-xs md:text-sm font-medium text-muted-foreground">concurrent exam sessions handled</div>
-          </div>
+        <div class="grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-4">
+          <YorhaPanel
+            v-for="metric in metrics"
+            :key="metric.label"
+            brackets
+            variant="simple"
+            hover
+            padding="p-4 md:p-6"
+            class="text-center"
+          >
+            <div
+              class="mb-2 font-mono text-[10px] uppercase tracking-widest text-foreground-secondary group-hover:text-background/60"
+            >
+              {{ metric.code }}
+            </div>
+            <div
+              class="mb-2 text-3xl font-display font-bold tracking-wider transition-colors group-hover:text-background"
+            >
+              {{ metric.value }}
+            </div>
+            <div
+              class="text-[10px] font-bold uppercase tracking-widest opacity-80 transition-all group-hover:text-background group-hover:opacity-100"
+            >
+              {{ metric.label }}
+            </div>
+          </YorhaPanel>
         </div>
       </section>
 
-      <!-- 02. Experience Section -->
-      <section id="experience" class="scroll-mt-24">
-        <div class="flex items-center gap-4 mb-8">
-          <h2 class="text-3xl font-black uppercase tracking-tight">Execution_Logs</h2>
-          <div class="h-px bg-foreground flex-1 opacity-20"></div>
+      <div class="yorha-divider-double"></div>
+
+      <section id="achievements" class="scroll-mt-24 space-y-6">
+        <div class="flex items-end justify-between border-b-2 border-yorha-strong pb-2">
+          <h2 class="text-2xl font-display font-bold uppercase tracking-wider text-foreground">
+            02. Signal_Achievements
+          </h2>
         </div>
 
-        <div class="border-2 border-foreground bg-background">
-          <!-- Company Header -->
-          <div class="p-6 md:p-8 bg-foreground/5 border-b-2 border-foreground">
-            <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
-              <div>
-                <h3 class="text-2xl md:text-3xl font-black uppercase tracking-tight">Rail System</h3>
-                <div class="font-mono text-sm text-accent font-bold mt-1">Senior Software Engineer</div>
-              </div>
-              <div class="flex flex-col md:items-end gap-1">
-                <span class="font-mono text-xs font-bold tracking-widest text-background bg-foreground shrink-0 px-3 py-1.5">2013 - PRESENT</span>
-                <span class="font-mono text-xs uppercase tracking-widest text-muted-foreground">Remote</span>
-              </div>
+        <div class="grid grid-cols-1 gap-px border border-border bg-border xl:grid-cols-2">
+          <YorhaPanel
+            v-for="item in achievementItems"
+            :key="item.code"
+            brackets
+            variant="simple"
+            hover
+            padding="p-6 md:p-8"
+            class="group"
+          >
+            <div
+              class="mb-4 border-b border-yorha-faint pb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground-secondary group-hover:text-background/60"
+            >
+              {{ item.code }}
             </div>
-            <p class="text-sm md:text-base text-muted-foreground mt-4 max-w-3xl">
-              Software company building digital products while also delivering external client platforms across education, government, and media sectors. Responsible for architecture, full-stack implementation, infrastructure, and long-term operational ownership across both internal products and client engagements.
+            <p class="text-sm leading-relaxed md:text-base">
+              {{ item.body }}
             </p>
-          </div>
-
-          <!-- Project Engagements -->
-          <div class="space-y-0">
-
-            <!-- LMS -->
-            <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20">
-              <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
-                <div class="flex flex-wrap items-baseline gap-2">
-                  <h4 class="text-xl font-black uppercase tracking-tight">LMS Certification Platform</h4>
-                  <span class="font-mono text-[10px] px-2 py-0.5 border border-foreground/30 text-foreground/70 uppercase tracking-[0.15em] font-bold">Software Engineer</span>
-                </div>
-                <span class="font-mono text-xs font-bold tracking-widest text-accent border border-accent/30 shrink-0 px-2 py-1">2025 - PRES</span>
-              </div>
-
-              <!-- Tech Stack Chips -->
-              <div class="flex flex-wrap gap-1.5 mb-4">
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">React 19</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">TypeScript</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">TanStack</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Elixir</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Ash Framework</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Phoenix WebSockets</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Oban</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">PostgreSQL</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Hono</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Cloudflare Workers</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">xAPI</span>
-              </div>
-
-              <ul class="space-y-3 text-sm md:text-base text-muted-foreground font-medium">
-                <li class="flex items-start gap-4">
-                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">AI-Augmented Delivery</strong> Accelerated feature delivery cycles by 3x, acting as Architect and driver while orchestrating AI tools for high-quality full-stack code execution.</span>
-                </li>
-                <li class="flex items-start gap-4">
-                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Real-Time Infrastructure</strong> Engineered React 19 + Phoenix WebSocket architecture with O(1) granular progress tracking, powering real-time chat/notifications with zero perceived latency.</span>
-                </li>
-                <li class="flex items-start gap-4">
-                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Backend Resilience</strong> Built scalable Elixir/Ash backend enforcing strict data immutability, coupled with modern xAPI architecture enabling deep learning analytics and full data interoperability.</span>
-                </li>
-                <li class="flex items-start gap-4">
-                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Cost-Optimized Media Pipeline</strong> Designed resilient Media Gateway and custom HLS pipeline using Cloudflare Worker &amp; R2, drastically reducing storage and egress costs while automating Oban-based video transcription.</span>
-                </li>
-              </ul>
-            </div>
-
-            <!-- Digital School -->
-            <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20">
-              <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
-                <div class="flex flex-wrap items-baseline gap-2">
-                  <h4 class="text-xl font-black uppercase tracking-tight">Digital School Platform</h4>
-                  <span class="font-mono text-[10px] px-2 py-0.5 border border-foreground/30 text-foreground/70 uppercase tracking-[0.15em] font-bold">Software Engineer</span>
-                </div>
-                <span class="font-mono text-xs font-bold tracking-widest text-muted-foreground border border-foreground/30 shrink-0 px-2 py-1">2019 - 2025</span>
-              </div>
-
-              <!-- v1 Sub-section -->
-              <div class="mb-6">
-                <div class="flex items-center gap-2 mb-3">
-                  <span class="text-accent font-mono text-xs font-bold">[V1]</span>
-                  <span class="text-muted-foreground text-xs">Team-based Development (2019–2024)</span>
-                </div>
-                <p class="text-xs text-muted-foreground italic mb-3">Team of 4 — responsible for backend architecture, API design, and infrastructure while collaborating with frontend engineers.</p>
-                <div class="flex flex-wrap gap-1.5 mb-3">
-                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Yii2</span>
-                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Vue</span>
-                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">MySQL</span>
-                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Redis</span>
-                </div>
-                <ul class="space-y-2 text-sm text-muted-foreground font-medium ml-4">
-                  <li class="flex items-start gap-3">
-                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
-                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Cache Architecture &amp; Invalidation:</strong> Architected backend caching and invalidation patterns using Redis and controller-level response caching to reduce repeated database load across academic workflows.</span>
-                  </li>
-                  <li class="flex items-start gap-3">
-                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
-                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Exam Processing Reliability:</strong> Engineered resilient exam-processing flows with strict session validation, batch answer handling, and async background jobs to support reliable assessment operations.</span>
-                  </li>
-                  <li class="flex items-start gap-3">
-                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
-                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Soft Proctoring &amp; Exam Integrity:</strong> Built soft-proctoring and exam integrity workflows with tokenized sessions, device-bound access, activity tracking, and auditable session logs for digital assessments.</span>
-                  </li>
-                  <li class="flex items-start gap-3">
-                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
-                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Payment Reconciliation &amp; Attendance Operations:</strong> Integrated signed payment reconciliation workflows with biometric and web attendance operations, including geofencing and evidence-backed attendance records.</span>
-                  </li>
-                </ul>
-              </div>
-
-              <!-- v2 Sub-section -->
-              <div>
-                <div class="flex items-center gap-2 mb-3">
-                  <span class="text-accent font-mono text-xs font-bold">[V2]</span>
-                  <span class="text-muted-foreground text-xs">Platform Rebuild (2024–2025)</span>
-                </div>
-                <p class="text-xs text-muted-foreground italic mb-3">Led full platform rewrite with complete architecture ownership — solo execution from design to deployment.</p>
-                <div class="flex flex-wrap gap-1.5 mb-3">
-                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Vue 3</span>
-                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Inertia.js</span>
-                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Laravel 12</span>
-                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Python (OR-Tools)</span>
-                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">MySQL</span>
-                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Redis</span>
-                </div>
-                <ul class="space-y-2 text-sm text-muted-foreground font-medium ml-4">
-                  <li class="flex items-start gap-3">
-                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
-                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Automated Assessment Pipeline:</strong> Eliminated manual grading to near-zero with automated assessment pipeline.</span>
-                  </li>
-                  <li class="flex items-start gap-3">
-                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
-                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Advanced Scheduling Solver:</strong> Architected multi-stage solver using Python (Google OR-Tools) for clash-free timetables.</span>
-                  </li>
-                  <li class="flex items-start gap-3">
-                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
-                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Multi-Curriculum Support:</strong> Designed flexible JSON-backed data model for diverse academic standards.</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <!-- UPI -->
-            <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20">
-              <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
-                <div class="flex flex-wrap items-baseline gap-2">
-                  <h4 class="text-xl font-black uppercase tracking-tight">Universitas Pendidikan Indonesia</h4>
-                  <span class="font-mono text-[10px] px-2 py-0.5 border border-foreground/30 text-foreground/70 uppercase tracking-[0.15em] font-bold">Software Engineer</span>
-                </div>
-                <span class="font-mono text-xs font-bold tracking-widest text-muted-foreground border border-foreground/30 shrink-0 px-2 py-1">2022 - 2024</span>
-              </div>
-
-              <!-- SIMSARPRAS Sub-section -->
-              <div class="mb-6">
-                <div class="flex items-center gap-2 mb-3">
-                  <span class="text-accent font-mono text-xs font-bold">[SIMSARPRAS]</span>
-                  <span class="text-muted-foreground text-xs">Asset Management System</span>
-                </div>
-                <div class="flex flex-wrap gap-1.5 mb-3">
-                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Vue 3</span>
-                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Inertia.js</span>
-                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Laravel 11</span>
-                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">PHP 8.3</span>
-                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">MySQL</span>
-                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Redis</span>
-                </div>
-                <ul class="space-y-2 text-sm text-muted-foreground font-medium ml-4">
-                  <li class="flex items-start gap-3">
-                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
-                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Unified Data Model:</strong> Engineered extensible single asset schema unifying procurement types (purchase, donation, grants), eliminating data silos.</span>
-                  </li>
-                  <li class="flex items-start gap-3">
-                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
-                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Depreciation Engine:</strong> Developed module auto-computing real-time straight-line depreciation for 50,000+ assets.</span>
-                  </li>
-                  <li class="flex items-start gap-3">
-                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
-                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Immutable Audit Trail:</strong> Architected tamper-proof change history for all asset mutations, satisfying university compliance.</span>
-                  </li>
-                  <li class="flex items-start gap-3">
-                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
-                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Hierarchical RBAC:</strong> Implemented granular access controls governing asset visibility across departments.</span>
-                  </li>
-                </ul>
-              </div>
-
-              <!-- SIMKERMA Sub-section -->
-              <div>
-                <div class="flex items-center gap-2 mb-3">
-                  <span class="text-accent font-mono text-xs font-bold">[SIMKERMA]</span>
-                  <span class="text-muted-foreground text-xs">Cooperation Information System</span>
-                </div>
-                <div class="flex flex-wrap gap-1.5 mb-3">
-                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Vue 3</span>
-                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Inertia.js</span>
-                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Laravel 11</span>
-                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">MySQL</span>
-                  <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Redis</span>
-                </div>
-                <ul class="space-y-2 text-sm text-muted-foreground font-medium ml-4">
-                  <li class="flex items-start gap-3">
-                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
-                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Fault-Tolerant Sync:</strong> Designed robust synchronization bridging local workflows with Kemdikbud national schemas.</span>
-                  </li>
-                  <li class="flex items-start gap-3">
-                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
-                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Compliance Workflow:</strong> Streamlined national reporting with real-time Report Weight calculations and scoring simulations.</span>
-                  </li>
-                  <li class="flex items-start gap-3">
-                    <span class="text-accent font-black mt-0.5 shrink-0 text-sm">></span>
-                    <span><strong class="text-foreground uppercase text-[11px] font-black tracking-widest">Performance Tracking:</strong> Developed comprehensive monitoring for cooperation activities per organizational unit.</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <!-- SIBER -->
-            <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20">
-              <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
-                <div class="flex flex-wrap items-baseline gap-2">
-                  <h4 class="text-xl font-black uppercase tracking-tight">SIBER Election Platform</h4>
-                  <span class="font-mono text-[10px] px-2 py-0.5 border border-foreground/30 text-foreground/70 uppercase tracking-[0.15em] font-bold">Software Engineer</span>
-                </div>
-                <span class="font-mono text-xs font-bold tracking-widest text-muted-foreground border border-foreground/30 shrink-0 px-2 py-1">2024</span>
-              </div>
-
-              <!-- Tech Stack Chips -->
-              <div class="flex flex-wrap gap-1.5 mb-4">
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Vue 3</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Inertia.js</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Laravel 11</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">PHP 8.2</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">MySQL</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Redis</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Laravel Horizon</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Azure OCR API</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Google Maps API</span>
-              </div>
-
-              <ul class="space-y-3 text-sm md:text-base text-muted-foreground font-medium">
-                <li class="flex items-start gap-4">
-                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Automated Real-Count OCR Pipeline</strong> Architected automated data extraction pipeline leveraging Azure OCR API to process ID cards and C1 voting forms from thousands of polling stations (TPS).</span>
-                </li>
-                <li class="flex items-start gap-4">
-                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Real-Time Geospatial Analytics</strong> Engineered dynamic territory mapping using Google Maps API, providing real-time visual insights into voter distribution and logistics tracking.</span>
-                </li>
-                <li class="flex items-start gap-4">
-                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">High-Availability Architecture</strong> Built resilient high-load system using Redis and Laravel Horizon. Eliminated N+1 query bottlenecks, ensuring sub-second response times during Election Day traffic spikes.</span>
-                </li>
-              </ul>
-            </div>
-
-            <!-- limawaktu.id -->
-            <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20">
-              <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
-                <div class="flex flex-wrap items-baseline gap-2">
-                  <h4 class="text-xl font-black uppercase tracking-tight">limawaktu.id</h4>
-                  <span class="font-mono text-[10px] px-2 py-0.5 border border-foreground/30 text-foreground/70 uppercase tracking-[0.15em] font-bold">Software Engineer</span>
-                </div>
-                <span class="font-mono text-xs font-bold tracking-widest text-muted-foreground border border-foreground/30 shrink-0 px-2 py-1">2016 - 2024</span>
-              </div>
-
-              <!-- Tech Stack Chips -->
-              <div class="flex flex-wrap gap-1.5 mb-4">
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">PHP</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Yii2 Framework</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Bulma CSS</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">MySQL</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Nginx</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Linux</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Cloudflare</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Google Analytics</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Matomo</span>
-              </div>
-
-              <ul class="space-y-3 text-sm md:text-base text-muted-foreground font-medium">
-                <li class="flex items-start gap-4">
-                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Solo Platform Architecture</strong> Designed, developed, and solely maintained entire media portal using Yii2 and Bulma CSS, managing 16,000+ news articles over 9 years.</span>
-                </li>
-                <li class="flex items-start gap-4">
-                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Technical SEO & Traffic Analytics</strong> Architected frontend and server pipelines with SEO best practices. Integrated Google Analytics alongside Matomo for robust tracking.</span>
-                </li>
-              </ul>
-            </div>
-
-            <!-- bandungkita.id -->
-            <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20">
-              <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
-                <div class="flex flex-wrap items-baseline gap-2">
-                  <h4 class="text-xl font-black uppercase tracking-tight">bandungkita.id</h4>
-                  <span class="font-mono text-[10px] px-2 py-0.5 border border-foreground/30 text-foreground/70 uppercase tracking-[0.15em] font-bold">Software Engineer</span>
-                </div>
-                <span class="font-mono text-xs font-bold tracking-widest text-muted-foreground border border-foreground/30 shrink-0 px-2 py-1">2017 - 2024</span>
-              </div>
-
-              <!-- Tech Stack Chips -->
-              <div class="flex flex-wrap gap-1.5 mb-4">
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">WordPress</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Linux Server</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Nginx</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Cloudflare WAF</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Fail2Ban</span>
-              </div>
-
-              <ul class="space-y-3 text-sm md:text-base text-muted-foreground font-medium">
-                <li class="flex items-start gap-4">
-                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Infrastructure & Reliability</strong> Managed and optimized Nginx and server resources for high-volume WordPress architecture.</span>
-                </li>
-                <li class="flex items-start gap-4">
-                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Security Hardening & Disaster Recovery</strong> Fortified defenses using multi-layered protocols. Led recovery for 3 major security incidents with zero permanent data loss.</span>
-                </li>
-              </ul>
-            </div>
-
-            <!-- Gov -->
-            <div class="relative p-6 md:p-8 group border-b-2 border-foreground/20 last:border-b-0">
-              <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-4 gap-2 border-b border-dashed border-foreground/20 pb-4">
-                <div class="flex flex-wrap items-baseline gap-2">
-                  <h4 class="text-xl font-black uppercase tracking-tight">Pemkab Bandung Barat</h4>
-                  <span class="font-mono text-[10px] px-2 py-0.5 border border-foreground/30 text-foreground/70 uppercase tracking-[0.15em] font-bold">Software Engineer</span>
-                </div>
-                <span class="font-mono text-xs font-bold tracking-widest text-muted-foreground border border-foreground/30 shrink-0 px-2 py-1">2013 - 2016</span>
-              </div>
-
-              <!-- Tech Stack Chips -->
-              <div class="flex flex-wrap gap-1.5 mb-4">
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">PHP</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Yii2 Framework</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Bootstrap</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">jQuery</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">MySQL</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Kannel SMS Gateway</span>
-                <span class="border border-foreground/20 bg-foreground/5 px-2 py-0.5 text-[10px] font-mono font-bold text-foreground/70">Linux</span>
-              </div>
-
-              <ul class="space-y-3 text-sm md:text-base text-muted-foreground font-medium">
-                <li class="flex items-start gap-4">
-                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">E-Government Ecosystem</strong> Designed and developed 10+ critical public service platforms including One-Stop Licensing (SIMPPTSP) and Village Finance Systems.</span>
-                </li>
-                <li class="flex items-start gap-4">
-                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Public Communication Channel</strong> Architected reliable SMS notification system using Kannel SMS Gateway for real-time citizen status updates.</span>
-                </li>
-                <li class="flex items-start gap-4">
-                  <span class="text-accent font-black mt-0.5 shrink-0">>></span>
-                  <span><strong class="text-foreground uppercase text-xs font-black tracking-widest block mb-1">Agency Web Infrastructure</strong> Built, deployed, and maintained official portals across multiple government agencies.</span>
-                </li>
-              </ul>
-            </div>
-
-          </div>
+          </YorhaPanel>
         </div>
       </section>
 
-      <!-- 03. Tech Matrix Section -->
-      <section id="skills" class="scroll-mt-24">
-        <div class="flex items-center gap-4 mb-8">
-          <h2 class="text-3xl font-black uppercase tracking-tight">Technical Matrix</h2>
-          <div class="h-px bg-foreground flex-1 opacity-20"></div>
+      <div class="yorha-divider-double"></div>
+
+      <section id="experience" class="scroll-mt-24 space-y-6">
+        <div class="flex items-end justify-between border-b-2 border-yorha-strong pb-2">
+          <h2 class="text-2xl font-display font-bold uppercase tracking-wider text-foreground">
+            03. Execution_Logs
+          </h2>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0.5 bg-foreground border-2 border-foreground">
-          <div class="bg-background p-6 md:p-8 group relative">
-            <div class="font-mono text-[10px] text-muted-foreground uppercase tracking-widest mb-6 border-b border-dashed border-foreground/20 pb-2">IDX_01 // Architecture</div>
-            <h3 class="font-black uppercase mb-4 text-xl md:text-2xl tracking-tight">Architecture &amp; Design</h3>
-            <div class="flex flex-wrap gap-2">
-              <span class="border px-2 py-1 text-xs font-mono uppercase bg-accent/10 border-accent/20 text-accent font-black tracking-widest">Multi-Tenant SaaS</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">System Design Patterns</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">High Availability</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Event-Driven Arch</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">API Design</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Database Schema Design</span>
+        <div class="space-y-8">
+          <YorhaPanel
+            v-for="section in experienceSections"
+            :key="section.company"
+            as="div"
+            variant="panel"
+            brackets
+            padding="p-0"
+          >
+            <div class="border-b border-yorha-strong bg-background p-6 md:p-8">
+              <div class="flex flex-col justify-between gap-4 md:flex-row md:items-start">
+                <div>
+                  <h3 class="text-2xl font-display font-bold uppercase tracking-wider md:text-3xl">
+                    {{ section.company }}
+                  </h3>
+                  <div class="mt-2 text-xs font-bold uppercase tracking-widest opacity-80">
+                    {{ section.role }}
+                  </div>
+                </div>
+                <div
+                  class="flex flex-col gap-1 text-[10px] font-bold uppercase tracking-widest md:items-end"
+                >
+                  <span class="border border-transparent bg-foreground px-3 py-1.5 text-background">
+                    {{ section.dates }}
+                  </span>
+                  <span v-if="section.location" class="mt-1 text-foreground-secondary">
+                    {{ section.location }}
+                  </span>
+                </div>
+              </div>
+              <p
+                v-if="section.summary"
+                class="mt-4 max-w-3xl text-sm leading-relaxed text-foreground md:text-base"
+              >
+                {{ section.summary }}
+              </p>
             </div>
-          </div>
 
-          <div class="bg-background p-6 md:p-8 group relative">
-            <div class="font-mono text-[10px] text-muted-foreground uppercase tracking-widest mb-6 border-b border-dashed border-foreground/20 pb-2">IDX_02 // Frontend</div>
-            <h3 class="font-black uppercase mb-4 text-xl md:text-2xl tracking-tight">Frontend</h3>
-            <div class="flex flex-wrap gap-2">
-              <span class="border px-2 py-1 text-xs font-mono uppercase bg-accent/10 border-accent/20 text-accent font-black tracking-widest">Vue 3</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">React 19</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">TypeScript</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Tailwind CSS 4</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Inertia.js</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">TanStack</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">PrimeVue</span>
+            <div class="space-y-0 text-foreground">
+              <article
+                v-for="project in section.projects"
+                :key="`${section.company}-${project.title}`"
+                class="relative border-b border-yorha-faint p-6 transition-colors last:border-b-0 hover:bg-foreground/5 md:p-8"
+              >
+                <div
+                  class="mb-4 flex flex-col justify-between gap-2 border-b border-yorha-faint pb-4 md:flex-row md:items-baseline"
+                >
+                  <div class="flex flex-wrap items-baseline gap-3">
+                    <h4 class="text-xl font-display font-bold uppercase tracking-wider">
+                      {{ project.title }}
+                    </h4>
+                    <span
+                      class="bg-foreground px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-background"
+                    >
+                      {{ project.scope }}
+                    </span>
+                  </div>
+                  <span
+                    class="border border-yorha-strong px-2 py-1 text-[10px] font-bold uppercase tracking-widest"
+                  >
+                    {{ project.dates }}
+                  </span>
+                </div>
+
+                <div class="mb-6 flex flex-wrap gap-1.5">
+                  <span
+                    v-for="tech in project.tech"
+                    :key="`${project.title}-${tech}`"
+                    class="border border-yorha-strong px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest"
+                  >
+                    {{ tech }}
+                  </span>
+                </div>
+
+                <ul class="space-y-4 text-sm leading-relaxed md:text-base">
+                  <li
+                    v-for="bullet in project.bullets"
+                    :key="bullet.title"
+                    class="flex items-start gap-4"
+                  >
+                    <span class="mt-1 shrink-0 font-display font-bold text-foreground-secondary">
+                      >
+                    </span>
+                    <span>
+                      <strong class="mb-1 block text-xs font-bold uppercase tracking-widest">
+                        {{ bullet.title }}
+                      </strong>
+                      {{ bullet.body }}
+                    </span>
+                  </li>
+                </ul>
+              </article>
             </div>
-          </div>
-
-          <div class="bg-background p-6 md:p-8 group relative">
-            <div class="font-mono text-[10px] text-muted-foreground uppercase tracking-widest mb-6 border-b border-dashed border-foreground/20 pb-2">IDX_03 // Backend</div>
-            <h3 class="font-black uppercase mb-4 text-xl md:text-2xl tracking-tight">Backend</h3>
-            <div class="flex flex-wrap gap-2">
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Elixir</span>
-              <span class="border px-2 py-1 text-xs font-mono uppercase bg-accent/10 border-accent/20 text-accent font-black tracking-widest">Ash Framework</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Phoenix</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Laravel 11/12</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">PHP 8.4</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Hono</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Yii2</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Python (OR-Tools)</span>
-            </div>
-          </div>
-
-          <div class="bg-background p-6 md:p-8 group relative">
-            <div class="font-mono text-[10px] text-muted-foreground uppercase tracking-widest mb-6 border-b border-dashed border-foreground/20 pb-2">IDX_04 // Data</div>
-            <h3 class="font-black uppercase mb-4 text-xl md:text-2xl tracking-tight">Database &amp; Data</h3>
-            <div class="flex flex-wrap gap-2">
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">PostgreSQL</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">MySQL/MariaDB</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Redis</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">xAPI/LRS</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Query Optimization</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Data Modeling</span>
-            </div>
-          </div>
-
-          <div class="bg-background p-6 md:p-8 group relative">
-            <div class="font-mono text-[10px] text-muted-foreground uppercase tracking-widest mb-6 border-b border-dashed border-foreground/20 pb-2">IDX_05 // Infra</div>
-            <h3 class="font-black uppercase mb-4 text-xl md:text-2xl tracking-tight">Infrastructure &amp; DevOps</h3>
-            <div class="flex flex-wrap gap-2">
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Docker</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Nginx</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Linux Server</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Cloudflare</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Azure Services</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">AWS S3</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">CI/CD</span>
-            </div>
-          </div>
-
-          <div class="bg-background p-6 md:p-8 group relative">
-            <div class="font-mono text-[10px] text-muted-foreground uppercase tracking-widest mb-6 border-b border-dashed border-foreground/20 pb-2">IDX_06 // Process</div>
-            <h3 class="font-black uppercase mb-4 text-xl md:text-2xl tracking-tight">Product &amp; Process</h3>
-            <div class="flex flex-wrap gap-2">
-              <span class="border px-2 py-1 text-xs font-mono uppercase bg-accent/10 border-accent/20 text-accent font-black tracking-widest">Full Product Ownership</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Requirements Gathering</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">Client Consultation</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">UAT Coordination</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">AI-Assisted Dev</span>
-              <span class="border border-foreground/30 px-2 py-1 text-xs font-mono uppercase font-bold opacity-80">System Maintenance</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 04. Education Section -->
-      <section id="education" class="scroll-mt-24 pb-20">
-        <div class="flex items-center gap-4 mb-8">
-          <h2 class="text-3xl font-black uppercase tracking-tight">Education</h2>
-          <div class="h-px bg-foreground flex-1 opacity-20"></div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-0 border-2 border-foreground bg-foreground">
-          <div class="bg-background p-6 md:p-8 group relative border-b border-r border-foreground">
-            <div class="font-mono text-xs font-bold tracking-widest text-background bg-foreground shrink-0 px-2 py-1 inline-block mb-4">2011 - 2016</div>
-            <h3 class="text-xl md:text-2xl font-black uppercase tracking-tight mb-2">S1 Teknik Informatika</h3>
-            <div class="font-mono text-xs uppercase tracking-widest text-foreground/70 mb-4 font-bold border-b border-dashed border-foreground/20 pb-4">Universitas Komputer Indonesia (UNIKOM)</div>
-            <p class="text-sm font-medium opacity-80 group-hover:opacity-100 transition-opacity">Software Engineering, Information System</p>
-          </div>
-
-          <div class="bg-background p-6 md:p-8 group relative border-b border-foreground">
-            <div class="font-mono text-xs font-bold tracking-widest text-background bg-foreground shrink-0 px-2 py-1 inline-block mb-4">2006 - 2010</div>
-            <h3 class="text-lg md:text-xl font-black uppercase tracking-tight mb-2">Teknik Komputer &amp; Jaringan</h3>
-            <div class="font-mono text-xs uppercase tracking-widest text-foreground/70 mb-4 font-bold border-b border-dashed border-foreground/20 pb-4">SMKN 1 Cimahi</div>
-            <p class="text-sm font-medium opacity-80 group-hover:opacity-100 transition-opacity">Network Engineering</p>
-          </div>
+          </YorhaPanel>
         </div>
       </section>
 
+      <div class="yorha-divider-double"></div>
+
+      <section id="skills" class="scroll-mt-24 space-y-6">
+        <div class="flex items-end justify-between border-b-2 border-yorha-strong pb-2">
+          <h2 class="text-2xl font-display font-bold uppercase tracking-wider text-foreground">
+            04. Core_Skills
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
+          <YorhaPanel
+            v-for="group in skillGroups"
+            :key="group.code"
+            brackets
+            variant="simple"
+            padding="p-6 md:p-8"
+          >
+            <div
+              class="mb-4 border-b border-yorha-faint pb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground-secondary"
+            >
+              {{ group.code }}
+            </div>
+            <h3 class="mb-4 text-xl font-display font-bold uppercase tracking-wider">
+              {{ group.title }}
+            </h3>
+            <div class="flex flex-wrap gap-2 text-[10px] font-bold uppercase tracking-widest">
+              <span
+                v-for="item in group.items"
+                :key="`${group.code}-${item.label}`"
+                :class="
+                  item.highlight
+                    ? 'bg-foreground text-background'
+                    : 'border border-yorha-strong text-foreground'
+                "
+                class="px-2 py-1"
+              >
+                {{ item.label }}
+              </span>
+            </div>
+          </YorhaPanel>
+        </div>
+      </section>
+
+      <div class="yorha-divider-double"></div>
+
+      <section id="education" class="scroll-mt-24 space-y-6 pb-20">
+        <div class="flex items-end justify-between border-b-2 border-yorha-strong pb-2">
+          <h2 class="text-2xl font-display font-bold uppercase tracking-wider text-foreground">
+            05. Education
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
+          <YorhaPanel
+            v-for="item in educationItems"
+            :key="item.school"
+            brackets
+            variant="simple"
+            padding="p-6 md:p-8"
+          >
+            <div
+              class="mb-4 inline-block bg-foreground px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-background"
+            >
+              {{ item.dates }}
+            </div>
+            <h3 class="mb-2 text-xl font-display font-bold uppercase tracking-wider md:text-2xl">
+              {{ item.degree }}
+            </h3>
+            <div
+              class="mb-3 border-b border-yorha-faint pb-3 text-[10px] font-bold uppercase tracking-widest text-foreground-secondary"
+            >
+              {{ item.school }}
+            </div>
+            <p class="text-sm font-bold uppercase tracking-widest">{{ item.focus }}</p>
+          </YorhaPanel>
+        </div>
+      </section>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+const navItems = [
+  { href: '#summary', label: '01. Summary' },
+  { href: '#achievements', label: '02. Achievements' },
+  { href: '#experience', label: '03. Exec_Logs' },
+  { href: '#skills', label: '04. Core_Skills' },
+  { href: '#education', label: '05. Education' },
+]
+
+const contactItems = [
+  { label: 'Email', value: 'anggi.wibiyanto@gmail.com', href: 'mailto:anggi.wibiyanto@gmail.com' },
+  { label: 'Phone', value: '+6285723960603', href: 'tel:+6285723960603' },
+  { label: 'Location', value: 'Bandung, Indonesia' },
+  { label: 'Portfolio', value: 'labtime.web.id', href: 'https://labtime.web.id', external: true },
+  {
+    label: 'GitHub',
+    value: 'github.com/hopewithoute',
+    href: 'https://github.com/hopewithoute',
+    external: true,
+  },
+  {
+    label: 'LinkedIn',
+    value: 'linkedin.com/in/hopewithoute',
+    href: 'https://www.linkedin.com/in/hopewithoute/',
+    external: true,
+  },
+]
+
+const metrics = [
+  { code: 'Sig_01', value: '10+', label: 'Years in production' },
+  { code: 'Sig_02', value: '5,000+', label: 'Students served' },
+  { code: 'Sig_03', value: '2,000', label: 'Peak exam users' },
+  { code: 'Sig_04', value: '80K+', label: 'Managed records' },
+]
+
+const achievementItems = [
+  {
+    code: 'ACH_01',
+    body: 'Delivered and operated a digital school platform serving 5,000+ students and supporting peaks of 2,000 concurrent exam users while keeping infrastructure costs below USD 50 per month.',
+  },
+  {
+    code: 'ACH_02',
+    body: 'Rebuilt a university cooperation-management platform that removed duplicate reporting into the national system and introduced real-time progress tracking across faculties, campuses, and study programs.',
+  },
+  {
+    code: 'ACH_03',
+    body: 'Replaced a failing academic and LMS platform for a private high school serving around 800 students across 4 years of operation, keeping online exams stable without recurring exam incidents.',
+  },
+  {
+    code: 'ACH_04',
+    body: 'Designed an institutional asset-governance platform covering 68 organizational units and 80K+ records with audit trails, ownership tracking, and automated depreciation workflows.',
+  },
+]
+
+const experienceSections = [
+  {
+    company: 'Rail System',
+    role: 'Senior Full-Stack Engineer / Long-Term Core Engineer',
+    dates: '2013 - Present',
+    location: 'Remote',
+    summary:
+      'Rail System is a software house and product studio delivering internal products and custom platforms for university, government, and media clients. I work there full-time as a long-term core engineer, leading some systems independently end to end while also partnering with frontend, mobile, PM, and stakeholder teams when projects require cross-functional delivery.',
+    projects: [
+      {
+        title: 'Digital School Platform',
+        scope: 'Internal Product',
+        dates: '2019 - 2025',
+        tech: ['Laravel', 'Vue', 'Inertia.js', 'PHP', 'MySQL', 'Redis', 'Python', 'OR-Tools'],
+        bullets: [
+          {
+            title: 'Backend Architecture',
+            body: 'Led backend architecture and production operations for a digital school platform used by 5,000+ students, collaborating with frontend, mobile, and PM contributors across delivery.',
+          },
+          {
+            title: 'Exam Stability',
+            body: 'Kept online exam operations stable at peaks of 2,000 concurrent users while maintaining infrastructure costs below USD 50 per month.',
+          },
+          {
+            title: 'Multi-School Delivery',
+            body: 'Served as the backend and infrastructure decision maker, defining feature implementation patterns, rollout strategy, and multi-tenant architecture for multi-school deployments.',
+          },
+          {
+            title: 'Cross-Functional Rollout',
+            body: 'Worked with frontend and mobile contributors through contract-based API design and joint debugging during rollout and production issue resolution.',
+          },
+          {
+            title: 'Automation',
+            body: 'Replaced paper-based exams with online assessment and automatic grading, and built a scheduling solver with Google OR-Tools to reduce manual academic planning.',
+          },
+        ],
+      },
+      {
+        title: 'SIMKERMA - Universitas Pendidikan Indonesia',
+        scope: 'Client Platform',
+        dates: '2022 - 2024',
+        tech: ['Laravel 11', 'Vue 3', 'Inertia.js', 'PrimeVue', 'PHP 8.3', 'MySQL', 'Redis'],
+        bullets: [
+          {
+            title: 'Platform Rebuild',
+            body: 'Rebuilt a university cooperation-management platform from scratch after the prior implementation diverged from operational requirements, restoring delivery quality and stakeholder trust.',
+          },
+          {
+            title: 'Reporting Model',
+            body: 'Reverse engineered an undocumented external reporting API and designed a reporting-compatible data model and synchronization workflow for 8,000+ cooperation records across 9 faculties, 5 regional campuses, and 176 study programs.',
+          },
+          {
+            title: 'Duplicate Work Removal',
+            body: 'Enabled units to submit reports directly from SIMKERMA without re-entering data into the central government reporting system, reducing duplicate work and reporting friction.',
+          },
+          {
+            title: 'Progress Visibility',
+            body: 'Defined clear boundaries between internal workflow and external compliance reporting, adding real-time progress tracking and local scoring simulation before final submission.',
+          },
+          {
+            title: 'Source-of-Truth Control',
+            body: 'Reduced sync ambiguity and state drift where the central system acted as the reporting source of truth.',
+          },
+        ],
+      },
+      {
+        title: 'SIMSARPRAS - Universitas Pendidikan Indonesia',
+        scope: 'Client Platform',
+        dates: '2022 - 2024',
+        tech: ['Laravel 11', 'Vue 3', 'Inertia.js', 'PrimeVue', 'PHP 8.3', 'MySQL', 'Redis'],
+        bullets: [
+          {
+            title: 'Asset Governance',
+            body: 'Built an asset management platform used across 68 organizational units, unifying 3 procurement channels and 8 asset classes in one operational system.',
+          },
+          {
+            title: 'Lifecycle Model',
+            body: 'Designed a database-backed asset lifecycle model to track ownership, location, distribution state, and depreciation across 80K+ asset and inventory records.',
+          },
+          {
+            title: 'Auditability',
+            body: 'Added audit trails and role-based access controls to strengthen accountability, traceability, and compliance across university units.',
+          },
+          {
+            title: 'Financial Automation',
+            body: 'Automated fixed-asset depreciation and related workflows, reducing manual reconciliation effort for finance and operations teams.',
+          },
+          {
+            title: 'Long-Term Support',
+            body: 'Sustained the platform through more than two years of ongoing maintenance and production support.',
+          },
+        ],
+      },
+      {
+        title: 'LMS Certification Platform',
+        scope: 'Internal Product',
+        dates: '2025 - Present',
+        tech: [
+          'React 19',
+          'TypeScript',
+          'TanStack',
+          'Elixir',
+          'Ash Framework',
+          'Phoenix WebSockets',
+          'Oban',
+          'PostgreSQL',
+          'Hono',
+          'Cloudflare Workers',
+          'Cloudflare R2',
+          'xAPI',
+        ],
+        bullets: [
+          {
+            title: 'Platform Scope',
+            body: 'Leading the design and implementation of an in-development certification LMS intended to unify learning, exams, certification, and audit workflows in a single platform.',
+          },
+          {
+            title: 'Domain Modeling',
+            body: 'Translated 22 product user stories into a domain model with 40+ data entities supporting academic and certification workflows.',
+          },
+          {
+            title: 'Real-Time Records',
+            body: 'Designed a real-time architecture and immutable xAPI-based learning records to support auditability, reporting, and interoperability.',
+          },
+          {
+            title: 'Media Delivery',
+            body: 'Built a media pipeline on Cloudflare Workers and R2 to improve delivery resilience while controlling storage and bandwidth costs.',
+          },
+          {
+            title: 'Quality Standards',
+            body: 'Established automated testing practices and code quality standards to support stable delivery without a dedicated QA team.',
+          },
+        ],
+      },
+      {
+        title: 'limawaktu.id - Media Portal',
+        scope: 'Internal Product',
+        dates: '2016 - 2024',
+        tech: ['PHP', 'Yii2', 'MySQL', 'Nginx', 'Linux', 'Cloudflare', 'Google Analytics', 'Matomo'],
+        bullets: [
+          {
+            title: 'Product Ownership',
+            body: 'Designed, built, and maintained a media portal supporting 16,000+ published articles over 9 years.',
+          },
+          {
+            title: 'Lean Operations',
+            body: 'Owned the application and infrastructure end to end for 2.3M+ monthly requests on USD 10 per month hosting.',
+          },
+          {
+            title: 'Search Visibility',
+            body: 'Improved search visibility and editorial insight through SEO-friendly delivery and analytics instrumentation.',
+          },
+        ],
+      },
+      {
+        title: 'bandungkita.id - Media Infrastructure',
+        scope: 'Client Infrastructure',
+        dates: '2017 - 2024',
+        tech: ['WordPress', 'Linux Server', 'Nginx', 'Cloudflare WAF', 'Fail2Ban'],
+        bullets: [
+          {
+            title: 'Traffic Handling',
+            body: 'Managed infrastructure reliability and server performance for a WordPress-based media platform handling up to 4.2M+ requests per month on USD 10 per month hosting.',
+          },
+          {
+            title: 'Incident Recovery',
+            body: 'Recovered from three major security incidents, including rogue-plugin takeovers, through backup restoration and system rebuilds with no permanent data loss.',
+          },
+        ],
+      },
+      {
+        title: 'West Bandung Regency Government',
+        scope: 'Client Delivery',
+        dates: '2013 - 2016',
+        tech: ['PHP', 'Yii2', 'MySQL', 'Kannel SMS Gateway', 'Linux'],
+        bullets: [
+          {
+            title: 'Public Systems',
+            body: 'Delivered 10+ public service and internal government systems, including licensing, village finance, and agency websites.',
+          },
+          {
+            title: 'Status Notifications',
+            body: 'Built SMS-based notification services to improve status communication for citizens and administrative users.',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    company: 'Independent Freelance Delivery',
+    role: 'Full-Stack Engineer',
+    dates: '2022 - 2023',
+    location: 'Remote',
+    projects: [
+      {
+        title: 'Academic System & LMS - SMA PGRI Depok',
+        scope: 'Client Platform',
+        dates: '2022 - 2023',
+        tech: ['Laravel', 'Inertia.js', 'Vue', 'Vuetify', 'Redis', 'MySQL', 'S3 Storage'],
+        bullets: [
+          {
+            title: 'Platform Recovery',
+            body: 'Replaced a failing academic and LMS platform serving around 800 students across 4 years of operation, resolving online exam instability, emergency server scaling, and high operating costs during peak periods.',
+          },
+          {
+            title: 'Solo Delivery',
+            body: 'Built the system end to end as a solo engineer, covering exams, automatic grading, attendance, and learning-material delivery.',
+          },
+          {
+            title: 'Operational Stability',
+            body: 'Provided one year of post-launch maintenance; the platform has remained in active use across 4 years of operation without recurring exam-related issues.',
+          },
+        ],
+      },
+    ],
+  },
+]
+
+const skillGroups = [
+  {
+    code: 'IDX_01 // DELIVERY',
+    title: 'Full-Stack Delivery',
+    items: [
+      { label: 'Laravel', highlight: true },
+      { label: 'Vue', highlight: true },
+      { label: 'PHP' },
+      { label: 'Inertia.js' },
+      { label: 'React' },
+      { label: 'TypeScript' },
+      { label: 'Hono' },
+      { label: 'Elixir', highlight: true },
+      { label: 'Phoenix' },
+      { label: 'Ash Framework' },
+    ],
+  },
+  {
+    code: 'IDX_02 // ARCH',
+    title: 'Backend & Architecture',
+    items: [
+      { label: 'REST API Design', highlight: true },
+      { label: 'Multi-Tenant SaaS' },
+      { label: 'Background Jobs' },
+      { label: 'Real-Time Systems', highlight: true },
+      { label: 'Event-Driven Patterns' },
+    ],
+  },
+  {
+    code: 'IDX_03 // DATA',
+    title: 'Data & Infrastructure',
+    items: [
+      { label: 'MySQL/MariaDB', highlight: true },
+      { label: 'PostgreSQL', highlight: true },
+      { label: 'Redis' },
+      { label: 'Docker' },
+      { label: 'Nginx' },
+      { label: 'Linux Server Administration', highlight: true },
+      { label: 'Cloudflare', highlight: true },
+      { label: 'AWS S3' },
+      { label: 'CI/CD' },
+    ],
+  },
+  {
+    code: 'IDX_04 // OPS',
+    title: 'Product & Operations',
+    items: [
+      { label: 'Requirements Discovery', highlight: true },
+      { label: 'Stakeholder Communication' },
+      { label: 'Technical Documentation' },
+      { label: 'UAT Coordination' },
+      { label: 'QA Discipline' },
+      { label: 'Production Support', highlight: true },
+      { label: 'xAPI/LRS' },
+    ],
+  },
+]
+
+const educationItems = [
+  {
+    dates: '2011 - 2016',
+    degree: 'Bachelor of Informatics Engineering',
+    school: 'Universitas Komputer Indonesia (UNIKOM)',
+    focus: 'Software Engineering, Information Systems',
+  },
+  {
+    dates: '2006 - 2010',
+    degree: 'Vocational High School, Computer and Network Engineering',
+    school: 'SMKN 1 Cimahi',
+    focus: 'Four-year vocational program in network engineering',
+  },
+]
+
 useHead({
   title: 'Resume | LabTime',
   meta: [
-    { name: 'description', content: 'Anggi Wibiyanto — Senior Software Engineer & AI-Augmented Engineer with 10+ years designing scalable digital systems.' }
-  ]
+    {
+      name: 'description',
+      content:
+        'Anggi Wibiyanto — Senior Full-Stack Engineer with 10+ years of experience building and operating business-critical platforms across education, government, and media.',
+    },
+  ],
 })
 </script>
-
-<style scoped>
-.group\/crt::after {
-  content: " ";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%,
-    rgba(0, 0, 0, 0.05) 50%
-  );
-  background-size: 100% 8px;
-  z-index: 50;
-  pointer-events: none;
-}
-.crt-hover:hover::after {
-  content: " ";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: linear-gradient(
-    rgba(255, 255, 255, 0) 50%,
-    rgba(255, 255, 255, 0.05) 50%
-  );
-  background-size: 100% 4px;
-  z-index: 50;
-  pointer-events: none;
-}
-</style>
