@@ -47,7 +47,7 @@ test.describe('Navigation', () => {
     await input.fill('cloudflare')
 
     await expect(page.getByRole('option', {
-      name: 'LMS Sertifikasi / Authenticating HLS streaming at the edge How I designed a stateless media gateway that secures segmented video playback with edge-side token verification instead of per-request backend authorization.',
+      name: 'LMS Certification Platform / Authenticating HLS streaming at the edge How I designed a stateless media gateway that secures segmented video playback with edge-side token verification instead of per-request backend authorization.',
     })).toBeVisible()
   })
 

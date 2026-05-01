@@ -10,7 +10,7 @@ test.describe('Projects', () => {
   test('project detail page renders', async ({ page }) => {
     await page.goto('/projects/lms-sertifikasi')
     await expect(page.locator('article')).toBeVisible()
-    await expect(page.getByRole('heading', { name: 'LMS Sertifikasi' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'LMS Certification Platform' })).toBeVisible()
   })
 
   test('project has tech badges', async ({ page }) => {
