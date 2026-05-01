@@ -1,12 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
   <style>
-    path { fill: #171717; }
+    :root {
+      --color-stroke: #3F352F;
+      --color-accent: #C0392B;
+    }
     @media (prefers-color-scheme: dark) {
-      path { fill: #fafafa; }
+      :root {
+        --color-stroke: #F4EFE8;
+        --color-accent: #C0392B;
+      }
+    }
+    .bracket {
+      stroke: var(--color-stroke);
+      stroke-width: 2.5;
+      fill: none;
+      stroke-linecap: square;
+    }
+    .pulse {
+      stroke: var(--color-accent);
+      stroke-width: 3;
+      fill: none;
+      stroke-linecap: square;
     }
   </style>
-  <!-- The Prompt ">" in LabTime Red -->
-  <polyline points="6,6 16,16 6,26" fill="none" stroke="#db7706" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter"/>
-  <!-- The Cursor "_" dynamic fill -->
-  <path d="M 18,24 h 10 v 4 h -10 z" />
+  
+  <!-- Tactical Brackets (HUD Motif) -->
+  <path class="bracket" d="M 4,14 V 4 H 14" />
+  <path class="bracket" d="M 18,28 H 28 V 18" />
+  
+  <!-- Center Pulse / Stylized 'L' -->
+  <path class="pulse" d="M 12,11 V 21 H 20" />
 </svg>
