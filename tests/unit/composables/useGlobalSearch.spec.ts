@@ -15,7 +15,7 @@ describe('useGlobalSearch', () => {
   const mockItems: SearchableItem[] = [
     {
       path: '/projects/lms-sertifikasi',
-      title: 'LMS Sertifikasi',
+      title: 'LMS Certification Platform',
       description: 'A learning management system',
       tags: ['elixir', 'react'],
       stem: 'projects/lms-sertifikasi/index',
@@ -36,7 +36,7 @@ describe('useGlobalSearch', () => {
       tags: ['elixir', 'phoenix'],
       stem: 'projects/lms-sertifikasi/chat-architecture-scaling',
       _type: 'projectArticle',
-      _parentProject: 'LMS Sertifikasi',
+      _parentProject: 'LMS Certification Platform',
     },
   ]
 
@@ -81,10 +81,10 @@ describe('useGlobalSearch', () => {
     await waitForDebounce()
 
     expect(results.value.projects).toHaveLength(1)
-    expect(results.value.projects[0]?.title).toBe('LMS Sertifikasi')
+    expect(results.value.projects[0]?.title).toBe('LMS Certification Platform')
     expect(results.value.articles).toHaveLength(0)
     expect(results.value.projectArticles).toHaveLength(1)
-    expect(results.value.projectArticles[0]?._parentProject).toBe('LMS Sertifikasi')
+    expect(results.value.projectArticles[0]?._parentProject).toBe('LMS Certification Platform')
   })
 
   it('rebuilds the index when prepared items change', async () => {

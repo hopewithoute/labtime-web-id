@@ -8,94 +8,87 @@
       leave-from-class="opacity-100"
       leave-to-class="opacity-0"
     >
-      <div
-        v-if="isOpen"
-        class="fixed inset-0 z-50"
-        @click.self="close"
+    <div v-if="isOpen" class="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-6">
+      <div class="fixed inset-0 bg-background/80 backdrop-blur-sm" @click="close"></div>
+      
+      <YorhaPanel
+        brackets
+        variant="none"
+        padding="p-6"
+        class="relative z-10 w-full max-w-2xl bg-background border border-border"
       >
-        <!-- Backdrop with scanlines -->
-        <div class="absolute inset-0 bg-background/80 backdrop-blur-sm search-scanlines" @click="close"></div>
+          <div class="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground-secondary mb-4">
+            [ SYSTEM SEARCH MODULE ]
+          </div>
+          
+          <!-- Search Input -->
+          <div class="flex items-center gap-2 mb-2 font-sans">
+            <span class="text-foreground tracking-widest uppercase font-bold text-sm">QUERY : </span>
+            <input
+              ref="inputRef"
+              v-model="query"
+              type="text"
+              placeholder="Data term..."
+              class="yorha-input flex-1 border-b-0! text-lg uppercase tracking-wider font-display! font-bold"
+              @keydown.escape="close"
+              @keydown.down.prevent="moveSelection(1)"
+              @keydown.up.prevent="moveSelection(-1)"
+              @keydown.enter.prevent="navigateToSelected"
+            />
+          </div>
+          
+          <div class="yorha-divider mt-0! mb-4!"></div>
 
-        <!-- Palette -->
-        <div class="relative z-10 max-w-2xl mx-auto mt-[15vh] px-4">
-          <CornerFrame class="bg-background border-2 border-foreground shadow-2xl">
-            <div>
-              <!-- Search Input -->
-              <div class="flex items-center gap-3 px-6 py-4 border-b-2 border-foreground">
-                <span class="text-accent font-mono font-bold text-sm shrink-0">&gt;</span>
-                <input
-                  ref="inputRef"
-                  v-model="query"
-                  type="text"
-                  placeholder="grep -i 'query' ~/content/*"
-                  class="bg-transparent w-full font-mono text-sm outline-none placeholder:text-muted-foreground/50 text-foreground caret-accent"
-                  @keydown.escape="close"
-                  @keydown.down.prevent="moveSelection(1)"
-                  @keydown.up.prevent="moveSelection(-1)"
-                  @keydown.enter.prevent="navigateToSelected"
-                />
-                <kbd class="hidden sm:inline-block text-[10px] font-mono px-1.5 py-0.5 border border-foreground/30 text-muted-foreground shrink-0">ESC</kbd>
-              </div>
-
-              <!-- Results -->
-              <div class="max-h-[50vh] overflow-y-auto" role="listbox">
-                <!-- Empty state -->
-                <div v-if="!query.trim()" class="p-6 text-center font-mono text-xs text-muted-foreground">
-                  <div class="mb-2 opacity-60">[SEARCH_MODULE v1.0]</div>
-                  <div>Type to search projects, articles, and logs...</div>
-                </div>
-
-                <!-- No results -->
-                <div v-else-if="!hasResults" class="p-6 text-center font-mono text-xs text-muted-foreground">
-                  <div class="text-accent mb-1">&gt; No matches found</div>
-                  <div class="opacity-60">grep: pattern '{{ query }}' not found in any file</div>
-                </div>
-
-                <!-- Grouped results -->
-                <template v-else>
-                  <div v-for="group in resultGroups" :key="group.type">
-                    <div class="px-6 py-2 text-[10px] font-mono font-bold uppercase tracking-widest text-accent bg-foreground/5 border-b border-foreground/10">
-                      {{ group.label }} — {{ group.items.length }} match{{ group.items.length > 1 ? 'es' : '' }}
-                    </div>
-                    <button
-                      v-for="(item, i) in group.items"
-                      :key="item.path"
-                      role="option"
-                      :aria-selected="isSelected(group.type, i)"
-                      class="w-full text-left px-6 py-3 font-mono text-sm flex flex-col gap-1 transition-colors border-b border-foreground/5"
-                      :class="isSelected(group.type, i) ? 'bg-foreground text-background' : 'hover:bg-foreground/5'"
-                      @click="navigateTo(item.path)"
-                      @mouseenter="setSelection(group.type, i)"
-                    >
-                      <div v-if="group.type === 'projectArticle'" class="flex items-center gap-2">
-                        <span
-                          class="text-[10px] shrink-0"
-                          :class="isSelected(group.type, i) ? 'text-background/50' : 'opacity-50'"
-                        >{{ item._parentProject }} /</span>
-                        <span class="font-bold uppercase tracking-tight truncate">{{ item.title }}</span>
-                      </div>
-                      <span v-else class="font-bold uppercase tracking-tight">{{ item.title }}</span>
-                      <span
-                        class="text-xs opacity-70 line-clamp-1"
-                        :class="isSelected(group.type, i) ? 'text-background/70' : 'text-muted-foreground'"
-                      >{{ item.description }}</span>
-                    </button>
-                  </div>
-                </template>
-              </div>
-
-              <!-- Footer -->
-              <div class="px-6 py-2 border-t-2 border-foreground flex items-center justify-between text-[10px] font-mono text-muted-foreground">
-                <div class="flex gap-4">
-                  <span><kbd class="px-1 border border-foreground/30">↑↓</kbd> navigate</span>
-                  <span><kbd class="px-1 border border-foreground/30">↵</kbd> open</span>
-                  <span><kbd class="px-1 border border-foreground/30">esc</kbd> close</span>
-                </div>
-                <span class="text-accent animate-pulse">●</span>
-              </div>
+          <!-- Results -->
+          <div class="h-[40vh] overflow-y-auto" role="listbox">
+            <!-- Empty state -->
+            <div v-if="!query.trim()" class="font-sans text-sm tracking-widest uppercase text-foreground-secondary py-4 text-center">
+              <YorhaScramble text="Waiting for input data..." />
             </div>
-          </CornerFrame>
-        </div>
+
+            <!-- No results -->
+            <div v-else-if="!hasResults" class="font-sans text-sm tracking-widest uppercase text-yorha-red py-4 text-center">
+              <YorhaScramble text="No data found in this sector." />
+            </div>
+
+            <!-- Grouped results -->
+            <template v-else>
+              <div v-for="group in resultGroups" :key="group.type" class="mb-4">
+                <div class="text-[10px] font-mono tracking-[0.2em] uppercase text-foreground-secondary mb-1">
+                  <YorhaScramble :text="group.label" /> [<YorhaScramble :text="String(group.items.length)" /> REC]
+                </div>
+                <button
+                  v-for="(item, i) in group.items"
+                  :key="item.path"
+                  role="option"
+                  :aria-selected="isSelected(group.type, i)"
+                  class="w-full text-left font-sans flex items-baseline justify-between transition-colors border-b border-yorha-faint group cursor-pointer"
+                  :class="isSelected(group.type, i) ? 'bg-foreground dark:bg-foreground' : 'hover:bg-foreground/5'"
+                  @click="navigateTo(item.path)"
+                  @mouseenter="setSelection(group.type, i)"
+                >
+                  <div class="flex items-baseline py-2 px-3 gap-2 truncate text-sm">
+                    <span v-if="group.type === 'projectArticle'" class="text-xs uppercase tracking-widest" :class="isSelected(group.type, i) ? 'text-background' : 'text-foreground-secondary'">
+                      {{ item._parentProject }} /
+                    </span>
+                    <span class="uppercase tracking-widest font-bold" :class="isSelected(group.type, i) ? 'text-background dark:text-background' : 'text-foreground'">{{ item.title }}</span>
+                  </div>
+                </button>
+              </div>
+            </template>
+          </div>
+          
+          <div class="yorha-divider-double"></div>
+          
+          <!-- Footer -->
+          <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.2em] text-foreground-secondary">
+            <div class="flex gap-4">
+              <span>[↑↓] NAVIGATE</span>
+              <span>[ENTER] SELECT</span>
+              <span>[ESC] CLOSE</span>
+            </div>
+          </div>
+        </YorhaPanel>
       </div>
     </Transition>
   </Teleport>
@@ -131,9 +124,9 @@ const selectedIndex = ref(0)
 
 const resultGroups = computed(() => {
   return [
-    { type: 'project' as const, label: '[SYSTEMS]', items: results.value.projects },
-    { type: 'article' as const, label: '[LOGS]', items: results.value.articles },
-    { type: 'projectArticle' as const, label: '[SUB_MODULES]', items: results.value.projectArticles }
+    { type: 'project' as const, label: 'SYSTEMS', items: results.value.projects },
+    { type: 'article' as const, label: 'LOGS', items: results.value.articles },
+    { type: 'projectArticle' as const, label: 'SUB_MODULES', items: results.value.projectArticles }
   ].filter(g => g.items.length > 0)
 })
 
@@ -194,21 +187,3 @@ watch(results, () => {
   }
 })
 </script>
-
-<style scoped>
-.search-scanlines::after {
-  content: ' ';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%,
-    rgba(0, 0, 0, 0.03) 50%
-  );
-  background-size: 100% 8px;
-  pointer-events: none;
-}
-</style>
