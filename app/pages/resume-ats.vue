@@ -173,7 +173,7 @@
 <script setup lang="ts">
 const contactItems = [
   { label: 'Email', value: 'anggi.wibiyanto@gmail.com', href: 'mailto:anggi.wibiyanto@gmail.com' },
-  { label: 'Phone', value: '+6285723960603', href: 'tel:+6285723960603' },
+  { label: 'Phone', value: '-'},
   { label: 'Location', value: 'Bandung, Indonesia' },
   { label: 'Portfolio', value: 'labtime.web.id', href: 'https://labtime.web.id', external: true },
   {
