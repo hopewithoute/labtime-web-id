@@ -26,10 +26,10 @@ export default defineNuxtConfig({
   css: ['~/assets/css/tailwind.css'],
 
   routeRules: process.env.NODE_ENV === 'production' ? {
-    '/': { swr: 3600 },
-    '/projects/**': { swr: 3600 },
-    '/articles/**': { swr: 3600 },
-    '/api/**': { swr: 3600 }
+    '/': { prerender: true },
+    '/projects/**': { prerender: true },
+    '/articles/**': { prerender: true },
+    '/api/**': { prerender: true }
   } : {},
 
   nitro: process.env.NODE_ENV === 'production' ? {
