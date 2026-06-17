@@ -1,0 +1,34 @@
+erDiagram
+    ASET_TETAP {
+        int id PK
+        string nama_barang
+        int pengadaan_id FK
+    }
+    
+    PENGADAAN {
+        int id PK
+        string tipe_pengadaan "Polymorphic Type"
+        int sourceable_id "Polymorphic ID"
+    }
+
+    PENGADAAN_PEMBELIAN {
+        int id PK
+        string nomor_spk
+        string nama_vendor
+    }
+    
+    PENGADAAN_HIBAH {
+        int id PK
+        string instansi_pemberi
+        string nomor_bast
+    }
+    
+    PENGADAAN_DONASI {
+        int id PK
+        string nama_donatur
+    }
+    
+    ASET_TETAP }|--|| PENGADAAN : "Berasal dari"
+    PENGADAAN ||--o| PENGADAAN_PEMBELIAN : "morphsTo (Pembelian)"
+    PENGADAAN ||--o| PENGADAAN_HIBAH : "morphsTo (Hibah)"
+    PENGADAAN ||--o| PENGADAAN_DONASI : "morphsTo (Donasi)"

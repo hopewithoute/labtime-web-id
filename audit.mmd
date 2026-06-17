@@ -1,0 +1,16 @@
+flowchart LR
+    User[User / Operator] -->|Aksi: Mutasi/Penghapusan| API[Sistem Controller]
+    API --> Validasi[Validasi RBAC & RoleAuth]
+    
+    Validasi -->|Unauthorized| Tolak[Tolak Akses]
+    Validasi -->|Authorized| Eksekusi[Eksekusi Perubahan Status]
+    
+    Eksekusi --> TabelAset[(Tabel Aset Tetap)]
+    Eksekusi --> Jurnal[(Jurnal Historis)]
+    
+    Jurnal -->|Append-Only / Anti-Ubah| Log[Catat: User ID, Waktu, Nilai Lama, Nilai Baru]
+    
+    Log -.->|Read-Only Akses| Auditor[BPK / Auditor Internal]
+    
+    style Jurnal fill:#f9f2e7,stroke:#333,stroke-width:2px
+    style Auditor fill:#e2e8f0,stroke:#333,stroke-width:2px

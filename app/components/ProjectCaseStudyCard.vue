@@ -10,9 +10,6 @@
           <span class="text-[11px] md:text-xs font-sans font-bold uppercase tracking-[0.24em] text-foreground bg-foreground/10 px-2 py-1">
             {{ project.role || 'Core System Ownership' }}
           </span>
-          <span class="text-[11px] md:text-xs font-mono uppercase tracking-[0.18em] text-foreground-secondary">
-            {{ formatDate(project.date) }}
-          </span>
         </div>
         
         <!-- Action Button -->
@@ -49,7 +46,6 @@
 
 <script setup lang="ts">
 import { flattenTechStack } from '~/utils/flattenTechStack'
-import { formatDate } from '~/utils/formatDate'
 import { useYorhaAudio } from '~/composables/useYorhaAudio'
 
 defineProps<{
@@ -57,10 +53,8 @@ defineProps<{
   project: any
 }>()
 
-// eslint-disable-next-line no-unused-vars
 defineEmits<{
-  // eslint-disable-next-line no-unused-vars
-  (e: 'open', slug: string): void
+    (e: 'open', slug: string): void
 }>()
 
 const { playHover } = useYorhaAudio()

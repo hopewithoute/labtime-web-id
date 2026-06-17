@@ -20,9 +20,6 @@
                 <span class="text-[11px] md:text-xs font-sans font-bold uppercase tracking-[0.24em] text-foreground bg-foreground/10 px-2 py-1">
                   {{ project.role || 'Core System Ownership' }}
                 </span>
-                <span class="text-[11px] md:text-xs font-mono uppercase tracking-[0.18em] text-foreground-secondary">
-                  {{ formatDate(project.date) }}
-                </span>
               </div>
               
               <!-- Back to Projects Button (Now Close Modal) -->
@@ -238,8 +235,9 @@
                   :key="index"
                   class="w-full min-w-full snap-center shrink-0 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start lg:items-center select-none"
                 >
-                  <!-- Diagram Image -->
+                  <!-- Diagram Image (Optional) -->
                   <YorhaPanel
+                    v-if="screenshot.src"
                     as="figure"
                     brackets
                     variant="none"
@@ -266,7 +264,7 @@
                   </YorhaPanel>
 
                   <!-- CV-Like Bullet Points -->
-                  <div class="lg:col-span-5 xl:col-span-4">
+                  <div :class="screenshot.src ? 'lg:col-span-5 xl:col-span-4' : 'lg:col-span-12'">
                     <h3 class="text-2xl font-bold uppercase tracking-tight mb-4 border-b border-border pb-2 inline-block">
                       {{ screenshot.title }}
                     </h3>
@@ -297,11 +295,15 @@
                   @click="scrollToSlide(index)"
                 >
                   <NuxtImg
+                    v-if="screenshot.src"
                     :src="screenshot.src"
                     :alt="screenshot.title || 'Thumbnail'"
                     class="w-full h-full object-contain"
                     format="webp"
                   />
+                  <div v-else class="w-full h-full flex flex-col items-center justify-center p-4 text-center">
+                    <span class="text-xs font-mono font-bold uppercase">{{ screenshot.title }}</span>
+                  </div>
                   <!-- Overlay for unselected -->
                   <div v-if="activeScreenshotIndex !== index" class="absolute inset-0 bg-background/40"></div>
                 </button>
@@ -333,10 +335,8 @@ const props = defineProps<{
   slug: string
 }>()
 
-// eslint-disable-next-line no-unused-vars
 const emit = defineEmits<{
-  // eslint-disable-next-line no-unused-vars
-  (e: 'close'): void
+    (e: 'close'): void
 }>()
 
 // App Screenshots Gallery State

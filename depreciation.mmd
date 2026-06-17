@@ -1,0 +1,15 @@
+flowchart TD
+    A[Cron Job Scheduler] -->|Trigger Tiap Akhir Bulan| B(Depreciation Queue Worker)
+    
+    B --> C{Load Aset Aktif}
+    C -->|Batch Processing| D[Kalkulasi Umur Ekonomis]
+    
+    D --> E[Metode Garis Lurus: <br> Value = Cost / Umur]
+    
+    E --> F[Generate Jurnal Penyusutan Otomatis]
+    F --> G[Update Nilai Buku Aset]
+    
+    G --> H{Sisa Aset di Antrean?}
+    H -->|Masih Ada| C
+    H -->|Selesai| I[Generate Laporan Keuangan Bulanan]
+    I --> J([Selesai])

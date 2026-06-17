@@ -1,0 +1,19 @@
+stateDiagram-v2
+    [*] --> Draft : Entry Baru
+    
+    Draft --> Pengajuan : Submit (Operator)
+    Draft --> Dibatalkan : Cancel (Operator)
+    
+    state "Pengecekan Kepemilikan (Ownership)" as CekKepemilikan {
+        Pengajuan --> Selesai : Internal Unit (Self Unit)
+        Pengajuan --> Disetujui : External Unit (Beda Unit)
+        Pengajuan --> Ditolak : Ditolak Source Owner
+    }
+    
+    Disetujui --> Diterima : Konfirmasi Fisik (Target Owner)
+    Disetujui --> Dibatalkan : Cancel (Kasi Umum)
+    
+    Diterima --> Selesai : Finalisasi Dokumen
+    Diterima --> Dibatalkan : Retur / Cancel
+    
+    Selesai --> [*] : Jurnal Terkunci
