@@ -90,24 +90,24 @@
 
 :root {
   --radius: 0rem;
-  --background: #E8D8C4;
-  --background-secondary: #D4B896;
-  --background-dark: #C9A87C;
-  --foreground: #3F352F;
-  --foreground-secondary: #6B5A50;
-  --muted: #D4B896;
-  --muted-foreground: #9E8E84;
-  --primary: #3F352F;
-  --primary-foreground: #E8D8C4;
-  --secondary: #D4B896;
+  --background: #F8F4F0; /* Lighter, cleaner off-white */
+  --background-secondary: #EAE0D5; /* Slightly darker for contrast areas */
+  --background-dark: #D4C3B3;
+  --foreground: #1F1A17; /* Very dark, almost black brown */
+  --foreground-secondary: #4A3F38; /* Darker secondary text */
+  --muted: #EAE0D5;
+  --muted-foreground: #7A6A5F;
+  --primary: #1F1A17;
+  --primary-foreground: #F8F4F0;
+  --secondary: #EAE0D5;
   
-  --accent-red: #C0392B;
-  --accent-green: #A8C4A2;
-  --accent-white: #F4EFE8;
+  --accent-red: #B92B27; /* Deeper red for better contrast */
+  --accent-green: #2D6A4F; /* Darker green for light mode */
+  --accent-white: #FFFFFF;
   
-  --border: rgba(63, 53, 47, 0.25);
-  --border-strong: rgba(63, 53, 47, 0.5);
-  --border-faint: rgba(63, 53, 47, 0.15);
+  --border: rgba(31, 26, 23, 0.2);
+  --border-strong: rgba(31, 26, 23, 0.4);
+  --border-faint: rgba(31, 26, 23, 0.1);
 }
 
 .dark {
@@ -295,6 +295,15 @@
   }
 }
 
+@layer utilities {
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
 
 @keyframes screen-enter {
   from {

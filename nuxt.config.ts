@@ -25,15 +25,15 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/tailwind.css'],
 
-  routeRules: {
-    // Prerendering disabled for content routes - Nuxt Content with Cloudflare D1
-    // requires D1 bindings which are only available at runtime on Cloudflare.
-    // SSR will handle these routes dynamically with D1 access.
-  },
+  routeRules: process.env.NODE_ENV === 'production' ? {
+    '/': { swr: 3600 },
+    '/projects/**': { swr: 3600 },
+    '/articles/**': { swr: 3600 },
+    '/api/**': { swr: 3600 }
+  } : {},
 
-  nitro: {
+  nitro: process.env.NODE_ENV === 'production' ? {
     preset: 'cloudflare_module',
-
     cloudflare: {
       deployConfig: true,
       nodeCompat: true,
@@ -43,7 +43,10 @@ export default defineNuxtConfig({
         ],
       },
     },
-
+    experimental: {
+      database: true
+    }
+  } : {
     experimental: {
       database: true
     }
@@ -53,11 +56,15 @@ export default defineNuxtConfig({
     // Vite defaults are usually better for HMR on Linux unless in a container/VM
   },
 
-  modules: ['@nuxt/eslint', 'shadcn-nuxt', '@nuxtjs/color-mode', 'nitro-cloudflare-dev', '@nuxtjs/tailwindcss', '@nuxt/content', '@vueuse/motion/nuxt'],
+  modules: process.env.NODE_ENV === 'production' 
+    ? ['@nuxt/eslint', 'shadcn-nuxt', '@nuxtjs/color-mode', 'nitro-cloudflare-dev', '@nuxtjs/tailwindcss', '@nuxt/content', '@vueuse/motion/nuxt', '@nuxt/image']
+    : ['@nuxt/eslint', 'shadcn-nuxt', '@nuxtjs/color-mode', '@nuxtjs/tailwindcss', '@nuxt/content', '@vueuse/motion/nuxt', '@nuxt/image'],
 
-
-
-
+  content: {
+    database: process.env.NODE_ENV === 'production' 
+      ? { type: 'd1', binding: 'DB' }
+      : { type: 'sqlite', filename: './.data/content.db' }
+  },
   shadcn: {
     prefix: '',
     componentDir: './app/components/ui',

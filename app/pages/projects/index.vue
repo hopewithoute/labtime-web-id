@@ -28,12 +28,12 @@
           </div>
           <div class="text-sm font-sans space-y-2 opacity-80 font-bold uppercase tracking-widest">
             <div class="text-foreground border-yorha-strong mb-4 break-all pb-2 opacity-100">~/systems/core</div>
-            <NuxtLink
+            <button
               v-for="(project, i) in projects"
               :key="'tree-' + project.path"
-              :to="project.path"
-              class="flex hover:text-foreground transition-colors group"
-              active-class="text-foreground font-black"
+              class="flex hover:text-foreground transition-colors group text-left w-full"
+              :class="{ 'text-foreground font-black': route.query.project === project.path.split('/').pop() }"
+              @click="openProject(project.path.split('/').pop())"
             >
               <span class="text-yorha-strong mr-2">
                 {{ i === (projects?.length ?? 0) - 1 ? '└──' : '├──' }}
@@ -41,7 +41,7 @@
               <span class="truncate block w-full relative">
                 <YorhaScramble :text="project.title" />
               </span>
-            </NuxtLink>
+            </button>
           </div>
         </YorhaPanel>
       </aside>
@@ -59,9 +59,8 @@
           <YorhaPanel
             v-for="(project, index) in projects"
             :key="project.path"
-            as="NuxtLink"
             v-motion
-            :to="project.path"
+            as="button"
             :initial="{ opacity: 0, x: 15 }"
             :enter="{
               opacity: 1,
@@ -72,7 +71,8 @@
             variant="simple"
             hover
             padding="p-6 md:p-8"
-            class="block w-full"
+            class="block w-full text-left"
+            @click="openProject(project.path.split('/').pop())"
           >
               <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
                 <div class="w-full">
@@ -130,13 +130,34 @@
         </div>
       </main>
     </div>
+
+    <!-- Project Details Modal -->
+    <ProjectDetailsModal
+      v-if="route.query.project"
+      :slug="route.query.project as string"
+      @close="closeProject"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
+const route = useRoute()
+const router = useRouter()
+
 const { data: projects } = await useAsyncData('projects', () =>
   queryCollection('projects').order('date', 'DESC').all()
 )
+
+const openProject = (slug: string | undefined) => {
+  if (!slug) return
+  router.push({ query: { project: slug } })
+}
+
+const closeProject = () => {
+  const query = { ...route.query }
+  delete query.project
+  router.push({ query })
+}
 
 useHead({
   title: 'Systems Built | LabTime',

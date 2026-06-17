@@ -18,16 +18,24 @@ export default defineContentConfig({
                 date: z.string(),
                 tags: z.array(z.string()).optional(),
                 role: z.string().optional(),
-                problem: z.string().optional(),
-                approach: z.string().optional(),
-                outcome: z.string().optional(),
+                problem: z.union([z.string(), z.array(z.string())]).optional(),
+                approach: z.union([z.string(), z.array(z.string())]).optional(),
+                outcome: z.union([z.string(), z.array(z.string())]).optional(),
                 tech_stack: z.record(z.string(), z.array(z.object({
                     name: z.string(),
                     reason: z.string().optional()
                 }))).optional(),
                 screenshots: z.array(z.object({
                     src: z.string(),
-                    alt: z.string().optional()
+                    alt: z.string().optional(),
+                    title: z.string().optional(),
+                    description: z.string().optional(),
+                    bullets: z.array(z.string()).optional()
+                })).optional(),
+                app_screenshots: z.array(z.object({
+                    src: z.string(),
+                    alt: z.string().optional(),
+                    caption: z.string().optional()
                 })).optional(),
             }),
         }),

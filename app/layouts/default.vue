@@ -1,5 +1,8 @@
 <template>
-  <div class="min-h-screen flex flex-col relative overflow-x-hidden bg-background yorha-grid-bg">
+  <div class="min-h-screen flex flex-col relative bg-background">
+    <!-- Dynamic Ambient Graph Background -->
+    <GraphBackground />
+    
     <!-- CRT Effect Overlay -->
     <div class="crt-overlay"></div>
     
@@ -28,13 +31,22 @@
     <div class="flex-1 flex flex-col w-full z-10 relative max-w-7xl mx-auto min-h-screen border-x border-yorha-faint">
       
       <!-- HUD Header -->
-      <header class="p-4 md:p-8 flex justify-between items-start z-30">
+      <header 
+        class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl flex justify-between items-start z-50 transition-all duration-300 ease-yorha border-x"
+        :class="isScrolled ? 'py-1.5 px-4 md:py-2 md:px-8 bg-background border-b border-yorha-faint border-x-yorha-faint' : 'py-4 px-4 md:py-8 md:px-8 bg-transparent border-b border-transparent border-x-transparent'"
+      >
         <NuxtLink to="/" class="flex flex-col group w-fit" @click="closeMobileMenu">
-          <div class="font-display font-bold text-2xl md:text-3xl tracking-wide flex items-center gap-2">
+          <div 
+            class="font-display font-bold tracking-wide flex items-center gap-2 transition-all duration-300"
+            :class="isScrolled ? 'text-xl md:text-2xl' : 'text-2xl md:text-3xl'"
+          >
             <span class="text-yorha-red">[</span> LABTIME <span class="text-yorha-red">]</span>
           </div>
-          <div class="font-mono text-xs text-foreground-secondary uppercase tracking-[0.2em] mt-1 group-hover:text-foreground transition-colors yorha-bracket-panel p-1 w-fit">
-            <YorhaScramble text="System.Init()" />
+          <div 
+            class="font-mono text-xs text-foreground-secondary uppercase tracking-[0.2em] group-hover:text-foreground transition-all duration-300 overflow-hidden"
+            :class="isScrolled ? 'h-0 opacity-0 mt-0 p-0' : 'h-6 opacity-100 mt-1 p-1 yorha-bracket-panel w-fit'"
+          >
+            <YorhaScramble text="Anggi Wibiyanto" />
           </div>
         </NuxtLink>
         
@@ -68,8 +80,12 @@
             {{ mobileMenuOpen ? 'CLOSE' : 'MENU' }}
           </button>
           
-          <div class="hidden md:flex gap-4">
-            <button class="yorha-btn relative group flex items-center gap-2" @click="openSearch">
+          <div class="hidden md:flex gap-4 items-center">
+            <button 
+              class="yorha-btn relative group flex items-center gap-2 transition-all duration-300" 
+              :class="isScrolled ? 'py-1 text-xs' : ''"
+              @click="openSearch"
+            >
               <span>SEARCH</span>
               <kbd class="text-[10px] font-mono border border-foreground/30 px-1 opacity-50 group-hover:opacity-100 group-hover:border-background">⌘K</kbd>
             </button>
@@ -78,7 +94,7 @@
       </header>
 
       <!-- Content Area -->
-      <main class="flex-1 p-4 md:p-8 lg:p-12 pt-0 z-10 animate-screen-enter">
+      <main class="flex-1 p-4 md:p-8 lg:p-12 pt-28 md:pt-36 lg:pt-40 z-10 animate-screen-enter">
         <slot />
       </main>
 
@@ -175,10 +191,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, onBeforeUnmount, nextTick } from 'vue'
-import { onKeyStroke } from '@vueuse/core'
+import { ref, watch, onMounted, onBeforeUnmount, nextTick, computed } from 'vue'
+import { onKeyStroke, useWindowScroll } from '@vueuse/core'
 import { useRoute } from 'vue-router'
 
+const { y } = useWindowScroll()
+const isScrolled = computed(() => y.value > 20)
 
 const route = useRoute()
 const desktopNavItems = [
@@ -191,6 +209,7 @@ const desktopNavRef = ref<HTMLElement | null>(null)
 const navRefs = ref<HTMLElement[]>([])
 const activeIndicatorStyle = ref({ opacity: 0, transform: 'translateX(0px)', top: '10px' }) // Assuming height is 1rem, adjust top if needed
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const setNavRef = (el: HTMLElement | any, index: number) => {
   if (el) {
     navRefs.value[index] = el.$el || el

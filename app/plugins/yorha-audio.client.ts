@@ -1,5 +1,5 @@
 export default defineNuxtPlugin(() => {
-  if (!process.client) return
+  if (!import.meta.client) return
 
   const { playClick, playHover } = useYorhaAudio()
 

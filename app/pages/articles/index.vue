@@ -32,8 +32,8 @@
         <YorhaPanel
           v-for="(article, index) in articles"
           :key="article.path"
-          as="NuxtLink"
           v-motion
+          as="NuxtLink"
           :to="article.path"
           :initial="{ opacity: 0, y: 15 }"
           :enter="{

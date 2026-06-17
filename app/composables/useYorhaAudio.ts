@@ -5,6 +5,7 @@ export const useYorhaAudio = () => {
 
   const initAudio = () => {
     if (!audioCtx.value && typeof window !== 'undefined') {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const AudioContextClass = (window.AudioContext || (window as any).webkitAudioContext) as typeof AudioContext
       if (AudioContextClass) {
         audioCtx.value = new AudioContextClass()

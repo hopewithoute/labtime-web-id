@@ -25,6 +25,7 @@ import { NuxtLink } from '#components'
 import { computed } from 'vue'
 
 interface Props {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   as?: string | any
   cut?: boolean
   brackets?: boolean
