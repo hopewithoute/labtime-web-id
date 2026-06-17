@@ -31,31 +31,37 @@ tech_stack:
     - name: "MySQL & Redis Horizon"
       reason: "ACID compliant storage paired with high-performance background queues for remote data synchronization."
 screenshots:
-  - title: "Hierarchical Document Engine"
+  - src: /projects/lapkerma/lap-hierarchy-infographic.jpg
+    title: "Hierarchical Document Engine"
     description: "Tracking the complex lineage of legal partnerships."
     bullets:
       - "Engineered a recursive database schema mapping overarching MoUs down to faculty-specific Implementation Arrangements (IA)."
       - "Enforced strict hierarchical dependencies, preventing orphaned documents."
-  - title: "Contextual Ownership & RBAC"
+  - src: /projects/lapkerma/lap-rbac-infographic.jpg
+    title: "Contextual Ownership & RBAC"
     description: "Dynamic security scoping based on institutional involvement."
     bullets:
       - "Implemented dynamic Eloquent Scopes (scopeOwned) restricting data visibility."
       - "Access is granted automatically if a user's Faculty is tagged as an Initiator, Collaborator, or Executor."
-  - title: "Cross-Platform Data Synchronization"
+  - src: /projects/lapkerma/lap-sync-infographic.jpg
+    title: "Cross-Platform Data Synchronization"
     description: "Maintaining parity with National Ministry databases."
     bullets:
       - "Built an API client layer using Saloon PHP for structured HTTP communication."
       - "Implemented 'Remote Data Flags' to prevent local users from hard-deleting records that have already been synchronized globally."
-  - title: "Immutable Audit Logging (WORM)"
+  - src: /projects/lapkerma/lap-worm-infographic.jpg
+    title: "Immutable Audit Logging (WORM)"
     description: "Enterprise-grade accountability for legal documents."
     bullets:
       - "Integrated automated model event trackers at the ORM layer."
       - "Captured comprehensive snapshots (old_values vs new_values) for every state change."
-  - title: "Polymorphic Media Management"
+  - src: /projects/lapkerma/lap-media-infographic.jpg
+    title: "Polymorphic Media Management"
     description: "Centralized file storage for disparate attachment types."
     bullets:
       - "Utilized Polymorphic relations to attach scanned legal PDFs to any hierarchical level of the agreement."
-  - title: "KPI (IKU) Mapping Engine"
+  - src: /projects/lapkerma/lap-kpi-infographic.jpg
+    title: "KPI (IKU) Mapping Engine"
     description: "Bridging administrative documents with academic performance metrics."
     bullets:
       - "Built a relational matrix mapping concrete activities (Kegiatan) to national Key Performance Indicators (IKU)."
