@@ -166,11 +166,12 @@
                 class="w-full mb-6 group"
               >
                 <div ref="appScreenshotContainerRef" class="overflow-hidden bg-foreground aspect-[16/9] relative flex items-center justify-center touch-pan-y cursor-grab active:cursor-grabbing">
-                  <img
+                  <NuxtImg
                     :src="project.app_screenshots[selectedAppScreenshotIndex]?.src"
                     :alt="project.app_screenshots[selectedAppScreenshotIndex]?.alt || 'App Screenshot'"
                     class="w-full h-full object-contain opacity-90 group-hover:opacity-100 transition-opacity select-none"
                     draggable="false"
+                    format="webp"
                   />
                 </div>
                 <figcaption
@@ -191,10 +192,11 @@
                   :class="selectedAppScreenshotIndex === index ? 'border-foreground' : 'border-border hover:border-foreground/50'"
                   @click="selectedAppScreenshotIndex = index"
                 >
-                  <img
+                  <NuxtImg
                     :src="screenshot.src"
                     :alt="screenshot.alt || 'Thumbnail'"
                     class="w-full h-full object-contain"
+                    format="webp"
                   />
                   <!-- Overlay for unselected -->
                   <div v-if="selectedAppScreenshotIndex !== index" class="absolute inset-0 bg-background/40"></div>
@@ -245,12 +247,13 @@
                     class="lg:col-span-7 xl:col-span-8 group"
                   >
                     <div class="overflow-hidden bg-foreground flex items-center justify-center">
-                      <img
+                      <NuxtImg
                         :src="screenshot.src"
                         :alt="screenshot.title || screenshot.alt"
                         loading="lazy"
                         class="w-full h-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity pointer-events-none"
                         draggable="false"
+                        format="webp"
                       />
                     </div>
                     <figcaption
@@ -293,10 +296,11 @@
                   :class="activeScreenshotIndex === index ? 'border-foreground' : 'border-border hover:border-foreground/50'"
                   @click="scrollToSlide(index)"
                 >
-                  <img
+                  <NuxtImg
                     :src="screenshot.src"
                     :alt="screenshot.title || 'Thumbnail'"
                     class="w-full h-full object-contain"
+                    format="webp"
                   />
                   <!-- Overlay for unselected -->
                   <div v-if="activeScreenshotIndex !== index" class="absolute inset-0 bg-background/40"></div>
